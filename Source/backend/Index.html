@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script src="/scripts/kinetic-v5.1.0.min.js" type="text/javascript"></script>
+    <script src="/scripts/jquery.js" type="text/javascript"></script>
+    <script src="/scripts/jquery-ui.js" type="text/javascript"></script>
+    <link href="/content/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/content/style.css" rel="stylesheet" type="text/css" />
+
+    <link href="/content/workflowdesigner.css" rel="stylesheet" type="text/css" />
+    <script src="/scripts/workflowdesigner.min.js" type="text/javascript"></script>
+    <script src="/scripts/ace.js" type="text/javascript"></script>
+
+    <div class="container">
+        <header class="header clearfix">
+            <div style="display: -webkit-inline-box;">
+                <div style=" width: 160px;">
+                    <a href="http://optimajet.com"><img src="/Content/optimajet.png" /></a>
+                </div>
+                <div style="padding-top: 12px;">
+                    <a style="text-decoration:none" href="http://workflowenginenet.com/server"><div class="logo" style="color: red; font-size: 20px;">WorkfolowServer</div></a>
+                </div>
+            </div>
+    </header>
+    <div class="info">
+        <article class="hero clearfix">
+            <div class="col_100">
+                <table>
+                    <tr>
+                        <td>Code of scheme:</td>
+                        <td><input id="schemecode" /></td>
+                        <td><button onclick="OpenScheme(); return false;">Open</button></td>
+                    </tr>
+                </table>
+            </div>
+        </article>
+        <article class="article clearfix">
+            <div class="clearfix"></div>
+            <div id="workflowwarning" style="display:none">
+                <h1>To display a scheme enter a code and press 'Open'.<br />
+                    If the scheme exists, the Designer will show the scheme.</h1>
+            </div>
+            <div id="workflowform" style="display:none">
+                <form action="" id="uploadform" method="post" enctype="multipart/form-data" onsubmit="tmp()">
+                    <table>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <a href='javascript:DownloadScheme()'>Download scheme workflow</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="file" name="uploadFile" id="uploadFile" style="width:350px">
+                            </td>
+                            <td>
+                                <a href='javascript:UploadScheme()'>Upload  scheme workflow</a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <table>
+                    <tr>
+                        <td>Size:</td>
+                        <td><input id="graphwidth" value="1200" /> x <input id="graphheight" value="600" /></td>
+                        <td><button onclick="wfdesignerRedraw();return false;">Resize</button></td>
+                        <td>
+                            |
+                        </td>
+                        <td><button onclick="OnNew();return false;">Clean</button></td>
+                        <td><button onclick="OnSave();return false;">Save</button></td>
+                    </tr>
+                </table>
+                <br />
+                <div id="wfdesigner"></div>
+            </div>
+        </article>
+    </div>
+    <footer class="footer clearfix">
+        <b>Only non-commercial use. For commercial use, please contact <a href="mailto:sales@optimajet.com">sales@optimajet.com</a>.</b>
+        <nav class="menu_bottom">
+            Copyright by <a href="http://OptimaJet.com">OptimaJet.com</a> 2015
+        </nav>
+    </footer>
+    </div>
+
+    <script>
+        var schemecode = undefined;
+        var wfdesigner = undefined;
+        function wfdesignerRedraw() {
+            var data;
+
+            if (wfdesigner != undefined) {
+                data = wfdesigner.data;
+                wfdesigner.destroy();
+            }
+
+            wfdesigner = new WorkflowDesigner({
+                name: 'simpledesigner',
+                apiurl: 'designerapi',
+                renderTo: 'wfdesigner',
+                imagefolder: '/images/',
+                graphwidth: $('#graphwidth').val(),
+                graphheight: $('#graphheight').val()
+            });
+
+            if (data == undefined) {
+                var isreadonly = false;
+                var p = { schemecode: schemecode, readonly: isreadonly };
+                if (wfdesigner.exists(p))
+                    wfdesigner.load(p);
+                else
+                    wfdesigner.create();
+            }
+            else {
+                wfdesigner.data = data;
+                wfdesigner.render();
+            }
+        }
+
+        function DownloadScheme() {
+            wfdesigner.downloadscheme({ schemecode: schemecode });
+        }
+        function UploadScheme() {
+            var file = $('#uploadFile');
+            if (file == undefined || file.val().length == 0) {
+                alert('You did not select a file to upload!');
+                return false;
+            }
+
+            wfdesigner.uploadscheme($('#uploadform')[0], function () {
+                alert('The file is uploaded!');
+            });
+        }
+
+        function OnSave() {
+            wfdesigner.schemecode = schemecode;
+
+            var err = wfdesigner.validate();
+            if (err != undefined && err.length > 0) {
+                alert(err);
+            }
+            else {
+                wfdesigner.save(function () {
+                    alert('The scheme is saved!');
+                });
+            }
+        }
+        function OnNew() {
+            wfdesigner.create();
+        }
+
+        function OpenScheme() {
+            document.location.href = "/?schemecode=" + $('#schemecode').val();
+        }
+
+        var QueryString = function () {
+            // This function is anonymous, is executed immediately and
+            // the return value is assigned to QueryString!
+            var query_string = {};
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                // If first entry with this name
+                if (typeof query_string[pair[0]] === "undefined") {
+                    query_string[pair[0]] = pair[1];
+                    // If second entry with this name
+                } else if (typeof query_string[pair[0]] === "string") {
+                    var arr = [query_string[pair[0]], pair[1]];
+                    query_string[pair[0]] = arr;
+                    // If third or later entry with this name
+                } else {
+                    query_string[pair[0]].push(pair[1]);
+                }
+            }
+            return query_string;
+        }();
+
+        if (QueryString.schemecode == undefined || QueryString.schemecode == '') {
+            $('#workflowwarning').show();
+        }
+        else {
+            schemecode = QueryString.schemecode;
+            $('#schemecode')[0].value = schemecode
+            wfdesignerRedraw();
+            $('#workflowform').show();
+        }
+
+        $('#schemecode').on('keydown', function (e) {
+            if (e.keyCode == 13)
+                OpenScheme();
+        });
+
+    </script>
+</body>
+</html>
