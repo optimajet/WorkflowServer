@@ -1,0 +1,8 @@
+﻿Выполняется удаление сборки 'C:\GIT\OJ\workflowengine.net\Releases\1.4.5.0\WorkflowServer\bin\WorkflowServerSevice.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = C:\GIT\OJ\workflowengine.net\Releases\1.4.5.0\WorkflowServer\bin\WorkflowServerSevice.InstallLog
+   assemblypath = C:\GIT\OJ\workflowengine.net\Releases\1.4.5.0\WorkflowServer\bin\WorkflowServerSevice.exe
+Выполняется удаление источника EventLog OptimaJet.WorkflowServer.
+Выполняется удаление службы OptimaJet.WorkflowServer из системы...
+Служба OptimaJet.WorkflowServer успешно удалена из системы.
