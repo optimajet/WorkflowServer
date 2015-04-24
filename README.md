@@ -135,6 +135,10 @@ return: [XML scheme of workflow]
 <h3>Backend</h3>
 Used for create/edit/view scheme of workflow. 
 
+<a href="http://workflowenginenet.com/server"><img src="http://workflowenginenet.com/Cms_Data/Contents/WFE/Media/content_images/workflowserver.png" alt="workflowserver" width="500" style="
+    border: 1px solid;
+    border-color: #3e4d5c;"></a>
+
 <hr>
 <b>Official web site</b> - <a href="http://workflowenginenet.com">http://workflowenginenet.com/server</a><br/>
 For technical questions, please contact <a href="mailto:wf@optimajet.com?subject=Qustion from hithub">wf@optimajet.com<a><br/>
