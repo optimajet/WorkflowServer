@@ -31,55 +31,58 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MongoDB.Bson">
-      <HintPath>..\DLL\MongoDB.Bson.dll</HintPath>
+      <HintPath>..\..\DLL\MongoDB.Bson.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Driver">
-      <HintPath>..\DLL\MongoDB.Driver.dll</HintPath>
+      <HintPath>..\..\DLL\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Driver.Core">
-      <HintPath>..\DLL\MongoDB.Driver.Core.dll</HintPath>
+      <HintPath>..\..\DLL\MongoDB.Driver.Core.dll</HintPath>
     </Reference>
     <Reference Include="MongoDB.Driver.Legacy">
-      <HintPath>..\DLL\MongoDB.Driver.Legacy.dll</HintPath>
+      <HintPath>..\..\DLL\MongoDB.Driver.Legacy.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Security">
+      <HintPath>..\..\DLL\Mono.Security.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data">
-      <HintPath>..\DLL\MySql.Data.dll</HintPath>
+      <HintPath>..\..\DLL\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="Npgsql">
-      <HintPath>..\DLL\Npgsql.dll</HintPath>
+      <HintPath>..\..\DLL\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="OptimaJet.Workflow.Core">
-      <HintPath>..\DLL\OptimaJet.Workflow.Core.dll</HintPath>
+      <HintPath>..\..\DLL\OptimaJet.Workflow.Core.dll</HintPath>
     </Reference>
     <Reference Include="OptimaJet.Workflow.DbPersistence">
-      <HintPath>..\DLL\OptimaJet.Workflow.DbPersistence.dll</HintPath>
+      <HintPath>..\..\DLL\OptimaJet.Workflow.DbPersistence.dll</HintPath>
     </Reference>
     <Reference Include="OptimaJet.Workflow.MongoDB">
-      <HintPath>..\DLL\OptimaJet.Workflow.MongoDB.dll</HintPath>
+      <HintPath>..\..\DLL\OptimaJet.Workflow.MongoDB.dll</HintPath>
     </Reference>
     <Reference Include="OptimaJet.Workflow.MySQL">
-      <HintPath>..\DLL\OptimaJet.Workflow.MySQL.dll</HintPath>
+      <HintPath>..\..\DLL\OptimaJet.Workflow.MySQL.dll</HintPath>
     </Reference>
     <Reference Include="OptimaJet.Workflow.Oracle">
-      <HintPath>..\DLL\OptimaJet.Workflow.Oracle.dll</HintPath>
+      <HintPath>..\..\DLL\OptimaJet.Workflow.Oracle.dll</HintPath>
     </Reference>
     <Reference Include="OptimaJet.Workflow.PostgreSQL">
-      <HintPath>..\DLL\OptimaJet.Workflow.PostgreSQL.dll</HintPath>
+      <HintPath>..\..\DLL\OptimaJet.Workflow.PostgreSQL.dll</HintPath>
     </Reference>
     <Reference Include="OptimaJet.Workflow.RavenDB">
-      <HintPath>..\DLL\OptimaJet.Workflow.RavenDB.dll</HintPath>
+      <HintPath>..\..\DLL\OptimaJet.Workflow.RavenDB.dll</HintPath>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess">
-      <HintPath>..\DLL\Oracle.ManagedDataAccess.dll</HintPath>
+      <HintPath>..\..\DLL\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Abstractions">
-      <HintPath>..\DLL\Raven.Abstractions.dll</HintPath>
+      <HintPath>..\..\DLL\Raven.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Client.Lightweight">
-      <HintPath>..\DLL\Raven.Client.Lightweight.dll</HintPath>
+      <HintPath>..\..\DLL\Raven.Client.Lightweight.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Text">
-      <HintPath>..\DLL\ServiceStack.Text.dll</HintPath>
+      <HintPath>..\..\DLL\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

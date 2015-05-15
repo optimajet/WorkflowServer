@@ -15,7 +15,7 @@ BEFORE USE CREATE TABLES FROM SCRIPTS!!! (Folder: \SQL)
 
 1. Console
 
-Execute HTTP server: run_mssql.bat (ATTENTION: For current settings, need run run_callbackapi_sharp.bat)
+Execute HTTP server: run_mssql.bat (ATTENTION: For current settings, need run run_callbackapi_sharp.bat for processing CallbackAPI requests)
 Execute HTTP server (with log): run_mssql_withlog.bat (ATTENTION: For current settings, need run run_callbackapi_sharp.bat)
 
 Usage is: wfes [options]
@@ -44,7 +44,7 @@ wfes.exe -url="http://*:8077/" -callbackurl="http://localhost:8078/" -befolder="
 
 Before install the services, check configuration: bin\WorkflowServerSevice.exe.config
 
-For install the service: workflowservice_install.bat (ATTENTION: For current settings, need run run_callbackapi_sharp.bat)
+For install the service: workflowservice_install.bat (ATTENTION: For current settings, need run run_callbackapi_sharp.bat for processing CallbackAPI requests)
 For unistall the service: workflowservice_uninstall.bat
 The Log output to EventLogs/Applications (name: OptimaJet.WorkflowServer).
 
