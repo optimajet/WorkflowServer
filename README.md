@@ -3,6 +3,8 @@ WorkflowServer. Powered by WorkflowEngine.NET
 
 The WorkflowServer is open source standalone HTTP server. It supports two modes: console and windows service.  You can Integrate a workflow functionality to a solution using HTTP-protocol. Solution can use any technologies: .NET, PHP, Java, NodeJS, Ruby, Python.
 
+The sample: <a href="https://github.com/optimajet/WorkflowServer/tree/master/Binary">here</a><br/>
+
 <h2>Features:</h2>
 <ul>
 <li>Process scheme generation in runtime</li>
