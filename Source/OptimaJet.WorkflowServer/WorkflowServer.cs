@@ -3,22 +3,20 @@ using MongoDB.Driver;
 using OptimaJet.Workflow;
 using OptimaJet.Workflow.Core.Builder;
 using OptimaJet.Workflow.Core.Bus;
-using OptimaJet.Workflow.Core.Model;
 using OptimaJet.Workflow.Core.Parser;
 using OptimaJet.Workflow.Core.Runtime;
 using OptimaJet.Workflow.RavenDB;
-using ServiceStack.Text;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
+using MongoDB.Bson.IO;
+using OptimaJet.Workflow.Oracle;
+using JsonConvert = Newtonsoft.Json.JsonConvert;
 
 namespace OptimaJet
 {
@@ -146,7 +144,7 @@ namespace OptimaJet
 
         private WorkflowRuntime CreateRuntimeOracle()
         {
-            var provider = new OptimaJet.Workflow.DbPersistence.OracleProvider(Parameters.ConnectionString);
+            var provider = new OracleProvider(Parameters.ConnectionString);
             callbackProvider = new WorkflowCallbackProvider(Parameters, provider);
             var builder = new WorkflowBuilder<XElement>(callbackProvider, new XmlWorkflowParser(), provider).WithDefaultCache();
             return new WorkflowRuntime(Parameters.RuntimeId)
@@ -190,7 +188,7 @@ namespace OptimaJet
                 }
                 var identityid = ctx.Request.HttpParams.QueryString["identityid"];
                 var impersonatedIdentityId = ctx.Request.HttpParams.QueryString["impersonatedIdentityId"];
-                Dictionary<string, object> parameters = JsonSerializer.DeserializeFromString<Dictionary<string, object>>(ctx.Request.HttpParams.QueryString["parameters"]);
+                Dictionary<string, object> parameters = JsonConvert.DeserializeObject<Dictionary<string, object>>(ctx.Request.HttpParams.QueryString["parameters"]);
                 CultureInfo culture = CultureInfo.CurrentUICulture;
                 if (!string.IsNullOrWhiteSpace(ctx.Request.HttpParams.QueryString["culture"]))
                 {
@@ -213,7 +211,7 @@ namespace OptimaJet
                         break;
 
                     case "getavailablecommands":
-                        data = JsonSerializer.SerializeToString(_runtime.GetAvailableCommands(processid, new List<string>() { identityid }, null, impersonatedIdentityId));
+                        data = JsonConvert.SerializeObject(_runtime.GetAvailableCommands(processid, new List<string>() { identityid }, null, impersonatedIdentityId));
                         break;
 
                     case "executecommand":
@@ -223,7 +221,7 @@ namespace OptimaJet
                         break;
 
                     case "getavailablestatetoset":
-                        data = JsonSerializer.SerializeToString(_runtime.GetAvailableStateToSet(processid, culture));
+                        data = JsonConvert.SerializeObject(_runtime.GetAvailableStateToSet(processid, culture));
                         break;
 
                     case "setstate":
@@ -236,7 +234,7 @@ namespace OptimaJet
                         break;
 
                     case "isexistprocess":
-                        data = JsonSerializer.SerializeToString(_runtime.IsProcessExists(processid));
+                        data = JsonConvert.SerializeObject(_runtime.IsProcessExists(processid));
                         break;
                     default:
                         throw new Exception(string.Format("operation={0} is not suported!", operation));
@@ -249,7 +247,7 @@ namespace OptimaJet
                             string.Format(". InnerException: {0}", ex.InnerException.Message));
             }
 
-            var res = JsonSerializer.SerializeToString(new 
+            var res = JsonConvert.SerializeObject(new 
             {
                 data = data, 
                 success = error.Length == 0, 

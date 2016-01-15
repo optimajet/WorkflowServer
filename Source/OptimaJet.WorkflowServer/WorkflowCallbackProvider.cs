@@ -1,17 +1,15 @@
 ﻿using OptimaJet.Workflow.Core.Generator;
 using OptimaJet.Workflow.Core.Model;
 using OptimaJet.Workflow.Core.Runtime;
-using ServiceStack.Text;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Xml.Linq;
+using Newtonsoft.Json;
 
 namespace OptimaJet
 {
@@ -26,22 +24,22 @@ namespace OptimaJet
         }
 
         #region IWorkflowRuleProvider
-        public bool Check(ProcessInstance processInstance, string identityId, string ruleName, string parameter)
+        public bool Check(ProcessInstance processInstance, WorkflowRuntime runtime, string identityId, string ruleName, string parameter)
         {
             var res = SendRequest("check", ruleName, processInstance, identityId, parameter);
-            return JsonSerializer.DeserializeFromString<bool>(res);
+            return JsonConvert.DeserializeObject<bool>(res);
         }
 
-        public IEnumerable<string> GetIdentities(ProcessInstance processInstance, string ruleName, string parameter)
+        public IEnumerable<string> GetIdentities(ProcessInstance processInstance, WorkflowRuntime runtime, string ruleName, string parameter)
         {
             var res = SendRequest("getidentities", ruleName, processInstance, null, parameter);
-            return JsonSerializer.DeserializeFromString<List<string>>(res);
+            return JsonConvert.DeserializeObject<List<string>>(res);
         }
 
         public List<string> GetRules()
         {
             var res = SendRequest("getrules");
-            return JsonSerializer.DeserializeFromString<List<string>>(res);
+            return JsonConvert.DeserializeObject<List<string>>(res);
         }
         #endregion
 
@@ -54,13 +52,13 @@ namespace OptimaJet
         public bool ExecuteCondition(string name, ProcessInstance processInstance, WorkflowRuntime runtime, string actionParameter)
         {
             var res = SendRequest("executecondition", name, processInstance, null, actionParameter);
-            return JsonSerializer.DeserializeFromString<bool>(res);
+            return JsonConvert.DeserializeObject<bool>(res);
         }
 
         public List<string> GetActions()
         {
             var res = SendRequest("getactions");
-            return JsonSerializer.DeserializeFromString<List<string>>(res);
+            return JsonConvert.DeserializeObject<List<string>>(res);
         }
         #endregion
 
@@ -73,7 +71,7 @@ namespace OptimaJet
 
             NameValueCollection pars = new NameValueCollection(){
                 {"type", "generate"},
-                {"parameters", JsonSerializer.SerializeToString(parameters)},
+                {"parameters", JsonConvert.SerializeObject(parameters)},
                 {"schemecode", schemeCode},
                 {"schemeid", schemeId.ToString("N")},
                 {"scheme", xe.ToString()},
@@ -92,7 +90,7 @@ namespace OptimaJet
 
             NameValueCollection parameters = new NameValueCollection(){
                 {"type", type},
-                {"pi", processInstance != null ? JsonSerializer.SerializeToString(processInstance) : null},
+                {"pi", processInstance != null ? JsonConvert.SerializeObject(processInstance) : null},
                 {"identityid", identityId},
                 {"name", name},
                 {"parameter", parameter},
