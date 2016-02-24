@@ -86,7 +86,7 @@ namespace OptimaJet
         private string SendRequest(string type, string name = null, ProcessInstance processInstance = null, string identityId = null, string parameter = null)
         {
             if (string.IsNullOrWhiteSpace(_parameters.CallbackApiUrl))
-                return null;
+                return "null";
 
             NameValueCollection parameters = new NameValueCollection(){
                 {"type", type},

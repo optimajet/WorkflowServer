@@ -13,6 +13,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using MongoDB.Bson.IO;
 using OptimaJet.Workflow.Oracle;
@@ -168,7 +169,7 @@ namespace OptimaJet
         #endregion
 
         #region Processing
-        public Response WorkflowApiProcessing(ref AsyncHttp.Server.RequestContext ctx)
+        public async Task<Response> WorkflowApiProcessing(RequestContext ctx)
         {
             object data = string.Empty;
             string error = string.Empty;
@@ -188,7 +189,10 @@ namespace OptimaJet
                 }
                 var identityid = ctx.Request.HttpParams.QueryString["identityid"];
                 var impersonatedIdentityId = ctx.Request.HttpParams.QueryString["impersonatedIdentityId"];
-                Dictionary<string, object> parameters = JsonConvert.DeserializeObject<Dictionary<string, object>>(ctx.Request.HttpParams.QueryString["parameters"]);
+                var value = ctx.Request.HttpParams.QueryString["parameters"];
+
+                var parameters = !string.IsNullOrWhiteSpace(value) ? JsonConvert.DeserializeObject<Dictionary<string, object>>(value) : null;
+
                 CultureInfo culture = CultureInfo.CurrentUICulture;
                 if (!string.IsNullOrWhiteSpace(ctx.Request.HttpParams.QueryString["culture"]))
                 {
@@ -207,21 +211,24 @@ namespace OptimaJet
                         if (parameters == null)
                             parameters = new Dictionary<string, object>();
                                 
-                        _runtime.CreateInstance(schemacode, processid, identityid, impersonatedIdentityId, parameters);
+                        await _runtime.CreateInstanceAsync(schemacode, processid, identityid, impersonatedIdentityId, parameters);
                         break;
 
                     case "getavailablecommands":
-                        data = JsonConvert.SerializeObject(_runtime.GetAvailableCommands(processid, new List<string>() { identityid }, null, impersonatedIdentityId));
+                        var availableCommands = await _runtime.GetAvailableCommandsAsync(processid, new List<string>() { identityid }, null, impersonatedIdentityId);
+                        data = JsonConvert.SerializeObject(availableCommands);
                         break;
 
                     case "executecommand":
                         var command = ctx.Request.HttpParams.QueryString["command"];
-                        var wfcommand = _runtime.GetAvailableCommands(processid, new List<string>() { identityid }, command, impersonatedIdentityId).FirstOrDefault();
-                        _runtime.ExecuteCommand(processid, identityid, impersonatedIdentityId, wfcommand);
+                        var wfcommands = await _runtime.GetAvailableCommandsAsync(processid, new List<string>() { identityid }, command, impersonatedIdentityId);
+                        var wfcommand = wfcommands.FirstOrDefault();
+                        await _runtime.ExecuteCommandAsync(processid, identityid, impersonatedIdentityId, wfcommand);
                         break;
 
                     case "getavailablestatetoset":
-                        data = JsonConvert.SerializeObject(_runtime.GetAvailableStateToSet(processid, culture));
+                        var availableStateToSet = await _runtime.GetAvailableStateToSetAsync(processid, culture);
+                        data = JsonConvert.SerializeObject(availableStateToSet);
                         break;
 
                     case "setstate":
@@ -230,11 +237,12 @@ namespace OptimaJet
                         if (parameters == null)
                             parameters = new Dictionary<string, object>();
 
-                        _runtime.SetState(processid, identityid, impersonatedIdentityId, state, parameters);
+                        await _runtime.SetStateAsync(processid, identityid, impersonatedIdentityId, state, parameters);
                         break;
 
                     case "isexistprocess":
-                        data = JsonConvert.SerializeObject(_runtime.IsProcessExists(processid));
+                        var isProcessExists = await _runtime.IsProcessExistsAsync(processid);
+                        data = JsonConvert.SerializeObject(isProcessExists);
                         break;
                     default:
                         throw new Exception(string.Format("operation={0} is not suported!", operation));
@@ -256,9 +264,14 @@ namespace OptimaJet
             return new StringResponse(res);
         }
 
-        public Response DesignerApiProcessing(ref AsyncHttp.Server.RequestContext ctx)
+        public Task<Response> DesignerApiProcessing( RequestContext ctx)
         {
-            AsyncHttp.Server.Response response = null;
+            return Task.Run(() => DesignerApiProcessingSync(ctx));
+        }
+
+        private Response DesignerApiProcessingSync(RequestContext ctx)
+        {
+            Response response;
             try
             {
                 NameValueCollection pars = new NameValueCollection();
@@ -274,7 +287,8 @@ namespace OptimaJet
                 var res = DesignerApi(pars, fileStream);
                 if (pars.AllKeys.Contains("operation") && pars["operation"] == "downloadscheme")
                 {
-                    response = new StringResponse(res, "file/xml", new Dictionary<string, string>() {
+                    response = new StringResponse(res, "file/xml", new Dictionary<string, string>()
+                    {
                         {"Content-Disposition", "attachment; filename=schema.xml"}
                     });
                 }
@@ -291,6 +305,7 @@ namespace OptimaJet
             }
             return response;
         }
+
         #endregion
 
         public static void RegisterLicenseKey(string key)

@@ -12,7 +12,7 @@ namespace OptimaJet
     {
         public static IDisposable SubscribeProcessing(HttpServer server, WorkflowServer workflowserver)
         {
-            return server.Subscribe(ctx =>
+            return server.Subscribe(async ctx =>
             {
                 var path = ctx.Request.LocalPath.ToLower();
 
@@ -29,30 +29,35 @@ namespace OptimaJet
                     if (workflowserver.Parameters.Log != null)
                         workflowserver.Parameters.Log(string.Format("Workflow API {0} ({2}): {1}",
                         ctx.Request.HttpMethod, ctx.Request.RawUrl, ctx.Request.ClientAddress));
-                    response = workflowserver.WorkflowApiProcessing(ref ctx);
+                    response = await workflowserver.WorkflowApiProcessing(ctx);
                 }
                 else if (path == "/designerapi")
                 {
                    if (workflowserver.Parameters.Log != null)
                         workflowserver.Parameters.Log(string.Format("Designer API {0} ({2}): {1}",
                         ctx.Request.HttpMethod, ctx.Request.RawUrl, ctx.Request.ClientAddress));
-                    response = workflowserver.DesignerApiProcessing(ref ctx);
+                    response = await workflowserver.DesignerApiProcessing(ctx);
                 }
                 else
                 {
                     if (workflowserver.Parameters.Log != null)
                         workflowserver.Parameters.Log(string.Format("Get file ({1}): {0}", ctx.Request.RawUrl, ctx.Request.ClientAddress));
-                    response = BackEndProcessing(ref ctx, workflowserver.Parameters);
+                    response = await BackEndProcessing(ctx, workflowserver.Parameters);
                 }
 
                 ctx.Respond(response);
             });
         }
 
-        public static Response BackEndProcessing(ref RequestContext ctx, WorkflowServerParameter parameter)
+        public static Task<Response> BackEndProcessing(RequestContext ctx, WorkflowServerParameter parameter)
+        {
+            return Task.Run(()=>BackendProcessingSync(ctx, parameter));
+        }
+
+        private static Response BackendProcessingSync(RequestContext ctx, WorkflowServerParameter parameter)
         {
             var localPath = ctx.Request.LocalPath;
-            if (localPath.IndexOf("..") >= 0)
+            if (localPath.IndexOf("..", StringComparison.Ordinal) >= 0)
             {
                 return new EmptyResponse(404);
             }
