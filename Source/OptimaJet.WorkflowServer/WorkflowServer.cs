@@ -15,7 +15,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using MongoDB.Bson.IO;
 using OptimaJet.Workflow.Oracle;
 using JsonConvert = Newtonsoft.Json.JsonConvert;
 
@@ -52,9 +51,9 @@ namespace OptimaJet
 
         public WorkflowServer(WorkflowServerParameter parameters)
         {
-           Parameters = parameters;
+            Parameters = parameters;
 
-           switch (Parameters.Provider)
+            switch (Parameters.Provider)
             {
                 case "mssql":
                     _runtime = CreateRuntimeMSSQL();
@@ -85,17 +84,19 @@ namespace OptimaJet
                 .SwitchAutoUpdateSchemeBeforeGetAvailableCommandsOn()
                 .RegisterAssemblyForCodeActions(Assembly.GetExecutingAssembly());
         }
+
         public void Start()
         {
             _runtime.Start();
         }
 
         public string DesignerApi(NameValueCollection pars, Stream filestream = null)
-        {   
+        {
             return _runtime.DesignerAPI(pars, filestream, true);
         }
 
         #region Create Runtime
+
         private WorkflowRuntime CreateRuntimeMongoDB()
         {
             var provider = new OptimaJet.Workflow.MongoDB.MongoDBProvider(new MongoClient(Parameters.DBUrl).GetServer().GetDatabase(Parameters.Database));
@@ -160,15 +161,17 @@ namespace OptimaJet
             var builder = new WorkflowBuilder<XElement>(callbackProvider,
                 new XmlWorkflowParser(),
                 new OptimaJet.Workflow.DbPersistence.DbSchemePersistenceProvider(Parameters.ConnectionString)
-                ).WithDefaultCache();
+            ).WithDefaultCache();
 
             return new WorkflowRuntime(Parameters.RuntimeId)
                 .WithBuilder(builder)
                 .WithPersistenceProvider(new OptimaJet.Workflow.DbPersistence.DbPersistenceProvider(Parameters.ConnectionString));
         }
+
         #endregion
 
         #region Processing
+
         public async Task<Response> WorkflowApiProcessing(RequestContext ctx)
         {
             object data = string.Empty;
@@ -210,20 +213,34 @@ namespace OptimaJet
 
                         if (parameters == null)
                             parameters = new Dictionary<string, object>();
-                                
-                        await _runtime.CreateInstanceAsync(schemacode, processid, identityid, impersonatedIdentityId, parameters);
+
+                        var initialPrameters = await GetInitialProcessParameters(ctx, schemacode);
+
+                        var createInstanceParams = new CreateInstanceParams(schemacode, processid)
+                        {
+                            IdentityId = identityid,
+                            ImpersonatedIdentityId = impersonatedIdentityId,
+                            InitialProcessParameters = initialPrameters,
+                            SchemeCreationParameters = parameters
+                        };
+
+                        await _runtime.CreateInstanceAsync(createInstanceParams);
                         break;
 
                     case "getavailablecommands":
-                        var availableCommands = await _runtime.GetAvailableCommandsAsync(processid, new List<string>() { identityid }, null, impersonatedIdentityId);
+                        var availableCommands = await _runtime.GetAvailableCommandsAsync(processid, new List<string>() {identityid}, null, impersonatedIdentityId);
                         data = JsonConvert.SerializeObject(availableCommands);
                         break;
 
                     case "executecommand":
                         var command = ctx.Request.HttpParams.QueryString["command"];
-                        var wfcommands = await _runtime.GetAvailableCommandsAsync(processid, new List<string>() { identityid }, command, impersonatedIdentityId);
+                        var wfcommands = await _runtime.GetAvailableCommandsAsync(processid, new List<string>() {identityid}, command, impersonatedIdentityId);
                         var wfcommand = wfcommands.FirstOrDefault();
-                        await _runtime.ExecuteCommandAsync(processid, identityid, impersonatedIdentityId, wfcommand);
+                        if (wfcommand == null)
+                            throw new Exception(string.Format("Command {0} is not found", command));
+
+                        FillCommandParameters(ctx,wfcommand);
+                        await _runtime.ExecuteCommandAsync(wfcommand, identityid, impersonatedIdentityId);
                         break;
 
                     case "getavailablestatetoset":
@@ -251,20 +268,21 @@ namespace OptimaJet
             catch (Exception ex)
             {
                 error = string.Format("{0}{1}",
-                    ex.Message, ex.InnerException == null ? string.Empty :
-                            string.Format(". InnerException: {0}", ex.InnerException.Message));
+                    ex.Message, ex.InnerException == null
+                        ? string.Empty
+                        : string.Format(". InnerException: {0}", ex.InnerException.Message));
             }
 
-            var res = JsonConvert.SerializeObject(new 
+            var res = JsonConvert.SerializeObject(new
             {
-                data = data, 
-                success = error.Length == 0, 
+                data = data,
+                success = error.Length == 0,
                 error = error
             });
             return new StringResponse(res);
         }
 
-        public Task<Response> DesignerApiProcessing( RequestContext ctx)
+        public Task<Response> DesignerApiProcessing(RequestContext ctx)
         {
             return Task.Run(() => DesignerApiProcessingSync(ctx));
         }
@@ -311,6 +329,68 @@ namespace OptimaJet
         public static void RegisterLicenseKey(string key)
         {
             WorkflowRuntime.RegisterLicense(key);
+        }
+
+        private async Task<Dictionary<string, object>> GetInitialProcessParameters(RequestContext ctx, string schemeCode)
+        {
+            var formParameters = ctx.Request.HttpParams.FormParams;
+            if (!ctx.Request.HttpMethod.Equals("POST", StringComparison.InvariantCultureIgnoreCase) || formParameters == null || !formParameters.HasKeys())
+            {
+                return new Dictionary<string, object>();
+            }
+
+            var scheme = await Task.Run(() => _runtime.Builder.GetProcessScheme(schemeCode));
+
+            var result = new Dictionary<string, object>();
+
+            foreach (var key in formParameters.AllKeys)
+            {
+                var parameter = scheme.Parameters.FirstOrDefault(p => p.Name.Equals(key));
+                if (parameter == null)
+                    continue;
+                var value = DeserializeValue(formParameters, key, parameter.Type);
+                result.Add(parameter.Name, value);
+            }
+            return result;
+        }
+
+        private void FillCommandParameters(RequestContext ctx, WorkflowCommand command)
+        {
+            var formParameters = ctx.Request.HttpParams.FormParams;
+            command.SetAllParametersToDefault();
+            if (!ctx.Request.HttpMethod.Equals("POST", StringComparison.InvariantCultureIgnoreCase) || formParameters == null || !formParameters.HasKeys())
+                return;
+
+            foreach (var key in formParameters.AllKeys)
+            {
+                var parameter = command.Parameters.FirstOrDefault(p => p.ParameterName.Equals(key));
+                if (parameter == null)
+                    continue;
+                var value = DeserializeValue(formParameters, key, parameter.Type);
+
+                parameter.Value = value;
+            }
+        }
+
+        private static object DeserializeValue(NameValueCollection formParameters, string key, Type type)
+        {
+            object value = null;
+            try
+            {
+                value = ParametersSerializer.Deserialize(formParameters[key], type);
+            }
+            catch (Exception)
+            {
+                if (type == typeof(string))
+                {
+                    value = formParameters[key];
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return value;
         }
     }
 }

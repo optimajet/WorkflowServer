@@ -4367,6 +4367,14 @@
             <param name="mainIdentityId">User id for priority check of rules</param>
             <returns>List of <see cref="T:OptimaJet.Workflow.Core.Runtime.WorkflowCommand"/> commands</returns>
         </member>
+        <member name="M:OptimaJet.Workflow.Core.Runtime.WorkflowRuntime.ExecuteCommandAsync(OptimaJet.Workflow.Core.Runtime.WorkflowCommand,System.String,System.String)">
+            <summary>
+            Execute specified command for specified users (async version)
+            </summary>
+            <param name="command">Command to execute</param>
+            <param name="identityId">The user id which execute command</param>
+            <param name="impersonatedIdentityId">The user id for whom executes command (impersonation)</param>
+        </member>
         <member name="M:OptimaJet.Workflow.Core.Runtime.WorkflowRuntime.ExecuteCommandAsync(System.Guid,System.String,System.String,OptimaJet.Workflow.Core.Runtime.WorkflowCommand)">
             <summary>
             Execute specified command for specified users (async version)

@@ -13,15 +13,15 @@ namespace wfes
         {
             RegisterWorkflowEngine();
 
-            //for tests (MS SQL)
+            // for tests(MS SQL)
             //args = new string[]{
             //    "-url=http://*:8077/",
             //    //"-callbackurl=http://localhost:8078/",
             //    //"-callbackgenscheme",
             //    "-dbprovider=mssql",
-            //    "-log",
+            //   // "-log",
             //    "-dbcs=Data Source=(local)\\SQL2012;Initial Catalog=WFTemp;Integrated Security=True;User ID=sa;Password=1;",
-            //    "-befolder=../../../backend"
+            //    "-befolder=../backend"
             //};
 
             var wsparams = ParseWorkflowServerParameter(args); 

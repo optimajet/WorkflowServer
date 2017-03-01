@@ -51,7 +51,9 @@ The basic operations:
 <li>Set State</li>
 <li>Process is exist</li>
 </ul>
-Creation of the instance - Creates the instance of the process.
+Creation of the instance - Creates the instance of the process. Please note that the  parameters parameter in query will be passed to an 
+IWorkflowGenerator instance. In most cases you don't need it. If you want to pass initial parameters to the process. Use POST query and specify 
+this parameters as form data.
 ````
 /workflowapi?operation=createinstance&processid=&schemacode=&identityid=&impersonatedIdentityId=&parameters=
 ````
@@ -59,7 +61,8 @@ Getting the list of available commands - Returns the list of available commands 
 ````
 /workflowapi?operation=getavailablecommands&processid=&identityid=&impersonatedIdentityId=
 ````
-Execution of the command - This call will execute the command.
+Execution of the command - This call will execute the command. If you want to pass command parameters to the process. Use POST query and specify 
+this parameters as form data.
 ````
 /workflowapi?operation=executecommand&processid=&identityid=&impersonatedIdentityId=
 ````
