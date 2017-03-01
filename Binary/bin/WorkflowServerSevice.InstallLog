@@ -1,0 +1,34 @@
+﻿Выполняется установка сборки 'C:\Projects\WorkflowServerGitHub\Binary\bin\WorkflowServerSevice.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = C:\Projects\WorkflowServerGitHub\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = C:\Projects\WorkflowServerGitHub\Binary\bin\WorkflowServerSevice.exe
+Устанавливается служба OptimaJet.WorkflowServer...
+Служба OptimaJet.WorkflowServer успешно установлена.
+Создается исходный EventLog OptimaJet.WorkflowServer в журнале Application...
+Выполняется фиксация сборки 'C:\Projects\WorkflowServerGitHub\Binary\bin\WorkflowServerSevice.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = C:\Projects\WorkflowServerGitHub\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = C:\Projects\WorkflowServerGitHub\Binary\bin\WorkflowServerSevice.exe
+Выполняется удаление сборки 'C:\Projects\WorkflowServerGitHub\Binary\bin\WorkflowServerSevice.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = C:\Projects\WorkflowServerGitHub\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = C:\Projects\WorkflowServerGitHub\Binary\bin\WorkflowServerSevice.exe
+Выполняется удаление источника EventLog OptimaJet.WorkflowServer.
+Выполняется удаление службы OptimaJet.WorkflowServer из системы...
+Служба OptimaJet.WorkflowServer успешно удалена из системы.
+Выполняется установка сборки 'C:\Projects\WorkflowServerGitHub\Binary\bin\WorkflowServerSevice.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = C:\Projects\WorkflowServerGitHub\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = C:\Projects\WorkflowServerGitHub\Binary\bin\WorkflowServerSevice.exe
+Устанавливается служба OptimaJet.WorkflowServer...
+Служба OptimaJet.WorkflowServer успешно установлена.
+Создается исходный EventLog OptimaJet.WorkflowServer в журнале Application...
+Выполняется фиксация сборки 'C:\Projects\WorkflowServerGitHub\Binary\bin\WorkflowServerSevice.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = C:\Projects\WorkflowServerGitHub\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = C:\Projects\WorkflowServerGitHub\Binary\bin\WorkflowServerSevice.exe

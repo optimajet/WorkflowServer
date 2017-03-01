@@ -46,6 +46,9 @@ namespace TestCallbackAPIService
                             case "getactions":
                                 data = "[\"Action1\", \"Action2\", \"Action3\"]";
                                 break;
+                            case "getconditions":
+                                data = "[\"Condition1\", \"Condition2\", \"Condition3\"]";
+                                break;
                             case "executeaction":
                                 break;
                             case "executecondition":
@@ -76,9 +79,9 @@ namespace TestCallbackAPIService
 
                 while (true)
                 {
-                    Console.WriteLine("For exit please enter '^Q'.");
+                    Console.WriteLine("For exit please enter 'Q'.");
                     var command = Console.ReadLine();
-                    if (command.ToUpper() == "^Q")
+                    if (!string.IsNullOrEmpty(command) && command.ToUpper() == "Q")
                         break;
                 }
 

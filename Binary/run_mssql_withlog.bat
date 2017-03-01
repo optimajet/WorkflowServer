@@ -6,7 +6,9 @@ if "%~1" neq "Admin" (
   cd /d "%~dp0"
 
   cd bin
-  wfes.exe -url="http://*:8077/" -callbackurl="http://localhost:8078/" -befolder="../backend" -log -callbackgenscheme -dbprovider=mssql -dbcs="Data Source=(local);Initial Catalog=WorkflowApp;Integrated Security=False;User ID=sa;Password=1;"
+  REM use commented sting to run WFE server with callback service
+  REM wfes.exe -url="http://*:8077/" -callbackurl="http://localhost:8078/" -befolder="../backend" -callbackgenscheme -dbprovider=mssql -dbcs="Data Source=(local);Initial Catalog=WorkflowApp;Integrated Security=False;User ID=sa;Password=1;"
+  wfes.exe -url="http://*:8077/" -callbackurl="" -befolder="../backend" -callbackgenscheme -log -dbprovider=mssql -dbcs="Data Source=(local);Initial Catalog=WorkflowApp;Integrated Security=False;User ID=sa;Password=1;"
   pause
 )
 exit /B

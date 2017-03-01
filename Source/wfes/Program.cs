@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Text;
 using AsyncHttp.Server;
-using System.IO;
 using System.Configuration;
 
 namespace wfes
@@ -20,11 +16,11 @@ namespace wfes
             //for tests (MS SQL)
             //args = new string[]{
             //    "-url=http://*:8077/",
-            //    "-callbackurl=http://localhost:8078/",
+            //    //"-callbackurl=http://localhost:8078/",
             //    //"-callbackgenscheme",
             //    "-dbprovider=mssql",
             //    "-log",
-            //    "-dbcs=Data Source=(local);Initial Catalog=WorkflowApp;Integrated Security=False;User ID=sa;Password=1;",
+            //    "-dbcs=Data Source=(local)\\SQL2012;Initial Catalog=WFTemp;Integrated Security=True;User ID=sa;Password=1;",
             //    "-befolder=../../../backend"
             //};
 
@@ -55,9 +51,9 @@ namespace wfes
                     
                 while (true)
                 {
-                    Console.WriteLine("For exit please enter '^Q'.");
+                    Console.WriteLine("For exit please enter 'Q'.");
                     var command = Console.ReadLine();
-                    if (command.ToUpper() == "^Q")
+                    if (!string.IsNullOrEmpty(command) && command.ToUpper() == "Q")
                         break;
                 }
                 

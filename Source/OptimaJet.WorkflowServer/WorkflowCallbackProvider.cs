@@ -60,6 +60,12 @@ namespace OptimaJet
             var res = SendRequest("getactions");
             return JsonConvert.DeserializeObject<List<string>>(res);
         }
+
+        public List<string> GetConditions()
+        {
+            var res = SendRequest("getconditions");
+            return JsonConvert.DeserializeObject<List<string>>(res);
+        }
         #endregion
 
         #region IWorkflowGenerator
