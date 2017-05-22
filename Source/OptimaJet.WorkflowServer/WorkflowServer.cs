@@ -20,7 +20,7 @@ using JsonConvert = Newtonsoft.Json.JsonConvert;
 
 namespace OptimaJet
 {
-    public delegate void LogDelegate(string msg);
+    public delegate void LogDelegate(string msg, LogEntryType type = LogEntryType.Information);
 
     public class WorkflowServerParameter
     {
@@ -176,7 +176,7 @@ namespace OptimaJet
         {
             object data = string.Empty;
             string error = string.Empty;
-
+            string detailedError = string.Empty;
             try
             {
                 string operation = ctx.Request.HttpParams.QueryString["operation"];
@@ -267,18 +267,19 @@ namespace OptimaJet
             }
             catch (Exception ex)
             {
-                error = string.Format("{0}{1}",
-                    ex.Message, ex.InnerException == null
-                        ? string.Empty
-                        : string.Format(". InnerException: {0}", ex.InnerException.Message));
+                detailedError = ex.ToDetailedString();
+                error = $"{ex.Message}{(ex.InnerException == null ? string.Empty : $". InnerException: {ex.InnerException.Message}")}";
+                Parameters?.Log?.Invoke(detailedError,LogEntryType.Error);
             }
 
             var res = JsonConvert.SerializeObject(new
             {
-                data = data,
+                data,
                 success = error.Length == 0,
-                error = error
+                error,
+                detailedError
             });
+
             return new StringResponse(res);
         }
 
@@ -317,8 +318,8 @@ namespace OptimaJet
             }
             catch (Exception ex)
             {
-                if (this.Parameters.Log != null)
-                    this.Parameters.Log(ex.ToString());
+                var detailedError = ex.ToDetailedString();
+                Parameters?.Log?.Invoke(detailedError,LogEntryType.Error);
                 response = new EmptyResponse(404);
             }
             return response;

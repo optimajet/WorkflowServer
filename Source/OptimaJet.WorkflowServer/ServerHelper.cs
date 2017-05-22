@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OptimaJet
 {
-    public class ServerHelper
+    public static class ServerHelper
     {
         public static IDisposable SubscribeProcessing(HttpServer server, WorkflowServer workflowserver)
         {
@@ -26,22 +26,19 @@ namespace OptimaJet
                         return;
                     }
 
-                    if (workflowserver.Parameters.Log != null)
-                        workflowserver.Parameters.Log(string.Format("Workflow API {0} ({2}): {1}",
+                    workflowserver.Parameters?.Log?.Invoke(string.Format("Workflow API {0} ({2}): {1}",
                         ctx.Request.HttpMethod, ctx.Request.RawUrl, ctx.Request.ClientAddress));
                     response = await workflowserver.WorkflowApiProcessing(ctx);
                 }
                 else if (path == "/designerapi")
                 {
-                   if (workflowserver.Parameters.Log != null)
-                        workflowserver.Parameters.Log(string.Format("Designer API {0} ({2}): {1}",
+                    workflowserver.Parameters?.Log?.Invoke(string.Format("Designer API {0} ({2}): {1}",
                         ctx.Request.HttpMethod, ctx.Request.RawUrl, ctx.Request.ClientAddress));
                     response = await workflowserver.DesignerApiProcessing(ctx);
                 }
                 else
                 {
-                    if (workflowserver.Parameters.Log != null)
-                        workflowserver.Parameters.Log(string.Format("Get file ({1}): {0}", ctx.Request.RawUrl, ctx.Request.ClientAddress));
+                    workflowserver.Parameters?.Log?.Invoke(string.Format("Get file ({1}): {0}", ctx.Request.RawUrl, ctx.Request.ClientAddress));
                     response = await BackEndProcessing(ctx, workflowserver.Parameters);
                 }
 

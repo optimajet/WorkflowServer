@@ -110,7 +110,7 @@ namespace OptimaJet
             if (string.IsNullOrWhiteSpace(_parameters.CallbackApiUrl))
                 return null;
 
-            var targerUrl = string.Format("{0}{1}apikey={2}", _parameters.CallbackApiUrl, _parameters.CallbackApiUrl.IndexOf("?") < 0 ? "?" : "&", _parameters.ApiKey);
+            var targerUrl = $"{_parameters.CallbackApiUrl}{(_parameters.CallbackApiUrl.IndexOf("?", StringComparison.Ordinal) < 0 ? "?" : "&")}apikey={_parameters.ApiKey}";
 
             StringBuilder sb = new StringBuilder();
             foreach (string key in parameters.AllKeys)
@@ -120,11 +120,8 @@ namespace OptimaJet
                 sb.AppendFormat("{0}={1}", key, HttpUtility.UrlEncode(parameters[key]));
             }
 
-            if (_parameters.Log != null)
-            {
-                _parameters.Log(string.Format("WorkflowProviderWebApi Send request {0}", targerUrl));
-            }
-            
+            _parameters.Log?.Invoke($"WorkflowProviderWebApi Send request {targerUrl}");
+
             var request = (HttpWebRequest)WebRequest.Create(targerUrl);
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";

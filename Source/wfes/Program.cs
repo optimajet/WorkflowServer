@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reactive.Subjects;
 using AsyncHttp.Server;
 using System.Configuration;
+using OptimaJet;
 
 namespace wfes
 {
@@ -62,9 +63,9 @@ namespace wfes
         }
 
 
-        public static void Log(string msg)
+        public static void Log(string msg, LogEntryType type)
         {
-            Console.WriteLine(msg);
+            Console.WriteLine($"{type}:{msg}");
         }
 
         private static void RegisterWorkflowEngine()

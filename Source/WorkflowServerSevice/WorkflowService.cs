@@ -1,22 +1,22 @@
 ﻿using AsyncHttp.Server;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
-using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
-using System.Threading.Tasks;
+using OptimaJet;
 
 namespace WorkflowServerSevice
 {
     public partial class WorkflowService : ServiceBase
     {
-        HttpServer server;
-        IDisposable listeners;
-        OptimaJet.WorkflowServer workflowserver;
+        HttpServer _server;
+        IDisposable _listeners;
+        OptimaJet.WorkflowServer _workflowserver;
+        ConcurrentDictionary<LogEntryType,byte> _logEntryTypes = new ConcurrentDictionary<LogEntryType,byte>();
         public WorkflowService()
         {
             InitializeComponent();
@@ -24,54 +24,73 @@ namespace WorkflowServerSevice
 
         protected override void OnStart(string[] args)
         {
-            OptimaJet.WorkflowServerParameter wsparams = GetParams();
+            WorkflowServerParameter wsparams = GetParams();
             RegisterWorkflowEngine();
 
-            Log("WorkflowServer by OptimaJet 2015");
             Log("WorkflowEngine.NET: Init...");
-            workflowserver = new OptimaJet.WorkflowServer(wsparams);
+            _workflowserver = new OptimaJet.WorkflowServer(wsparams);
 
             if (!wsparams.NoStartWorkflow)
             {
                 Log("WorkflowEngine.NET: Starting...");
-                workflowserver.Start();
+                _workflowserver.Start();
             }
 
             Log("HttpServer: Starting...");
-            server = new HttpServer(wsparams.Url);
-            Log(string.Format("Waiting for a connection on {0}...", wsparams.Url));
+            _server = new HttpServer(wsparams.Url);
+            Log($"Waiting for a connection on {wsparams.Url}...");
 
-            listeners = OptimaJet.ServerHelper.SubscribeProcessing(server, workflowserver);
+            _listeners = ServerHelper.SubscribeProcessing(_server, _workflowserver);
         }
 
         protected override void OnStop()
         {
-            listeners.Dispose();
-            server.Dispose();
+            _listeners.Dispose();
+            _server.Dispose();
         }
 
-        private OptimaJet.WorkflowServerParameter GetParams()
+        private WorkflowServerParameter GetParams()
         {
-            var p = new OptimaJet.WorkflowServerParameter();
+            var p = new WorkflowServerParameter
+            {
+                Url = ConfigurationManager.AppSettings["url"],
+                CallbackApiUrl = ConfigurationManager.AppSettings["callbackurl"],
+                CallbackGenScheme = bool.Parse(ConfigurationManager.AppSettings["callbackgenscheme"]),
+                ApiKey = ConfigurationManager.AppSettings["apikey"],
+                Provider = ConfigurationManager.AppSettings["dbprovider"],
+                ConnectionString = ConfigurationManager.AppSettings["dbcs"],
+                DBUrl = ConfigurationManager.AppSettings["dburl"],
+                Database = ConfigurationManager.AppSettings["dbdatabase"],
+                NoStartWorkflow = bool.Parse(ConfigurationManager.AppSettings["nostartworkflow"])
+            };
 
-            p.Url = ConfigurationManager.AppSettings["url"];
-            p.CallbackApiUrl = ConfigurationManager.AppSettings["callbackurl"];
-            p.CallbackGenScheme = bool.Parse(ConfigurationManager.AppSettings["callbackgenscheme"]);
-            p.ApiKey = ConfigurationManager.AppSettings["apikey"];
-            p.Provider = ConfigurationManager.AppSettings["dbprovider"];
-            p.ConnectionString = ConfigurationManager.AppSettings["dbcs"];
-            p.DBUrl = ConfigurationManager.AppSettings["dburl"];
-            p.Database = ConfigurationManager.AppSettings["dbdatabase"];
-            p.NoStartWorkflow = bool.Parse(ConfigurationManager.AppSettings["nostartworkflow"]);
             if(bool.Parse(ConfigurationManager.AppSettings["log"]))
                 p.Log = Log;
+            var logEntryTypesString = ConfigurationManager.AppSettings["logentrytypes"];
+            if (!string.IsNullOrEmpty(logEntryTypesString))
+            {
+                logEntryTypesString.Split(',').ToList().ForEach(v =>
+                {
+                    var parsed = (LogEntryType) Enum.Parse(typeof(LogEntryType), v, true);
+                    _logEntryTypes.AddOrUpdate(parsed, 0, (type, b) => b);
+                });
+            }
+            else
+            {
+                _logEntryTypes.AddOrUpdate(LogEntryType.Error, 0, (type, b) => b);
+            }
+
 
             p.BackendFolder = ConfigurationManager.AppSettings["befolder"];
             return p;
         }
 
-        public void Log(string message)
+        public void Log(string message, LogEntryType type = LogEntryType.Information)
         {
+            if (!_logEntryTypes.ContainsKey(type))
+            {
+                return;
+            }
             try
             {
                 if (!EventLog.SourceExists("OptimaJet.WorkflowServer"))
@@ -79,9 +98,17 @@ namespace WorkflowServerSevice
                     EventLog.CreateEventSource("OptimaJet.WorkflowServer", "OptimaJet.WorkflowServer");
                 }
                 eventLog1.Source = "OptimaJet.WorkflowServer";
-                eventLog1.WriteEntry(message);
+                if (type == LogEntryType.Information)
+                    eventLog1.WriteEntry(message,EventLogEntryType.Information);
+                else
+                {
+                    eventLog1.WriteEntry(message, EventLogEntryType.Error);
+                }
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
         }
 
         private static void RegisterWorkflowEngine()

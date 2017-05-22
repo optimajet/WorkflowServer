@@ -88,16 +88,16 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Reactive.Core">
-      <HintPath>..\DLL\System.Reactive.Core.dll</HintPath>
+      <HintPath>..\..\Binary\bin\System.Reactive.Core.dll</HintPath>
     </Reference>
     <Reference Include="System.Reactive.Interfaces">
-      <HintPath>..\DLL\System.Reactive.Interfaces.dll</HintPath>
+      <HintPath>..\..\Binary\bin\System.Reactive.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="System.Reactive.Linq">
-      <HintPath>..\DLL\System.Reactive.Linq.dll</HintPath>
+      <HintPath>..\..\Binary\bin\System.Reactive.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Reactive.PlatformServices">
-      <HintPath>..\DLL\System.Reactive.PlatformServices.dll</HintPath>
+      <HintPath>..\..\Binary\bin\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -107,8 +107,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LogEntryType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerHelper.cs" />
+    <Compile Include="Utils.cs" />
     <Compile Include="WorkflowCallbackProvider.cs" />
     <Compile Include="WorkflowServer.cs" />
   </ItemGroup>
