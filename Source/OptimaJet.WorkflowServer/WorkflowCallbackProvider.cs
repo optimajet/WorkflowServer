@@ -7,6 +7,8 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Xml.Linq;
 using Newtonsoft.Json;
@@ -26,19 +28,19 @@ namespace OptimaJet
         #region IWorkflowRuleProvider
         public bool Check(ProcessInstance processInstance, WorkflowRuntime runtime, string identityId, string ruleName, string parameter)
         {
-            var res = SendRequest("check", ruleName, processInstance, identityId, parameter);
+            var res = SendRequest("check", ruleName, processInstance, identityId, parameter).Result;
             return JsonConvert.DeserializeObject<bool>(res);
         }
 
         public IEnumerable<string> GetIdentities(ProcessInstance processInstance, WorkflowRuntime runtime, string ruleName, string parameter)
         {
-            var res = SendRequest("getidentities", ruleName, processInstance, null, parameter);
+            var res = SendRequest("getidentities", ruleName, processInstance, null, parameter).Result;
             return JsonConvert.DeserializeObject<List<string>>(res);
         }
 
         public List<string> GetRules()
         {
-            var res = SendRequest("getrules");
+            var res = SendRequest("getrules").Result;
             return JsonConvert.DeserializeObject<List<string>>(res);
         }
         #endregion
@@ -46,24 +48,44 @@ namespace OptimaJet
         #region IWorkflowActionProvider
         public void ExecuteAction(string name, ProcessInstance processInstance, WorkflowRuntime runtime, string actionParameter)
         {
-            SendRequest("executeaction", name, processInstance, null, actionParameter);
+            ExecuteActionAsync(name, processInstance, runtime, actionParameter, CancellationToken.None).Wait();
+        }
+
+        public async Task ExecuteActionAsync(string name, ProcessInstance processInstance, WorkflowRuntime runtime, string actionParameter, CancellationToken token)
+        {
+            await SendRequest("executeaction", name, processInstance, null, actionParameter);
         }
 
         public bool ExecuteCondition(string name, ProcessInstance processInstance, WorkflowRuntime runtime, string actionParameter)
         {
-            var res = SendRequest("executecondition", name, processInstance, null, actionParameter);
+            return ExecuteConditionAsync(name, processInstance, runtime, actionParameter, CancellationToken.None).Result;
+        }
+
+        public async Task<bool> ExecuteConditionAsync(string name, ProcessInstance processInstance, WorkflowRuntime runtime, string actionParameter, CancellationToken token)
+        {
+            var res = await SendRequest("executecondition", name, processInstance, null, actionParameter);
             return JsonConvert.DeserializeObject<bool>(res);
+        }
+
+        public bool IsActionAsync(string name)
+        {
+            return true;
+        }
+
+        public bool IsConditionAsync(string name)
+        {
+            return true;
         }
 
         public List<string> GetActions()
         {
-            var res = SendRequest("getactions");
+            var res = SendRequest("getactions").Result;
             return JsonConvert.DeserializeObject<List<string>>(res);
         }
 
         public List<string> GetConditions()
         {
-            var res = SendRequest("getconditions");
+            var res = SendRequest("getconditions").Result;
             return JsonConvert.DeserializeObject<List<string>>(res);
         }
         #endregion
@@ -83,13 +105,13 @@ namespace OptimaJet
                 {"scheme", xe.ToString()},
             };
 
-            var res = Send(pars);
+            var res = Send(pars).Result;
             return XElement.Parse(res);
         }
         #endregion
 
         #region Send
-        private string SendRequest(string type, string name = null, ProcessInstance processInstance = null, string identityId = null, string parameter = null)
+        private async Task<string> SendRequest(string type, string name = null, ProcessInstance processInstance = null, string identityId = null, string parameter = null)
         {
             if (string.IsNullOrWhiteSpace(_parameters.CallbackApiUrl))
                 return "null";
@@ -102,10 +124,10 @@ namespace OptimaJet
                 {"parameter", parameter},
             };
 
-            return Send(parameters);
+            return await Send(parameters);
         }
 
-        public string Send(NameValueCollection parameters)
+        public async Task<string> Send(NameValueCollection parameters)
         {
             if (string.IsNullOrWhiteSpace(_parameters.CallbackApiUrl))
                 return null;
@@ -125,14 +147,14 @@ namespace OptimaJet
             var request = (HttpWebRequest)WebRequest.Create(targerUrl);
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
-            using (var stream = request.GetRequestStream())
+            using (var stream = await request.GetRequestStreamAsync())
             {
                 byte[] buffer = Encoding.Default.GetBytes(sb.ToString());
-                stream.Write(buffer, 0, buffer.Length);
+                await stream.WriteAsync(buffer, 0, buffer.Length);
             }
 
-            var response = (HttpWebResponse)request.GetResponse();
-            var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            var response = (HttpWebResponse)await request.GetResponseAsync();
+            var responseString = await new StreamReader(response.GetResponseStream()).ReadToEndAsync();
             return HttpUtility.UrlDecode(responseString);
         }
         #endregion
