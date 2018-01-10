@@ -32,3 +32,312 @@
    logtoconsole = 
    logfile = C:\Projects\WorkflowServerGitHub\Binary\bin\WorkflowServerSevice.InstallLog
    assemblypath = C:\Projects\WorkflowServerGitHub\Binary\bin\WorkflowServerSevice.exe
+Installing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Installing service OptimaJet.WorkflowServer...
+Service OptimaJet.WorkflowServer has been successfully installed.
+Creating EventLog source OptimaJet.WorkflowServer in log Application...
+Committing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Uninstalling assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Removing EventLog source OptimaJet.WorkflowServer.
+Service OptimaJet.WorkflowServer is being removed from the system...
+Service OptimaJet.WorkflowServer was successfully removed from the system.
+Attempt to stop service OptimaJet.WorkflowServer.
+Installing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Installing service OptimaJet.WorkflowServer...
+Service OptimaJet.WorkflowServer has been successfully installed.
+Creating EventLog source OptimaJet.WorkflowServer in log Application...
+Committing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Uninstalling assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Removing EventLog source OptimaJet.WorkflowServer.
+Service OptimaJet.WorkflowServer is being removed from the system...
+Service OptimaJet.WorkflowServer was successfully removed from the system.
+Installing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Installing service OptimaJet.WorkflowServer...
+Service OptimaJet.WorkflowServer has been successfully installed.
+Creating EventLog source OptimaJet.WorkflowServer in log Application...
+Committing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Uninstalling assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Removing EventLog source OptimaJet.WorkflowServer.
+Service OptimaJet.WorkflowServer is being removed from the system...
+Service OptimaJet.WorkflowServer was successfully removed from the system.
+Attempt to stop service OptimaJet.WorkflowServer.
+Installing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Installing service OptimaJet.WorkflowServer...
+Service OptimaJet.WorkflowServer has been successfully installed.
+Creating EventLog source OptimaJet.WorkflowServer in log Application...
+Committing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Uninstalling assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Removing EventLog source OptimaJet.WorkflowServer.
+Service OptimaJet.WorkflowServer is being removed from the system...
+Service OptimaJet.WorkflowServer was successfully removed from the system.
+Installing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Installing service OptimaJet.WorkflowServer...
+Creating EventLog source OptimaJet.WorkflowServer in log Application...
+Rolling back assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Restoring event log to previous state for source OptimaJet.WorkflowServer.
+Installing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Installing service OptimaJet.WorkflowServer...
+Creating EventLog source OptimaJet.WorkflowServer in log Application...
+Rolling back assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Restoring event log to previous state for source OptimaJet.WorkflowServer.
+Uninstalling assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Removing EventLog source OptimaJet.WorkflowServer.
+Warning: The source OptimaJet.WorkflowServer is not registered on the local machine.
+Service OptimaJet.WorkflowServer is being removed from the system...
+Service OptimaJet.WorkflowServer was successfully removed from the system.
+Installing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Installing service OptimaJet.WorkflowServer...
+Creating EventLog source OptimaJet.WorkflowServer in log Application...
+Rolling back assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Restoring event log to previous state for source OptimaJet.WorkflowServer.
+Installing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Installing service OptimaJet.WorkflowServer...
+Service OptimaJet.WorkflowServer has been successfully installed.
+Creating EventLog source OptimaJet.WorkflowServer in log Application...
+Committing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Uninstalling assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Removing EventLog source OptimaJet.WorkflowServer.
+Service OptimaJet.WorkflowServer is being removed from the system...
+Service OptimaJet.WorkflowServer was successfully removed from the system.
+Installing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Installing service OptimaJet.WorkflowServer...
+Creating EventLog source OptimaJet.WorkflowServer in log Application...
+Rolling back assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Restoring event log to previous state for source OptimaJet.WorkflowServer.
+Installing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Installing service OptimaJet.WorkflowServer...
+Service OptimaJet.WorkflowServer has been successfully installed.
+Creating EventLog source OptimaJet.WorkflowServer in log Application...
+Committing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Uninstalling assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Removing EventLog source OptimaJet.WorkflowServer.
+Service OptimaJet.WorkflowServer is being removed from the system...
+Service OptimaJet.WorkflowServer was successfully removed from the system.
+Installing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Installing service OptimaJet.WorkflowServer...
+Service OptimaJet.WorkflowServer has been successfully installed.
+Creating EventLog source OptimaJet.WorkflowServer in log Application...
+Committing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Uninstalling assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Removing EventLog source OptimaJet.WorkflowServer.
+Service OptimaJet.WorkflowServer is being removed from the system...
+Service OptimaJet.WorkflowServer was successfully removed from the system.
+Attempt to stop service OptimaJet.WorkflowServer.
+Installing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Installing service OptimaJet.WorkflowServer...
+Service OptimaJet.WorkflowServer has been successfully installed.
+Creating EventLog source OptimaJet.WorkflowServer in log Application...
+Committing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Uninstalling assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Removing EventLog source OptimaJet.WorkflowServer.
+Service OptimaJet.WorkflowServer is being removed from the system...
+Service OptimaJet.WorkflowServer was successfully removed from the system.
+Installing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Installing service OptimaJet.WorkflowServer...
+Service OptimaJet.WorkflowServer has been successfully installed.
+Creating EventLog source OptimaJet.WorkflowServer in log Application...
+Committing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Uninstalling assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Removing EventLog source OptimaJet.WorkflowServer.
+Service OptimaJet.WorkflowServer is being removed from the system...
+Service OptimaJet.WorkflowServer was successfully removed from the system.
+Attempt to stop service OptimaJet.WorkflowServer.
+Installing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Installing service OptimaJet.WorkflowServer...
+Service OptimaJet.WorkflowServer has been successfully installed.
+Creating EventLog source OptimaJet.WorkflowServer in log Application...
+Committing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Uninstalling assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Removing EventLog source OptimaJet.WorkflowServer.
+Service OptimaJet.WorkflowServer is being removed from the system...
+Service OptimaJet.WorkflowServer was successfully removed from the system.
+Installing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Installing service OptimaJet.WorkflowServer...
+Service OptimaJet.WorkflowServer has been successfully installed.
+Creating EventLog source OptimaJet.WorkflowServer in log Application...
+Committing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Uninstalling assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Removing EventLog source OptimaJet.WorkflowServer.
+Service OptimaJet.WorkflowServer is being removed from the system...
+Service OptimaJet.WorkflowServer was successfully removed from the system.
+Installing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe
+Installing service OptimaJet.WorkflowServer...
+Service OptimaJet.WorkflowServer has been successfully installed.
+Creating EventLog source OptimaJet.WorkflowServer in log Application...
+Committing assembly 'D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.InstallLog
+   assemblypath = D:\Projects\workflowengine\github_workflowserver\Binary\bin\WorkflowServerSevice.exe

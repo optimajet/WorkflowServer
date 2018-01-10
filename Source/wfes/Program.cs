@@ -32,7 +32,7 @@ namespace wfes
                 return;
             }
 
-            Console.WriteLine("WorkflowServer by OptimaJet 2015");
+            Console.WriteLine("WorkflowServer by OptimaJet");
             Console.WriteLine("WorkflowEngine.NET: Init...");
             var workflowserver = new OptimaJet.WorkflowServer(wsparams);
 
