@@ -1,9 +1,9 @@
-WorkflowServer. Powered by WorkflowEngine.NET
+Workflow Server. Powered by WorkflowEngine.NET
 ==================
 
 The WorkflowServer is open source standalone HTTP server. It supports two modes: console and windows service.  You can Integrate a workflow functionality to a solution using HTTP-protocol. Solution can use any technologies: .NET, PHP, Java, NodeJS, Ruby, Python.
 
-## WorkflowServer 2.0 with admin panel is available here: https://workflowengine.io/server/
+## Workflow Server 2.0 with admin panel is available here: https://workflowengine.io/server/
 
 ## Features
 
