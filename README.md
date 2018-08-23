@@ -1,8 +1,8 @@
 # Workflow Server
 
-**Official web site** - [https://workflowengine.io/server/](https://workflowengine.io/server/)
-**Documentation** - [https://workflowengine.io/documentation/workflow-server/](https://workflowengine.io/documentation/workflow-server/)
-**Demo** - [https://workflowengine.io/demo/designer/](https://workflowengine.io/demo/designer/)
+* **Official web site** - [https://workflowengine.io/server/](https://workflowengine.io/server/)
+* **Documentation** - [https://workflowengine.io/documentation/workflow-server/](https://workflowengine.io/documentation/workflow-server/)
+* **Demo** - [https://workflowengine.io/demo/designer/](https://workflowengine.io/demo/designer/)
 
 ## Overview
 
