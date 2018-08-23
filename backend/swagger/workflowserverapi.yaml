@@ -1,0 +1,740 @@
+#IMPORTANT INFORMATION
+# Because this specification describes a common API and it describes strongly typed entities, it does not take into account the specificity of your processes. Both commands and processes can have a different set of parameters, which is determined solely by your use case. It is highly desirable to describe these parameters explicitly in each particular case. In this specification, these parameters are represented by an empty object (schema) called ProcessParameters. In the future, we plan to add automatic generation of specifications for specific schemes.
+swagger: '2.0'
+info:
+  version: 2.0.0
+  title: Workflow Server API
+  description: Describes the basic methods for managing WorkflowEngine processes
+  termsOfService: 'https://workflowengine.io/'
+  contact:
+    name: OptimaJet
+    email: sales@optimajet.com
+    url: 'https://workflowengine.io'
+  license:
+    name: Workflow Engine EULA 1.0
+    url: 'https://workflowengine.io/agreements/eula/'
+host: localhost:8077
+basePath: '/workflowapi'
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  '/createinstance/{processId}':
+    get:
+      summary: >-
+        Creates the instance of the process. Use GET verb if you don't want to
+        transfer a parameters to the process.
+      operationId: CreateInstance
+      parameters:
+        - name: processId
+          in: path
+          required: true
+          description: The id of the process being created
+          type: string
+          format: uuid
+        - name: schemeCode
+          in: query
+          required: true
+          description: The code of process scheme
+          type: string
+        - name: identityId
+          in: query
+          required: false
+          description: User's identifier
+          type: string
+        - name: impersonatedIdentityId
+          in: query
+          required: false
+          description: Deputy's identifier
+          type: string
+        - name: schemeParameters
+          in: query
+          required: false
+          description: >-
+            Parameters for creating a scheme. Must be a valid JSON serialized
+            object.
+          type: string
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/OperationResult'
+    post:
+      summary: >-
+        Creates the instance of the process. Use POST verb if you want to
+        transfer a parameters to the process.
+      operationId: CreateInstanceWithParameters
+      parameters:
+        - name: processId
+          in: path
+          required: true
+          description: The id of the process being created
+          type: string
+          format: uuid
+        - name: schemeCode
+          in: query
+          required: true
+          description: The code of process scheme
+          type: string
+        - name: identityId
+          in: query
+          required: false
+          description: User's identifier
+          type: string
+        - name: impersonatedIdentityId
+          in: query
+          required: false
+          description: Deputy's identifier
+          type: string
+        - name: schemeParameters
+          in: query
+          required: false
+          description: >-
+            Parameters for creating a scheme. Must be a valid JSON serialized
+            object.
+          type: string
+        - name: 'ProcessParameters'
+          in: body
+          required: false
+          schema:
+             $ref: '#/definitions/ProcessParameters'
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/OperationResult'
+  '/getinstanceinfo/{processId}':
+    get:
+      summary: >-
+        Creates the instance of the process. Use GET verb if you don't want to
+        transfer a parameters to the process.
+      operationId: GetInstanceInfo
+      parameters:
+        - name: processId
+          in: path
+          required: true
+          description: The id of the process
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/ProcessInfoOperationResult'
+  '/getavailablecommands/{processId}':
+    get:
+      summary: >-
+        Returns a list of available commands for the current state of the
+        process and known user Id.
+      operationId: GetAvailableCommands
+      parameters:
+        - name: processId
+          in: path
+          required: true
+          description: The id of the process
+          type: string
+          format: uuid
+        - name: identityId
+          in: query
+          required: false
+          description: User's identifier
+          type: string
+        - name: impersonatedIdentityId
+          in: query
+          required: false
+          description: Deputy's identifier
+          type: string
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/GetCommandsOperationResult'
+  '/executecommand/{processId}':
+    get:
+      summary: >-
+        Execute the command. Use GET verb if you don't want to transfer a
+        parameters to the process with the command.
+      operationId: ExecuteCommand
+      parameters:
+        - name: processId
+          in: path
+          required: true
+          description: The id of the process being created
+          type: string
+          format: uuid
+        - name: command
+          in: query
+          required: true
+          description: The command name
+          type: string
+        - name: identityId
+          in: query
+          required: false
+          description: User's identifier
+          type: string
+        - name: impersonatedIdentityId
+          in: query
+          required: false
+          description: Deputy's identifier
+          type: string
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/OperationResult'
+    post:
+      summary: >-
+        Execute the command. Use POST verb if you want to transfer a parameters
+        to the process with the command.
+      operationId: ExecuteCommandWithParameters
+      parameters:
+        - name: processId
+          in: path
+          required: true
+          description: The id of the process being created
+          type: string
+          format: uuid
+        - name: command
+          in: query
+          required: true
+          description: The command name
+          type: string
+        - name: identityId
+          in: query
+          required: false
+          description: User's identifier
+          type: string
+        - name: impersonatedIdentityId
+          in: query
+          required: false
+          description: Deputy's identifier
+          type: string
+        - name: 'ProcessParameters'
+          in: body
+          required: false
+          schema:
+             $ref: '#/definitions/ProcessParameters'
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/OperationResult'
+  '/getavailablestatetoset/{processId}':
+    get:
+      summary: >-
+        Returns the list of available states, that can be set through the
+        SetState function.
+      operationId: GetAvailableStatesToSet
+      parameters:
+        - name: processId
+          in: path
+          required: true
+          description: The id of the process
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/GetStatesOperationResult'
+  '/setstate/{processId}':
+    get:
+      summary: >-
+        Sets the new state to the process. Use GET verb if you don't want to
+        transfer a parameters to the process.
+      operationId: SetState
+      parameters:
+        - name: processId
+          in: path
+          required: true
+          description: The id of the process being created
+          type: string
+          format: uuid
+        - name: state
+          in: query
+          required: true
+          description: The state name
+          type: string
+        - name: identityId
+          in: query
+          required: false
+          description: User's identifier
+          type: string
+        - name: impersonatedIdentityId
+          in: query
+          required: false
+          description: Deputy's identifier
+          type: string
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/OperationResult'
+    post:
+      summary: >-
+        Sets the new state to the process. Use POST verb if you want to transfer
+        a parameters to the process.
+      operationId: SetStateWithParameters
+      parameters:
+        - name: processId
+          in: path
+          required: true
+          description: The id of the process being created
+          type: string
+          format: uuid
+        - name: state
+          in: query
+          required: true
+          description: The state name
+          type: string
+        - name: identityId
+          in: query
+          required: false
+          description: User's identifier
+          type: string
+        - name: impersonatedIdentityId
+          in: query
+          required: false
+          description: Deputy's identifier
+          type: string
+        - name: 'ProcessParameters'
+          in: body
+          required: false
+          schema:
+             $ref: '#/definitions/ProcessParameters'
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/OperationResult'
+  '/isexistprocess/{processId}':
+    get:
+      summary: Check if the process exists
+      operationId: IsExistProcess
+      parameters:
+        - name: processId
+          in: path
+          required: true
+          description: The id of the process
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/IsExistOperationResult'
+  '/deleteinstance/{processId}':
+    post:
+      summary: Deletes the instance of the process.
+      operationId: DeleteInstance
+      parameters:
+        - name: processId
+          in: path
+          required: true
+          description: The id of the process
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/OperationResult'
+  '/deleteinstances/':
+    post:
+      summary: Deletes the instances of the processes.
+      operationId: DeleteInstances
+      parameters:
+        - name: 'ProcessIds'
+          in: body
+          required: false
+          schema:
+             $ref: '#/definitions/ProcessIds'
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/OperationResult'
+  '/inbox':
+    get:
+      summary: Return a list of inbox items
+      operationId: GetInbox
+      parameters:
+        - name: processid
+          in: query
+          required: false
+          description: The id of the process
+          type: string
+          format: uuid
+        - name: identityid
+          in: query
+          required: false
+          description: User's identifier
+          type: string
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/InboxResult'
+  '/outbox':
+    get:
+      summary: Return a list of outbox items
+      operationId: GetOutbox
+      parameters:
+        - name: processid
+          in: query
+          required: false
+          description: The id of the process
+          type: string
+          format: uuid
+        - name: identityid
+          in: query
+          required: false
+          description: User's identifier
+          type: string
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/OutboxResult'
+  '/inboxrecalc':
+    post:
+      summary: Recalc inbox and outbox for specific processes.
+      operationId: InboxRecalc
+      parameters:
+        - name: 'ProcessIds'
+          in: body
+          required: false
+          schema:
+             $ref: '#/definitions/ProcessIds'
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/OperationResult'
+  '/getformbyflow/{name}':
+    get:
+      summary: Return a form according to a businessflow and a state of workflow
+      operationId: GetFormByFlow
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the busines flow
+          type: string
+        - name: processId
+          in: query
+          required: false
+          description: The id of the process
+          type: string
+          format: uuid
+        - name: identityid
+          in: query
+          required: false
+          description: User's identifier
+          type: string
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/BusinessFlowResult'
+definitions:
+    OperationResult:
+      type: object
+      required:
+        - success
+      properties:
+        success:
+          description: Indicates whether the operation was successful or not
+          type: boolean
+        error:
+          description: The short description of the error
+          type: string
+        message:
+          description: The details of the error
+          type: string
+    ProcessInfoOperationResult:
+      allOf:
+        - $ref: '#/definitions/OperationResult'
+        - type: object
+          properties:
+            data:
+              $ref: '#/definitions/ProcessInfo'
+    GetCommandsOperationResult:
+      allOf:
+        - $ref: '#/definitions/OperationResult'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/definitions/Command'
+    GetStatesOperationResult:
+      allOf:
+        - $ref: '#/definitions/OperationResult'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/definitions/State'
+    IsExistOperationResult:
+      allOf:
+        - $ref: '#/definitions/OperationResult'
+        - type: object
+          properties:
+            data:
+              type: boolean
+    InboxResult:
+      allOf:
+        - $ref: '#/definitions/OperationResult'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/definitions/InboxItem'
+    OutboxResult:
+      allOf:
+        - $ref: '#/definitions/OperationResult'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/definitions/OutboxItem'
+    BusinessFlowResult:
+      allOf:
+        - $ref: '#/definitions/OperationResult'
+        - type: object
+          properties:
+            data:
+              $ref: '#/definitions/Form'
+    Form:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          type: string
+        Source:
+          type: string
+    InboxItem:
+      type: object
+      properties:
+        ProcessId:
+          type: string
+          format: uuid
+        IdentityId:
+          type: string
+    OutboxItem:
+      type: object
+      properties:
+        ProcessId:
+          type: string
+          format: uuid
+        ExecutorIdentityId:
+          type: string
+    ProcessInfo:
+      type: object
+      required:
+        - Id
+        - ActivityName
+        - SchemeCode
+        - InstanceStatus
+      properties:
+        Id:
+          type: string
+          format: uuid
+        StateName:
+          type: string
+        ActivityName:
+          type: string
+        SchemeId:
+          type: string
+          format: uuid
+        SchemeCode:
+          type: string
+        PreviousState:
+          type: string
+        PreviousStateForDirect:
+          type: string
+        PreviousStateForReverse:
+          type: string
+        PreviousActivity:
+          type: string
+        PreviousActivityForDirect:
+          type: string
+        PreviousActivityForReverse:
+          type: string
+        ParentProcessId:
+          type: string
+          format: uuid
+        RootProcessId:
+          type: string
+          format: uuid
+        InstanceStatus:
+          type: integer
+        Transitions:
+          type: array
+          items:
+            $ref: '#/definitions/Transition'
+        History:
+          type: array
+          items:
+            $ref: '#/definitions/HistoryItem'
+        ProcessParameters:
+          $ref: '#/definitions/ProcessParameters'
+    Transition:
+      type: object
+      required:
+        - ProcessId
+        - FromActivityName
+        - ToActivityName
+        - TransitionClassifier
+        - TransitionTime
+      properties:
+        ProcessId:
+          type: string
+          format: uuid
+        ActorIdentityId:
+          type: string
+        ExecutorIdentityId:
+          type: string
+        FromActivityName:
+          type: string
+        FromStateName:
+          type: string
+        IsFinalised:
+          type: boolean
+        ToActivityName:
+          type: string
+        ToStateName:
+          type: string
+        TransitionClassifier:
+          type: string
+          enum:
+            - "NotSpecified"
+            - "Direct"
+            - "Reverse"
+        TransitionTime:
+          type: string
+          format: date-time
+        TriggerName:
+          type: string
+    HistoryItem:
+      type: object
+      required:
+        - Id
+        - ProcessId
+        - InitialState
+        - DestinationState
+        - Order
+      properties:
+        Id:
+          type: string
+          format: uuid
+        ProcessId:
+          type: string
+          format: uuid
+        IdentityId:
+          type: string
+        AllowedToEmployeeNames:
+          type: string
+        TransitionTime:
+          type: string
+          format: date-time
+        Order:
+          type: integer
+        InitialState:
+          type: string
+        DestinationState:
+          type: string
+        Command:
+          type: string
+    Command:
+      type: object
+      required:
+        - CommandName
+        - Classifier
+        - ValidForActivityName
+        - ProcessId
+      properties:
+        CommandName:
+          type: string
+        LocalizedName:
+          type: string
+        Classifier:
+          type: string
+          enum:
+            - NotSpecified
+            - Direct
+            - Reverse
+        IsForSubprocess:
+          type: boolean
+        ValidForStateName:
+          type: string
+        ValidForActivityName:
+          type: string
+        ProcessId:
+          type: string
+          format: uuid
+        Identities:
+          type: array
+          items:
+            type: string
+        Parameters:
+          type: array
+          items:
+            $ref: '#/definitions/CommandParameter'
+    State:
+      type: object
+      required:
+        - Name
+        - SchemeCode
+      properties:
+        Name:
+          type: string
+        VisibleName:
+          type: string
+        SchemeCode:
+          type: string
+    CommandParameter:
+      type: object
+      required:
+        - ParameterName
+        - IsRequired
+        - ValidForActivityName
+        - ProcessId
+      properties:
+        ParameterName:
+          type: string
+        LocalizedName:
+          type: string
+        TypeName:
+          type: string
+        IsRequired:
+          type: boolean
+        DefaultValue:
+          type: string
+    ProcessIds:
+      type: object
+      required:
+        - processids
+      properties:
+        processids:
+          type: array
+          items:
+            type: string
+            format: uuid
+    ProcessParameters:
+      type: object
+      # properties:
+      #   IntParameter:
+      #     type: integer
+      #   StringParameter:
+      #     type: string
+      #   BooleanParameter:
+      #     type: boolean

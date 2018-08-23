@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <Win32Resource />
+    <SignAssembly>false</SignAssembly>
+    <Product>WorkflowServer</Product>
+    <PackageLicenseUrl>
+    </PackageLicenseUrl>
+    <PackageProjectUrl>https://workflowengine.io/server/</PackageProjectUrl>
+    <Authors>OptimaJet LLC</Authors>
+    <Company>OptimaJet LLC</Company>
+    <Version>2.1.0</Version>
+    <PackageProjectUrl>https://workflowengine.io/server/</PackageProjectUrl>
+    <Authors>OptimaJet LLC</Authors>
+    <Company>OptimaJet LLC</Company>
+    <Version>2.1.0</Version>
+    <PublishProtocol>FileSystem</PublishProtocol>
+    <PublishDir>bin\Release\PublishOutput</PublishDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Update="config.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="WorkflowEngine.NET-Server" Version="2.1.0" />
+  </ItemGroup>
+</Project>

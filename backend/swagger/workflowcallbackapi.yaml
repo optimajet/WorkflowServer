@@ -1,0 +1,354 @@
+#IMPORTANT INFORMATION
+# Because this specification describes a common API and it describes strongly typed entities, it does not take into account the specificity of your processes. Both commands and processes can have a different set of parameters, which is determined solely by your use case.It is highly desirable to describe these parameters explicitly in each particular case. In this specification, these parameters are represented by an empty object (schema) called ProcessParameters. In the future, we plan to add automatic generation of specifications for specific schemes.
+swagger: '2.0'
+info:
+  version: 2.0.0
+  title: Callback Server for Workflow Server API
+  description: Describes CallbackApi, a set of methods that will be called by the WFS, to execute external Actions, Conditions and Rules.
+  termsOfService: 'https://workflowengine.io/'
+  contact:
+    name: OptimaJet
+    email: sales@optimajet.com
+    url: 'https://workflowengine.io'
+  license:
+    name: Workflow Engine EULA 1.0
+    url: 'https://workflowengine.io/agreements/eula/'
+host: localhost:5000
+basePath: '/callbackapi'
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  '/getactions':
+    get:
+      description: Returns the list of Actions that can be called on this server
+      operationId: GetActions
+      responses:
+        '200':
+          description: List of actions
+          schema:
+            $ref: '#/definitions/ListOfStringsOperationResult'
+  '/getconditions':
+    get:
+      description: Returns the list of Conditions that can be checked by this server
+      operationId: GetConditions
+      responses:
+        '200':
+          description: List of conditions
+          schema:
+            $ref: '#/definitions/ListOfStringsOperationResult'
+  '/getrules':
+    get:
+      description: Returns the list of Rules that can be checked by this server
+      operationId: GetRules
+      responses:
+        '200':
+          description: List of rules
+          schema:
+            $ref: '#/definitions/ListOfStringsOperationResult'
+  '/executeaction':
+    post:
+      description: Executes the naming action on the callback server
+      operationId: ExecuteAction
+      parameters:
+        - name: 'ExecuteParameters'
+          in: body
+          required: true
+          schema:
+             $ref: '#/definitions/ExecuteParameters'
+      responses:
+        '200':
+          description: Excecution result with new process parameters
+          schema:
+            $ref: '#/definitions/ActionExecutionResult'
+  '/executecondition':
+    post:
+      description: Executes the naming condition on the callback server
+      operationId: ExecuteCondition
+      parameters:
+        - name: 'ExecuteParameters'
+          in: body
+          required: true
+          schema:
+             $ref: '#/definitions/ExecuteParameters'
+      responses:
+        '200':
+          description: Condition result
+          schema:
+            $ref: '#/definitions/BooleanExecutionResult'
+  '/checkrule':
+    post:
+      description: Executes the naming rule on the callback server
+      operationId: CheckRule
+      parameters:
+        - name: 'ExecuteParameters'
+          in: body
+          required: true
+          schema:
+             $ref: '#/definitions/ExecuteParameters'
+      responses:
+        '200':
+          description: Rule check result
+          schema:
+            $ref: '#/definitions/BooleanExecutionResult'
+  '/getidentities':
+    post:
+      description: Executes the naming rule on the callback server, returns user ids thats satisfy this rule
+      operationId: GetIdentities
+      parameters:
+        - name: 'ExecuteParameters'
+          in: body
+          required: true
+          schema:
+             $ref: '#/definitions/ExecuteParameters'
+      responses:
+        '200':
+          description: Rule get result
+          schema:
+            $ref: '#/definitions/ListOfStringsOperationResult'
+  '/generate':
+    post:
+      description: External scheme generator method
+      operationId: Generate
+      parameters:
+        - name: 'GenerateParameters'
+          in: body
+          required: true
+          schema:
+             $ref: '#/definitions/GeneratorParameters'
+      responses:
+        '200':
+          description: New generated scheme
+          schema:
+            $ref: '#/definitions/StringOperationResult'
+  '/processstatuschanged':
+    post:
+      description: External event handler for ProcessStatusChanged event
+      operationId: ProcessStatusChanged
+      parameters:
+        - name: 'ProcessStatusChangedParameters'
+          in: body
+          required: true
+          schema:
+             $ref: '#/definitions/ProcessStatusChangedParameters'
+      responses:
+        '200':
+          description: OperationResult
+          schema:
+            $ref: '#/definitions/OperationResult'  
+definitions:
+    OperationResult:
+      type: object
+      required:
+        - success
+      properties:
+        success:
+          description: Indicates whether the operation was successful or not
+          type: boolean
+        error:
+          description: The short description of the error
+          type: string
+        message:
+          description: The details of the error
+          type: string
+    ListOfStringsOperationResult:
+      allOf:
+        - $ref: '#/definitions/OperationResult'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                type: string
+    StringOperationResult:
+      allOf:
+        - $ref: '#/definitions/OperationResult'
+        - type: object
+          properties:
+            data:
+              type: string
+    ActionExecutionResult:
+      allOf:
+        - $ref: '#/definitions/OperationResult'
+        - type: object
+          properties:
+            data:
+              $ref: '#/definitions/ProcessParameters'
+    BooleanExecutionResult:
+      allOf:
+        - $ref: '#/definitions/OperationResult'
+        - type: object
+          properties:
+            data:
+              type: boolean
+    ExecuteParameters:
+      type: object
+      required:
+        - name
+      properties:
+        Name:
+          type: string
+        IdentityId:
+          type: string
+        Parameter:
+          type: string
+        ProcessInstance: 
+          $ref: '#/definitions/ProcessInfo'
+    GeneratorParameters:
+      type: object
+      required:
+        - SchemeCode
+        - SchemeId
+        - Scheme
+      properties:
+        SchemeCode:
+          type: string
+        SchemeId:
+          type: string
+          format: uuid
+        Parameters:
+          type: string
+        Scheme: 
+          type: string
+    ProcessStatusChangedParameters:
+      type: object
+      required:
+        - ProcessId
+        - SchemeCode
+      properties:
+        ProcessId:
+          type: string
+          format: uuid
+        SchemeCode:
+          type: string
+        ProcessInstance: 
+          $ref: '#/definitions/ProcessInfo'
+    ProcessInfo:
+      type: object
+      required:
+        - Id
+        - ActivityName
+        - SchemeCode
+        - InstanceStatus
+      properties:
+        Id:
+          type: string
+          format: uuid
+        StateName:
+          type: string
+        ActivityName:
+          type: string
+        SchemeId:
+          type: string
+          format: uuid
+        SchemeCode:
+          type: string
+        PreviousState:
+          type: string
+        PreviousStateForDirect:
+          type: string
+        PreviousStateForReverse:
+          type: string
+        PreviousActivity:
+          type: string
+        PreviousActivityForDirect:
+          type: string
+        PreviousActivityForReverse:
+          type: string
+        ParentProcessId:
+          type: string
+          format: uuid
+        RootProcessId:
+          type: string
+          format: uuid
+        InstanceStatus:
+          type: integer
+        Transitions:
+          type: array
+          items:
+            $ref: '#/definitions/Transition'
+        History:
+          type: array
+          items:
+            $ref: '#/definitions/HistoryItem'
+        ProcessParameters:
+          $ref: '#/definitions/ProcessParameters'
+    Transition:
+      type: object
+      required:
+        - ProcessId
+        - FromActivityName
+        - ToActivityName
+        - TransitionClassifier
+        - TransitionTime
+      properties:
+        ProcessId:
+          type: string
+          format: uuid
+        ActorIdentityId:
+          type: string
+        ExecutorIdentityId:
+          type: string
+        FromActivityName:
+          type: string
+        FromStateName:
+          type: string
+        IsFinalised:
+          type: boolean
+        ToActivityName:
+          type: string
+        ToStateName:
+          type: string
+        TransitionClassifier:
+          type: string
+          enum: 
+            - "NotSpecified"
+            - "Direct"
+            - "Reverse"
+        TransitionTime:
+          type: string
+          format: date-time
+        TriggerName:
+          type: string
+    HistoryItem:
+      type: object
+      required:
+        - Id
+        - ProcessId
+        - InitialState
+        - DestinationState
+        - Order
+      properties:
+        Id:
+          type: string
+          format: uuid
+        ProcessId:
+          type: string
+          format: uuid
+        IdentityId:
+          type: string
+        AllowedToEmployeeNames:
+          type: string
+        TransitionTime:
+          type: string
+          format: date-time
+        Order:
+          type: integer
+        InitialState:
+          type: string
+        DestinationState:
+          type: string
+        Command:
+          type: string
+    ProcessParameters:
+      type: object
+      # properties:
+      #   IntParameter:
+      #     type: integer
+      #   StringParameter:
+      #     type: string
+      #   BooleanParameter:
+      #     type: boolean  

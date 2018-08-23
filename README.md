@@ -1,159 +1,76 @@
-Workflow Server. Powered by WorkflowEngine.NET
-==================
+# Workflow Server
 
-The WorkflowServer is open source standalone HTTP server. It supports two modes: console and windows service.  You can Integrate a workflow functionality to a solution using HTTP-protocol. Solution can use any technologies: .NET, PHP, Java, NodeJS, Ruby, Python.
+**Official web site** - [https://workflowengine.io/server/](https://workflowengine.io/server/)
+**Documentation** - [https://workflowengine.io/documentation/workflow-server/](https://workflowengine.io/documentation/workflow-server/)
+**Demo** - [https://workflowengine.io/demo/designer/](https://workflowengine.io/demo/designer/)
 
-## Workflow Server 2.0 with admin panel is available here: https://workflowengine.io/server/
+## Overview
+
+Workflow Server is a ready-to-use Workflow Engine-based application that you can deploy into your infrastructure. It can be integrated with NodeJS, PHP, Ruby, .NET, or Java applications via a REST API. Workflow Server is a key component for managing the lifecycle of business objects within your enterprise.
 
 ## Features
 
-- Process scheme generation in runtime
-- BackEnd with designer of process scheme
-- Integration into any solutions (.NET, PHP, Java, NodeJS, Ruby, Python and etc.) using HTTP-protocol
-- Database support: MS SQL, Oracle, MySQL, PostgreSQL, RavenDB, MongoDB
-- Mode: Console and Windows Sevice
+### Rest API
 
-### Execution
+Manage schemes and processes with GET and POST requests to Workflow Server.
 
-You can execute the WorkflowServer in Console mode or Windows Service mode.
-```
-Usage is: wfes [options]
-        -url=<options>          Url for bind HTTP listener (Default: 'http://*:8077/')
-        -callbackurl=<options>  URL for Callback API
-        -callbackgenscheme      Enable request for post-generation of scheme
-Database:
-        -dbprovider=<options>   DB Provider: mssql=MS SQL Server, oracle=Oracle, mysql=MySQL, postgresql=PostgreSQL, ravendb=RavenDB, mongodb=MongoDB
-        -dbcs=<options>         ConnectionString for DB (Available for MS SQL, Oracle, PostgreSQL, MySQL)
-        -dburl=<options>        Url for DB (Available for RavenDB, MongoDB
-        -dbdatabase=<options>   Database name (Available for RavenDB, MongoDB
-Other:
-        -nostartworkflow
-        -log                    Show logs to the console
-        -befolder=<options>     Folder with backend files (Default: '../backend')
-```
+### Web UI
 
-### Inegration API
+Enjoy a responsive web-based interface, enabling you to make change on the fly.
 
-Integration via HTTP:
+### Business Flow
 
-- Workflow API
-- Designer API
-- Callback API
+Get form names depending on user role or type for each workflow instance.
 
-#### Workflow API
+### Reports
 
-```
-url: /workflowapi
-```
-Implements the basic operation of WorkflowRuntime.
-The basic operations:
+Visualize process states, & key information on schemes, processes and performance.
 
-- Creation of the instance
-- Getting the list of available commands<
-- Execution of the command
-- Getting the list of available states to set
-- Set State
-- Process is exist
+## OS Support
 
-Creation of the instance - Creates the instance of the process. Please note that the  parameters parameter in query will be passed to an 
-IWorkflowGenerator instance. In most cases you don't need it. If you want to pass initial parameters to the process. Use POST query and specify 
-this parameters as form data.
-```
-/workflowapi?operation=createinstance&processid=&schemacode=&identityid=&impersonatedIdentityId=&parameters=
-```
-Getting the list of available commands - Returns the list of available commands for current state of the process and known user Id.
-```
-/workflowapi?operation=getavailablecommands&processid=&identityid=&impersonatedIdentityId=
-```
-Execution of the command - This call will execute the command. If you want to pass command parameters to the process. Use POST query and specify 
-this parameters as form data.
-```
-/workflowapi?operation=executecommand&processid=&identityid=&impersonatedIdentityId=
-```
-Getting the list of available states to set - Returns the list of available states, that can be set through the SetState function.
-```
-/workflowapi?operation=getavailablestatetoset&processid=
-```
-Set state - This call will set state for the process.
-```
-/workflowapi?operation=setstate&processid=&identityid=&impersonatedIdentityId=&state&parameters=
-```
-Process is exist
-```
-/workflowapi?operation=isexistprocess&processid=
-```
-Response
-```
-{
-    "success": "",
-    "data": "",
-    "error": ""
-}
-```
-#### Designer API
-```
-url: /designerapi
-```
-Implements the server-interface for the workflow designer.
+| OS      | Version                                                                                                                                                               | Architectures |
+|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| Windows | 7 SP1+, 8.1 or newer; 2008 R2 SP1 or newer                                                                                                                            | x64, x86      |
+| Linux   | Red Hat Enterprise Linux/CentOS/Oracle Linux 7; Fedora 26, 27; Debian 8.7, 9; Ubuntu/Linux Mint 17.10, 16.04, 14.04, 18, 17; openSUSE 42.2+; SUSE Enterprise Linux 12 | x64           |
+| macOS   | 10.12+ or newer                                                                                                                                                       | x64           |
 
-#### Callback API
-For full integration WorkflowEngine.NET requires implementation of the interfaces: IWorkflowRuleProvider, IWorkflowActionProvider, IWorkflowGenerator. WokflowServer forwards request via HTTP (POST) to an external service.
+## System Requirements
 
-**Paramerets of IWorkflowActionProvider:**
+Workflow Server runs on .NET Core and supports MS SQL Server and PostgreSQL. The minimum system requirements are:
 
-GetActions
-```
-input: type=getactions
-return: [list of actions]
-```
-ExecuteAction
-```
-input: type=executeaction, name=[name of action], parameter=[parameter of action], pi=[ProcessInstanse serialized to json]
-```
-ExecuteCondition
-```
-input: type=executecondition, name=[name of action], parameter=[parameter of action], pi=[ProcessInstanse serialized to json]
-return: [result of condition]
-```
+* CPU 1 core 1 Ghz 
+* RAM 1 Gb 
+* HDD/SSD 5 Gb
 
-**Paramerets of IWorkflowRuleProvider:**
+## API
 
-GetRules
-```
-input: type=getrules
-return: [list of rules]
-```
-Check
-```
-input: type=check,pi=[ProcessInstanse serialized to json],identityid=[user id],name=[name of rule],parameter=[parameter of rule]
-return: [result of check]
-```
-GetIdentities
-```
-input: type=getidentities,pi=[ProcessInstanse serialized to json],name=[name of rule],parameter=[parameter of rule]
-return: [list of idetities of users]
-```
-**Paramerets of IWorkflowGenerator:**
-Generate
-````
-input: type=generate, schemecode=[code of scheme],schemeid=[id of scheme],parameters=[parameters of workflow],scheme=[XML scheme of workflow]
-return: [XML scheme of workflow]
-````
-#### Backend
-Used for create/edit/view scheme of workflow. 
+The set of APIs enables the exchange of messages between external applications and Workflow Server via the HTTP protocol.
 
-![https://workflowengine.io/designer](https://workflowengine.io/images/schemes/scheme.png)
+### Workflow API
 
-**Official web site** - [https://workflowengine.io/](https://workflowengine.io/)
+Workflow API enables you to manage everything related to your schemes and workflows, be it the creation of a process instance, returning the list of available commands and executing them, getting the list of available states and setting them, inbox/outbox folders, etc.
 
-For technical questions, please contact <a href="mailto:wf@optimajet.com?subject=Qustion from hithub">wf@optimajet.com</a>
+* Creating instances & retrieving their info
+* Getting a list of commands & executing them
+* Getting a list of available states & setting them
+* Checking if a process exists
+* Accessing Inbox/Outbox folders
+* Recalculating Inbox folder
+ 
+### Callback API
 
-For commercial use, please contact <a href="mailto:sales@optimajet.com?subject=Qustion from hithub">sales@optimajet.com</a>
+Callback API allows you to integrate Workflow Server into any infrastructure (for example, the one based on microservice architecture) by specifying external URLs that you wish Workflow Server to call whenever a specific event occurs.
 
-**WorkflowEngine.NET free limits:**
-- Activity: 15
-- Transition: 25
-- Command: 5
-- Schema: 1
-- Thread: 1
+* Getting a list of actions & executing them
+* Getting a list of conditions & executing them
+* Getting rules & checking them
+* Getting identities
+* Generating schemes
+* Receiving status change notifications
 
+## Application Modes
+
+Workflow Server is capable of being run either as a console application or as a Windows Service (for Windows-host only). You can choose the most suitable deployment option.
+
+* Console application 
+* Windows Service
