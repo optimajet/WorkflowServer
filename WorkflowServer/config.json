@@ -24,4 +24,8 @@
   //MySql
   //"Provider": "mysql",
   //"ConnectionString": "server=127.0.0.1;uid=root;pwd=myPassword;database=WorkflowServer"
+
+  //MongoDB or Cosmos DB
+  //"Provider": "mongodb",
+  //"ConnectionString": "mongodb://localhost:27017/WorkflowServer"
 }

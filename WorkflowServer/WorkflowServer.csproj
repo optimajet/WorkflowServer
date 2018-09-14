@@ -25,6 +25,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WorkflowEngine.NET-Server" Version="2.1.0" />
+    <PackageReference Include="WorkflowEngine.NET-Server" Version="2.2.0" />
   </ItemGroup>
 </Project>
