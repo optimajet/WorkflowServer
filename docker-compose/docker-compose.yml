@@ -1,0 +1,41 @@
+version: '3.4'
+
+services:
+  db:
+     image: postgres:alpine
+     environment:
+       POSTGRES_DB: wfs
+       POSTGRES_USER: dbuser
+       POSTGRES_PASSWORD: dbuserpassword
+     volumes:
+       - dbdata:/var/lib/postgresql/data
+     restart: always
+     ports:
+       - "5432:5432"
+  start_db:
+    image: jbergknoff/postgresql-client
+    depends_on:
+       - db
+    volumes:
+       - ./docker-files:/home/.docker
+    entrypoint: /home/.docker/wait-for-postgres.sh db dbuser dbuserpassword wfs echo
+  workflowserver:
+    depends_on:
+       - db
+    image: optimajet/workflowserver
+    ports:
+       - "8077:8077"
+    volumes:
+       - ./logs:/app/logs
+    environment:
+      ConnectionString: HOST=db;User ID=dbuser;Password=dbuserpassword;Database=wfs;Port=5432
+      Provider: postgresql
+      CreateMetadata: "true"
+      DefaultLoggerConfig__FileTarget__0: Debug
+      DefaultLoggerConfig__FileTarget__1: Information
+      DefaultLoggerConfig__FileTarget__2: Error
+      DefaultLoggerConfig__FileSettings__FileName: /app/logs/log.txt
+      DefaultLoggerConfig__FileSettings__RollingInterval: Day
+      DefaultLoggerConfig__FileSettings__RetainedFileCountLimit: 30
+volumes:
+    dbdata:
