@@ -8,6 +8,11 @@
   "log": false,
   "CallBackCacheTimeout": 300000, // 5 min
   "BlockMetadataChanges":  false,
+  "CreateMetadata": false,
+  "InitialScriptsFolder": "../OptimaJet.WorkflowServer/InitialScripts",
+  "DefaultLoggerConfig": {
+    "ConsoleTarget": [ "Debug", "Information", "Error" ]
+  },
   
   //MSSQL
   "Provider": "mssql",
