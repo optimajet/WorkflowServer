@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 using OptimaJet.Workflow.Core.Runtime;
 using OptimaJet.WorkflowServer;
 
@@ -10,8 +11,11 @@ namespace WorkflowServer
 {
     class Program
     {
+        private const string LicenseFileName = "license.key";
+
         static string configFileName = "config.json";
-        static string licenseFileName = "license.key";
+        static string licensePath = string.Empty;
+
         static void Main(string[] args)
         {
             Console.WriteLine("WorkflowServer by OptimaJet 2018");
@@ -27,17 +31,23 @@ namespace WorkflowServer
                 else
                 {
                     configFileName = tmp;
-                    licenseFileName = Path.Combine("..", licenseFileName);
+                    licensePath = "..";
                 }
             }
 
-            ConfigApi.LicenseFileName = licenseFileName;
-            RegisterWorkflowEngine();
-            
-            var config = File.ReadAllText(configFileName);
-            var wsparams = JsonConvert.DeserializeObject<ServerSettings>(config);
-            if(wsparams.Log)
-                wsparams.Logger = Log;
+            var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile(configFileName, optional: false, reloadOnChange: true)
+                    .AddEnvironmentVariables()
+            ;
+
+            var configuration = builder.Build();
+            var wsparams = configuration.Get<ServerSettings>();
+
+            ConfigApi.LicenseFileName = Path.Combine(wsparams.LicensePath ?? licensePath, LicenseFileName);
+            RegisterWorkflowEngine(ConfigApi.LicenseFileName);
+
+            wsparams.UseEventLog = false;
             Console.WriteLine("WorkflowEngine: Init...");
             var workflowserver = new WorkflowServerRuntime(wsparams);
             
@@ -116,35 +126,20 @@ in CertificateFile setting in configuration file");
 
             using (var host = hostBuilder.Build())
             {
-                host.Start();
-                Console.WriteLine("WorkflowStarting: Started.");
-                Console.WriteLine("Waiting for a connection on {0}...", wsparams.Url);
-
-                while (true)
-                {
-                    Console.WriteLine("For exit please enter 'Q'.");
-                    var command = Console.ReadLine();
-                    if (command != null && command.ToUpper() == "Q")
-                        break;
-                }
-
+                host.RunAsync().Wait();
+                workflowserver.WorkflowRuntime.Logger.Info("Shutting down...");
+                workflowserver.WorkflowRuntime.Logger.Dispose();
             }
         }
 
-
-        public static void Log(string msg, bool error = false)
+        private static void RegisterWorkflowEngine(string pathToLicense)
         {
-            Console.WriteLine(msg);
-        }
-
-        private static void RegisterWorkflowEngine()
-        {
-            if (File.Exists(licenseFileName))
+            if (File.Exists(pathToLicense))
             {
                 try
                 {
                     Console.WriteLine("WorkflowServer: Registering a license...");
-                    var licenseText = File.ReadAllText(licenseFileName);
+                    var licenseText = File.ReadAllText(pathToLicense);
                     WorkflowServerRuntime.RegisterLicenseKey(licenseText);
                     Console.WriteLine("WorkflowServer: The license is registered.");
                 }

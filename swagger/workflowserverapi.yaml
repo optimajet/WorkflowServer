@@ -2,7 +2,7 @@
 # Because this specification describes a common API and it describes strongly typed entities, it does not take into account the specificity of your processes. Both commands and processes can have a different set of parameters, which is determined solely by your use case. It is highly desirable to describe these parameters explicitly in each particular case. In this specification, these parameters are represented by an empty object (schema) called ProcessParameters. In the future, we plan to add automatic generation of specifications for specific schemes.
 swagger: '2.0'
 info:
-  version: 2.1.0
+  version: 2.3.0
   title: Workflow Server API
   description: Describes the basic methods for managing WorkflowEngine processes
   termsOfService: 'https://workflowengine.io/'
@@ -440,6 +440,60 @@ paths:
           description: Operation result
           schema:
             $ref: '#/definitions/BusinessFlowResult'
+  '/getschemelist':
+    get:
+      summary: Return a list of scheme codes
+      operationId: GetSchemeList
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/GetSchemeListResult'
+  '/loginfo':
+    post:
+      summary: Write message to the info log
+      operationId: LogInfo
+      parameters:
+        - name: message
+          in: query
+          required: true
+          description: Message to write
+          type: string
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/OperationResult'
+  '/logerror':
+    post:
+      summary: Write message to the error log
+      operationId: LogError
+      parameters:
+        - name: message
+          in: query
+          required: true
+          description: Message to write
+          type: string
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/OperationResult'
+  '/logdebug':
+    post:
+      summary: Write message to the debug log
+      operationId: LogDebug
+      parameters:
+        - name: message
+          in: query
+          required: true
+          description: Message to write
+          type: string
+      responses:
+        '200':
+          description: Operation result
+          schema:
+            $ref: '#/definitions/OperationResult'
 definitions:
     OperationResult:
       type: object
@@ -764,3 +818,12 @@ definitions:
       #     type: string
       #   BooleanParameter:
       #     type: boolean
+    GetSchemeListResult:
+      allOf:
+        - $ref: '#/definitions/OperationResult'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                type: string
