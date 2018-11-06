@@ -1,6 +1,6 @@
 {
   "url": "http://*:8077/",
-  "BackendFolder": "backend",
+  "BackendFolder": "../backend",
   "NoStartWorkflow": false,
   "DisableTimeManager": false,
   "DisableInbox": false,
@@ -9,7 +9,7 @@
   "CallBackCacheTimeout": 300000, // 5 min
   "BlockMetadataChanges":  false,
   "CreateMetadata": false,
-  "InitialScriptsFolder": "../OptimaJet.WorkflowServer/InitialScripts",
+  "InitialScriptsFolder": "../InitialScripts",
   "DefaultLoggerConfig": {
     "ConsoleTarget": [ "Debug", "Information", "Error" ]
   },
