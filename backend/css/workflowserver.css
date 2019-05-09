@@ -1,17 +1,3 @@
-.ui.form input[type=text],
-.ui.form input[type=number],
-.ui.form input[type=password],
-.ui.form input[type=date],
-.ui.form input[type=datetime-local],
-.ui.form textarea,
-.ui.input input{
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    padding-left: 2px;
-    border-radius: 0;
-}
-
 div.field > label {
     font-size: 12px!important;
     color: #97A3B4!important;
@@ -27,32 +13,12 @@ div.field > label {
     width: calc(100% - 20px)!important;
 }
 
-.ui.dropdown {
-    width: 100%!important;
-    padding-top: 8px!important;
-    border-bottom: 1px solid rgba(34,36,38,.15)!important;
-    padding-bottom: 9px!important;
-}
-
-.ui.multiple.dropdown>.text{
-    margin: 0;
-}
-
 .ui.secondary.pointing.menu .active.item, .ui.secondary.pointing.menu .active.item:hover{
     border-color: #1362E2;
 }
 
 .ui.secondary.pointing.menu .active.item > span{
     color: #1362E2;
-}
-
-
-.ui.selection.dropdown{
-    border:none;
-    padding-left: 2px;
-}
-.ui.selection.dropdown div.text{
-    padding-top: 4px;
 }
 
 .dwkit-workflowbar{
@@ -112,22 +78,6 @@ div.field > label {
 /*
  Others
 */
-.ui.form input[type=text], .ui.form input[type=number], .ui.form textarea{
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    padding-left: 2px;
-    padding-right: 2px;
-    border-radius: 0;
-}
-
-input[type=text], input[type=number], textarea{
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    padding-left: 2px;
-    border-radius: 0;
-}
 
 .ui.input input[type=number],
 .ui.form .ui.input input[type=number]{
@@ -149,18 +99,6 @@ div.field > label {
     width: calc(100% - 20px)!important;
 }
 
-.ui.dropdown {
-    width: 100%!important;
-    padding-top: 8px!important;
-    border-bottom: 1px solid rgba(34,36,38,.15)!important;
-    padding-bottom: 9px!important;
-}
-
-.ui.dropdown[data-buildertype=dropdowntrigger] {
-    border-bottom: none !important;
-    width: auto!important;
-}
-
 .ui.secondary.pointing.menu .active.item, .ui.secondary.pointing.menu .active.item:hover{
     border-color: #1362E2;
 }
@@ -168,7 +106,6 @@ div.field > label {
 .ui.secondary.pointing.menu .active.item > span{
     color: #1362E2;
 }
-
 
 .react-grid-Grid{
     border:none;
@@ -286,10 +223,6 @@ div.field > label {
 /**
 * Application
 **/
-
-.dwkit-application{
-
-}
 
 .ui.image.dwkit-application-header-logo img{
     height: 51px;
@@ -617,4 +550,11 @@ div.field > label {
 .alertify-log-success {
     background: #1362E2;/*#5CB811;*/
     background: #1362E2;/*rgba(92,184,17,.9);*/
+}
+
+@media all and (-ms-high-contrast:none)
+{
+    .ui.modal:not(.legacy){
+        position: static;
+    }
 }

@@ -475,13 +475,6 @@ Loading
 /*
  Others
 */
-.ui.form input[type=text], .ui.form input[type=number], .ui.form textarea{
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    padding-left: 2px;
-    border-radius: 0;
-}
 
 div.field > label {
     font-size: 12px!important;
@@ -497,14 +490,6 @@ div.field > label {
 .ui.dropdown > .text {
 	width: calc(100% - 20px)!important;
 }
-
-.ui.dropdown {
-	width: 100%!important;
-	padding-top: 8px!important;
-	border-bottom: 1px solid rgba(34,36,38,.15)!important;
-    padding-bottom: 9px!important;
-}
-
 
 .ui.secondary.pointing.menu .active.item, .ui.secondary.pointing.menu .active.item:hover{
     border-color: #1362E2;

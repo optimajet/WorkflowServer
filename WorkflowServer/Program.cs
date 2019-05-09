@@ -18,7 +18,7 @@ namespace WorkflowServer
 
         static void Main(string[] args)
         {
-            Console.WriteLine("WorkflowServer by OptimaJet 2018");
+            Console.WriteLine("WorkflowServer by OptimaJet 2019");
 
             if (!File.Exists(configFileName))
             {
@@ -54,6 +54,9 @@ namespace WorkflowServer
             //Register your own Action and Rule providers
             //workflowserver.RegisterActionProvider(new ActionProvider());
             //workflowserver.RegisterRuleProvider(new RuleProvider());
+            
+            //register additional assemblies
+            WorkflowRuntime.CodeActionsRegisterAssembly(typeof(System.Net.Http.HttpClient).Assembly);
 
             if (!wsparams.NoStartWorkflow)
             {

@@ -28,6 +28,7 @@ var WorkflowDesignerConstants = {
   ButtonTextRedo: "Yeniden yapmak",
   SaveConfirm: "Değişiklikleri Kaydet?",
   CloseWithoutSaving: "Kaydetmeden kapatılsın mı?",
+  TransitionAuto: 'Auto',
   DialogConfirmText: "Soru",
   None: "Yok",
   Warning: "Uyarı",
@@ -39,6 +40,7 @@ var WorkflowDesignerConstants = {
   ActivityNamePrefix: "Aktivite_",
   ActivityFormLabel: {
     Title: "Aktivite",
+    TitleForInline: 'Activity Inline',
     Name: "Isim",
     State: "Belirtmek, bildirmek",
     IsInitial: "Ilk",
@@ -51,7 +53,11 @@ var WorkflowDesignerConstants = {
     ImpAction: "Aksiyon",
     ImpActionParameter: "Eylem parametresi",
     AlwaysConditionShouldBeSingle: "Her zaman durum tek olmalı",
-    OtherwiseConditionShouldBeSingle: "Aksi halde durum tek olmalı"
+    OtherwiseConditionShouldBeSingle: "Aksi halde durum tek olmalı",
+    Annotations: 'Annotations',
+    AnnotationName: 'Name',
+    AnnotationValue: 'Value',
+    Scheme: "Inline scheme"
   },
   TransitionFormLabel: {
     Title: "Geçiş",
@@ -80,7 +86,11 @@ var WorkflowDesignerConstants = {
     MergeViaSetState: "Ayarlanmış durum aracılığıyla alt süreci birleştir",
     DisableParentStateControl: "Ana işlem denetimini devre dışı bırak",
     ShowConcatParameters: "Birleştirme göster",
-    HideConcatParameters: "Birleştirmeyi gizle"
+    HideConcatParameters: "Birleştirmeyi gizle",
+    Annotations: 'Annotations',
+    AnnotationName: 'Name',
+    AnnotationValue: 'Value',
+    InlinedFinalActivityName: "Inlined Final Activity Name"
   },
   LocalizationFormLabel: {
     Title: "Yerelleştirme",
@@ -131,13 +141,30 @@ var WorkflowDesignerConstants = {
     InputParametersParameter: "Parametre",
     InputParametersDefaultValue: "Varsayılan"
   },
-  AdditionalParamsFormLabel: {
-    Title: "Ek Parametreler",
-    IsObsolete: "Eski",
-    DefiningParameters: "Parametreleri tanımlama",
-    ProcessParameters: "İşlem parametreleri",
-    ProcessParametersName: "Isim",
-    ProcessParametersValue: "Değer"
+
+  ProcessInfoFormLabel: {
+    Title: 'Additional Parameters',
+    IsObsolete: "IsObsolete",
+    DefiningParameters: 'Defining parameters',
+    ProcessParameters: 'Process parameters',
+    SystemParametersTabName: 'System Parameters',
+    ProcessParametersTabName: 'Process Parameters',
+    HistoryTabName: 'History',
+    TimersTabName: 'Timers',
+    HistoryTabFromLabel: 'From',
+    HistoryTabFromStateLabel: 'From State',
+    HistoryTabToLabel: 'To',
+    HistoryTabToStateLabel: 'To State',
+    HistoryTabExecutorIdLabel: 'Executor Id',
+    HistoryTabActorIdLabel: 'Actor Id',
+    HistoryTabTimeLabel: 'Time',
+    HistoryTabTriggerNameLabel: 'Trigger Name',
+    HistoryTabTransitionClassifierNameLabel: '',
+    ParametersNameLabel: 'Name',
+    ParametersValueLabel: 'Value',
+    TimersTabNameLabel: 'Name',
+    TimersTabValueLabel: 'Value',
+    RootProcess: "Root Process"
   },
   CodeActionsFormLabel: {
     Title: "Kod eylemleri",
@@ -146,11 +173,34 @@ var WorkflowDesignerConstants = {
     IsGlobal: "Küresel mi",
     IsAsync: "zaman uyumsuz",
     Type: "Tip",
-    GlobalDeleteMessage: "Global CodeAction'ı sildiniz. <br/> <b> Diğer şemalar bu CodeAction'ı çağıramayacak! </ B>",
-    UnGlobalMessage: "Küresel bayrağın durumunu değiştirdiniz. <br/> Bu şemayı kaydettikten sonra bu Global CodeAction'a dayalı bir Yerel Kodlama Oluşturulacak."
+    GlobalDeleteMessage: "Global CodeAction'ı sildiniz. <br/> <b> Diğer şemalar bu CodeAction'ı çağıramayacak! </b>",
+    UnGlobalMessage: "Küresel bayrağın durumunu değiştirdiniz. <br/> Bu şemayı kaydettikten sonra bu Global CodeAction'a dayalı bir Yerel Kodlama Oluşturulacak.",
+    EditParameters: "Edit parameters",
+    Parameters: "Parameters" ,
+    Text: "Text",
+    Number: "Number",
+    Checkbox: "Checkbox",
+    Dropdown: "Dropdown",
+    DateTime: "Date/Time",
+    Values: 'Values',
+    DropdownName: 'Name',
+    DropdownValue: 'Value',
+    DropdownShouldContainValues: 'Dropdown should contain values',
+    IsRequired: 'Required',
+    DefaultValue: 'Default value',
+    Json: 'Json'
+  },
+  EditParametersFormlabel: {
+    Title: "Edit parameter values",
+    NumberRequired: "Should be a numeric value",
+    DateShouldBeInISOFormat: "Date/Time parameter should be in ISO8601 format",
+    SwitchToJson: "Switch to JSON editor",
+    SwitchToConstructor: "Switch to parameter values editor",
+    InvalidJson: "JSON object is invalid or does not match the model"
   },
   ToolbarLabel: {
     CreateActivity: "Etkinlik oluştur",
+    CreateInline: 'Create inline (template)',
     CopySelected: "Seçilenleri kopyala",
     Undo: "Geri alma",
     Redo: "yeniden yapmak",
@@ -174,10 +224,17 @@ var WorkflowDesignerConstants = {
     Settings: "Ayarlar",
     CreateTransition: "Geçiş oluştur",
     CreateActivityTransition: "Bir etkinlik ve geçiş oluşturun",
-    Legend: "Efsane"
+    Legend: "Efsane",
+    ProcessInfo: "Process Info",
+    Inline: "The scheme can be inlined"
   },
   ErrorActivityIsInitialCountText: "Bir öğe bayrakla işaretlenmiş olmalıdır",
+  ErrorActivityIsFinalCountText: "This scheme is Inlined. One or more elements must be marked flag Final",
   ErrorReadOnlySaveText: "ReadOnly modunda Tasarımcı, kaydedemezsiniz.",
+  ErrorInvalidObjectsSaveText: function(objects) {
+    return "Can't save the schema. Those objects are in invalid state: " + objects;
+  },
+  BrokenReferencesDialogText: "This schema contains references to Actions, Conditions or Rules that aren't defined by this schema or current action providers. Do you want to keep them?",
   FormMaxHeight: 700,
   EditCodeSettings: {
     Height: 600,
@@ -210,7 +267,6 @@ var WorkflowDesignerConstants = {
     CreateEmptyType: "Yaratmak",
     Format: "Biçim"
   },
-  isjava: false,
   OverviewMap: {
     show: true,
     width: 300,

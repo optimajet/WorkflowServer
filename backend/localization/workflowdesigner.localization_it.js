@@ -28,6 +28,7 @@ var WorkflowDesignerConstants = {
   ButtonTextRedo : "Rifare",
   SaveConfirm : "Salva I Cambiamenti?",
   CloseWithoutSaving : "Chiudi senza salvare?",
+  TransitionAuto: 'Auto',
   DialogConfirmText : "Domanda",
   None : "Nessuna",
   Warning : "Avvertimento",
@@ -39,6 +40,7 @@ var WorkflowDesignerConstants = {
   ActivityNamePrefix : "Attività_",
   ActivityFormLabel : {
     Title : "Attività",
+    TitleForInline: 'Activity Inline',
     Name : "Nome",
     State : "Stato",
     IsInitial : "Iniziale",
@@ -51,7 +53,11 @@ var WorkflowDesignerConstants = {
     ImpAction : "Azione",
     ImpActionParameter : "Parametro di azione",
     AlwaysConditionShouldBeSingle : "Le condizioni sempre dovrebbero essere singole",
-    OtherwiseConditionShouldBeSingle : "Altrimenti la condizione dovrebbe essere singola"
+    OtherwiseConditionShouldBeSingle : "Altrimenti la condizione dovrebbe essere singola",
+    Annotations: 'Annotations',
+    AnnotationName: 'Name',
+    AnnotationValue: 'Value',
+    Scheme: "Inline scheme"
   },
   TransitionFormLabel : {
     Title : "Transizione",
@@ -80,7 +86,11 @@ var WorkflowDesignerConstants = {
     MergeViaSetState : "Unisci sottoprocesso tramite lo stato impostato",
     DisableParentStateControl : "Disabilitare il controllo del processo genitore",
     ShowConcatParameters : "Mostra concatenazione",
-    HideConcatParameters : "Nascondi concatenazione"
+    HideConcatParameters : "Nascondi concatenazione",
+    Annotations: 'Annotations',
+    AnnotationName: 'Name',
+    AnnotationValue: 'Value',
+    InlinedFinalActivityName: "Inlined Final Activity Name"
   },
   LocalizationFormLabel : {
     Title : "Localizzazione",
@@ -131,13 +141,29 @@ var WorkflowDesignerConstants = {
     InputParametersParameter : "Parametro",
     InputParametersDefaultValue : "Predefinito"
   },
-  AdditionalParamsFormLabel : {
-    Title : "Parametri aggiuntivi",
-    IsObsolete : "IsObsolete",
-    DefiningParameters : "Definizione dei parametri",
-    ProcessParameters : "Parametri di processo",
-    ProcessParametersName : "Nome",
-    ProcessParametersValue : "Valore"
+  ProcessInfoFormLabel: {
+    Title: 'Additional Parameters',
+    IsObsolete: "IsObsolete",
+    DefiningParameters: 'Defining parameters',
+    ProcessParameters: 'Process parameters',
+    SystemParametersTabName: 'System Parameters',
+    ProcessParametersTabName: 'Process Parameters',
+    HistoryTabName: 'History',
+    TimersTabName: 'Timers',
+    HistoryTabFromLabel: 'From',
+    HistoryTabFromStateLabel: 'From State',
+    HistoryTabToLabel: 'To',
+    HistoryTabToStateLabel: 'To State',
+    HistoryTabExecutorIdLabel: 'Executor Id',
+    HistoryTabActorIdLabel: 'Actor Id',
+    HistoryTabTimeLabel: 'Time',
+    HistoryTabTriggerNameLabel: 'Trigger Name',
+    HistoryTabTransitionClassifierNameLabel: '',
+    ParametersNameLabel: 'Name',
+    ParametersValueLabel: 'Value',
+    TimersTabNameLabel: 'Name',
+    TimersTabValueLabel: 'Value',
+    RootProcess: "Root Process"
   },
   CodeActionsFormLabel : {
     Title : "Azioni di codice",
@@ -146,11 +172,34 @@ var WorkflowDesignerConstants = {
     IsGlobal : "È globale",
     IsAsync : "Async",
     Type : "Genere",
-    GlobalDeleteMessage : "Hai eliminato Global CodeAction. <br/> <b> Altri schemi non saranno in grado di chiamare questo CodeAction! </ B>",
-    UnGlobalMessage : "Hai cambiato lo stato del flag globale. <br/> Dopo aver salvato questo schema, verrà creata un'Azione Code locale basata su questa Global CodeAction."
+    GlobalDeleteMessage : "Hai eliminato Global CodeAction. <br/> <b> Altri schemi non saranno in grado di chiamare questo CodeAction! </b>",
+    UnGlobalMessage : "Hai cambiato lo stato del flag globale. <br/> Dopo aver salvato questo schema, verrà creata un'Azione Code locale basata su questa Global CodeAction.",
+    EditParameters: "Edit parameters",
+    Parameters: "Parameters" ,
+    Text: "Text",
+    Number: "Number",
+    Checkbox: "Checkbox",
+    Dropdown: "Dropdown",
+    DateTime: "Date/Time",
+    Values: 'Values',
+    DropdownName: 'Name',
+    DropdownValue: 'Value',
+    DropdownShouldContainValues: 'Dropdown should contain values',
+    IsRequired: 'Required',
+    DefaultValue: 'Default value',
+    Json: 'Json'
+  },
+  EditParametersFormlabel: {
+    Title: "Edit parameter values",
+    NumberRequired: "Should be a numeric value",
+    DateShouldBeInISOFormat: "Date/Time parameter should be in ISO8601 format",
+    SwitchToJson: "Switch to JSON editor",
+    SwitchToConstructor: "Switch to parameter values editor",
+    InvalidJson: "JSON object is invalid or does not match the model"
   },
   ToolbarLabel : {
     CreateActivity : "Crea attività",
+    CreateInline: 'Create inline (template)',
     CopySelected : "Copia selezionata",
     Undo : "Disfare",
     Redo : "Rifare",
@@ -174,10 +223,17 @@ var WorkflowDesignerConstants = {
     Settings : "Impostazioni",
     CreateTransition : "Crea una transizione",
     CreateActivityTransition : "Crea un'attività e una transizione",
-    Legend : "Leggenda"
+    Legend : "Leggenda",
+    ProcessInfo: "Process Info",
+    Inline: "The scheme can be inlined"
   },
   ErrorActivityIsInitialCountText : "Un elemento deve essere contrassegnato come flag Iniziale",
+  ErrorActivityIsFinalCountText: "This scheme is Inlined. One or more elements must be marked flag Final",
   ErrorReadOnlySaveText : "Designer in modalità ReadOnly, non puoi salvarlo.",
+  ErrorInvalidObjectsSaveText: function(objects) {
+    return "Can't save the schema. Those objects are in invalid state: " + objects;
+  },
+  BrokenReferencesDialogText: "This schema contains references to Actions, Conditions or Rules that aren't defined by this schema or current action providers. Do you want to keep them?",
   FormMaxHeight : 700,
   EditCodeSettings : {
     Height : 600,
@@ -210,7 +266,6 @@ var WorkflowDesignerConstants = {
     CreateEmptyType : "Creare",
     Format : "Formato"
   },
-  isjava : false,
   OverviewMap : {
     show : true,
     width : 300,

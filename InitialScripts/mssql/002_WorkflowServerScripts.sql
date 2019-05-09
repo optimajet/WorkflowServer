@@ -26,8 +26,6 @@ BEGIN
 
 END
 
-GO
-
 IF NOT EXISTS (SELECT 1 FROM [INFORMATION_SCHEMA].[TABLES] WHERE [TABLE_NAME] = N'WorkflowServerProcessHistory')
 BEGIN
 
@@ -52,11 +50,9 @@ BEGIN
 	ADD CONSTRAINT FK_WorkflowServerProcessHistory_WorkflowServerProcessHistory FOREIGN KEY (Id) REFERENCES dbo.WorkflowServerProcessHistory (Id)
 END
 
-GO
 
 ALTER TABLE [dbo].[WorkflowInbox] ALTER COLUMN [IdentityId] NVARCHAR(256) NOT NULL
 
-GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.procedures WHERE name = N'WorkflowReportBySchemes')
 BEGIN
@@ -78,7 +74,6 @@ BEGIN
 	PRINT 'WorkflowReportBySchemes CREATE PROCEDURE'
 END
 
-GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.procedures WHERE name = N'WorkflowReportByTransitions')
 BEGIN
@@ -135,7 +130,6 @@ BEGIN
 	PRINT 'WorkflowReportByTransitions CREATE PROCEDURE'
 END
 
-GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.procedures WHERE name = N'WorkflowReportByStats')
 BEGIN
@@ -225,7 +219,6 @@ BEGIN
 	PRINT 'WorkflowReportByStats CREATE PROCEDURE'
 END
 
-GO
 
 IF NOT EXISTS (
   SELECT * 
@@ -236,7 +229,7 @@ IF NOT EXISTS (
 BEGIN
  ALTER TABLE [dbo].[WorkflowScheme] ADD [DeleteFinalized] BIT NOT NULL DEFAULT (0)
 END
-GO
+
 
 IF NOT EXISTS (
   SELECT *
@@ -247,7 +240,7 @@ IF NOT EXISTS (
 BEGIN
  ALTER TABLE [dbo].[WorkflowScheme] ADD [DontFillIndox] BIT NOT NULL DEFAULT (0)
 END
-GO
+
 
 IF NOT EXISTS (
   SELECT *
@@ -258,4 +251,4 @@ IF NOT EXISTS (
 BEGIN
  ALTER TABLE [dbo].[WorkflowScheme] ADD [DontPreExecute] BIT NOT NULL DEFAULT (0)
 END
-GO
+

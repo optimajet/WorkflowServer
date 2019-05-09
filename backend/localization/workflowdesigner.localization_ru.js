@@ -28,6 +28,7 @@ var WorkflowDesignerConstants = {
   ButtonTextRedo: "Повторить",
   SaveConfirm: "Сохранить изменения?",
   CloseWithoutSaving: "Закрыть без сохранения?",
+  TransitionAuto: 'Auto',
   DialogConfirmText: "Вопрос",
   None: "Никто",
   Warning: "Предупреждение",
@@ -39,6 +40,7 @@ var WorkflowDesignerConstants = {
   ActivityNamePrefix: "Деятельность_",
   ActivityFormLabel: {
     Title: "Деятельность",
+    TitleForInline: 'Activity Inline',
     Name: "Наименование",
     State: "Статус",
     IsInitial: "Начальный",
@@ -51,7 +53,11 @@ var WorkflowDesignerConstants = {
     ImpAction: "Действие",
     ImpActionParameter: "Параметр действия",
     AlwaysConditionShouldBeSingle: "Условие 'всегда' должно быть одно",
-    OtherwiseConditionShouldBeSingle: "Условие 'в противном случае' должно быть одно"
+    OtherwiseConditionShouldBeSingle: "Условие 'в противном случае' должно быть одно",
+    Annotations: 'Annotations',
+    AnnotationName: 'Name',
+    AnnotationValue: 'Value',
+    Scheme: "Inline scheme"
   },
   TransitionFormLabel: {
     Title: "Переход",
@@ -80,7 +86,11 @@ var WorkflowDesignerConstants = {
     MergeViaSetState: "Объединить подпроцесс через заданное состояние",
     DisableParentStateControl: "Отключить родительский контроль процесса",
     ShowConcatParameters: "Показать конкатенацию",
-    HideConcatParameters: "Скрыть конкатенацию"
+    HideConcatParameters: "Скрыть конкатенацию",
+    Annotations: 'Annotations',
+    AnnotationName: 'Name',
+    AnnotationValue: 'Value',
+    InlinedFinalActivityName: "Inlined Final Activity Name"
   },
   LocalizationFormLabel: {
     Title: "Локализация",
@@ -131,13 +141,29 @@ var WorkflowDesignerConstants = {
     InputParametersParameter: "Параметр",
     InputParametersDefaultValue: "По умолчанию"
   },
-  AdditionalParamsFormLabel: {
-    Title: "Дополнительные параметры",
-    IsObsolete: "Устаревший",
-    DefiningParameters: "Определение параметров",
-    ProcessParameters: "Параметры процесса",
-    ProcessParametersName: "Название",
-    ProcessParametersValue: "Значение"
+  ProcessInfoFormLabel: {
+    Title: 'Additional Parameters',
+    IsObsolete: "IsObsolete",
+    DefiningParameters: 'Defining parameters',
+    ProcessParameters: 'Process parameters',
+    SystemParametersTabName: 'System Parameters',
+    ProcessParametersTabName: 'Process Parameters',
+    HistoryTabName: 'History',
+    TimersTabName: 'Timers',
+    HistoryTabFromLabel: 'From',
+    HistoryTabFromStateLabel: 'From State',
+    HistoryTabToLabel: 'To',
+    HistoryTabToStateLabel: 'To State',
+    HistoryTabExecutorIdLabel: 'Executor Id',
+    HistoryTabActorIdLabel: 'Actor Id',
+    HistoryTabTimeLabel: 'Time',
+    HistoryTabTriggerNameLabel: 'Trigger Name',
+    HistoryTabTransitionClassifierNameLabel: '',
+    ParametersNameLabel: 'Name',
+    ParametersValueLabel: 'Value',
+    TimersTabNameLabel: 'Name',
+    TimersTabValueLabel: 'Value',
+    RootProcess: "Root Process"
   },
   CodeActionsFormLabel: {
     Title: "Действия",
@@ -146,11 +172,34 @@ var WorkflowDesignerConstants = {
     IsGlobal: "Является глобальным",
     IsAsync: "Асинхронный",
     Type: "Тип",
-    GlobalDeleteMessage: "Вы удалили глобальное действие. <br/> <b> Другие схемы не смогут вызвать это Действие! </ B>",
-    UnGlobalMessage: "Вы изменили состояние глобального флага. <br/> После сохранения этой схемы будет создано локальное действие, основанный на этом глобальном действии."
+    GlobalDeleteMessage: "Вы удалили глобальное действие. <br/> <b> Другие схемы не смогут вызвать это Действие! </b>",
+    UnGlobalMessage: "Вы изменили состояние глобального флага. <br/> После сохранения этой схемы будет создано локальное действие, основанный на этом глобальном действии.",
+    EditParameters: "Edit parameters",
+    Parameters: "Parameters" ,
+    Text: "Text",
+    Number: "Number",
+    Checkbox: "Checkbox",
+    Dropdown: "Dropdown",
+    DateTime: "Date/Time",
+    Values: 'Values',
+    DropdownName: 'Name',
+    DropdownValue: 'Value',
+    DropdownShouldContainValues: 'Dropdown should contain values',
+    IsRequired: 'Required',
+    DefaultValue: 'Default value',
+    Json: 'Json'
+  },
+  EditParametersFormlabel: {
+    Title: "Edit parameter values",
+    NumberRequired: "Should be a numeric value",
+    DateShouldBeInISOFormat: "Date/Time parameter should be in ISO8601 format",
+    SwitchToJson: "Switch to JSON editor",
+    SwitchToConstructor: "Switch to parameter values editor",
+    InvalidJson: "JSON object is invalid or does not match the model"
   },
   ToolbarLabel: {
     CreateActivity: "Создать активности",
+    CreateInline: 'Create inline (template)',
     CopySelected: "Копировать выбранные",
     Undo: "Отменить",
     Redo: "Повторить",
@@ -174,10 +223,17 @@ var WorkflowDesignerConstants = {
     Settings: "Настройки",
     CreateTransition: "Создать переход",
     CreateActivityTransition: "Создать активности и переход",
-    Legend: "Легенда"
+    Legend: "Легенда",
+    ProcessInfo: "Process Info",
+    Inline: "The scheme can be inlined"
   },
   ErrorActivityIsInitialCountText: "Один элемент должен быть отмечен флагом Начальный",
+  ErrorActivityIsFinalCountText: "This scheme is Inlined. One or more elements must be marked flag Final",
   ErrorReadOnlySaveText: "Конструктор в режиме ReadOnly, вы не можете его сохранить.",
+  ErrorInvalidObjectsSaveText: function(objects) {
+    return "Can't save the schema. Those objects are in invalid state: " + objects;
+  },
+  BrokenReferencesDialogText: "This schema contains references to Actions, Conditions or Rules that aren't defined by this schema or current action providers. Do you want to keep them?",
   FormMaxHeight: 700,
   EditCodeSettings: {
     Height: 600,
@@ -210,7 +266,6 @@ var WorkflowDesignerConstants = {
     CreateEmptyType: "Создать",
     Format: "Формат"
   },
-  isjava: false,
   OverviewMap: {
     show: true,
     width: 300,

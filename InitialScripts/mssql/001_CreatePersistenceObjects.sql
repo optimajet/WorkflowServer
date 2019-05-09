@@ -1,7 +1,7 @@
 /*
 Company: OptimaJet
 Project: WorkflowEngine.NET Provider for MSSQL and Azure SQL
-Version: 3.2
+Version: 4.0
 File: CreatePersistenceObjects.sql
 
 */
@@ -145,8 +145,10 @@ IF NOT EXISTS (
 		)
 BEGIN
 	CREATE TABLE WorkflowScheme (
-		[Code] NVARCHAR(256) NOT NULL CONSTRAINT PK_WorkflowScheme PRIMARY KEY
-		,[Scheme] NVARCHAR(max) NOT NULL
+		[Code] NVARCHAR(256) NOT NULL CONSTRAINT PK_WorkflowScheme PRIMARY KEY,
+		[Scheme] NVARCHAR(max) NOT NULL,
+		[CanBeInlined] [bit] NOT NULL DEFAULT(0),
+		[InlinedSchemes] [nvarchar](max) NULL
 		)
 
 	PRINT 'WorkflowScheme CREATE TABLE'
@@ -286,6 +288,6 @@ BEGIN
 
 	PRINT 'WorkflowGlobalParameter CREATE TABLE'
 END
-GO
+
 
 COMMIT TRANSACTION
