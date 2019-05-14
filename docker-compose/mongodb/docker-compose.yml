@@ -2,36 +2,35 @@ version: '3.4'
 
 services:
   db:
-     image: mcr.microsoft.com/mssql/server:2017-latest
+     image: mongo
      environment:
-       SA_PASSWORD: MyStRoNgPWD12345678
-       ACCEPT_EULA: Y
+       MONGO_INITDB_ROOT_USERNAME: root
+       MONGO_INITDB_ROOT_PASSWORD: mongopassword
      volumes:
-       - dbdata:/var/opt/mssql
+       - dbdata:/data/db
      restart: always
      ports:
-       - "1433:1433"
+       - "27017:27017"
   start_db:
-    image: mcr.microsoft.com/mssql-tools
+    image: mongo
     depends_on:
        - db
     volumes:
        - ./docker-files:/home/.docker
-    entrypoint: /home/.docker/wait-for-mssql.sh db sa MyStRoNgPWD12345678 wfs
+    entrypoint: /home/.docker/wait-for-mongodb.sh db root mongopassword
   workflowserver:
     depends_on:
        - db
-    image: optimajet/workflowserver:latest
+    image: optimajet/workflowserver
     ports:
        - "8077:8077"
     volumes:
        - ./logs:/app/logs
        - ./license:/app/license
     environment:
-      ConnectionString: Data Source=db;Initial Catalog=wfs;Integrated Security=False;User ID=sa;Password=MyStRoNgPWD12345678
-      Provider: mssql
-      CreateMetadata: "true"
-      LicensePath: /app/license/
+      ConnectionString: mongodb://root:mongopassword@db:27017/ws?authSource=admin
+      Provider: mongodb
+      LicensePath: /app/license/  
       DefaultLoggerConfig__FileTarget__0: Debug
       DefaultLoggerConfig__FileTarget__1: Information
       DefaultLoggerConfig__FileTarget__2: Error
