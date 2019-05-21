@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using OptimaJet.Workflow.Core.Runtime;
 using OptimaJet.WorkflowServer;
 
+
 namespace WorkflowServer
 {
     class Program
@@ -72,7 +73,7 @@ namespace WorkflowServer
                 }
             }
 
-            Console.WriteLine("WorkflowStarting: Starting...");
+            Console.WriteLine("WorkflowServer: Starting...");
 
             UrlInfo info;
             try
@@ -89,7 +90,7 @@ namespace WorkflowServer
             if (!info.IsHttps)
             {
                 hostBuilder = new WebHostBuilder().UseKestrel().UseContentRoot(Directory.GetCurrentDirectory())
-                    .UseUrls(wsparams.Url).SubscribeProcessing(workflowserver);
+                    .UseUrls(wsparams.Url).ConfigureCorsServices(workflowserver).SubscribeProcessing(workflowserver);
             }
             else
             {
@@ -123,6 +124,7 @@ in CertificateFile setting in configuration file");
                            
                         })
                     .UseContentRoot(Directory.GetCurrentDirectory())
+                    .ConfigureCorsServices(workflowserver)
                     .SubscribeProcessing(workflowserver);
 
             }

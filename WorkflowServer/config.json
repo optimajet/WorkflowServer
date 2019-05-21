@@ -1,19 +1,23 @@
 {
   "url": "http://*:8077/",
-  "BackendFolder": "../backend",
+  "BackendFolder": "../../../../backend",
   "NoStartWorkflow": false,
   "DisableTimeManager": false,
   "DisableInbox": false,
   "DisableStats": false,
   "log": false,
   "CallBackCacheTimeout": 300000, // 5 min
-  "BlockMetadataChanges":  false,
+  "BlockMetadataChanges": false,
   "CreateMetadata": false,
   "InitialScriptsFolder": "../InitialScripts",
   "DefaultLoggerConfig": {
     "ConsoleTarget": [ "Debug", "Information", "Error" ]
   },
-  
+  "DefaultCorsSettings": {
+    "AllowedOrigins": [
+      "*"
+    ]
+  },
   //MSSQL
   "Provider": "mssql",
   "ConnectionString": "Data Source=(local);Initial Catalog=WorkflowServer;Integrated Security=False;User ID=sa;Password=1;"
