@@ -17,7 +17,7 @@ services:
        - db
     volumes:
        - ./docker-files:/home/.docker
-    entrypoint: /home/.docker/wait-for-mssql.sh db sa MyStRoNgPWD12345678 wfs
+    entrypoint: /home/.docker/wait-for-db.sh db sa MyStRoNgPWD12345678 wfs
   workflowserver:
     depends_on:
        - db

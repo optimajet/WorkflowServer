@@ -17,7 +17,7 @@ services:
        - db
     volumes:
        - ./docker-files:/home/.docker
-    entrypoint: /home/.docker/wait-for-mongodb.sh db root mongopassword
+    entrypoint: /home/.docker/wait-for-db.sh db root mongopassword
   workflowserver:
     depends_on:
        - db

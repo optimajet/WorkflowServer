@@ -18,7 +18,7 @@ services:
        - db
     volumes:
        - ./docker-files:/home/.docker
-    entrypoint: /home/.docker/wait-for-postgres.sh db dbuser dbuserpassword wfs
+    entrypoint: /home/.docker/wait-for-db.sh db dbuser dbuserpassword wfs
   workflowserver:
     depends_on:
        - db
