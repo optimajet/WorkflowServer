@@ -158,7 +158,8 @@ window.WFEServerLang = {
     schemesettingchanged: "Şema ayarı değiştirildi!",
     clearschemebutton: "Planı temizle",
     messagetitle: "Mesaj",
-    restartsuccess: "Sunucu başarıyla yeniden başlatıldı!"
+    restartsuccess: "Sunucu başarıyla yeniden başlatıldı!",
+    createinstance: "Create an instance"
   },
   workflowinstance: {
     title: "Örnekleri yönet",

@@ -158,6 +158,7 @@ window.WFEServerLang = {
       clearschemebutton: "Clear scheme",
       messagetitle: "Message",
       restartsuccess: "The server was restarted successfully!",
+      createinstance: "Create an instance"
   },
   workflowinstance: {
       title: "Manage instances",

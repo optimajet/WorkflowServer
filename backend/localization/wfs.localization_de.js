@@ -159,7 +159,8 @@ window.WFEServerLang = {
     schemesettingchanged: "Schemaeinstellung wurde geändert!",
     clearschemebutton: "Klares Schema",
     messagetitle: "Botschaft",
-    restartsuccess: "Der Server wurde erfolgreich neu gestartet!"
+    restartsuccess: "Der Server wurde erfolgreich neu gestartet!",
+    createinstance: "Create an instance"
   },
   workflowinstance: {
     title: "Instanzen verwalten",

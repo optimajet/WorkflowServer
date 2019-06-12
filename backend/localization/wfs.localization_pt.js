@@ -159,7 +159,8 @@ window.WFEServerLang = {
     schemesettingchanged: "A configuração do esquema foi alterada!",
     clearschemebutton: "Esquema claro",
     messagetitle: "Mensagem",
-    restartsuccess: "O servidor foi reiniciado com sucesso!"
+    restartsuccess: "O servidor foi reiniciado com sucesso!",
+    createinstance: "Create an instance"
   },
   workflowinstance: {
     title: "Gerenciar instâncias",

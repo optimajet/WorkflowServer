@@ -159,7 +159,8 @@ window.WFEServerLang = {
     schemesettingchanged: "Настройка схемы была изменена!",
     clearschemebutton: "Очистить схему",
     messagetitle: "Сообщение",
-    restartsuccess: "Сервер был успешно перезагружен!"
+    restartsuccess: "Сервер был успешно перезагружен!",
+    createinstance: "Создать экземпляр"
   },
   workflowinstance: {
     title: "Управление экземплярами",
