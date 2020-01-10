@@ -329,6 +329,57 @@ div.field > label {
     background: transparent;
 }
 
+.dwkit-formadmin-header-right{
+    display:flex;
+}
+
+.wfs-login-wrapper {
+    height: 100vh;
+    width: 100vw;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.wfs-login-wrapper .wfs-login {
+    padding: 55px 90px 55px;
+    background: #FFFFFF;
+    -webkit-box-shadow: 0px 6px 10px rgba(18, 83, 204, 0.12), 0px 1px 18px rgba(18, 83, 204, 0.12), 0px 3px 5px rgba(18, 83, 204, 0.15);
+    box-shadow: 0px 6px 10px rgba(18, 83, 204, 0.12), 0px 1px 18px rgba(18, 83, 204, 0.12), 0px 3px 5px rgba(18, 83, 204, 0.15);
+    border-radius: 5px;
+    width: 600px;
+    max-width: 95%;
+}
+
+.wfs-logout{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 620px) {
+    .wfs-login-wrapper .wfs-login {
+        width: 90%;
+        height: auto;
+        padding: 30px 40px 40px;
+    }
+}
+
+.wfs-login-logo{
+    display: block;
+    margin-left: auto; 
+    margin-right: auto; 
+    height: 25px;
+}
+
+.wfs-login-divlogo{
+    height: 60px;
+}
 
 /**
  * Alertify
@@ -557,4 +608,9 @@ div.field > label {
     .ui.modal:not(.legacy){
         position: static;
     }
+}
+
+.dwkit-dashboard-settings .ui.bottom.segment.tab.top {
+    padding: 0px;
+    border: none;
 }

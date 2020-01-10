@@ -57,7 +57,7 @@ delimiter ;
 
 
 CALL AddIndexTemp("ix_workflowserverstats_processid", "workflowserverstats");
-CALL AddIndexTemp("ix_workflowServerprocesshistory_processid", "workflowServerprocesshistory");
+CALL AddIndexTemp("ix_workflowServerprocesshistory_processid", "workflowserverprocesshistory");
 
 DROP PROCEDURE AddIndexTemp;
 
@@ -76,9 +76,9 @@ begin
 		(SELECT COUNT(inst.`Id`) FROM `WorkflowProcessInstance` inst
 			LEFT JOIN `WorkflowProcessScheme` ps on ps.`Id` = inst.`SchemeId`
 			WHERE coalesce(ps.`RootSchemeCode`, ps.`SchemeCode`) = ws.`Code`) as `ProcessCount`,
-		(SELECT COUNT(history.`Id`) FROM `WorkflowProcessTransitionHistory` history
-		LEFT JOIN `WorkflowProcessInstance` inst on history.`ProcessId` = inst.`Id`
-		LEFT JOIN `WorkflowProcessScheme` ps on ps.`Id` = inst.`SchemeId`
+		(SELECT COUNT(history.`Id`) FROM `workflowprocesstransitionhistory` history
+		LEFT JOIN `workflowprocessinstance` inst on history.`ProcessId` = inst.`Id`
+		LEFT JOIN `workflowprocessscheme` ps on ps.`Id` = inst.`SchemeId`
 		WHERE coalesce(ps.`RootSchemeCode`, ps.`SchemeCode`) = ws.`Code`) as `TransitionCount`
 	FROM `workflowscheme` AS ws;
 end;//
@@ -135,9 +135,9 @@ by_transitions:BEGIN
 		coalesce(COUNT(history.`Id`), 0) as `Count`
 	FROM report_trans_table p
 	LEFT JOIN `workflowscheme` scheme on 1=1
-	LEFT JOIN `WorkflowProcessScheme` ps on scheme.`Code` = coalesce(ps.`RootSchemeCode`, ps.`SchemeCode`)
-	LEFT JOIN `WorkflowProcessInstance` inst on ps.`Id` = inst.`SchemeId`
-	LEFT JOIN `WorkflowProcessTransitionHistory` history on history.`ProcessId` = inst.`Id` AND history.`TransitionTime` >= p.df AND history.`TransitionTime` < p.de
+	LEFT JOIN `workflowprocessscheme` ps on scheme.`Code` = coalesce(ps.`RootSchemeCode`, ps.`SchemeCode`)
+	LEFT JOIN `workflowprocessinstance` inst on ps.`Id` = inst.`SchemeId`
+	LEFT JOIN `workflowprocesstransitionhistory` history on history.`ProcessId` = inst.`Id` AND history.`TransitionTime` >= p.df AND history.`TransitionTime` < p.de
 	GROUP BY p.df, scheme.`Code`
 	ORDER BY p.df, scheme.`Code`;
 
@@ -191,16 +191,16 @@ by_stats:BEGIN
 
 	insert into report_stats_schemes (`Code`) 
 		SELECT DISTINCT coalesce(ps.`RootSchemeCode`, ps.`SchemeCode`) 
-        FROM `WorkflowServerStats` stats
-		LEFT JOIN `WorkflowProcessInstance` inst on inst.`Id` = stats.`ProcessId`
-		LEFT JOIN `WorkflowProcessScheme` ps on inst.`SchemeId` = ps.`Id`
+        FROM `workflowserverstats` stats
+		LEFT JOIN `workflowprocessinstance` inst on inst.`Id` = stats.`ProcessId`
+		LEFT JOIN `workflowprocessscheme` ps on inst.`SchemeId` = ps.`Id`
 		WHERE `DateFrom` >= datefrom AND `DateFrom` < dateto;
 
 	DROP TEMPORARY TABLE IF EXISTS report_stats_types;
 	create temporary table report_stats_types (`Code` varchar(1024));
 
 	insert into report_stats_types (`Code`) 
-	SELECT DISTINCT stats.`Type` FROM `WorkflowServerStats` stats
+	SELECT DISTINCT stats.`Type` FROM `workflowserverstats` stats
 	WHERE stats.`DateFrom` >= datefrom AND stats.`DateFrom` < dateto;
 
 	DROP TEMPORARY TABLE IF EXISTS report_stats_success;
@@ -222,9 +222,9 @@ by_stats:BEGIN
 	LEFT JOIN report_stats_schemes scheme on 1=1
 	LEFT JOIN report_stats_types types on 1=1
 	LEFT JOIN report_stats_success success on 1=1
-	LEFT JOIN `WorkflowServerStats` stats on stats.`Type` = types.`Code` AND stats.`IsSuccess` = success.`Value` AND stats.`DateFrom` >= p.df AND stats.`DateFrom` < p.de
-	LEFT JOIN `WorkflowProcessInstance` inst on stats.`ProcessId` = inst.`Id`
-	LEFT JOIN `WorkflowProcessScheme` ps on ps.`Id` = inst.`SchemeId` AND scheme.`Code` = coalesce(ps.`RootSchemeCode`, ps.`SchemeCode`)
+	LEFT JOIN `workflowserverstats` stats on stats.`Type` = types.`Code` AND stats.`IsSuccess` = success.`Value` AND stats.`DateFrom` >= p.df AND stats.`DateFrom` < p.de
+	LEFT JOIN `workflowprocessinstance` inst on stats.`ProcessId` = inst.`Id`
+	LEFT JOIN `workflowprocessscheme` ps on ps.`Id` = inst.`SchemeId` AND scheme.`Code` = coalesce(ps.`RootSchemeCode`, ps.`SchemeCode`)
 	GROUP BY p.df, scheme.`Code`, types.`Code`, success.`Value`
 	ORDER BY p.df, scheme.`Code`, types.`Code`, success.`Value`;
 

@@ -35,7 +35,7 @@
     None: "None",
     Warning: "Warning",
 
-    InfoBlockLabel:{
+    InfoBlockLabel: {
         Activity: 'Activities: ',
         Transition: 'Transitions: ',
         Command: 'Commands: ',
@@ -90,8 +90,8 @@
         IsFork: 'Is fork',
         MergeViaSetState: 'Merge subprocess via set state',
         DisableParentStateControl: 'Disable parent process control',
-        ShowConcatParameters : "Show concatenation",
-        HideConcatParameters : "Hide concatenation",
+        ShowConcatParameters: "Show concatenation",
+        HideConcatParameters: "Hide concatenation",
         Annotations: 'Annotations',
         AnnotationName: 'Name',
         AnnotationValue: 'Value',
@@ -113,7 +113,7 @@
         Type: 'Type',
         Value: 'Value',
         Types: ['Command', 'State', 'Parameter'],
-        NotOverrideIfExists : "Do not override timer if exists"
+        NotOverrideIfExists: "Do not override timer if exists"
     },
 
     ParameterFormLabel: {
@@ -123,7 +123,7 @@
         Purpose: 'Purpose',
         Value: 'Value',
         InitialValue: 'InitialValue',
-        ShowSystemParameters : 'Show system parameters'
+        ShowSystemParameters: 'Show system parameters'
     },
 
     ActorFormLabel: {
@@ -152,6 +152,7 @@
         ProcessParametersTabName: 'Process Parameters',
         HistoryTabName: 'History',
         TimersTabName: 'Timers',
+        TagsTabName: "Tags",
         HistoryTabFromLabel: 'From',
         HistoryTabFromStateLabel: 'From State',
         HistoryTabToLabel: 'To',
@@ -165,7 +166,8 @@
         ParametersValueLabel: 'Value',
         TimersTabNameLabel: 'Name',
         TimersTabValueLabel: 'Value',
-        RootProcess: "Root Process"
+        RootProcess: "Root Process",
+        TagsLabel:'Tags (separated by commas)'
     },
 
     CodeActionsFormLabel: {
@@ -178,7 +180,7 @@
         GlobalDeleteMessage: "You've deleted the Global CodeAction.<br/><b>Other schemes won't be able to call this CodeAction!</b>",
         UnGlobalMessage: "You've changed the state of the global flag.<br/>There will be created a Local CodeAction based on this Global CodeAction after saving this scheme.",
         EditParameters: "Edit parameters",
-        Parameters: "Parameters" ,
+        Parameters: "Parameters",
         Text: "Text",
         Number: "Number",
         Checkbox: "Checkbox",
@@ -235,7 +237,7 @@
     ErrorActivityIsInitialCountText: "One element must be marked flag Initial",
     ErrorActivityIsFinalCountText: "This scheme is Inlined. One or more elements must be marked flag Final",
     ErrorReadOnlySaveText: "The Designer in ReadOnly mode, you can't save it.",
-    ErrorInvalidObjectsSaveText: function(objects) {
+    ErrorInvalidObjectsSaveText: function (objects) {
         return "Can't save the schema. Those objects are in invalid state: " + objects;
     },
     BrokenReferencesDialogText: "This schema contains references to Actions, Conditions or Rules that aren't defined by this schema or current action providers. Do you want to keep them?",
@@ -277,5 +279,6 @@
         height: 150
     },
     UndoDepth: 200,
-    DefaultCulture: 'en-US'
+    DefaultCulture: 'en-US',
+    ErrorInBrowserConsole: "See more info in the browser console."
 };

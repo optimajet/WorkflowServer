@@ -57,6 +57,11 @@ paths:
             Parameters for creating a scheme. Must be a valid JSON serialized
             object.
           type: string
+        - name: tenantId
+          in: query
+          required: false
+          description: Tenant Id
+          type: string
       responses:
         '200':
           description: Operation result
@@ -101,6 +106,16 @@ paths:
           required: false
           schema:
              $ref: '#/definitions/ProcessParameters'
+        - name: tenantId
+          in: query
+          required: false
+          description: Tenant Id 
+          type: string
+        - name: persist
+          in: query
+          required: false
+          description: names of persistence parameters. Comma-separated string.
+          type: string
       responses:
         '200':
           description: Operation result
@@ -119,6 +134,11 @@ paths:
           description: The id of the process
           type: string
           format: uuid
+        - name: tenantId
+          in: query
+          required: false
+          description: Tenant Id (for assert processId)
+          type: string          
       responses:
         '200':
           description: Operation result
@@ -147,6 +167,11 @@ paths:
           required: false
           description: Deputy's identifier
           type: string
+        - name: tenantId
+          in: query
+          required: false
+          description: Tenant Id (for assert processId)
+          type: string          
       responses:
         '200':
           description: Operation result
@@ -180,6 +205,11 @@ paths:
           required: false
           description: Deputy's identifier
           type: string
+        - name: tenantId
+          in: query
+          required: false
+          description: Tenant Id (for assert processId)
+          type: string          
       responses:
         '200':
           description: Operation result
@@ -217,6 +247,16 @@ paths:
           required: false
           schema:
              $ref: '#/definitions/ProcessParameters'
+        - name: tenantId
+          in: query
+          required: false
+          description: Tenant Id (for assert processId)
+          type: string
+        - name: persist
+          in: query
+          required: false
+          description: names of persistence parameters. Comma-separated string.
+          type: string  
       responses:
         '200':
           description: Operation result
@@ -235,6 +275,11 @@ paths:
           description: The id of the process
           type: string
           format: uuid
+        - name: tenantId
+          in: query
+          required: false
+          description: Tenant Id (for assert processId)
+          type: string          
       responses:
         '200':
           description: Operation result
@@ -268,6 +313,11 @@ paths:
           required: false
           description: Deputy's identifier
           type: string
+        - name: tenantId
+          in: query
+          required: false
+          description: Tenant Id (for assert processId)
+          type: string          
       responses:
         '200':
           description: Operation result
@@ -305,6 +355,11 @@ paths:
           required: false
           schema:
              $ref: '#/definitions/ProcessParameters'
+        - name: tenantId
+          in: query
+          required: false
+          description: Tenant Id (for assert processId)
+          type: string                
       responses:
         '200':
           description: Operation result
@@ -321,6 +376,11 @@ paths:
           description: The id of the process
           type: string
           format: uuid
+        - name: tenantId
+          in: query
+          required: false
+          description: Tenant Id (for assert processId)
+          type: string          
       responses:
         '200':
           description: Operation result
@@ -337,6 +397,11 @@ paths:
           description: The id of the process
           type: string
           format: uuid
+        - name: tenantId
+          in: query
+          required: false
+          description: Tenant Id (for assert processId)
+          type: string          
       responses:
         '200':
           description: Operation result
@@ -352,6 +417,11 @@ paths:
           required: false
           schema:
              $ref: '#/definitions/ProcessIds'
+        - name: tenantId
+          in: query
+          required: false
+          description: Tenant Id (for assert ALL processIds)
+          type: string        
       responses:
         '200':
           description: Operation result
@@ -394,6 +464,11 @@ paths:
           required: false
           description: User's identifier
           type: string
+        - name: tenantId
+          in: query
+          required: false
+          description: Tenant Id (for assert processId)
+          type: string 
       responses:
         '200':
           description: Operation result
@@ -435,6 +510,11 @@ paths:
           required: false
           description: User's identifier
           type: string
+        - name: tenantId
+          in: query
+          required: false
+          description: Tenant Id (for assert processId)
+          type: string           
       responses:
         '200':
           description: Operation result
@@ -444,6 +524,12 @@ paths:
     get:
       summary: Return a list of scheme codes
       operationId: GetSchemeList
+      parameters:
+        - name: tags
+          in: query
+          required: false
+          description: tags separated by commas
+          type: string
       responses:
         '200':
           description: Operation result

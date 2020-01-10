@@ -191,6 +191,10 @@
     height: 100%;
 }
 
+.container > div{
+    height: 100%;
+}
+
 .dwkit-admin-formbuilder-container-fullscreen{
     position: absolute;
     top: 0;
