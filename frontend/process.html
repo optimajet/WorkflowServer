@@ -12,7 +12,12 @@
                         <i class="el-icon-info"></i>
                         No commands
                     </div>
-                    <el-button :loading="extra.loading" v-for="command in commands" style="margin: 10px 10px 0px 0px;" @click="executeCommand(command)">{{command.LocalizedName}}</v-btn>
+                    <el-button 
+                        v-for="command in commands" 
+                        :loading="extra.loading" 
+                        :type="getCommandType(command)" 
+                        style="margin: 10px 10px 0px 0px;" 
+                        @click="executeCommand(command)">{{command.LocalizedName}}</v-btn>
                 </div>
             </el-card>     
         </div>
@@ -21,7 +26,6 @@
             <div wfs-form="processtimeline"></div>
         </div>
     </div>
-
     <div v-if="!WorkflowServer.Data.processInstance">  
         <el-card style="max-width:700px" class="wfs-processnotstarted" >
             <div slot="header" class="clearfix">
@@ -34,7 +38,7 @@
                 </div>
                 <div v-if="Array.isArray(WorkflowServer.Data.commands) && WorkflowServer.Data.commands.length > 0">
                     <span v-if="!extra.loading" v-for="command in commands">
-                        <el-button style="margin: 10px 10px 0px 0px;" @click="executeCommand(command)">{{command.LocalizedName}}</v-btn>
+                        <el-button style="margin: 10px 10px 0px 0px;" :type="getCommandType(command)"  @click="executeCommand(command)">{{command.LocalizedName}}</v-btn>
                         <br/>
                     </span> 
                     <v-progress-circular v-if="extra.loading" indeterminate color="green"></v-progress-circular>                               
@@ -78,6 +82,10 @@
             else{
                 WorkflowServer.saveForm();
             }
+        };
+
+        WorkflowServer.VueConfig.methods.getCommandType = function(command){
+           return WorkflowServer.getCommandType(command);
         };
         
         WorkflowServer.VueConfig.methods.executeCommand = function(command){

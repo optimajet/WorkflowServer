@@ -19,7 +19,7 @@
         <a v-if="item.value == 'title'" :href="'/workflow/' + scope.row.SchemeCode + '/' + scope.row.Id" style="text-overflow: ellipsis;white-space: nowrap;">{{ WorkflowServer.getTitle(scope.row) }}</a>
         <div v-else-if="item.value == 'commands'" style="max-width: 500px;">
           <span v-for="command in scope.row.commands">
-            <el-button style="margin:5px;" size="small" @click="executeCommand(scope.row, command)">{{command.LocalizedName}}</el-button>
+            <el-button style="margin:5px;" :type="getCommandType(command)" size="small" @click="executeCommand(scope.row, command)">{{command.LocalizedName}}</el-button>
           </span>
         </div>
         <el-button v-else-if="item.value == 'actions'" type="danger" icon="el-icon-delete" circle @click="deleteItem(scope.row)"></el-button>
@@ -167,6 +167,10 @@
           WorkflowServer.VueConfig.methods.dataload();
         });
       });
+    };
+
+    WorkflowServer.VueConfig.methods.getCommandType = function(command){
+        return WorkflowServer.getCommandType(command);
     };
 
     WorkflowServer.VueConfig.methods.executeCommand = function(row, command){

@@ -7,7 +7,7 @@
     <div wfs-placeholder="fields"></div>
 
     <el-form-item v-if="WorkflowServer.Data.processInstance && !isreadonly()">
-        <el-button type="primary" @click="submit()">Save</el-button>
+        <el-button type="primary" :loading="extra.loading"  @click="submit()">Save</el-button>
     </el-form-item>
 </el-form>
 

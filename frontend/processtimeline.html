@@ -11,13 +11,13 @@
 
 <el-timeline v-if="history.length == 0">
     <el-timeline-item color="orange">
-        {{ localizedstate ? localizedstate : CurrentActivity }}
+        <b>{{ localizedstate ? localizedstate : CurrentActivity }}</b>
     </el-timeline-item>
     <el-timeline-item v-for="(item, index) in processHistory.slice().reverse()"
       :key="index"
       :color="item.InitialState == CurrentState ? 'blue' : 'grey'"
       :timestamp="WorkflowServer.formatDate(item.TransitionTime)">
         {{ item.FromStateName ? item.FromStateName : item.FromActivityName }}
-        ( {{ item.TriggerName }} )
+        <span v-if="item.TriggerName">( {{ item.TriggerName }} )</span>
     </el-timeline-item>
 </el-timeline>

@@ -39,7 +39,7 @@ var WorkflowServer = {
         number: { validator: 
             function(rule, value, callback){ 
                 var intValues =  /^\d+$/;
-                if(!value || (value.match(intValues) && !isNaN(value)))
+                if(!value || Number.isInteger(value) || (value.match(intValues) && !isNaN(value)))
                     callback();
                 
                 callback(new Error(rule.message));
@@ -49,7 +49,7 @@ var WorkflowServer = {
         float: { validator: 
             function(rule, value, callback){ 
                 var floatValues =  /[+-]?([0-9]*[.])?[0-9]+/;
-                if(!value || (value.match(floatValues) && !isNaN(value)))
+                if(!value || (Number(n) === n && n % 1 !== 0) || (value.match(floatValues) && !isNaN(value)))
                     callback();
                 
                 callback(new Error(rule.message));
@@ -67,6 +67,17 @@ var WorkflowServer = {
         }
 
         return WorkflowServer.fetchJson(location.href, {queryParams: Object.assign({}, options, {dataonly: true})});
+    },
+    getCommandType: function(command){
+        var res = "";
+        if(command.Classifier == 1)
+            res = "primary";
+        else if(command.Classifier == 2)
+            res = 'danger';
+        else
+            res = 'info';
+
+        return res;
     },
     executeCommand: function(id, command, autoReload) {
         if (autoReload === null || autoReload === undefined)
@@ -210,7 +221,18 @@ var WorkflowServer = {
             body: JSON.stringify({
                 "__operation": "saveform",
                 data: WorkflowServer.Data.FormData
-            })});
+            })}).then(function(response){
+                if(response.ok){
+                    WorkflowServer.reload();
+                }
+                else{
+                    var msg = response.message;
+                    if(!msg) msg = "The request has not been processed.";
+                    WorkflowServer.showError(msg);
+                    console.log(response);
+                }
+                
+            });
     },
     getTitle: function(item){
         var fields = ["title", "name",  "Id", "ProcessId"];
@@ -221,6 +243,10 @@ var WorkflowServer = {
                     return item[field];
             }
             else {
+
+                if(WorkflowServer.Data.FormData && WorkflowServer.Data.FormData[field])
+                    return WorkflowServer.Data.FormData[field];
+
                 if(WorkflowServer.Data[field])
                     return WorkflowServer.Data[field];
             }
