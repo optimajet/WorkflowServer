@@ -325,6 +325,7 @@
 .dwkitadmin-toolbar-editform{
     padding-bottom: 10px;
     margin-top: 10px;
+    margin-bottom: 10px;
     border-bottom-style: solid;
     border-bottom-width: 1px;
     border-bottom-color: rgba(148,149,154,0.20);

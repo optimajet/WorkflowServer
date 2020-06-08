@@ -1,0 +1,30 @@
+<el-menu :collapse="extra.sidebar.mini" style="height: 100%;">
+    <div style="width: 255px;"></div>
+    <el-menu-item index="top" @click="sidebarClick()" >
+        <el-image :src="extra.user.avatar" ></el-image>              
+    </el-menu-item>
+    <el-divider></el-divider>
+    <a style="text-decoration: inherit;" :href="item.href" v-for="(item, index) in extra.sidebar.menu">
+        <el-menu-item :index="index" >
+            <i :class="item.icon"></i>
+            <span v-if="!extra.sidebar.mini" slot="title">{{ item.title }}</span>
+        </el-menu-item>
+    </a>
+</el-menu>
+<button class="wfs-sidebar-btn" onclick="sideBarOnClick();"></button>
+<script>
+    WorkflowServer.VueConfig.methods.sidebarClick = function(){
+        WorkflowServer.Data.extra.sidebar.mini = 
+            !WorkflowServer.Data.extra.sidebar.mini;
+    };
+
+    function sideBarOnClick() {
+        $('.wfs-sidebar-container').toggleClass('active');
+        $('.wfs-sidebar-btn').toggleClass('active');
+        WorkflowServer.Data.extra.sidebar.mini = false;
+    }
+
+    if(WorkflowServer.Data.extra.sidebar.menu.length == 0){
+        $('.wfs-sidebar-btn').remove();
+    }
+</script>

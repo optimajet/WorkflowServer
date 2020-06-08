@@ -21,16 +21,18 @@ services:
   workflowserver:
     depends_on:
        - db
-    image: optimajet/workflowserver:latest
+    build:
+      context: ../..
+      dockerfile: ./WorkflowServer/Dockerfile
     ports:
        - "8077:8077"
+       - "8078:8078"
     volumes:
        - ./logs:/app/logs
        - ./license:/app/license
     environment:
       ConnectionString: Data Source=db;Initial Catalog=wfs;Integrated Security=False;User ID=sa;Password=MyStRoNgPWD12345678
       Provider: mssql
-      CreateMetadata: "true"
       LicensePath: /app/license/
       DefaultLoggerConfig__FileTarget__0: Debug
       DefaultLoggerConfig__FileTarget__1: Information

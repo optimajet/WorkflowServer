@@ -1,0 +1,56 @@
+<div wfs-content="content">
+    <div v-if="schemes.length > 0" style="margin-bottom: 10px;">
+        <h1>Workflow</h1>
+        <el-card v-for="item in schemes" class="wfs-index-card">
+            <div slot="header" class="clearfix">
+                <span>{{ item.Code }}</span>                  
+            </div>
+            <div class="text item">
+                <a :href="'/workflow/' + item.Code" v-if="!item.AutoStart">
+                    <el-button>Open</el-button>
+                </a>
+                <a :href="'/workflow/' + item.Code + '/launch'" v-if="item.AutoStart && item.InitialCommands.length == 0">
+                    <el-button>Launch</el-button>
+                </a>
+                <a :href="'/workflow/' + item.Code + '/' + command.CommandName" v-for="command in item.InitialCommands">
+                    <el-button v-if="item.AutoStart">{{ command.LocalizedName }}</el-button>
+                </a>
+            </div>                    
+        </el-card>
+    </div>
+    <div style="clear: both;"></div>
+    <div v-if="flows.length > 0">
+        <h1>Flows</h1>
+        <el-card v-for="item in flows" class="wfs-index-card">
+            <div slot="header" class="clearfix">
+                <span>{{ item.Name }}</span>                  
+            </div>
+            <div class="text item">
+                <a :href="'/flow/' + item.Name" v-if="!item.AutoStart">
+                    <el-button>Open</el-button>
+                </a>
+                <a :href="'/flow/' + item.Name + '/launch'" v-if="item.AutoStart && item.InitialCommands.length == 0">
+                    <el-button>Launch</el-button>
+                </a>
+                <a :href="'/flow/' + item.Name + '/' + command.CommandName" v-for="command in item.InitialCommands">
+                    <el-button v-if="item.AutoStart">{{ command.LocalizedName }}</el-button>
+                </a>
+            </div>                    
+        </el-card>
+    </div>
+    <script>
+        WorkflowServer.DataExtend({
+            schemes: [],
+            flows: []
+        });
+
+        WorkflowServer.loadSchemes().then(function(data) {
+            WorkflowServer.Data.schemes = data;
+        });
+            
+        // WorkflowServer.loadFlows().then(function(data) {
+        //     WorkflowServer.Data.flows = data;
+        // });        
+    </script>
+</div>
+

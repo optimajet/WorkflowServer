@@ -1,5 +1,9 @@
 {
+  "IsMultiServer": false,
+  //"RuntimeId": "someruntimeid", //specify runtime name for multi-server mode here
   "url": "http://*:8077/",
+  "FrontendFolder": "../../../../frontend",
+  "DefaultFrontendPort": "8078",
   "BackendFolder": "../../../../backend",
   "NoStartWorkflow": false,
   "DisableTimeManager": false,

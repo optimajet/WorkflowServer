@@ -38,7 +38,9 @@ namespace WorkflowServer
 
                 WorkflowServerRuntime wf = initializer.WorkflowServer;
 
+                wf.FormManager.Stop();
                 wf.WorkflowRuntime.Logger.Info("Shutting down...");
+                wf.WorkflowRuntime.Shutdown();
                 wf.WorkflowRuntime.Logger.Dispose();
             }
         }

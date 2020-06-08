@@ -263,4 +263,48 @@ CALL AddColumnTemp("DontFillIndox");
 
 CALL AddColumnTemp("DontPreExecute");
 
+CALL AddColumnTemp("AutoStart");
+
 DROP PROCEDURE AddColumnTemp;
+
+delimiter //
+CREATE PROCEDURE AddColumnTemp(columnname varchar(128))
+BEGIN
+
+	SET @statement = (SELECT IF(
+	  (
+		SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+		WHERE
+		  (table_name = "workflowscheme" )
+		  AND (table_schema = DATABASE())
+		  AND (column_name = columnname)
+	  ) > 0,
+	  "SELECT 1",
+	  CONCAT("ALTER TABLE `workflowscheme` ADD `", columnname, "` varchar(1024) NULL;")
+	));
+
+	PREPARE prepared FROM @statement;
+    EXECUTE prepared;
+    DEALLOCATE PREPARE prepared;
+
+END;//
+delimiter ;
+
+CALL AddColumnTemp("DefaultForm");
+
+DROP PROCEDURE AddColumnTemp;
+
+
+CREATE TABLE IF NOT EXISTS `workflowserverlogs` (
+  `Id` binary(16) NOT NULL,
+  `Message` text NOT NULL,
+  `MessageTemplate` text NOT NULL,
+  `Timestamp` datetime NOT NULL,
+  `Exception` text NULL,
+  `PropertiesJson` text NULL,
+  `Level` tinyint(4) not null,
+   `RuntimeId` varchar(450) not null,
+  PRIMARY KEY  (`Timestamp`, `Id`),
+  INDEX `IX_WorkflowServerLogs_RuntimeId` (`RuntimeId`),
+  INDEX `IX_WorkflowServerLogs_Level` (`Level`)
+);

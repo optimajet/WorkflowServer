@@ -50,9 +50,7 @@ BEGIN
 	ADD CONSTRAINT FK_WorkflowServerProcessHistory_WorkflowServerProcessHistory FOREIGN KEY (Id) REFERENCES dbo.WorkflowServerProcessHistory (Id)
 END
 
-
 ALTER TABLE [dbo].[WorkflowInbox] ALTER COLUMN [IdentityId] NVARCHAR(256) NOT NULL
-
 
 IF NOT EXISTS (SELECT 1 FROM sys.procedures WHERE name = N'WorkflowReportBySchemes')
 BEGIN
@@ -73,7 +71,6 @@ BEGIN
 	END')
 	PRINT 'WorkflowReportBySchemes CREATE PROCEDURE'
 END
-
 
 IF NOT EXISTS (SELECT 1 FROM sys.procedures WHERE name = N'WorkflowReportByTransitions')
 BEGIN
@@ -129,7 +126,6 @@ BEGIN
 	END')
 	PRINT 'WorkflowReportByTransitions CREATE PROCEDURE'
 END
-
 
 IF NOT EXISTS (SELECT 1 FROM sys.procedures WHERE name = N'WorkflowReportByStats')
 BEGIN
@@ -219,7 +215,6 @@ BEGIN
 	PRINT 'WorkflowReportByStats CREATE PROCEDURE'
 END
 
-
 IF NOT EXISTS (
   SELECT * 
   FROM   sys.columns 
@@ -229,7 +224,6 @@ IF NOT EXISTS (
 BEGIN
  ALTER TABLE [dbo].[WorkflowScheme] ADD [DeleteFinalized] BIT NOT NULL DEFAULT (0)
 END
-
 
 IF NOT EXISTS (
   SELECT *
@@ -241,7 +235,6 @@ BEGIN
  ALTER TABLE [dbo].[WorkflowScheme] ADD [DontFillIndox] BIT NOT NULL DEFAULT (0)
 END
 
-
 IF NOT EXISTS (
   SELECT *
   FROM   sys.columns
@@ -252,3 +245,56 @@ BEGIN
  ALTER TABLE [dbo].[WorkflowScheme] ADD [DontPreExecute] BIT NOT NULL DEFAULT (0)
 END
 
+IF NOT EXISTS (
+  SELECT *
+  FROM   sys.columns
+  WHERE  object_id = OBJECT_ID(N'[dbo].[WorkflowScheme]')
+         AND name = 'AutoStart'
+)
+BEGIN
+ ALTER TABLE [dbo].[WorkflowScheme] ADD [AutoStart] BIT NOT NULL DEFAULT (0)
+END
+
+IF NOT EXISTS (
+  SELECT *
+  FROM   sys.columns
+  WHERE  object_id = OBJECT_ID(N'[dbo].[WorkflowScheme]')
+         AND name = 'DefaultForm'
+)
+BEGIN
+ ALTER TABLE [dbo].[WorkflowScheme] ADD [DefaultForm] nvarchar(max) NULL
+END
+
+IF NOT EXISTS (SELECT 1 FROM [INFORMATION_SCHEMA].[TABLES] WHERE [TABLE_NAME] = N'WorkflowServerLogs')
+BEGIN
+
+	CREATE TABLE [dbo].[WorkflowServerLogs](
+		[Id] [uniqueidentifier] NOT NULL,
+		[Message] [nvarchar](max) NOT NULL,
+		[MessageTemplate] [nvarchar](max) NOT NULL,
+		[Timestamp] [datetime] NOT NULL,
+		[Exception] [nvarchar](max) NULL,
+		[PropertiesJson] [nvarchar](max) NULL,
+		[Level] [tinyint] NOT NULL,
+		[RuntimeId] [nvarchar](450) NOT NULL,
+	 CONSTRAINT [PK_WorkflowServerLogs] PRIMARY KEY NONCLUSTERED 
+	(
+		[Id] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+	CREATE CLUSTERED INDEX [IX_WorkflowServerLogs_Timestamp_Id]
+	ON [dbo].[WorkflowServerLogs]([Timestamp] ASC, [Id] ASC)
+
+	CREATE NONCLUSTERED INDEX [IX_WorkflowServerLogs_RuntimeId] ON [dbo].[WorkflowServerLogs]
+	(
+		[RuntimeId] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+
+	CREATE NONCLUSTERED INDEX [IX_WorkflowServerLogs_Level] ON [dbo].[WorkflowServerLogs]
+	(
+		[Level] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+
+
+END

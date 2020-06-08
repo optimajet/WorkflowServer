@@ -218,3 +218,22 @@ ALTER TABLE "WorkflowScheme" ADD COLUMN IF NOT EXISTS "DeleteFinalized" BIT NOT 
 ALTER TABLE "WorkflowScheme" ADD COLUMN IF NOT EXISTS "DontFillIndox" BIT NOT NULL DEFAULT(0::bit);
 
 ALTER TABLE "WorkflowScheme" ADD COLUMN IF NOT EXISTS "DontPreExecute" BIT NOT NULL DEFAULT(0::bit);
+
+ALTER TABLE "WorkflowScheme" ADD COLUMN IF NOT EXISTS "AutoStart" BIT NOT NULL DEFAULT(0::bit);
+
+ALTER TABLE "WorkflowScheme" ADD COLUMN IF NOT EXISTS "DefaultForm" character varying(1024) NULL;
+
+CREATE TABLE IF NOT EXISTS "WorkflowServerLogs" (
+  "Id" uuid NOT NULL,
+  "Message" text NOT NULL,
+  "MessageTemplate" text NOT NULL,
+  "Timestamp" timestamp NOT NULL,
+  "Exception" text NULL,
+  "PropertiesJson" text NULL,
+  "Level" smallint NOT NULL,
+  "RuntimeId" character varying(450),
+  CONSTRAINT "WorkflowServerLogs_pkey" PRIMARY KEY ("Id")
+);
+CREATE index IF NOT EXISTS "WorkflowServerLogs_Timestamp_idx"  ON "WorkflowServerLogs" USING btree ("Timestamp");
+CREATE index IF NOT EXISTS "WorkflowServerLogs_Level_idx"  ON "WorkflowServerLogs" USING btree ("Level");
+CREATE index IF NOT EXISTS "WorkflowServerLogs_RuntimeId_idx"  ON "WorkflowServerLogs" USING btree ("RuntimeId");

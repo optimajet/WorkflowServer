@@ -1,0 +1,23 @@
+{
+  "IsMultiServer": false,
+  //"RuntimeId": "someruntimeid", //specify runtime name for multi-server mode here
+  "url": "http://*:8077/",
+  "BackendFolder": "./backend",
+  "FrontendFolder": "./frontend",
+  "DefaultFrontendPort": "8078",
+  "NoStartWorkflow": false,
+  "DisableTimeManager": false,
+  "DisableInbox": false,
+  "DisableStats": false,
+  "BlockMetadataChanges": false,
+  "CreateMetadata": true,
+  "InitialScriptsFolder": "./InitialScripts",
+  "DefaultLoggerConfig": {
+    "ConsoleTarget": [ "Information", "Error" ]
+  },
+  "DefaultCorsSettings": {
+    "AllowedOrigins": [
+      "*"
+    ]
+  }
+}

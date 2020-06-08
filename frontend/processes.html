@@ -1,0 +1,180 @@
+<div wfs-content="content">
+  <h2><div wfs-placeholder="pagetittle"></div></h2>
+
+  <div style="margin-bottom: 10px; display: flex;max-width: 400px;">
+    <el-input v-model="search" placeholder="Search..." @input="onSearch"></el-input>
+    <el-button style="margin-left:10px;" @click="onSearch()">Search</el-button>
+  </div>
+  <el-table 
+    :data="items" 
+    style="width: 100%; height: fit-content;" 
+    empty-text="No data"
+    @row-dblclick="rowdblclick"
+    @sort-change="sortchange"
+    v-loading="extra.loading"
+    border="true"
+    >
+    <el-table-column v-for="item in columns" :sortable="item.sortable ? 'custom' : false" :label="item.text" :prop="item.value" resizable="true">
+      <template slot-scope="scope">
+        <a v-if="item.value == 'title'" :href="'/workflow/' + scope.row.SchemeCode + '/' + scope.row.Id" style="text-overflow: ellipsis;white-space: nowrap;">{{ WorkflowServer.getTitle(scope.row) }}</a>
+        <div v-else-if="item.value == 'commands'" style="max-width: 500px;">
+          <span v-for="command in scope.row.commands">
+            <el-button style="margin:5px;" size="small" @click="executeCommand(scope.row, command)">{{command.LocalizedName}}</el-button>
+          </span>
+        </div>
+        <el-button v-else-if="item.value == 'actions'" type="danger" icon="el-icon-delete" circle @click="deleteItem(scope.row)"></el-button>
+        <span v-else>{{ scope.row[item.value] }}</span>        
+      </template>
+    </el-table-column>
+  </el-table>
+  <el-pagination
+    background
+    layout="total, prev, pager, next"
+    :total="itemsCount"
+    @current-change="dataload"
+    :current-page.sync="page"
+    :page-size.sync="pageSize"
+    >
+  </el-pagination>
+  <script>
+    if(Array.isArray(WorkflowServer.Data.fields)){
+      var fields = WorkflowServer.Data.fields;
+      WorkflowServer.Data.columns = [];
+      fields.forEach(function(c){
+        var sortable = c.Name != 'localizedstate' && c.Name != 'commands' && c.Name != 'actions'; 
+        WorkflowServer.Data.columns.push({
+          text: c.Title,
+          value: c.Name,
+          sortable: sortable
+        })
+      });
+    }
+    else{
+      WorkflowServer.Data.columns = [
+        { text: 'Title', value: 'title' }, 
+        { text: 'Scheme', value: 'SchemeCode' },
+        { text: 'State', value: 'localizedstate' },
+        { text: 'Commands', value: 'commands', sortable: false },
+        { text: 'Actions', value: 'actions', sortable: false }
+      ];
+    }
+
+    WorkflowServer.DataExtend({
+      search: '',
+      extra: {loading: true},
+      page: 1,
+      pageSize: 10,
+      sort: {},
+      items: [],
+      itemsCount: 0,
+      filter: []
+    });
+    
+    WorkflowServer.VueConfig.methods.onSearch = function(){ 
+      if(WorkflowServer.onSearchTimer)
+        clearTimeout(WorkflowServer.onSearchTimer);
+
+      WorkflowServer.Data.extra.loading = true;
+        
+      WorkflowServer.onSearchTimer = setTimeout(function(){ 
+        WorkflowServer.VueConfig.methods.dataload();
+      }, 500);
+    }
+
+    WorkflowServer.VueConfig.methods.addFilter = function(){ 
+      WorkflowServer.Data.filter.push({});
+    }
+
+    WorkflowServer.VueConfig.methods.removeFilter = function(row){ 
+      
+      var index = WorkflowServer.Data.filter.indexOf(row);
+      if(index !== -1) {
+        WorkflowServer.Data.filter.splice(index, 1);
+      }
+    }
+
+    WorkflowServer.VueConfig.methods.searchByFilter = function(){ 
+
+      var options = {};
+      var columns = ["Id", "StateName"];
+      if(Array.isArray(WorkflowServer.Data.columns)){
+        WorkflowServer.Data.columns.forEach(function(column){
+          if(!column.skip)
+            columns.push(column.value);
+        });
+      }
+
+      var params = { 
+        page: WorkflowServer.Data.page - 1,
+        pageSize: WorkflowServer.Data.pageSize,
+        sort: WorkflowServer.getSort(WorkflowServer.Data.sort),
+        search: WorkflowServer.Data.search,
+        columns: columns.join(','),
+        filter: WorkflowServer.Data.filter.map(function(x){
+          let tmp = {};
+          Object.assign(tmp, x);
+          tmp.value = x.value !== '' && !isNaN(x.value) ? Number.parseFloat(x.value) : x.value;
+          return tmp;
+        })
+      };
+
+      WorkflowServer.loadInstances(params).then(function(response){
+        WorkflowServer.Data.items = response.items;
+        WorkflowServer.Data.itemsCount = response.count;
+      });
+    }
+
+    WorkflowServer.VueConfig.methods.sortchange = function(sort) {
+      if(sort){
+        WorkflowServer.Data.sort.prop = sort.prop;
+        WorkflowServer.Data.sort.order = sort.order;
+      }
+
+      WorkflowServer.VueConfig.methods.dataload();
+    }
+
+    WorkflowServer.VueConfig.methods.dataload = function() {
+      var options = {};
+      var columns = ["Id", "StateName"];
+      if(Array.isArray(WorkflowServer.Data.columns)){
+        WorkflowServer.Data.columns.forEach(function(column){
+          if(!column.skip)
+            columns.push(column.value);
+        });
+      }
+
+      var params = { 
+        page: WorkflowServer.Data.page - 1,
+        pageSize: WorkflowServer.Data.pageSize,
+        search: WorkflowServer.Data.search,
+        columns: columns.join(','),
+        sort: WorkflowServer.getSort(WorkflowServer.Data.sort)
+      };
+      
+      WorkflowServer.loadInstances(params).then(function(response){
+        console.log(response.items);
+        WorkflowServer.Data.items = response.items;
+        WorkflowServer.Data.itemsCount = response.count;
+      });
+    };
+
+    WorkflowServer.VueConfig.methods.rowdblclick = function(row) {
+      location.href = "/workflow/" + row.SchemeCode + "/" + row.Id;        
+    };
+    WorkflowServer.VueConfig.methods.deleteItem = function(row){
+      WorkflowServer.showConfirm("Confirm", "Are you sure you want to delete?", function() {
+        WorkflowServer.deleteInstance(row.Id, false).then(function(response){
+          WorkflowServer.VueConfig.methods.dataload();
+        });
+      });
+    };
+
+    WorkflowServer.VueConfig.methods.executeCommand = function(row, command){
+      WorkflowServer.executeCommand(row.Id, command.CommandName, false).then(function(response){
+        WorkflowServer.VueConfig.methods.dataload();
+      });
+    };
+
+    WorkflowServer.VueConfig.methods.dataload();
+  </script>
+</div>

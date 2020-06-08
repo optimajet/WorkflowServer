@@ -1,0 +1,98 @@
+<div wfs-content="content">
+    <el-breadcrumb separator="/" style="margin-bottom: 10px;">
+        <el-breadcrumb-item v-for="item in extra.breadcrumbs">
+            <a :href="item.href">{{ item.text }}</a>
+        </el-breadcrumb-item>
+    </el-breadcrumb>   
+    <div v-if="WorkflowServer.Data.processInstance">        
+        <div class="wfs-formtoolbar">
+            <el-card style="max-width:700px" class="wfs-processnotstarted" >
+                <div class="text item">
+                    <div v-if="commands.length == 0">
+                        <i class="el-icon-info"></i>
+                        No commands
+                    </div>
+                    <el-button :loading="extra.loading" v-for="command in commands" style="margin: 10px 10px 0px 0px;" @click="executeCommand(command)">{{command.LocalizedName}}</v-btn>
+                </div>
+            </el-card>     
+        </div>
+        <div class="wfs-formblocks">
+            <div wfs-form="processform" v-if="Array.isArray(WorkflowServer.Data.fields) && WorkflowServer.Data.fields.length > 0"></div>
+            <div wfs-form="processtimeline"></div>
+        </div>
+    </div>
+
+    <div v-if="!WorkflowServer.Data.processInstance">  
+        <el-card style="max-width:700px" class="wfs-processnotstarted" >
+            <div slot="header" class="clearfix">
+                <span><b>{{ SchemeCode }}</b></span>
+            </div>
+            <div class="text item">
+                <div>
+                    The process is not started.</br/>
+                    Click on a button for starting the workflow.
+                </div>
+                <div v-if="Array.isArray(WorkflowServer.Data.commands) && WorkflowServer.Data.commands.length > 0">
+                    <span v-if="!extra.loading" v-for="command in commands">
+                        <el-button style="margin: 10px 10px 0px 0px;" @click="executeCommand(command)">{{command.LocalizedName}}</v-btn>
+                        <br/>
+                    </span> 
+                    <v-progress-circular v-if="extra.loading" indeterminate color="green"></v-progress-circular>                               
+                </div>
+                <div v-if="!Array.isArray(WorkflowServer.Data.commands) || WorkflowServer.Data.commands.length == 0">
+                    <a :href="'/workflow/' + SchemeCode + '/launch'">
+                        <el-button>Launch</el-button>
+                    </a>
+                </div>
+            </div>
+        </el-card>
+        <div class="wfs-formblocks">
+            <div wfs-form="processform"></div>            
+        </div>
+    </div>
+    <script>
+        WorkflowServer.Data.extra.breadcrumbs = [
+            {
+                text: 'Dashboard',
+                disabled: false,
+                href: '/',
+            },{
+                text: WorkflowServer.Data.SchemeCode,
+                disabled: false,
+                href: '/workflow/' + WorkflowServer.Data.SchemeCode
+            },{
+                text: WorkflowServer.getTitle()          
+            }
+        ];
+
+        WorkflowServer.VueConfig.methods.submit = function() {
+            if(this.$refs && this.$refs.form){
+                this.$refs.form.validate(function(valid) {
+                    if (valid) {
+                        WorkflowServer.saveForm();
+                    } else {
+                        WorkflowServer.showError("Check errors on the form!");
+                    }
+                });
+            }
+            else{
+                WorkflowServer.saveForm();
+            }
+        };
+        
+        WorkflowServer.VueConfig.methods.executeCommand = function(command){
+            if(this.$refs && this.$refs.form){
+                this.$refs.form.validate(function(valid) {
+                    if (valid) {
+                        WorkflowServer.executeCommand(command.ProcessId, command.CommandName);
+                    } else {
+                        WorkflowServer.showError("Check errors on the form!");
+                    }
+                });
+            }
+            else{
+                WorkflowServer.executeCommand(command.ProcessId, command.CommandName);
+            }
+        };
+    </script>
+</div>

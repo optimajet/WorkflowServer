@@ -614,3 +614,7 @@ div.field > label {
     padding: 0px;
     border: none;
 }
+
+.gutter-horizontal{
+    cursor: ew-resize;
+}
