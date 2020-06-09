@@ -37,15 +37,14 @@
                     Click on a button for starting the workflow.
                 </div>
                 <div v-if="Array.isArray(WorkflowServer.Data.commands) && WorkflowServer.Data.commands.length > 0">
-                    <span v-if="!extra.loading" v-for="command in commands">
-                        <el-button style="margin: 10px 10px 0px 0px;" :type="getCommandType(command)"  @click="executeCommand(command)">{{command.LocalizedName}}</v-btn>
+                    <span v-for="command in commands">
+                        <el-button :loading="extra.loading" style="margin: 10px 10px 0px 0px;" :type="getCommandType(command)"  @click="executeCommand(command)">{{command.LocalizedName}}</v-btn>
                         <br/>
-                    </span> 
-                    <v-progress-circular v-if="extra.loading" indeterminate color="green"></v-progress-circular>                               
+                    </span>                              
                 </div>
                 <div v-if="!Array.isArray(WorkflowServer.Data.commands) || WorkflowServer.Data.commands.length == 0">
                     <a :href="'/workflow/' + SchemeCode + '/launch'">
-                        <el-button>Launch</el-button>
+                        <el-button type="info" style="margin: 10px 0px 0px 0px;">Launch</el-button>
                     </a>
                 </div>
             </div>
@@ -75,7 +74,7 @@
                     if (valid) {
                         WorkflowServer.saveForm();
                     } else {
-                        WorkflowServer.showError("Check errors on the form!");
+                        WorkflowServer.showWarning("Check errors on the form!");
                     }
                 });
             }
@@ -94,7 +93,7 @@
                     if (valid) {
                         WorkflowServer.executeCommand(command.ProcessId, command.CommandName);
                     } else {
-                        WorkflowServer.showError("Check errors on the form!");
+                        WorkflowServer.showWarning("Check errors on the form!");
                     }
                 });
             }

@@ -3,7 +3,7 @@
 
   <div style="margin-bottom: 10px; display: flex;max-width: 400px;">
     <el-input v-model="search" placeholder="Search..." @input="onSearch"></el-input>
-    <el-button style="margin-left:10px;" @click="onSearch()">Search</el-button>
+    <el-button style="margin-left:10px;" type="info" plain @click="onSearch()">Search</el-button>
   </div>
   <el-table 
     :data="items" 
@@ -152,7 +152,6 @@
       };
       
       WorkflowServer.loadInstances(params).then(function(response){
-        console.log(response.items);
         WorkflowServer.Data.items = response.items;
         WorkflowServer.Data.itemsCount = response.count;
       });

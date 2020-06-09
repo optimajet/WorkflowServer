@@ -7,10 +7,10 @@
             </div>
             <div class="text item">
                 <a :href="'/workflow/' + item.Code" v-if="!item.AutoStart">
-                    <el-button>Open</el-button>
+                    <el-button type="info" plain>Open</el-button>
                 </a>
                 <a :href="'/workflow/' + item.Code + '/launch'" v-if="item.AutoStart && item.InitialCommands.length == 0">
-                    <el-button>Launch</el-button>
+                    <el-button type="info" plain>Launch</el-button>
                 </a>
                 <a :href="'/workflow/' + item.Code + '/' + command.CommandName" v-for="command in item.InitialCommands">
                     <el-button v-if="item.AutoStart">{{ command.LocalizedName }}</el-button>

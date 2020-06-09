@@ -155,10 +155,7 @@ body{
 
 /* Main page Content */
 .wfs-container .wfs-content {
-    margin-left: 10px;
     width: 100%;
-    margin-right: 10px;
-    margin-top: 10px;
 }
 
 .wfs-sidebar-container{
@@ -167,6 +164,13 @@ body{
 
 @media only screen and (min-width: 998px) {
     .wfs-container .wfs-content {
+        margin: 20px;
+    }
+
+    .wfs-formblocks > div{
+        float: left;
+        width: 440px;
+        margin: 20px 10px 10px 0px;
     }
 }
 
@@ -174,11 +178,17 @@ body{
     .wfs-container .wfs-content {
         padding: 20px 10px;
     }
+
+    .wfs-formblocks > div{
+        width: 100%;
+        float: none;
+        margin: 20px 0px 10px 0px;
+    }
 }
 
 .wfs-index-card{
     float:left; 
-    margin:10px
+    margin:10px 10px 0px 0px
 }
 
 .wfs-index-card .el-button{
@@ -203,17 +213,11 @@ body{
     font-weight: 700;
 }
 
-.wfs-formblocks > div{
-    float: left;
-    width: 440px;
-    margin: 20px 10px 10px 0px;
-    
-}
-
-.wfs-processnotstarted{
-    margin-left: 10px;
-}
-
 .wfs-formtoolbar{
     margin: 20px 0px 20px 0px;
+}
+
+.el-card__header{
+    color: white;
+    background-color: #6fb048;
 }

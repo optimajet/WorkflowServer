@@ -2,7 +2,8 @@ var WorkflowServer = {
     VueConfig: {
         methods: {
             isreadonly : function()  {
-                return WorkflowServer.Data.extra.readonly || WorkflowServer.Data.readonly || WorkflowServer.Data.commands.length == 0;
+                var commandsWithoutRevert = WorkflowServer.Data.commands.filter(function(c){return c.Classifier != 2;});
+                return WorkflowServer.Data.extra.readonly || WorkflowServer.Data.readonly || commandsWithoutRevert.length == 0;
             }
         }
     },
@@ -268,6 +269,12 @@ var WorkflowServer = {
     showError: function(message){ 
         WorkflowServer.App.$notify.error({
             title: 'Error',
+            message: message
+          });
+    },
+    showWarning: function(message){ 
+        WorkflowServer.App.$notify.warning({
+            title: 'Warning',
             message: message
           });
     },
