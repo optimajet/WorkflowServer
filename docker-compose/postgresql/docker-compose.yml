@@ -22,18 +22,16 @@ services:
   workflowserver:
     depends_on:
        - db
-    build:
-      context: ../..
-      dockerfile: ./WorkflowServer/Dockerfile
+    image: optimajet/workflowserver
     ports:
        - "8077:8077"
-       - "8078:8078"
     volumes:
        - ./logs:/app/logs
        - ./license:/app/license
     environment:
       ConnectionString: HOST=db;User ID=dbuser;Password=dbuserpassword;Database=wfs;Port=5432
       Provider: postgresql
+      CreateMetadata: "true"
       LicensePath: /app/license/  
       DefaultLoggerConfig__FileTarget__0: Debug
       DefaultLoggerConfig__FileTarget__1: Information

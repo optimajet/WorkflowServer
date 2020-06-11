@@ -21,12 +21,9 @@ services:
   workflowserver:
     depends_on:
        - db
-    build:
-      context: ../..
-      dockerfile: ./WorkflowServer/Dockerfile
+    image: optimajet/workflowserver
     ports:
        - "8077:8077"
-       - "8078:8078"
     volumes:
        - ./logs:/app/logs
        - ./license:/app/license
