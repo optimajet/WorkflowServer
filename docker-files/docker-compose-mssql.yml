@@ -1,0 +1,48 @@
+version: '3.4'
+
+services:
+  db:
+     container_name: workflowserver-mssql
+     image: mcr.microsoft.com/mssql/server:2017-latest
+     environment:
+       SA_PASSWORD: MyStRoNgPWD12345678
+       ACCEPT_EULA: Y
+     volumes:
+       - dbdata:/var/opt/mssql
+     restart: always
+     ports:
+       - "1433:1433"
+  start_db:
+    container_name: workflowserver-mssql-wait
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+       - db
+    volumes:
+       - ./:/app/.docker
+    entrypoint: /app/.docker/wait-for-mssql.sh workflowserver-mssql sa MyStRoNgPWD12345678 wfs
+  workflowserver:
+    container_name: workflowserver
+    depends_on:
+       - db
+    build:
+      context: ..
+      dockerfile: ./WorkflowServer/Dockerfile
+    ports:
+       - "8077:8077"
+       - "8078:8078"
+    volumes:
+       - ./../logs:/app/logs
+       - ./../license:/app/license
+       - ./../InitialScripts:/app/InitialScripts
+    environment:
+      ConnectionString: Data Source=workflowserver-mssql;Initial Catalog=wfs;Integrated Security=False;User ID=sa;Password=MyStRoNgPWD12345678
+      Provider: mssql
+      LicensePath: /app/license/
+      DefaultLoggerConfig__FileTarget__0: Information
+      DefaultLoggerConfig__FileTarget__1: Error
+      DefaultLoggerConfig__FileSettings__FileName: /app/logs/log.txt
+      DefaultLoggerConfig__FileSettings__RollingInterval: Day
+      DefaultLoggerConfig__FileSettings__RetainedFileCountLimit: 30
+volumes:
+    dbdata:
+      name: wfs-mssql-data

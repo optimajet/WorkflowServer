@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <Win32Resource />
     <SignAssembly>false</SignAssembly>
@@ -15,10 +15,19 @@
     <PublishProtocol>FileSystem</PublishProtocol>
     <PublishDir>bin\Release\PublishOutput</PublishDir>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>../bin/</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>../bin/</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
   <ItemGroup>
-    <None Update="config.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Content Include="..\config.json">
+      <Link>config.json</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="WorkflowEngine.NET-Server" Version="2.6.2" />

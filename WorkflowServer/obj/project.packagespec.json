@@ -1,0 +1,75 @@
+﻿{
+  "version": "2.6.0",
+  "restore": {
+    "projectUniqueName": "E:\\Projects\\workflowengine\\github_workflowserver\\WorkflowServer\\WorkflowServer.csproj",
+    "projectName": "WorkflowServer",
+    "projectPath": "E:\\Projects\\workflowengine\\github_workflowserver\\WorkflowServer\\WorkflowServer.csproj",
+    "outputPath": "E:\\Projects\\workflowengine\\github_workflowserver\\WorkflowServer\\obj\\",
+    "projectStyle": "PackageReference",
+    "originalTargetFrameworks": [
+      "netcoreapp2.1"
+    ],
+    "sources": {
+      "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+      "E:\\LocalNuget": {},
+      "https://api.nuget.org/v3/index.json": {}
+    },
+    "frameworks": {
+      "netcoreapp2.1": {
+        "projectReferences": {}
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "netcoreapp2.1": {
+      "dependencies": {
+        "Microsoft.AspNetCore.SignalR": {
+          "target": "Package",
+          "version": "[1.1.0, )"
+        },
+        "Microsoft.CSharp": {
+          "target": "Package",
+          "version": "[4.5.0, )"
+        },
+        "Microsoft.Extensions.Configuration.Binder": {
+          "target": "Package",
+          "version": "[2.2.4, )"
+        },
+        "Microsoft.Extensions.Configuration.EnvironmentVariables": {
+          "target": "Package",
+          "version": "[2.2.4, )"
+        },
+        "Microsoft.Extensions.Configuration.Json": {
+          "target": "Package",
+          "version": "[2.2.0, )"
+        },
+        "Microsoft.NETCore.App": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.1.0, )",
+          "autoReferenced": true
+        },
+        "WorkflowEngine.NET-Server": {
+          "target": "Package",
+          "version": "[2.6.2, )"
+        }
+      },
+      "imports": [
+        "net461",
+        "net462",
+        "net47",
+        "net471",
+        "net472",
+        "net48"
+      ],
+      "assetTargetFallback": true,
+      "warn": true,
+      "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+    }
+  }
+}

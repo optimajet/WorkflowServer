@@ -1,0 +1,42 @@
+{
+  "IsMultiServer": false,
+  "ServerType": "All", // Under IIS you SHOULD (!!!) change to Admin or Forms value
+  //"RuntimeId": "someruntimeid", //specify runtime name for multi-server mode here
+  "url": "http://*:8077/",
+  "FrontendFolder": "../frontend",
+  "DefaultFrontendPort": "8078",
+  "BackendFolder": "../backend",
+  "LicensePath": "../license",
+  //"CertificateFile": "../WFS.pfx",
+  //"CertificatePassword": "password",
+  "CallBackCacheTimeout": 300000, // 5 min
+  "CreateMetadata": true,
+  "InitialScriptsFolder": "../InitialScripts",
+  "DefaultLoggerConfig": {
+    "ConsoleTarget": [ "Information", "Error" ]
+  },
+  "DefaultCorsSettings": {
+    "AllowedOrigins": [
+      "*"
+    ]
+  },
+  //MSSQL
+  "Provider": "mssql",
+  "ConnectionString": "Data Source=(local);Initial Catalog=WorkflowServer;Integrated Security=False;User ID=sa;Password=1;"
+
+  //PostgreSQL
+  //"Provider": "postgresql",
+  //"ConnectionString": "User ID=postgres;Password=1;Host=localhost;Port=5432;Database=WorkflowServer;"
+
+  //Oracle
+  //"Provider": "oracle",
+  //"ConnectionString": "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(COMMUNITY = tcp.world)(PROTOCOL = TCP)(Host = MyHost)(Port = 1521)))(CONNECT_DATA=(SID=MyOracleSID)));User ID=myUsername;Password=myPassword;"
+
+  //MySql
+  //"Provider": "mysql",
+  //"ConnectionString": "server=127.0.0.1;uid=root;pwd=myPassword;database=WorkflowServer"
+
+  //MongoDB or Cosmos DB
+  //"Provider": "mongodb",
+  //"ConnectionString": "mongodb://localhost:27017/WorkflowServer"
+}

@@ -1,0 +1,117 @@
+<p>&lt;!--Stay on the edge of our innovations and learn about the changes made to Workflow Server with each of our releases.--&gt;</p>
+<h1>Release Notes</h1>
+<h2>2.6 {#2.6}</h2>
+<ul>
+<li>
+<p>Updated to <a href="https://workflowengine.io/documentation/release-notes/workflow-engine/#4.2">Workflow Engine .NET 4.2</a></p>
+</li>
+<li>
+<p>Support of the multi-server mode has been added. If you need to run the Workflow Server instance in multi-server mode,  add the following setting to the <em>config.json</em> file.</p>
+<pre><code class="language-javascript">{
+  &quot;IsMultiServer&quot;: true
+}
+</code></pre>
+</li>
+<li>
+<p>Added database logs with records search possibility.</p>
+</li>
+<li>
+<p>Added new Workflow API  methods for managing a Workflow Server instance. <em>Start</em>, <em>Stop</em> and <em>IsActive</em>.</p>
+</li>
+<li>
+<p>Added ability to develop the end-user forms (frontend interface) based on Vue.js. It is the beta version. Access control for these forms will be added in the next version. It is also possible in the next version the base library of controls will be changed.</p>
+</li>
+</ul>
+<p><strong>If you use global Code Actions and you have several servers deployed, then to apply the changes you need to restart each of them. To do this, you can use the <em>Start</em> method from the Workflow API.</strong></p>
+<p><strong>The following additional actions must be taken to upgrade to Workflow Server 2.6:</strong></p>
+<ul>
+<li>Run the SQL script <em>update_wfs_2_6</em> for all relative databases and MongoDB.
+<ul>
+<li><a href="">MSSQL</a></li>
+<li><a href="">PostgreSQL</a></li>
+<li><a href="">Oracle</a></li>
+<li><a href="">MySQL</a></li>
+<li><a href="">MongoDB</a></li>
+</ul>
+</li>
+</ul>
+<h2>2.5 {#2.5}</h2>
+<ul>
+<li>Updated to <a href="https://workflowengine.io/documentation/release-notes/workflow-engine/#4.1">Workflow Engine .NET 4.1</a></li>
+<li>Support for multi-tenant applications.
+<ul>
+<li><em>TenantId</em> has been added to processes. When creating a process using the <em>createinstance WorkflowAPI</em> method, one can specify <em>TenantId</em> and use its value to work with the process. Also, when manipulating a process using WorkflowAPI methods, one can optionally assign <em>TenantId</em>; once <em>TenantId</em> is specified, its compliance with the initial <em>TenantId</em> value set at the process creation is automatically checked.</li>
+<li>For schemes one can specify tags, and then, search for schemes where these tags are indicated. Tags can be set on the <em>Workflow/Manage Schemes</em> admin page. In the <em>getschemelist WorkflowAPI</em> method, one can specify a list of tags to search for schemes. The search is performed using an OR expression.</li>
+</ul>
+</li>
+<li>The possibility to set a login and a password to access the WorkflowServer admin panel has been provided. This setting is available on the <em>Dashboard</em> page in the <em>Security</em> tab.</li>
+<li>The possibility to set an access token to access the <em>WorkflowAPI</em> methods has been provided. This setting is available on the <em>Dashboard</em> page in the <em>Security</em> tab.</li>
+<li>The Basic Plugin has been connected to the WorkflowServer, it can be enabled on the <em>Dashboard</em> page in the <em>Plugins</em> tab. For a full list of methods, please, see <a href="https://workflowengine.io/documentation/release-notes/workflow-engine/#4.1">here</a>.</li>
+<li>Using the <em>createinstance, executecommand and get state of WorkflowAPI</em> methods, one can pass implicit (that is, not explicitly described in the process scheme) persistent parameters. A parameter can also be a valid JSON object of any complexity. In this case, the type <code>DynamicParameter</code> should be applied to control such a parameter in the code.</li>
+<li>The <em>getparameter</em> and <em>setparameter</em> methods to read and modify process parameters have been added to <em>WorkflowAPI</em>.</li>
+<li>Intellisense has been added to the Code Actions editor, in schemes and in the <em>Workflow / Global Code Actions</em> section of the admin panel.</li>
+<li>In the <em>API / Workflow API</em> section, forms to execute <em>WorkflowAPI</em> methods have been added; an example request is also generated there.</li>
+</ul>
+<p><strong>The following additional actions must be taken to upgrade to Workflow Server 2.5:</strong></p>
+<ul>
+<li>
+<p>Run the SQL script update_2_7_to_2_8.sql for all relative databases.</p>
+<ul>
+<li><a href="https://github.com/optimajet/WorkflowEngine.NET/blob/master/Providers/NETCore_OptimaJet.Workflow.MSSQL/Scripts/update_4_0_to_4_1.sql">MSSQL</a></li>
+<li><a href="https://github.com/optimajet/WorkflowEngine.NET/blob/master/Providers/NETCore_OptimaJet.Workflow.PostgreSQL/Scripts/update_4_0_to_4_1.sql">PostgreSQL</a></li>
+<li><a href="https://github.com/optimajet/WorkflowEngine.NET/blob/master/Providers/NETCore_OptimaJet.Workflow.Oracle/Scripts/update_4_0_to_4_1.sql">Oracle</a></li>
+<li><a href="https://github.com/optimajet/WorkflowEngine.NET/blob/master/Providers/NETCore_OptimaJet.Workflow.MySQL/Scripts/update_4_0_to_4_1.sql">MySQL</a></li>
+</ul>
+</li>
+<li>
+<p><strong>IMPORTANT! Incorrect behavior was fixed when the subprocess was merged in the parent process via the set state of the parent process mechanism. Previously, the parent process parameters were OVERWRITTEN. Now, the parent process parameters won't be changed. Only new parameters from the subprocess will be written to the parent process automatically. The same way the merge via calculating conditions always works. If you consciously exploited this behavior, then the best way to get parameters from the subprocess is to use a property <code>processInstance.MergedSubprocessParameters</code> when merge occurs.</strong></p>
+</li>
+<li>
+<p>In the previous versions, implicit parameters passed by the WorkflowAPI methods were always interpreted as strings. Starting from version 2.5, the WorkflowServer converts these parameters to types (int, bool, double, DynamicParameter etc). If it’s important for you to keep the old behavior, add the following setting to the <em>config.json</em> file.</p>
+<pre><code class="language-javascript">{
+  &quot;ImplicitParametersParsingType&quot;: &quot;Legacy&quot;
+}
+</code></pre>
+</li>
+<li>
+<p>In the previous versions, process parameters were transferred to <em>Callback server</em> in the camel case. That is, the first letter of the parameter name (for example, 'Parameter1') became small ('parameter1'). Now, the parameter name will not change. If it’s important for you to keep the old behavior, add the following setting to the <em>config.json</em> file.</p>
+<pre><code class="language-javascript">{
+  &quot;CallbackServerJsonSerialization&quot;: &quot;CamelCase&quot;
+}
+</code></pre>
+</li>
+</ul>
+<h2>2.4</h2>
+<ul>
+<li>Updated to Workflow Engine .NET 4.0</li>
+</ul>
+<p><strong>The following additional actions must be taken to upgrade to Workflow Server 2.4:</strong></p>
+<ul>
+<li>Run the SQL  script <code>update_WFE_4_0.sql</code> for all relative databases.</li>
+</ul>
+<h2>2.3</h2>
+<ul>
+<li>Added localization for German, French, Spanish, Italian, Portuguese, Turkish, and Russian languages.</li>
+<li><code>SchemaName</code> setting has been added to specify the database schema to which the server is connected.</li>
+<li>The <code>GetSchemeList</code> method has been added to the server API, this method returns a list of schemes that exist on the server.</li>
+<li>The logging system has been added. Errors, debug information and informational messages are logged. Logging targets can be console, debug output or files. For windows service, logging can also be done in the Windows Event Log.</li>
+<li>The <code>LogInfo</code>,<code>LogError</code>, <code>LogMessage</code> methods have been added to the server API - methods for writing to the log from outside the server.</li>
+<li>The following new features are available in the <code>WorkflowRuntime</code> object, which is always available in standard WFE actions. <code>runtime.Logger</code> - returns logger, for recording messages to the log. <code>runtime.LogError ()</code>, <code>runtime.LogDebug ()</code>, <code>runtime.LogInfo ()</code> are methods for writing messages to the log.</li>
+<li>The docker container was published , containing the Workflow Server with the ability to transfer all the configuration settings to it.</li>
+</ul>
+<h2>2.2</h2>
+<ul>
+<li>The MongoDB support has been added, this type of connection also works with the Cosmos DB.</li>
+</ul>
+<hr>
+<h2>2.1</h2>
+<ul>
+<li>Added Oracle and MySQL support</li>
+<li>The <code>ExecuteCommand</code> method from WorkflowAPI returns information on whether the command was executed and process state after execution (including all process parameters)</li>
+<li>The source code of a console application which you can connect your <code>IWorkflowActionProvider</code> and <code>IWorkflowRuleProvider</code> to and perform fine-tuning of Workflow Engine was uploaded to (GitHub)[https://github.com/optimajet/workflowserver]</li>
+</ul>
+<hr>
+<h2>2.0</h2>
+<ul>
+<li>First release of Workflow Server 2.0</li>
+</ul>

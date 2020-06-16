@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  db:
+     container_name: workflowserver-postgres
+     image: postgres:alpine
+     environment:
+       POSTGRES_DB: wfs
+       POSTGRES_USER: dbuser
+       POSTGRES_PASSWORD: dbuserpassword
+     volumes:
+       - dbdata:/var/lib/postgresql/data
+     restart: always
+     ports:
+       - "5432:5432"
+  start_db:
+    container_name: workflowserver-postgres-wait
+    image: jbergknoff/postgresql-client
+    depends_on:
+       - db
+    volumes:
+       - ./:/app/.docker
+    entrypoint: /app/.docker/wait-for-postgres.sh workflowserver-postgres dbuser dbuserpassword wfs
+  workflowserver:
+    container_name: workflowserver
+    depends_on:
+       - db
+    build:
+      context: ..
+      dockerfile: ./WorkflowServer/Dockerfile
+    ports:
+       - "8077:8077"
+       - "8078:8078"
+    volumes:
+       - ./../logs:/app/logs
+       - ./../license:/app/license
+       - ./../InitialScripts:/app/InitialScripts
+    environment:
+      ConnectionString: HOST=workflowserver-postgres;User ID=dbuser;Password=dbuserpassword;Database=wfs;Port=5432
+      Provider: postgresql
+      LicensePath: /app/license/  
+      DefaultLoggerConfig__FileTarget__0: Information
+      DefaultLoggerConfig__FileTarget__1: Error
+      DefaultLoggerConfig__FileSettings__FileName: /app/logs/log.txt
+      DefaultLoggerConfig__FileSettings__RollingInterval: Day
+      DefaultLoggerConfig__FileSettings__RetainedFileCountLimit: 30
+volumes:
+    dbdata:
+      name: wfs-postgres-data

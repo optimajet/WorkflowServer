@@ -1,1 +1,0 @@
-The volume for the license key
