@@ -12,9 +12,9 @@ How to launch via docker
         startcontainer.bat
 
     For Linux/MacOS:
-	chmod +x docker-files/wait-for-postgres.sh
-        chmod +x startcontainer.sh
-        ./startcontainer.sh
+	    sudo chmod +x docker-files/wait-for-postgres.sh
+        sudo chmod +x startcontainer.sh
+        sudo ./startcontainer.sh
 
 This script build this workflowserver's solution and run it with Postgres database.
 
@@ -28,16 +28,16 @@ You need to use one of docker-compose files:
 - MongoDB: docker-files/docker-compose-mongo.yml
 
 MongoDB script:
-	chmod +x docker-files/wait-for-mongo.sh (for Linux/MacOS only!!!)
-	docker-compose -f docker-files/docker-compose-mongo.yml build
-	docker-compose -f docker-files/docker-compose-mongo.yml run --rm start_db
-	docker-compose -f docker-files/docker-compose-mongo.yml up
+	sudo chmod +x docker-files/wait-for-mongo.sh (for Linux/MacOS only!!!)
+	sudo docker-compose -f docker-files/docker-compose-mongo.yml build
+	sudo docker-compose -f docker-files/docker-compose-mongo.yml run --rm start_db
+	sudo docker-compose -f docker-files/docker-compose-mongo.yml up
 
 MSSQL script:
-	chmod +x docker-files/wait-for-mssql.sh (for Linux/MacOS only!!!)
-	docker-compose -f docker-files/docker-compose-mssql.yml build
-	docker-compose -f docker-files/docker-compose-mssql.yml run --rm start_db
-	docker-compose -f docker-files/docker-compose-mssql.yml up
+	sudo chmod +x docker-files/wait-for-mssql.sh (for Linux/MacOS only!!!)
+	sudo docker-compose -f docker-files/docker-compose-mssql.yml build
+	sudo docker-compose -f docker-files/docker-compose-mssql.yml run --rm start_db
+	sudo docker-compose -f docker-files/docker-compose-mssql.yml up
 
 How to launch it with a custom database
 -----------------
