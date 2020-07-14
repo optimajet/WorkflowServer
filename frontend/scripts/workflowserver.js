@@ -41,7 +41,10 @@ var WorkflowServer = {
             function(rule, value, callback){ 
                 var intValues =  /^\d+$/;
                 if(!value || Number.isInteger(value) || (value.match(intValues) && !isNaN(value)))
-                    callback();
+                {
+                   callback();
+                   return;
+                }
                 
                 callback(new Error(rule.message));
             }, 
@@ -50,8 +53,11 @@ var WorkflowServer = {
         float: { validator: 
             function(rule, value, callback){ 
                 var floatValues =  /[+-]?([0-9]*[.])?[0-9]+/;
-                if(!value || (Number(n) === n && n % 1 !== 0) || (value.match(floatValues) && !isNaN(value)))
+                if(!value || (Number(value) === value && value % 1 !== 0) || (value.match(floatValues) && !isNaN(value)))
+                {
                     callback();
+                    return;
+                }
                 
                 callback(new Error(rule.message));
             }, 

@@ -1,17 +1,19 @@
 ﻿{
-  "version": "2.6.0",
+  "version": "2.6.4",
   "restore": {
     "projectUniqueName": "E:\\Projects\\workflowengine\\github_workflowserver\\WorkflowServer\\WorkflowServer.csproj",
     "projectName": "WorkflowServer",
     "projectPath": "E:\\Projects\\workflowengine\\github_workflowserver\\WorkflowServer\\WorkflowServer.csproj",
     "outputPath": "E:\\Projects\\workflowengine\\github_workflowserver\\WorkflowServer\\obj\\",
     "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+    ],
     "originalTargetFrameworks": [
       "netcoreapp2.1"
     ],
     "sources": {
       "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-      "E:\\LocalNuget": {},
       "https://api.nuget.org/v3/index.json": {}
     },
     "frameworks": {
@@ -56,7 +58,7 @@
         },
         "WorkflowEngine.NET-Server": {
           "target": "Package",
-          "version": "[2.6.2, )"
+          "version": "[2.6.4, )"
         }
       },
       "imports": [
