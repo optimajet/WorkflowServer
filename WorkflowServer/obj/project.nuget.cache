@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7wOMIHNWSgNe57mlYeCzhfGREYUeQXS16rAp83wcqSChOkjgC55h9fgFtHtw6un2EciSXfoQ2W1Ajkg3D2sIJg==",
+  "dgSpecHash": "F4cMtR+DGKboHc6OGhC0ipJz0MdPzwZ/a9eJ0YzQmHwqOJ/dVcy24DOHLIA5CXEX5R/aGOzFlW6NdfD0nrG/vg==",
   "success": true,
   "projectFilePath": "E:\\Projects\\workflowengine\\github_workflowserver\\WorkflowServer\\WorkflowServer.csproj",
   "expectedPackageFiles": [
@@ -84,7 +84,7 @@
     "C:\\Users\\ebetin\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\ebetin\\.nuget\\packages\\nito.asyncex.strongnamed\\4.0.1\\nito.asyncex.strongnamed.4.0.1.nupkg.sha512",
     "C:\\Users\\ebetin\\.nuget\\packages\\npgsql\\4.1.3.1\\npgsql.4.1.3.1.nupkg.sha512",
-    "C:\\Users\\ebetin\\.nuget\\packages\\optimajet.logging\\1.1.2\\optimajet.logging.1.1.2.nupkg.sha512",
+    "C:\\Users\\ebetin\\.nuget\\packages\\optimajet.logging\\1.1.3\\optimajet.logging.1.1.3.nupkg.sha512",
     "C:\\Users\\ebetin\\.nuget\\packages\\oracle.manageddataaccess.core\\2.18.3\\oracle.manageddataaccess.core.2.18.3.nupkg.sha512",
     "C:\\Users\\ebetin\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
     "C:\\Users\\ebetin\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
@@ -206,13 +206,13 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\ebetin\\.nuget\\packages\\thomaslevesque.weakevent\\4.1.0\\thomaslevesque.weakevent.4.1.0.nupkg.sha512",
-    "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.net-server\\2.6.4\\workflowengine.net-server.2.6.4.nupkg.sha512",
-    "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.netcore-core\\4.2.4\\workflowengine.netcore-core.4.2.4.nupkg.sha512",
-    "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.netcore-providerformongodb\\4.2.4\\workflowengine.netcore-providerformongodb.4.2.4.nupkg.sha512",
-    "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.netcore-providerformssql\\4.2.4\\workflowengine.netcore-providerformssql.4.2.4.nupkg.sha512",
-    "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.netcore-providerformysql\\4.2.4\\workflowengine.netcore-providerformysql.4.2.4.nupkg.sha512",
-    "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.netcore-providerfororacle\\4.2.4\\workflowengine.netcore-providerfororacle.4.2.4.nupkg.sha512",
-    "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.netcore-providerforpostgresql\\4.2.4\\workflowengine.netcore-providerforpostgresql.4.2.4.nupkg.sha512"
+    "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.net-server\\2.6.5\\workflowengine.net-server.2.6.5.nupkg.sha512",
+    "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.netcore-core\\4.2.5\\workflowengine.netcore-core.4.2.5.nupkg.sha512",
+    "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.netcore-providerformongodb\\4.2.5\\workflowengine.netcore-providerformongodb.4.2.5.nupkg.sha512",
+    "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.netcore-providerformssql\\4.2.5\\workflowengine.netcore-providerformssql.4.2.5.nupkg.sha512",
+    "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.netcore-providerformysql\\4.2.5\\workflowengine.netcore-providerformysql.4.2.5.nupkg.sha512",
+    "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.netcore-providerfororacle\\4.2.5\\workflowengine.netcore-providerfororacle.4.2.5.nupkg.sha512",
+    "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.netcore-providerforpostgresql\\4.2.5\\workflowengine.netcore-providerforpostgresql.4.2.5.nupkg.sha512"
   ],
   "logs": [
     {

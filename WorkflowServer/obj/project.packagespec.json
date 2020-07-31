@@ -1,5 +1,5 @@
 ﻿{
-  "version": "2.6.4",
+  "version": "2.6.5",
   "restore": {
     "projectUniqueName": "E:\\Projects\\workflowengine\\github_workflowserver\\WorkflowServer\\WorkflowServer.csproj",
     "projectName": "WorkflowServer",
@@ -14,6 +14,7 @@
     ],
     "sources": {
       "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+      "E:\\LocalNuget": {},
       "https://api.nuget.org/v3/index.json": {}
     },
     "frameworks": {
@@ -58,7 +59,7 @@
         },
         "WorkflowEngine.NET-Server": {
           "target": "Package",
-          "version": "[2.6.4, )"
+          "version": "[2.6.5, )"
         }
       },
       "imports": [
