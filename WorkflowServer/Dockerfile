@@ -1,7 +1,7 @@
-FROM microsoft/dotnet:2.1-runtime AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
 WORKDIR /app
 
-FROM microsoft/dotnet:2.1-sdk AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
 COPY ./WorkflowServer WorkflowServer/
 RUN dotnet restore WorkflowServer/WorkflowServer.csproj --source https://api.nuget.org/v3/index.json

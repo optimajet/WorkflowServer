@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<script src="scripts/oidc-client.min.js"></script>
+<script src="scripts/silent-renew.js"></script>
+<script>
+  var mgr = new Oidc.UserManager();
+  
+  mgr.signinRedirectCallback().then(function(user) {
+      if (user && !user.expired) {
+        location.href = user.state.callerUrl;
+      }
+  }).catch(function(error) {
+      console.error(error);
+  });
+</script>

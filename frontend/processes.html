@@ -16,13 +16,19 @@
     >
     <el-table-column v-for="item in columns" :sortable="item.sortable ? 'custom' : false" :label="item.text" :prop="item.value" resizable="true">
       <template slot-scope="scope">
-        <a v-if="item.value == 'title'" :href="'/workflow/' + scope.row.SchemeCode + '/' + scope.row.Id" style="text-overflow: ellipsis;white-space: nowrap;">{{ WorkflowServer.getTitle(scope.row) }}</a>
+        <a v-if="item.value == 'title'" :href="getUrl(scope.row)" style="text-overflow: ellipsis;white-space: nowrap;">{{ WorkflowServer.getTitle(scope.row) }}</a>
         <div v-else-if="item.value == 'commands'" style="max-width: 500px;">
           <span v-for="command in scope.row.commands">
             <el-button style="margin:5px;" :type="getCommandType(command)" size="small" @click="executeCommand(scope.row, command)">{{command.LocalizedName}}</el-button>
           </span>
         </div>
-        <el-button v-else-if="item.value == 'actions'" type="danger" icon="el-icon-delete" circle @click="deleteItem(scope.row)"></el-button>
+        <div v-else-if="item.value == 'actions'">
+          <el-button type="danger" icon="el-icon-delete" circle @click="deleteItem(scope.row)"></el-button>
+          <el-button v-if="WorkflowServer.isAdminAccount()" type="primary" icon="el-icon-edit-outline" circle @click="openDesigner(scope.row)"></el-button>
+          
+        </div>
+
+     
         <span v-else>{{ scope.row[item.value] }}</span>        
       </template>
     </el-table-column>
@@ -37,6 +43,7 @@
     >
   </el-pagination>
   <script>
+
     if(Array.isArray(WorkflowServer.Data.fields)){
       var fields = WorkflowServer.Data.fields;
       WorkflowServer.Data.columns = [];
@@ -70,6 +77,15 @@
       filter: []
     });
     
+    WorkflowServer.VueConfig.methods.getUrl = function(process) {
+
+      if(process.flowName) {
+        return '/flow/' + process.flowName + '/' + process.Id;
+      }
+
+      return '/workflow/' + process.SchemeCode + '/' + process.Id;
+    }
+
     WorkflowServer.VueConfig.methods.onSearch = function(){ 
       if(WorkflowServer.onSearchTimer)
         clearTimeout(WorkflowServer.onSearchTimer);
@@ -96,7 +112,7 @@
     WorkflowServer.VueConfig.methods.searchByFilter = function(){ 
 
       var options = {};
-      var columns = ["Id", "StateName"];
+      var columns = ["Id", "StateName", "flowName"];
       if(Array.isArray(WorkflowServer.Data.columns)){
         WorkflowServer.Data.columns.forEach(function(column){
           if(!column.skip)
@@ -135,7 +151,7 @@
 
     WorkflowServer.VueConfig.methods.dataload = function() {
       var options = {};
-      var columns = ["Id", "StateName"];
+      var columns = ["Id", "StateName", "flowName"];
       if(Array.isArray(WorkflowServer.Data.columns)){
         WorkflowServer.Data.columns.forEach(function(column){
           if(!column.skip)
@@ -158,7 +174,7 @@
     };
 
     WorkflowServer.VueConfig.methods.rowdblclick = function(row) {
-      location.href = "/workflow/" + row.SchemeCode + "/" + row.Id;        
+      location.href = WorkflowServer.VueConfig.methods.getUrl(row);
     };
     WorkflowServer.VueConfig.methods.deleteItem = function(row){
       WorkflowServer.showConfirm("Confirm", "Are you sure you want to delete?", function() {
@@ -167,17 +183,21 @@
         });
       });
     };
+    WorkflowServer.VueConfig.methods.openDesigner = function(row){
+      location.href = "/designer?id=" + row.Id;
+    };
 
     WorkflowServer.VueConfig.methods.getCommandType = function(command){
         return WorkflowServer.getCommandType(command);
     };
 
     WorkflowServer.VueConfig.methods.executeCommand = function(row, command){
-      WorkflowServer.executeCommand(row.Id, command.CommandName, false).then(function(response){
+      WorkflowServer.executeCommand(row.Id, command.CommandName, null, false).then(function(response){
         WorkflowServer.VueConfig.methods.dataload();
       });
     };
 
     WorkflowServer.VueConfig.methods.dataload();
+
   </script>
 </div>

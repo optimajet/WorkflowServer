@@ -1,66 +1,38 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>OptimaJet Workflow Server</title>
-    <link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-</head>
-<body>
-    <script src="/scripts/jquery.js" type="text/javascript"></script>
-    <script src="/scripts/polyfill.min.js" type="text/javascript"></script>
-    <script src="/scripts/vue.js" type="text/javascript"></script>
-    <script src="/scripts/element.js" type="text/javascript"></script>
-    <script src="/scripts/en.js" type="text/javascript"></script>
-    <script>
-        ELEMENT.locale(ELEMENT.lang.en)
-    </script>
-    <script src="/scripts/workflowserver.js" type="text/javascript"></script>
 
-    <link href="/css/element.css" rel="stylesheet" type="text/css" />
-    <link href="/css/style.css" rel="stylesheet" type="text/css" />
-    <script>
-        $(document).ajaxStart(function () { Pace.restart(); });
-    </script>
-    <div id="app" class="wfs-maincontainer">
-        <div class="wfs-header">
-            <div wfs-form="header"></div>
+<div class="wfs-maincontainer">
+    <div class="wfs-header">
+        <div wfs-form="header"></div>
+    </div>
+    <div class="wfs-container">
+        <div class="wfs-sidebar-container">
+            <div wfs-form="sidebar"></div>
         </div>
-        <div class="wfs-container">
-            <div class="wfs-sidebar-container">
-                <div wfs-form="sidebar"></div>
-            </div>
-            <div class="wfs-content">
-                <div wfs-placeholder="content"></div>
-            </div>
-        </div>
-        <div id="apperror" v-if="extra.errormessage" >   
-            <div class="text-center">
-                <v-bottom-sheet v-model="extra.errormessage" persistent>
-                    <v-sheet class="text-center" height="200px">
-                    <v-btn class="mt-6" color="error" @click="extra.errormessage = undefined">Close</v-btn>
-                    <div class="py-3">{{ extra.errormessage }} </div>
-                    </v-sheet>
-                </v-bottom-sheet>
-            </div>
-        </div>
-        <div id="appconfirm" v-if="extra.confirmdialog">
-            <el-dialog
-                :title="extra.confirmdialog.title"
-                :before-close="function() {extra.confirmdialog = null}"
-                visible="true"
-                width="30%">
-                <span>{{ extra.confirmdialog.message }}</span>
-                <span slot="footer" class="dialog-footer">
-                    <el-button type="primary" @click="extra.confirmdialog.onSuccess()">OK</el-button>
-                    <el-button @click="extra.confirmdialog = null">Cancel</el-button>
-                </span>
-            </el-dialog>
+        <div class="wfs-content">
+            <div wfs-placeholder="content"></div>
         </div>
     </div>
-    <script>
-        WorkflowServer.VueConfig.el = '#app';
-        WorkflowServer.VueConfig.data = WorkflowServer.Data;
-        WorkflowServer.App = new Vue(WorkflowServer.VueConfig);
-    </script>
-</body>
-</html>
+    <div id="apperror" v-if="extra.errormessage" >   
+        <div class="text-center">
+            <v-bottom-sheet v-model="extra.errormessage" persistent>
+                <v-sheet class="text-center" height="200px">
+                <v-btn class="mt-6" color="error" @click="extra.errormessage = undefined">Close</v-btn>
+                <div class="py-3">{{ extra.errormessage }} </div>
+                </v-sheet>
+            </v-bottom-sheet>
+        </div>
+    </div>
+    <div id="appconfirm" v-if="extra.confirmdialog">
+        <el-dialog
+            :title="extra.confirmdialog.title"
+            :before-close="function() {extra.confirmdialog = null}"
+            visible="true"
+            width="30%">
+            <span>{{ extra.confirmdialog.message }}</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="extra.confirmdialog.onSuccess()">OK</el-button>
+                <el-button @click="extra.confirmdialog = null">Cancel</el-button>
+            </span>
+        </el-dialog>
+    </div>
+</div>
+ 

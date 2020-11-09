@@ -237,3 +237,27 @@ CREATE TABLE IF NOT EXISTS "WorkflowServerLogs" (
 CREATE index IF NOT EXISTS "WorkflowServerLogs_Timestamp_idx"  ON "WorkflowServerLogs" USING btree ("Timestamp");
 CREATE index IF NOT EXISTS "WorkflowServerLogs_Level_idx"  ON "WorkflowServerLogs" USING btree ("Level");
 CREATE index IF NOT EXISTS "WorkflowServerLogs_RuntimeId_idx"  ON "WorkflowServerLogs" USING btree ("RuntimeId");
+
+CREATE TABLE IF NOT EXISTS "WorkflowServerUser"(
+	"Id" uuid NOT NULL PRIMARY KEY,
+	"Name" varchar(256) NOT NULL,
+	"Email" varchar(256) NULL,
+	"Phone" varchar(256) NULL,
+	"IsLocked" boolean NOT NULL DEFAULT 0::boolean,
+	"ExternalId" varchar(1024) NULL,
+	"Lock" uuid NOT NULL,
+	"TenantId" varchar(1024) NULL,
+	"Roles" text NULL,
+	"Extensions" text NULL
+);
+
+CREATE TABLE IF NOT EXISTS "WorkflowServerUserCredential"(
+	"Id" uuid NOT NULL PRIMARY KEY,
+	"PasswordHash" varchar(128) NULL,
+	"PasswordSalt" varchar(128) NULL,
+	"UserId" uuid NOT NULL REFERENCES "WorkflowServerUser" ON DELETE CASCADE,
+	"Login" varchar(256) NOT NULL,
+	"AuthType" smallint NOT NULL,
+	"TenantId" varchar(1024) NULL,
+    "ExternalProviderName" varchar(256) NULL
+);

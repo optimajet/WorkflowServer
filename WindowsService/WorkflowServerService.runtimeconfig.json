@@ -1,9 +1,12 @@
 {
   "runtimeOptions": {
-    "tfm": "netcoreapp2.1",
+    "tfm": "netcoreapp3.1",
     "framework": {
-      "name": "Microsoft.NETCore.App",
-      "version": "2.1.0"
+      "name": "Microsoft.AspNetCore.App",
+      "version": "3.1.0"
+    },
+    "configProperties": {
+      "Microsoft.AspNetCore.SuppressSameSiteNone": "true"
     }
   }
 }

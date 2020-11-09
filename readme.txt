@@ -48,7 +48,7 @@ How to launch it with a custom database
 	2.1. Change the URL parameter to the IP and the port of the HTTP listener. Most likely you'll need to leave it as is.
 	2.2. Specify "mssql", "postgresql", "oracle", "mysql" or "mongodb" in the "provider" parameter depending on what database provider you are using.
 	2.3. Change the ConnectionString parameter to match your database provider connection settings.	
-3. Install .NET Core 2.1
+3. Install .NET Core 3.1
 4.1. Workflow Server supports console and service modes on Windows:
 	4.1.1. Run the 'start.bat' file to run it in the Console mode
 	4.1.2. Run the 'installservice.bat' as administrator to run it in the Service mode

@@ -1,5 +1,52 @@
 <p>&lt;!--Stay on the edge of our innovations and learn about the changes made to Workflow Server with each of our releases.--&gt;</p>
 <h1>Release Notes</h1>
+<h2>2.7 {#2.7}</h2>
+<ul>
+<li>Updated to <a href="https://workflowengine.io/documentation/release-notes/workflow-engine/#5.0">Workflow Engine .NET 5.0</a></li>
+<li>Workflow Server application now runs on <strong>.NET Core 3.1</strong> platform.</li>
+<li>Users are added to the database and Admin panel. Users can be created and modified through the Admin panel, through the Workflow API methods and using synchronization via LDAP.</li>
+<li>Users can be assigned with Roles, thus the role-based authorization of full value became available in the Workflow.</li>
+<li>Added authorization for forms based on OpenId, added authentication option via Facebook, Google and Okta.</li>
+<li>CallbackApi is now able to connect multiple callback servers.</li>
+<li>Files Plugin and Loops Plugin from Workflow Engine .NET have been added.</li>
+<li>Added an option to import and export server configuration. All server settings, schemes, code actions, forms and users are exported (and imported).</li>
+<li>Added Developer Mode, in which the server configuration is also saved to hard drive. The directory is specified in the configuration file of a specific instance.</li>
+<li>Added an option to embed forms into other web-sites and applications.</li>
+<li>In the Workflow API has been added the Resume method which resumes the process execution.</li>
+<li>In the Workflow API has been added a method to update the process scheme to a new one. The same feature has been added to the Admin panel interface.</li>
+</ul>
+<p><strong>The following additional actions must be taken to upgrade to Workflow Server 2.7:</strong></p>
+<ul>
+<li>
+<p>Install <a href="https://dotnet.microsoft.com/download/dotnet-core/3.1">.NET Core 3.1</a>, if you don't already install it.</p>
+</li>
+<li>
+<p>Run the SQL script <em>update_wfs_2_7</em> for all relative databases and MongoDB.</p>
+<ul>
+<li><a href="">MSSQL</a></li>
+<li><a href="">PostgreSQL</a></li>
+<li><a href="">Oracle</a></li>
+<li><a href="">MySQL</a></li>
+<li><a href="">MongoDB</a></li>
+</ul>
+</li>
+<li>
+<p>Add the following settings into the <a href="https://github.com/optimajet/WorkflowServer/blob/master/config.json">configuration file</a>.</p>
+<pre><code class="language-javascript">&quot;ExternalEventLoggerConfig&quot;: {
+  &quot;ConsoleTarget&quot;: [ &quot;Error&quot; ]
+},
+  &quot;IdentityServerSettings&quot;: {
+  &quot;CertificateFile&quot;: &quot;IdentityServer4Auth.pfx&quot;,
+  &quot;CertificatePassword&quot;: &quot;password&quot;,
+  &quot;RedirectHosts&quot;: [ &quot;http://localhost:8077&quot;, &quot;http://localhost:8078&quot; ],
+  &quot;RedirectUrls&quot;: [],
+  &quot;DefaultFormsRedirect&quot;: &quot;http://localhost:8078&quot;,
+  &quot;AuthorityBaseUrl&quot;: &quot;http://localhost:8077&quot;,
+  &quot;UseHostRedirectValidator&quot;: false
+},
+</code></pre>
+</li>
+</ul>
 <h2>2.6 {#2.6}</h2>
 <ul>
 <li>

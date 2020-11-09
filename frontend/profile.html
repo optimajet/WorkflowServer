@@ -1,0 +1,124 @@
+<div wfs-content="content">
+    <h2>Profile</h2>
+
+        <el-form style="max-width:500px" :model="FormData" ref="form" label-width="100px">
+            
+            <el-form-item label="Name" name="name" prop="name">
+                <el-input v-model="FormData.name" :disabled="true">
+                </el-input>
+            </el-form-item>
+
+            <el-form-item label="Email" name="email" prop="email">
+                <el-input v-model="FormData.email">
+                </el-input>
+            </el-form-item>
+
+            <el-form-item label="Phone" name="phone" prop="phone">
+                <el-input v-model="FormData.phone">
+                </el-input>
+            </el-form-item>
+
+            <el-form-item label="Password" name="password" prop="password">
+                <el-input show-password v-model="FormData.password">
+                </el-input>
+            </el-form-item>
+
+            <el-form-item label="Confirm" :rules="[WorkflowServer.Rules.confirmPassword]" name="pesswordRepeat" 
+                prop="pesswordRepeat">
+                <el-input show-password v-model="FormData.pesswordRepeat">
+                </el-input>
+            </el-form-item>
+
+           <el-form-item>
+            <el-button v-for="item in FormData.externalLogins" :key="item.Name" @click="confirmDelete(item)" type="primary" >
+                Remove {{item.DisplayName}} login
+            </el-button>
+           </el-form-item>               
+            
+            <el-form-item>
+                <el-button type="primary" :loading="extra.loading" @click="submit('form')">Save</el-button>
+            </el-form-item>
+        </el-form>
+  
+</div>
+
+<script>
+
+    WorkflowServer.DataExtend({
+        FormData: {
+            name: null,
+            email: null,
+            phone: null,
+            password: null,
+            pesswordRepeat: null,
+            externalLogins: []
+        }
+    });
+
+
+    WorkflowServer.Rules.confirmPassword = { 
+        validator: function(rule, value, callback) { 
+           
+            if((value || '') !== (WorkflowServer.Data.FormData.password || '')) {
+                callback(new Error(rule.message));
+            } else {
+                callback();
+            }
+        }, 
+        message: "Passwords don't match"
+    };
+
+    WorkflowServer.VueConfig.methods.submit = function(formName) {
+
+        this.$refs[formName].validate(function (valid) {
+
+            if (valid) {
+
+                WorkflowServer.updateProfile({
+                    email: WorkflowServer.Data.FormData.email,
+                    phone: WorkflowServer.Data.FormData.phone,
+                    password: WorkflowServer.Data.FormData.password
+                });
+            }
+        });
+
+    };
+
+    WorkflowServer.VueConfig.methods.confirmDelete = function(item) {
+
+        WorkflowServer.showConfirm("Confirm", 'This will unlink ' + item.DisplayName + ' account. Continue?', 
+        function () {
+            WorkflowServer.deleteExternalLogin(item.Id);
+        });
+    };
+
+    WorkflowServer.onGetUserCallback = function(user) {
+        WorkflowServer.Data.FormData.name = user.profile.name;
+        WorkflowServer.Data.FormData.email = user.profile.email;
+        WorkflowServer.Data.FormData.phone = user.profile.phone_number;
+
+        if(user.profile.ext_logins) {
+
+            // https://github.com/IdentityModel/oidc-client-js/issues/861
+            if(Array.isArray(user.profile.ext_logins.Id)) {
+
+                WorkflowServer.Data.FormData.externalLogins = [];
+
+                for(var i = 0; i < user.profile.ext_logins.Id.length; i += 1) {
+                    WorkflowServer.Data.FormData.externalLogins.push({
+                        Id: user.profile.ext_logins.Id[i],
+                        DisplayName: user.profile.ext_logins.DisplayName[i]
+                    });
+                }
+            }else {
+                WorkflowServer.Data.FormData.externalLogins = [user.profile.ext_logins];
+            }
+        } else {
+            WorkflowServer.Data.FormData.externalLogins = [];
+        }
+
+    };
+
+    WorkflowServer.getManager().signinSilent(); // signinSilent to update user profile
+
+</script>

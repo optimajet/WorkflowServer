@@ -12,12 +12,14 @@
                         <i class="el-icon-info"></i>
                         No commands
                     </div>
-                    <el-button 
-                        v-for="command in commands" 
-                        :loading="extra.loading" 
-                        :type="getCommandType(command)" 
-                        style="margin: 10px 10px 0px 0px;" 
-                        @click="executeCommand(command)">{{command.LocalizedName}}</v-btn>
+                   
+                        <el-button 
+                            v-for="command in commands" 
+                            :loading="extra.loading" 
+                            :type="getCommandType(command)" 
+                            style="margin: 10px 10px 0px 0px;" 
+                            @click="executeCommand(command)">{{command.LocalizedName}}</el-button>
+                    
                 </div>
             </el-card>     
         </div>
@@ -38,14 +40,12 @@
                 </div>
                 <div v-if="Array.isArray(WorkflowServer.Data.commands) && WorkflowServer.Data.commands.length > 0">
                     <span v-for="command in commands">
-                        <el-button :loading="extra.loading" style="margin: 10px 10px 0px 0px;" :type="getCommandType(command)"  @click="executeCommand(command)">{{command.LocalizedName}}</v-btn>
+                        <el-button :loading="extra.loading" style="margin: 10px 10px 0px 0px;" :type="getCommandType(command)"  @click="executeCommand(command)">{{command.LocalizedName}}</el-button>
                         <br/>
                     </span>                              
                 </div>
                 <div v-if="!Array.isArray(WorkflowServer.Data.commands) || WorkflowServer.Data.commands.length == 0">
-                    <a :href="'/workflow/' + SchemeCode + '/launch'">
-                        <el-button type="info" style="margin: 10px 0px 0px 0px;">Launch</el-button>
-                    </a>
+                    <el-button type="info" style="margin: 10px 0px 0px 0px;" @click="WorkflowServer.launch(SchemeCode)">Launch</el-button>
                 </div>
             </div>
         </el-card>
@@ -54,19 +54,67 @@
         </div>
     </div>
     <script>
-        WorkflowServer.Data.extra.breadcrumbs = [
-            {
+
+        if(!WorkflowServer.Data.SchemeCode) {
+            WorkflowServer.DataExtend({
+                SchemeCode: null,
+                commands: []
+            });
+        }
+
+
+        WorkflowServer.Data.extra.breadcrumbs = [];
+
+        if(!WorkflowServer.Data.embedded) {
+            WorkflowServer.Data.extra.breadcrumbs.push({
                 text: 'Dashboard',
-                disabled: false,
                 href: '/',
-            },{
-                text: WorkflowServer.Data.SchemeCode,
-                disabled: false,
-                href: '/workflow/' + WorkflowServer.Data.SchemeCode
-            },{
-                text: WorkflowServer.getTitle()          
+            });
+        }
+
+        if(WorkflowServer.Data.FormData.flowName) {
+            var flowHref = null;
+            if (WorkflowServer.Data.isEmbeddedIntoAnotherForm)
+            {
             }
-        ];
+            else if (WorkflowServer.Data.embedded)
+            {
+                flowHref =  '/flow/' + WorkflowServer.Data.FormData.flowName + '?embedded=true'
+            }
+            else
+            {
+                flowHref =  '/flow/' + WorkflowServer.Data.FormData.flowName;
+            }
+
+            WorkflowServer.Data.extra.breadcrumbs.push({
+                text: WorkflowServer.Data.FormData.flowName,
+                href: flowHref,
+            });
+        } else {
+            var formHref = null;
+            if (WorkflowServer.Data.isEmbeddedIntoAnotherForm)
+            {
+            }
+            else if (WorkflowServer.Data.embedded)
+            {
+                formHref =  '/workflow/' + WorkflowServer.Data.SchemeCode + '?embedded=true'
+            }
+            else
+            {
+                formHref =  '/workflow/' + WorkflowServer.Data.SchemeCode;
+            }
+
+            WorkflowServer.Data.extra.breadcrumbs.push({
+                text: WorkflowServer.Data.SchemeCode,
+                href: formHref,
+            });
+        }
+
+        WorkflowServer.Data.extra.breadcrumbs.push({
+            text: WorkflowServer.getTitle()      
+        });
+
+   
 
         WorkflowServer.VueConfig.methods.submit = function() {
             if(this.$refs && this.$refs.form){
@@ -87,8 +135,8 @@
            return WorkflowServer.getCommandType(command);
         };
         
-        WorkflowServer.VueConfig.methods.executeCommand = function(command){
-            if(this.$refs && this.$refs.form){
+        WorkflowServer.VueConfig.methods.executeCommand = function(command) {
+            if(this.$refs && this.$refs.form) {
                 this.$refs.form.validate(function(valid) {
                     if (valid) {
                         WorkflowServer.executeCommand(command.ProcessId, command.CommandName);

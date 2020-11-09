@@ -1,0 +1,223 @@
+body{
+    margin: 0px;
+    font-family:Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font-size:14px;
+}
+
+/* Main page */
+.wfs-maincontainer{
+
+}
+.wfs-container {
+    position: relative;
+    min-height: calc(100vh - 70px);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+/* Main page Header */
+
+.wfs-header {
+    background: #fff;
+    height: 50px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-shadow: 0px 6px 10px rgba(242, 242, 242, 0.5), 0px 1px 18px rgba(242, 242, 242, 0.5), 0px 3px 5px rgba(242, 242, 242, 0.7);
+    box-shadow: 0px 6px 10px rgba(242, 242, 242, 0.5), 0px 1px 18px rgba(242, 242, 242, 0.5), 0px 3px 5px rgba(242, 242, 242, 0.7);
+}
+
+.wfs-header .user {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.wfs-header .user .user-image {
+    margin-right: 22px;
+    min-width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.wfs-header .user .ui.dropdown .menu {
+    padding: 15px 0;
+    background: #FFFFFF;
+    -webkit-box-shadow: 0px 6px 10px rgba(242, 242, 242, 0.12), 0px 1px 18px rgba(242, 242, 242, 0.12), 0px 3px 5px rgba(242, 242, 242, 0.15);
+    box-shadow: 0px 6px 10px rgba(242, 242, 242, 0.12), 0px 1px 18px rgba(242, 242, 242, 0.12), 0px 3px 5px rgba(242, 242, 242, 0.15);
+    border-radius: 5px;
+    border: none;
+    min-width: 150px;
+}
+
+.wfs-header .user .ui.dropdown .menu > .item {
+    font-size: 16px;
+    padding: 12px 20px;
+}
+
+.wfs-header .user .user-text {
+    font-size: 16px;
+    color: #000;
+}
+
+.wfs-header .user .user-text i.icon {
+    color: #1253CC;
+    font-size: 30px;
+    top: 5px;
+    margin-left: 18px;
+}
+
+.wfs-header .search {
+    width: 1133px;
+    position: relative;
+    padding-top: 2px;
+    margin-right: 37px;
+}
+
+.wfs-header .search input {
+    width: 100%;
+    border: none;
+    height: 30px;
+    border-bottom: 1px solid #f24d00;
+}
+
+.wfs-header .search button {
+    position: absolute;
+    top: 7px;
+    right: 15px;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+/* Main page Sidebar */
+.wfs-sidebar-btn,
+.wfs-sidebar-btn:hover {
+    display: none;
+    -webkit-transition: .3s;
+    transition: .3s;
+    z-index: 2;
+    width: 41px;
+    height: 41px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: none;
+    padding: 0;
+    background-color: rgb(80, 138, 45);
+    background-image: url('../images/mobile-sidebar.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+@media only screen and (max-width: 997px) {
+    .wfs-sidebar-btn,
+    .wfs-sidebar-btn:hover {
+        display: block;
+        position: fixed;
+        left: 0;
+        top: 5px;
+    }
+
+    .wfs-sidebar-btn.active {
+        left: 256px;
+    }
+}
+
+ .wfs-sidebar-container {
+
+} 
+
+@media only screen and (max-width: 997px)
+{
+    .wfs-sidebar-container {
+        position: fixed;
+        top: 0;
+        z-index: 10;
+        -webkit-transition: .3s;
+        transition: .3s;
+        height: 100vh;
+        left: 0;
+        padding-top: 5px!important;
+    }
+
+    .wfs-sidebar-container:not(.active) {
+        left: -265px;
+    }
+}
+
+/* Main page Content */
+.wfs-container .wfs-content {
+    width: 100%;
+}
+
+.wfs-sidebar-container{
+    padding-top: 10px;
+}
+
+@media only screen and (min-width: 998px) {
+    .wfs-container .wfs-content {
+        margin: 20px;
+    }
+
+    .wfs-formblocks > div{
+        float: left;
+        width: 440px;
+        margin: 20px 10px 10px 0px;
+    }
+}
+
+@media only screen and (max-width: 997px){
+    .wfs-container .wfs-content {
+        padding: 20px 10px;
+    }
+
+    .wfs-formblocks > div{
+        width: 100%;
+        float: none;
+        margin: 20px 0px 10px 0px;
+    }
+}
+
+.wfs-index-card{
+    float:left; 
+    margin:10px 10px 0px 0px
+}
+
+.wfs-index-card .el-button{
+    margin: 10px 10px 0px 0px;
+}
+
+
+@media only screen and (min-width: 560px) {
+    .wfs-index-card{
+        width: 250px;
+    }
+}
+
+@media only screen and (max-width: 559px){
+    .wfs-index-card{
+        width: 100%;
+    }
+}
+
+.wfs-sidemenuspan {
+    float: right;
+    font-weight: 700;
+}
+
+.wfs-formtoolbar{
+    margin: 20px 0px 20px 0px;
+}
+
+.el-card__header{
+    color: white;
+    background-color: #6fb048;
+}

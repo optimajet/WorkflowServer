@@ -1,6 +1,47 @@
 ﻿<!--Stay on the edge of our innovations and learn about the changes made to Workflow Server with each of our releases.-->
 # Release Notes
 
+## 2.7 {#2.7}
+
+- Updated to [Workflow Engine .NET 5.0](https://workflowengine.io/documentation/release-notes/workflow-engine/#5.0)
+- Workflow Server application now runs on **.NET Core 3.1** platform.
+- Users are added to the database and Admin panel. Users can be created and modified through the Admin panel, through the Workflow API methods and using synchronization via LDAP.
+- Users can be assigned with Roles, thus the role-based authorization of full value became available in the Workflow.
+- Added authorization for forms based on OpenId, added authentication option via Facebook, Google and Okta.
+- CallbackApi is now able to connect multiple callback servers.
+- Files Plugin and Loops Plugin from Workflow Engine .NET have been added.
+- Added an option to import and export server configuration. All server settings, schemes, code actions, forms and users are exported (and imported).
+- Added Developer Mode, in which the server configuration is also saved to hard drive. The directory is specified in the configuration file of a specific instance.
+- Added an option to embed forms into other web-sites and applications.
+- In the Workflow API has been added the Resume method which resumes the process execution.
+- In the Workflow API has been added a method to update the process scheme to a new one. The same feature has been added to the Admin panel interface.
+
+**The following additional actions must be taken to upgrade to Workflow Server 2.7:**
+
+- Install [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1), if you don't already install it.
+- Run the SQL script *update_wfs_2_7* for all relative databases and MongoDB.
+  - [MSSQL]()
+  - [PostgreSQL]()
+  - [Oracle]()
+  - [MySQL]()
+  - [MongoDB]()
+- Add the following settings into the [configuration file](https://github.com/optimajet/WorkflowServer/blob/master/config.json).
+  
+  ```javascript
+  "ExternalEventLoggerConfig": {
+    "ConsoleTarget": [ "Error" ]
+  },
+    "IdentityServerSettings": {
+    "CertificateFile": "IdentityServer4Auth.pfx",
+    "CertificatePassword": "password",
+    "RedirectHosts": [ "http://localhost:8077", "http://localhost:8078" ],
+    "RedirectUrls": [],
+    "DefaultFormsRedirect": "http://localhost:8078",
+    "AuthorityBaseUrl": "http://localhost:8077",
+    "UseHostRedirectValidator": false
+  },
+  ```
+
 ## 2.6 {#2.6}
 
 - Updated to [Workflow Engine .NET 4.2](https://workflowengine.io/documentation/release-notes/workflow-engine/#4.2)

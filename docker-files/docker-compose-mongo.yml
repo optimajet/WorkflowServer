@@ -33,11 +33,13 @@ services:
     volumes:
        - ./../logs:/app/logs
        - ./../license:/app/license
+       - ./../metadata:/app/metadata
        - ./../InitialScripts:/app/InitialScripts
     environment:
       ConnectionString: mongodb://root:mongopassword@workflowserver-mongo:27017/ws?authSource=admin
       Provider: mongodb
       LicensePath: /app/license/  
+      MetadataFolder: /app/metadata/ 
       DefaultLoggerConfig__FileTarget__0: Information
       DefaultLoggerConfig__FileTarget__1: Error
       DefaultLoggerConfig__FileSettings__FileName: /app/logs/log.txt

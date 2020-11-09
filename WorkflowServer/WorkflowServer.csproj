@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <Win32Resource />
     <SignAssembly>false</SignAssembly>
@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://workflowengine.io/server/</PackageProjectUrl>
     <Authors>OptimaJet LLC</Authors>
     <Company>OptimaJet LLC</Company>
-    <Version>2.6.5</Version>
+    <Version>2.7.0</Version>
     <PublishProtocol>FileSystem</PublishProtocol>
     <PublishDir>bin\Release\PublishOutput</PublishDir>
   </PropertyGroup>
@@ -30,11 +30,26 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WorkflowEngine.NET-Server" Version="2.6.5" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+    <PackageReference Include="WorkflowEngine.NET-Server" Version="2.7.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.2.4" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.2.4" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="runtimeconfig.template.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="web.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IdentityServer4Auth.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="web.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

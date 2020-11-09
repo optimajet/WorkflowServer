@@ -33,11 +33,13 @@ services:
     volumes:
        - ./../logs:/app/logs
        - ./../license:/app/license
+       - ./../metadata:/app/metadata
        - ./../InitialScripts:/app/InitialScripts
     environment:
       ConnectionString: Data Source=workflowserver-mssql;Initial Catalog=wfs;Integrated Security=False;User ID=sa;Password=MyStRoNgPWD12345678
       Provider: mssql
       LicensePath: /app/license/
+      MetadataFolder: /app/metadata/ 
       DefaultLoggerConfig__FileTarget__0: Information
       DefaultLoggerConfig__FileTarget__1: Error
       DefaultLoggerConfig__FileSettings__FileName: /app/logs/log.txt

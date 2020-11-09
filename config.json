@@ -1,11 +1,13 @@
 {
   "IsMultiServer": false,
+  "DeveloperMode": false,
   "ServerType": "All", // Under IIS you SHOULD (!!!) change to Admin or Forms value
   //"RuntimeId": "someruntimeid", //specify runtime name for multi-server mode here
   "url": "http://*:8077/",
   "FrontendFolder": "../frontend",
   "DefaultFrontendPort": "8078",
   "BackendFolder": "../backend",
+  "MetadataFolder": "../metadata",
   "LicensePath": "../license",
   //"CertificateFile": "../WFS.pfx",
   //"CertificatePassword": "password",
@@ -15,10 +17,22 @@
   "DefaultLoggerConfig": {
     "ConsoleTarget": [ "Information", "Error" ]
   },
+  "ExternalEventLoggerConfig": {
+    "ConsoleTarget": [ "Error" ]
+  },
   "DefaultCorsSettings": {
     "AllowedOrigins": [
       "*"
     ]
+  },
+  "IdentityServerSettings": {
+    "CertificateFile": "IdentityServer4Auth.pfx",
+    "CertificatePassword": "password",
+    "RedirectHosts": [ "http://localhost:8077", "http://localhost:8078" ],
+    "RedirectUrls": [],
+    "DefaultFormsRedirect": "http://localhost:8078",
+    "AuthorityBaseUrl": "http://localhost:8077",
+    "UseHostRedirectValidator": false
   },
   //MSSQL
   "Provider": "mssql",

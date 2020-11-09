@@ -1,0 +1,5 @@
+﻿{
+  "configProperties": {
+    "Microsoft.AspNetCore.SuppressSameSiteNone": "true"
+  }
+}

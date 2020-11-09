@@ -10,5 +10,5 @@ pause
 exit
 
 :NO_DOTNETCORE
-echo .NET Core not found. Please install .NET Core 2.1 to run this application
-echo For more information visit https://dotnet.microsoft.com/download/dotnet-core/2.1
+echo .NET Core not found. Please install .NET Core 3.1 to run this application
+echo For more information visit https://dotnet.microsoft.com/download/dotnet-core/3.1

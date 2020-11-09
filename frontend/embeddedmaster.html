@@ -1,0 +1,48 @@
+<div class="wfs-maincontainer">
+    <div class="wfs-container">
+
+        <div class="wfs-content">
+
+            <el-menu mode="horizontal" style="max-width: 700px; margin-bottom: 20px;">
+                <el-menu-item index="top" >
+                    <el-image fit="fill" :src="formsServerUrl + extra.user.avatar" ></el-image>
+                    <span v-if="!extra.sidebar.mini" slot="title">{{ extra.user.name }}</span>
+                </el-menu-item>
+                <el-menu-item index="logoff" @click="WorkflowServer.logoff()" v-if="extra.user.sub" >
+                    <i class="el-icon-close"></i>
+                    <span v-if="!extra.sidebar.mini" slot="title">Logout</span>
+                </el-menu-item>
+                <el-menu-item index="logon" @click="WorkflowServer.logon()" v-if="!extra.user.sub" >
+                    <i class="el-icon-check"></i>
+                    <span v-if="!extra.sidebar.mini" slot="title">Login</span>
+                </el-menu-item>
+            </el-menu>
+        
+            <div wfs-placeholder="content"></div>
+        </div>
+    </div>
+    <div id="apperror" v-if="extra.errormessage" >   
+        <div class="text-center">
+            <v-bottom-sheet v-model="extra.errormessage" persistent>
+                <v-sheet class="text-center" height="200px">
+                <v-btn class="mt-6" color="error" @click="extra.errormessage = undefined">Close</v-btn>
+                <div class="py-3">{{ extra.errormessage }} </div>
+                </v-sheet>
+            </v-bottom-sheet>
+        </div>
+    </div>
+    <div id="appconfirm" v-if="extra.confirmdialog">
+        <el-dialog
+            :title="extra.confirmdialog.title"
+            :before-close="function() {extra.confirmdialog = null}"
+            visible="true"
+            width="30%">
+            <span>{{ extra.confirmdialog.message }}</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="extra.confirmdialog.onSuccess()">OK</el-button>
+                <el-button @click="extra.confirmdialog = null">Cancel</el-button>
+            </span>
+        </el-dialog>
+    </div>
+</div>
+ 

@@ -1,3 +1,15 @@
-<div style="margin-left: 25px;">
-    <a href="/"><img src="/images/logo.svg" ></a>
+<div style="display: flex; justify-content: space-between; margin-left: 25px; margin-right: 25px" >
+    <div style="display: flex; align-items: center;"> 
+        <a href="/"><img src="/images/logo.svg" ></a>
+    </div>
+    <div>
+        <el-button @click="WorkflowServer.logon()" v-if="!extra.user.sub">
+            <i class="el-icon-check"></i>
+            LogIn
+        </el-button>
+        <el-button @click="WorkflowServer.logoff()" v-if="extra.user.sub">
+            <i class="el-icon-close"></i>
+            Logout
+        </el-button>
+    </div>
 </div>

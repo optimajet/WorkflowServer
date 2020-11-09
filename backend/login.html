@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>OptimaJet WorkflowServer</title>
+        <link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon">
+
+        <script src="/scripts/jquery.js" type="text/javascript"></script>
+        <script src="/scripts/minified.js" type="text/javascript"></script>
+        <script src="/scripts/vue.js" type="text/javascript"></script>
+        <script src="/scripts/element.js" type="text/javascript"></script>
+
+        <link href="/css/element.css" rel="stylesheet" type="text/css" />
+        <link href="/css/workflowserver.css" rel="stylesheet" type="text/css" />
+    </head>
+    <style>
+        body{
+            margin: 0px;
+        }
+
+        .container .wfs-login-wrapper .wfs-login{
+            width: 400px;
+        }
+    </style>
+    <body>
+
+        <div id="app" class="container">
+            <div class="wfs-wrapper">
+                <div class="wfs-login-wrapper">
+                    <div class="wfs-login">
+                        <div id="wfs-content">
+                            <div class="wfs-login-divlogo">
+                                <img src="/images/logo.svg" class="wfs-login-logo">
+                            </div>
+                            <el-form :model="form" :rules="rules" ref="form">
+                                <el-form-item class="field" prop="login" label="Login">
+                                    <el-input  v-model="form.login" @keyup.enter.native="submit('form')"></el-input>
+                                </el-form-item>
+                                <el-form-item class="field" prop="password" label="Password">
+                                    <el-input show-password v-model="form.password" @keyup.enter.native="submit('form')"></el-input>
+                                </el-form-item>
+                                <el-form-item class="field">
+                                    <el-checkbox v-model="form.remember">Remember me</el-checkbox>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button style="width: 100%; background: #F24D00;color: #FFFFFF;" @click="submit('form')">Login</el-button>
+                                </el-form-item>
+                                <el-row>
+                                    <el-button type="primary" v-for="item in externals" :key="item.Name" @click="externalLogin(item.Name)">
+                                        {{item.DisplayName}}
+                                    </el-button>
+                                </el-row>
+                            </el-form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+
+        var vue = new Vue({
+            el: "#app",
+            data: {
+                form : {
+                    login: "",
+                    password: "",
+                    remember: true
+                },
+                rules: {
+                    login: [
+                        { required: true, message: 'Please input the login', trigger: 'blur' }
+                    ],
+                    password: [
+                        { required: true, message: 'Please input the password', trigger: 'blur' }
+                    ]
+                },
+                externals: [],
+                tenantId: null
+            },
+           
+            methods: {
+                submit: function (formName) {
+    
+                    var me = this;
+    
+                    this.$refs[formName].validate(function (valid) {
+    
+                        if (valid) {
+    
+                            var data = new Array();
+                            data.push({ name: 'operation', value: 'login' });
+                            data.push({ name: 'login', value: me.form.login });
+                            data.push({ name: 'password', value: me.form.password });
+                            data.push({ name: 'remember', value: me.form.remember });
+    
+                            if(me.tenantId) {
+                                data.push({ name: 'tenantId', value: me.tenantId });
+                            }
+    
+                            $.ajax({
+                                url: '/configapi',
+                                data: data,
+                                async: true,
+                                crossDomain: true,
+                                method: 'POST',
+                                success: function(response, status, xhr) {
+    
+                                    if (response.success) {
+                                        me.redirectToApp();
+                                    }
+                                    else {
+                                        me.$notify.error({
+                                            title: 'Error',
+                                            message: response.message
+                                        });
+                                    }
+                                },
+                                error: function(jqXHR, exception) {
+    
+                                    me.$notify.error({
+                                        title: 'Error',
+                                        message: "Auth failed"
+                                    });
+                                }
+                            });
+                          
+                        } else {
+                            return false;
+                        }
+                    });              
+                },
+                redirectToApp: function() {
+    
+                    var newLocation = '/';
+                    var urlParams = new URLSearchParams(location.search);
+    
+                    var keys = urlParams.keys();
+                    let result = keys.next();
+                    while (!result.done) {
+                        if (result.value.toLowerCase() === 'returnurl') {
+                            newLocation = urlParams.get(result.value);
+                            break;
+                        }
+                        result = keys.next();
+                    }
+    
+                    window.location = newLocation;
+                },
+                getExternalProviders: function() {
+    
+                    var me = this;
+    
+                    $.getJSON(
+                        "/account/external", function(response) {
+                            me.externals = response;
+                        }).fail(function() {
+                            me.$notify.error({
+                                title: 'Error',
+                                message: "Error on the server!"
+                            });
+                        });
+                },
+                externalLogin: function(name) {
+    
+                    var newLocation = "/account/challenge-external?name=" + name;
+    
+                    var urlParams = new URLSearchParams(location.search);
+    
+                    let keys = urlParams.keys();
+                    let result = keys.next();
+                    while (!result.done) {
+                        if (result.value.toLowerCase() === 'returnurl') {
+                            newLocation = newLocation + "&returnUrl=" + encodeURIComponent(urlParams.get(result.value));
+                            break;
+                        }
+                        result = keys.next();
+                    }
+    
+                    if(this.tenantId) {
+                        newLocation = newLocation + "&=" + encodeURIComponent(this.tenantId);
+                    }
+    
+                    location.href = newLocation;
+    
+                },
+                getTenantId: function() {
+                    var urlParams = new URLSearchParams(location.search);
+    
+                    let keys = urlParams.keys();
+    
+                    let result = keys.next();
+                    while (!result.done) {
+                        if (result.value.toLowerCase() === 'tenantid') {
+                            this.tenantId = urlParams.get(result.value);
+                            break;
+                        }
+                        result = keys.next();
+                    }
+                }
+            }
+        });
+    
+        vue.getTenantId();
+        vue.getExternalProviders();
+    
+    </script>
+    
+</html>
