@@ -11,7 +11,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Hosting.WindowsServices": "3.1.9",
           "Microsoft.Extensions.Logging.EventLog": "3.1.9",
-          "WorkflowEngine.NET-Server": "2.7.0"
+          "WorkflowEngine.NET-Server": "2.7.1"
         },
         "runtime": {
           "WorkflowServerService.dll": {}
@@ -2543,7 +2543,7 @@
           "OptimaJet.Logging.dll": {}
         }
       },
-      "WorkflowEngine.NET-Server/2.7.0": {
+      "WorkflowEngine.NET-Server/2.7.1": {
         "dependencies": {
           "AngleSharp": "0.13.0",
           "IdentityServer4": "4.1.1",
@@ -4256,7 +4256,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "WorkflowEngine.NET-Server/2.7.0": {
+    "WorkflowEngine.NET-Server/2.7.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

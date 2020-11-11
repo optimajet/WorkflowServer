@@ -25,13 +25,12 @@
       "*"
     ]
   },
+  "AuthorityUrl" : "http://localhost:8077",
   "IdentityServerSettings": {
     "CertificateFile": "IdentityServer4Auth.pfx",
     "CertificatePassword": "password",
     "RedirectHosts": [ "http://localhost:8077", "http://localhost:8078" ],
     "RedirectUrls": [],
-    "DefaultFormsRedirect": "http://localhost:8078",
-    "AuthorityBaseUrl": "http://localhost:8077",
     "UseHostRedirectValidator": false
   },
   //MSSQL

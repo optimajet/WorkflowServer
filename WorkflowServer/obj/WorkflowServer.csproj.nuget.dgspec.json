@@ -5,7 +5,7 @@
   },
   "projects": {
     "E:\\Projects\\workflowengine\\github_workflowserver\\WorkflowServer\\WorkflowServer.csproj": {
-      "version": "2.6.5",
+      "version": "2.7.0",
       "restore": {
         "projectUniqueName": "E:\\Projects\\workflowengine\\github_workflowserver\\WorkflowServer\\WorkflowServer.csproj",
         "projectName": "WorkflowServer",
@@ -21,7 +21,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp2.1"
+          "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -29,7 +29,7 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp2.1": {
+          "netcoreapp3.1": {
             "projectReferences": {}
           }
         },
@@ -40,37 +40,27 @@
         }
       },
       "frameworks": {
-        "netcoreapp2.1": {
+        "netcoreapp3.1": {
           "dependencies": {
-            "Microsoft.AspNetCore.SignalR": {
-              "target": "Package",
-              "version": "[1.1.0, )"
-            },
             "Microsoft.CSharp": {
               "target": "Package",
               "version": "[4.5.0, )"
             },
             "Microsoft.Extensions.Configuration.Binder": {
               "target": "Package",
-              "version": "[2.2.4, )"
+              "version": "[3.1.9, )"
             },
             "Microsoft.Extensions.Configuration.EnvironmentVariables": {
               "target": "Package",
-              "version": "[2.2.4, )"
+              "version": "[3.1.9, )"
             },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
-              "version": "[2.2.0, )"
-            },
-            "Microsoft.NETCore.App": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.1.0, )",
-              "autoReferenced": true
+              "version": "[3.1.9, )"
             },
             "WorkflowEngine.NET-Server": {
               "target": "Package",
-              "version": "[2.6.5, )"
+              "version": "[2.7.1, )"
             }
           },
           "imports": [
@@ -83,6 +73,14 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
