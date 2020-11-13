@@ -3429,7 +3429,7 @@
           "lib/netstandard2.0/WeakEvent.dll": {}
         }
       },
-      "WorkflowEngine.NET-Server/2.7.1": {
+      "WorkflowEngine.NET-Server/2.7.2": {
         "type": "package",
         "dependencies": {
           "AngleSharp": "0.13.0",
@@ -10579,15 +10579,15 @@
         "thomaslevesque.weakevent.nuspec"
       ]
     },
-    "WorkflowEngine.NET-Server/2.7.1": {
-      "sha512": "v4xl+TL9x2KQAweBQaW8cG9PHg4XzsZ+FcUiq8rNLPi+d46tjCkn2WwjjP6ex070Vmh+Z8Pw2dhKSFyEiJDsEg==",
+    "WorkflowEngine.NET-Server/2.7.2": {
+      "sha512": "CvND8NsqeJ3/ZnNJeMB83nvaszHOP9MzkWQeJ4mzuq1LlkAdr2T9V6m2MNa4hTSowlHPzJvr6/vkLM4XpWuDkA==",
       "type": "package",
-      "path": "workflowengine.net-server/2.7.1",
+      "path": "workflowengine.net-server/2.7.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netcoreapp3.1/OptimaJet.WorkflowServer.dll",
-        "workflowengine.net-server.2.7.1.nupkg.sha512",
+        "workflowengine.net-server.2.7.2.nupkg.sha512",
         "workflowengine.net-server.nuspec"
       ]
     },
@@ -10683,7 +10683,7 @@
       "Microsoft.Extensions.Configuration.Binder >= 3.1.9",
       "Microsoft.Extensions.Configuration.EnvironmentVariables >= 3.1.9",
       "Microsoft.Extensions.Configuration.Json >= 3.1.9",
-      "WorkflowEngine.NET-Server >= 2.7.1"
+      "WorkflowEngine.NET-Server >= 2.7.2"
     ]
   },
   "packageFolders": {
@@ -10746,7 +10746,7 @@
           },
           "WorkflowEngine.NET-Server": {
             "target": "Package",
-            "version": "[2.7.1, )"
+            "version": "[2.7.2, )"
           }
         },
         "imports": [

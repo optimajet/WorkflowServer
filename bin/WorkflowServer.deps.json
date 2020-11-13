@@ -6,13 +6,13 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "WorkflowServer/2.7.1": {
+      "WorkflowServer/2.7.2": {
         "dependencies": {
           "Microsoft.CSharp": "4.5.0",
           "Microsoft.Extensions.Configuration.Binder": "3.1.9",
           "Microsoft.Extensions.Configuration.EnvironmentVariables": "3.1.9",
           "Microsoft.Extensions.Configuration.Json": "3.1.9",
-          "WorkflowEngine.NET-Server": "2.7.1",
+          "WorkflowEngine.NET-Server": "2.7.2",
           "WorkflowEngine.NETCore-Core": "5.0.1"
         },
         "runtime": {
@@ -2447,7 +2447,7 @@
           "OptimaJet.Logging.dll": {}
         }
       },
-      "WorkflowEngine.NET-Server/2.7.1": {
+      "WorkflowEngine.NET-Server/2.7.2": {
         "dependencies": {
           "AngleSharp": "0.13.0",
           "IdentityServer4": "4.1.1",
@@ -2477,7 +2477,7 @@
     }
   },
   "libraries": {
-    "WorkflowServer/2.7.1": {
+    "WorkflowServer/2.7.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -3964,7 +3964,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "WorkflowEngine.NET-Server/2.7.1": {
+    "WorkflowEngine.NET-Server/2.7.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

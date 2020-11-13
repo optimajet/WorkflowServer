@@ -49,7 +49,7 @@
         },
         "WorkflowEngine.NET-Server": {
           "target": "Package",
-          "version": "[2.7.1, )"
+          "version": "[2.7.2, )"
         }
       },
       "imports": [

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "OK87CGoRnfyM7wosydQ9N+dYruoeNdu4JnR8tQK5NzQHVv68o96d56to4rknn53gnvoCeNSMv2IjtkMVHi3pAg==",
+  "dgSpecHash": "jXV+pas7jMvoUt0pV4a3+bTQQuwy+ChWFv4cEm74LtRTyGNpxRCyTURO16jOZe6XR9QEdHwneS+kkfEmS3u15Q==",
   "success": true,
   "projectFilePath": "E:\\Projects\\workflowengine\\github_workflowserver\\WorkflowServer\\WorkflowServer.csproj",
   "expectedPackageFiles": [
@@ -209,7 +209,7 @@
     "C:\\Users\\ebetin\\.nuget\\packages\\system.xml.xpath\\4.0.1\\system.xml.xpath.4.0.1.nupkg.sha512",
     "C:\\Users\\ebetin\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.0.1\\system.xml.xpath.xmldocument.4.0.1.nupkg.sha512",
     "C:\\Users\\ebetin\\.nuget\\packages\\thomaslevesque.weakevent\\4.1.0\\thomaslevesque.weakevent.4.1.0.nupkg.sha512",
-    "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.net-server\\2.7.1\\workflowengine.net-server.2.7.1.nupkg.sha512",
+    "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.net-server\\2.7.2\\workflowengine.net-server.2.7.2.nupkg.sha512",
     "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.netcore-core\\5.0.1\\workflowengine.netcore-core.5.0.1.nupkg.sha512",
     "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.netcore-filesplugin\\5.0.1\\workflowengine.netcore-filesplugin.5.0.1.nupkg.sha512",
     "C:\\Users\\ebetin\\.nuget\\packages\\workflowengine.netcore-providerformongodb\\5.0.1\\workflowengine.netcore-providerformongodb.5.0.1.nupkg.sha512",
