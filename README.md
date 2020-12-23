@@ -1,14 +1,15 @@
 # Workflow Server
 
-* **Official web site** - [https://workflowengine.io/server/](https://workflowengine.io/server/)
-* **Documentation** - [https://workflowengine.io/documentation/workflow-server/](https://workflowengine.io/documentation/workflow-server/)
-* **Demo** - [https://server.workflowengine.io/](https://server.workflowengine.io/)
+* **Official web site** - [https://workflowserver.io](https://workflowserver.io)
+* **Documentation** - [https://workflowserver.io/documentation/](https://workflowserver.io/documentation/)
+* **Demo** - [https://demo.workflowserver.io/](https://demo.workflowserver.io/)
+* **Frontend** - [https://forms.workflowserver.io/](https://forms.workflowserver.io/)
 
 ## Overview
 
 Workflow Server is a ready-to-use Workflow Engine-based application that you can deploy into your infrastructure. It can be integrated with NodeJS, PHP, Ruby, .NET, or Java applications via a REST API. Workflow Server is a key component for managing the lifecycle of business objects within your enterprise.
 
-<a href="https://server.workflowengine.io/"><img src="screenshot.png" width="580" style="
+<a href="https://demo.workflowserver.io/"><img src="screenshot.png" width="580" style="
     border: 1px solid;
     border-color: #3e4d5c;"></a>
 
