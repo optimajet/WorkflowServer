@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Projects\\workflowengine\\github_workflowserver\\WorkflowServer\\WorkflowServer.csproj": {}
+    "C:\\local\\projects\\github_public_wfs\\WorkflowServer\\WorkflowServer.csproj": {}
   },
   "projects": {
-    "E:\\Projects\\workflowengine\\github_workflowserver\\WorkflowServer\\WorkflowServer.csproj": {
-      "version": "2.7.0",
+    "C:\\local\\projects\\github_public_wfs\\WorkflowServer\\WorkflowServer.csproj": {
+      "version": "2.7.4",
       "restore": {
-        "projectUniqueName": "E:\\Projects\\workflowengine\\github_workflowserver\\WorkflowServer\\WorkflowServer.csproj",
+        "projectUniqueName": "C:\\local\\projects\\github_public_wfs\\WorkflowServer\\WorkflowServer.csproj",
         "projectName": "WorkflowServer",
-        "projectPath": "E:\\Projects\\workflowengine\\github_workflowserver\\WorkflowServer\\WorkflowServer.csproj",
+        "projectPath": "C:\\local\\projects\\github_public_wfs\\WorkflowServer\\WorkflowServer.csproj",
         "packagesPath": "C:\\Users\\ebetin\\.nuget\\packages\\",
-        "outputPath": "E:\\Projects\\workflowengine\\github_workflowserver\\WorkflowServer\\obj\\",
+        "outputPath": "C:\\local\\projects\\github_public_wfs\\WorkflowServer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -25,11 +25,11 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "E:\\LocalNuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -41,6 +41,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.CSharp": {
               "target": "Package",
@@ -60,7 +61,7 @@
             },
             "WorkflowEngine.NET-Server": {
               "target": "Package",
-              "version": "[2.7.3, )"
+              "version": "[2.7.4, )"
             }
           },
           "imports": [
@@ -74,14 +75,11 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
