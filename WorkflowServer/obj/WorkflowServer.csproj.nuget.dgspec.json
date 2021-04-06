@@ -5,7 +5,7 @@
   },
   "projects": {
     "C:\\local\\projects\\github_public_wfs\\WorkflowServer\\WorkflowServer.csproj": {
-      "version": "2.7.4",
+      "version": "2.8.0",
       "restore": {
         "projectUniqueName": "C:\\local\\projects\\github_public_wfs\\WorkflowServer\\WorkflowServer.csproj",
         "projectName": "WorkflowServer",
@@ -25,6 +25,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\local\\nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -61,7 +62,7 @@
             },
             "WorkflowEngine.NET-Server": {
               "target": "Package",
-              "version": "[2.7.4, )"
+              "version": "[2.8.0, )"
             }
           },
           "imports": [
@@ -75,6 +76,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

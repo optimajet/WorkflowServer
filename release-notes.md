@@ -1,6 +1,19 @@
 ﻿<!--Stay on the edge of our innovations and learn about the changes made to Workflow Server with each of our releases.-->
 # Release Notes
 
+## 2.8 {#2.8}
+
+- Updated to [Workflow Engine .NET 5.1](https://workflowengine.io/documentation/release-notes/workflow-engine/#5.1)
+
+**The following additional actions must be taken to upgrade to Workflow Server 2.8:**
+
+- Run the SQL script *update_wfs_2_8* for all relative databases and MongoDB.
+  - [MSSQL](https://github.com/optimajet/WorkflowServer/blob/master/sql/MSSQL/update_wfs_2_8.sql)
+  - [PostgreSQL](https://github.com/optimajet/WorkflowServer/blob/master/sql/PostgreSQL/update_wfs_2_8.sql)
+  - [Oracle](https://github.com/optimajet/WorkflowServer/blob/master/sql/Oracle/update_wfs_2_8.sql)
+  - [MySQL](https://github.com/optimajet/WorkflowServer/blob/master/sql/MySQL/update_wfs_2_8.sql)
+  - [MongoDB](https://github.com/optimajet/WorkflowServer/blob/master/sql/MongoDB/update_wfs_2_8.js)
+
 ## 2.7 {#2.7}
 
 - Updated to [Workflow Engine .NET 5.0](https://workflowengine.io/documentation/release-notes/workflow-engine/#5.0)

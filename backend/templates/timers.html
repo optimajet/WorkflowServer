@@ -1,4 +1,4 @@
-<h3>{{ labels.Title }}  |  
+<h3>{{ labels.Title  + (!readonly ? "  |  " : "")}}
     <a v-if="!readonly" style="cursor:pointer" @click="add()">{{ ButtonTextCreate }}</a>
 </h3>
 <div id="WorkflowDesignerTimersList" class="WorkflowDesignerWindowForm">
@@ -72,7 +72,7 @@
         <el-button @click="confirmdialog.visible = false">{{confirmdialog.no}}</el-button>
     </span>
 </el-dialog> 
-<script>
+<script type="application/javascript">
     function timers_Init(me){
          me.VueConfig.data = Object.assign(me.VueConfig.data, {
             readonly: false,

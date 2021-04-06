@@ -1,4 +1,4 @@
-<h3>{{(name || labels.Dropdown) + " " + labels.Values }}  |  
+<h3>{{(name || labels.Dropdown) + " " + labels.Values  + (!readonly ? "  |  " : "")}}
     <a v-if="!readonly" style="cursor:pointer" @click="addDropdownValues()">{{ ButtonTextCreate }}</a>
 </h3>
 <div id="WorkflowDesignerDropdownValues" class="WorkflowDesignerWindowForm">
@@ -53,7 +53,7 @@
         <el-button @click="confirmdialog.visible = false">{{confirmdialog.no}}</el-button>
     </span>
 </el-dialog> 
-<script>
+<script type="application/javascript">
     function dropdownValues_Init(me){
          me.VueConfig.data = Object.assign(me.VueConfig.data, {
             readonly: false,
