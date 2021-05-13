@@ -6,11 +6,11 @@ $exe = $exepath.FullName;
 $user =  "NT AUTHORITY\SYSTEM";
 # $user = $env:computername + "\" + $env:username;
 
- $netCoreVer = (dir (Get-Command dotnet).Path.Replace('dotnet.exe', 'shared\Microsoft.NETCore.App')).Name | Where-Object {$_ -like '2.1.*'}
+ $netCoreVer = dotnet --list-runtimes | Select-String -Pattern '3.1*'
 
  if (!$netCoreVer) {  
-    Write-Host ".NET Core not found. Please install .NET Core 2.1 to run this application";
-    Write-Host "For more information visit https://dotnet.microsoft.com/download/dotnet-core/2.1";
+    Write-Host ".NET Core not found. Please install .NET Core 3.1 to run this application";
+    Write-Host "For more information visit https://dotnet.microsoft.com/download/dotnet-core/3.1";
     Exit; 
 }
 
