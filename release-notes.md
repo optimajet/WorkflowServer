@@ -1,6 +1,32 @@
 ﻿<!--Stay on the edge of our innovations and learn about the changes made to Workflow Server with each of our releases.-->
 # Release Notes
 
+# 2.9 {#2.9}
+
+## Changes
+
+- Updated to [Workflow Engine .NET 5.2](https://workflowengine.io/documentation/release-notes/workflow-engine/#5.2). Please review the Workflow Engine Release notes to find out what functionality of Workflow appeared in Workflow Server.
+- Added a Filter and Connection Test feature into LDAP Setting.
+
+## Breaking changes
+
+- If you are using SetParameter action/activity from the Basic Plugin pay attention that:
+    - Before the parameter value was always interpreted as a string
+    - Now the parameter value is the compilable expression
+    
+    If you need to preserve old behavior please switch on the "Don't compile expressions" setting of the Basic Plugin.
+    
+
+## Update instructions
+
+**The following additional actions must be taken to upgrade to Workflow Server 2.9:**
+
+- Run the SQL script *update_wfs_2_9* for all relative databases.
+    - [MSSQL](https://github.com/optimajet/WorkflowServer/blob/master/sql/MSSQL/update_wfs_2_9.sql)
+    - [PostgreSQL](https://github.com/optimajet/WorkflowServer/blob/master/sql/PostgreSQL/update_wfs_2_9.sql)
+    - [Oracle](https://github.com/optimajet/WorkflowServer/blob/master/sql/Oracle/update_wfs_2_9.sql)
+    - [MySQL](https://github.com/optimajet/WorkflowServer/blob/master/sql/MySQL/update_wfs_2_9.sql)
+
 ## 2.8 {#2.8}
 
 - Updated to [Workflow Engine .NET 5.1](https://workflowengine.io/documentation/release-notes/workflow-engine/#5.1)

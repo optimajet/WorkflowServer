@@ -1,17 +1,44 @@
 $serviceName = "OptimaJet.WorkflowServer";
 
-$service = Get-WmiObject -Class Win32_Service -Filter "Name='$serviceName'"
+$service = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
 
-if ($service) { 
-    if ($service.State = "Running")
+if ($service.Length -gt 0) 
+{
+    if ($service.Status -eq "Running")
     {
-        Stop-Service $serviceName  | Out-Null;
-         Write-Host "$serviceName stopped"
+        try
+        {
+             Stop-Service $serviceName
+        }
+        catch 
+        {
+            Write-Host $error
+            Write-Host "Unable to stop $serviceName"
+            Exit
+        }
+
+        Write-Host "$serviceName stopped"
     }
 
+    try
+    {
+        if (Get-Command "Remove-Service" -errorAction SilentlyContinue)
+        {
+            Remove-Service $serviceName
+        }
+        else
+        {
+            sc.exe delete $serviceName | Out-Null 
+        }
+    }
+    catch
+    {
+        Write-Host $error
+        Write-Host "Unable to delete $serviceName";
+        Exit;
+    }
 
-    $service.delete() | Out-Null;
-     Write-Host "$serviceName deleted";
+    Write-Host "$serviceName deleted";  
 }
 else
 {

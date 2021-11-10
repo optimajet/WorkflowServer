@@ -1,16 +1,15 @@
-$serviceName = "OptimaJet.WorkflowServer";
-$serviceDescription = "OptimaJet Workflow Server";
-$exepath = Get-ChildItem -Path .\WindowsService -Filter WorkflowServerService.exe -Recurse;
-$exeDirectory = $exepath.Directory;
-$exe = $exepath.FullName;
-$user =  "NT AUTHORITY\SYSTEM";
-# $user = $env:computername + "\" + $env:username;
+$serviceName = "OptimaJet.WorkflowServer"
+$serviceDescription = "OptimaJet Workflow Server"
+$exepath = Get-ChildItem -Path .\WindowsService -Filter WorkflowServerService.exe -Recurse
+$exeDirectory = $exepath.Directory
+$exe = $exepath.FullName
+$user =  "NT AUTHORITY\SYSTEM"
 
  $netCoreVer = dotnet --list-runtimes | Select-String -Pattern '3.1*'
 
  if (!$netCoreVer) {  
-    Write-Host ".NET Core not found. Please install .NET Core 3.1 to run this application";
-    Write-Host "For more information visit https://dotnet.microsoft.com/download/dotnet-core/3.1";
+    Write-Host ".NET Core not found. Please install .NET Core 3.1 to run this application"
+    Write-Host "For more information visit https://dotnet.microsoft.com/download/dotnet-core/3.1"
     Exit; 
 }
 
@@ -20,37 +19,69 @@ $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule($acl
 $acl.SetAccessRule($accessRule) | Out-Null
 $acl | Set-Acl $exeDirectory | Out-Null
 
-$service = Get-WmiObject -Class Win32_Service -Filter "Name='$serviceName'"
+$service = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
 
-if ($service) { 
-    if ($service.State = "Running")
+if ($service.Length -gt 0) { 
+    if ($service.Status -eq "Running")
     {
-        Stop-Service $serviceName  | Out-Null;
-         Write-Host "$serviceName stopped"
+        try
+        {
+             Stop-Service $serviceName
+        }
+        catch 
+        {
+            Write-Host $error
+            Write-Host "Unable to stop $serviceName"
+            Exit
+        }
+
+        Write-Host "$serviceName stopped"
     }
 
+    try
+    {
+        if (Get-Command "Remove-Service" -errorAction SilentlyContinue)
+        {
+            Remove-Service $serviceName
+        }
+        else
+        {
+            sc.exe delete $serviceName | Out-Null 
+        }
+    }
+    catch
+    {
+        Write-Host $error
+        Write-Host "Unable to delete $serviceName";
+        Exit;
+    }
 
-    $service.delete() | Out-Null;
-     Write-Host "$serviceName deleted";
+    Write-Host "$serviceName deleted";
 }
 
-New-Service -Name $serviceName -BinaryPathName $exe  -Description $serviceDescription -DisplayName $serviceName -StartupType Automatic | Out-Null;
-
-if ($error)
+try
 {
+    New-Service -Name $serviceName -BinaryPathName $exe  -Description $serviceDescription -DisplayName $serviceName -StartupType Automatic | Out-Null
+}
+catch
+{
+    Write-Host $error
     Write-Host "Unable to create $serviceName";
     Exit;
 }
 
 Write-Host "$serviceName created";
 
-# New-Service -Name $serviceName -BinaryPathName $exepath -Credential $user -Description $serviceDescription -DisplayName $serviceName -StartupType Automatic  | Out-Null;
-
-Start-Service -Name $serviceName  | Out-Null;
-if ($error)
+try
 {
+    Start-Service -Name $serviceName
+}
+catch
+{
+    Write-Host $error
     Write-Host "Unable to start $serviceName";
     Exit;
 }
+
 Write-Host "$serviceName started";
 
