@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://workflowengine.io/server/</PackageProjectUrl>
     <Authors>OptimaJet LLC</Authors>
     <Company>OptimaJet LLC</Company>
-    <Version>2.9.0</Version>
+    <Version>2.9.1</Version>
     <PublishProtocol>FileSystem</PublishProtocol>
     <PublishDir>bin\Release\PublishOutput</PublishDir>
   </PropertyGroup>
@@ -30,7 +30,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WorkflowEngine.NET-Server" Version="2.9.0" />
+    <PackageReference Include="WorkflowEngine.NET-Server" Version="2.9.1" />
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.9" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.9" />
