@@ -32,10 +32,10 @@ services:
        - "8077:8077"
        - "8078:8078"
     volumes:
-       - ./../logs:/app/logs
-       - ./../license:/app/license
-       - ./../metadata:/app/metadata
-       - ./../InitialScripts:/app/InitialScripts
+       - ./../logs:/app/wfs/logs
+       - ./../license:/app/wfs/license
+       - ./../metadata:/app/wfs/metadata
+       - ./../InitialScripts:/app/wfs/InitialScripts
     environment:
       ConnectionString: HOST=workflowserver-postgres;User ID=dbuser;Password=dbuserpassword;Database=wfs;Port=5432
       Provider: postgresql
