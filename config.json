@@ -25,6 +25,8 @@
       "*"
     ]
   },
+  "LdapEncryptPassword": false,
+  "Salt": "s9K44zidpQMM",
   "AuthorityUrl" : "http://localhost:8077",
   "IdentityServerSettings": {
     "CertificateFile": "IdentityServer4Auth.pfx",

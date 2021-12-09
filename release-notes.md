@@ -1,6 +1,13 @@
 ﻿<!--Stay on the edge of our innovations and learn about the changes made to Workflow Server with each of our releases.-->
 # Release Notes
 
+# 2.10.0 {#2.10.0}
+
+## Changes
+
+- Updated to Workflow Engine .NET 5.2.1.
+- Added LDAP password encryption ([Working with Users](https://workflowserver.io/documentation/security/#users)).
+
 # 2.9 {#2.9}
 
 ## Changes

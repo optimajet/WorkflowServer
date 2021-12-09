@@ -38,11 +38,11 @@ services:
     environment:
       ConnectionString: Data Source=workflowserver-mssql;Initial Catalog=wfs;Integrated Security=False;User ID=sa;Password=MyStRoNgPWD12345678
       Provider: mssql
-      LicensePath: /app/license/
-      MetadataFolder: /app/metadata/ 
+      LicensePath: /app/wfs/license/
+      MetadataFolder: /app/wfs/metadata/ 
       DefaultLoggerConfig__FileTarget__0: Information
       DefaultLoggerConfig__FileTarget__1: Error
-      DefaultLoggerConfig__FileSettings__FileName: /app/logs/log.txt
+      DefaultLoggerConfig__FileSettings__FileName: /app/wfs/logs/log.txt
       DefaultLoggerConfig__FileSettings__RollingInterval: Day
       DefaultLoggerConfig__FileSettings__RetainedFileCountLimit: 30
 volumes:
