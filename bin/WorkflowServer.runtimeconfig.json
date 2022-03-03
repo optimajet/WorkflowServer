@@ -6,7 +6,8 @@
       "version": "3.1.0"
     },
     "configProperties": {
-      "Microsoft.AspNetCore.SuppressSameSiteNone": "true"
+      "Microsoft.AspNetCore.SuppressSameSiteNone": "true",
+      "System.Reflection.Metadata.MetadataUpdater.IsSupported": false
     }
   }
 }
