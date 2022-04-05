@@ -17,6 +17,11 @@ db.WorkflowProcessTimer.createIndex({Name: 1});
 db.WorkflowProcessTimer.createIndex({NextExecutionDateTime: 1});
 db.WorkflowProcessTimer.createIndex({Ignore: 1});
 
+db.WorkflowProcessAssignment.createIndex({ProcessId: 1});
+db.WorkflowProcessAssignment.createIndex({AssignmentCode: 1});
+db.WorkflowProcessAssignment.createIndex({Executor: 1});
+db.WorkflowProcessAssignment.createIndex({ProcessId: 1, Executor: 1});
+
 db.WorkflowProcessTransitionHistory.createIndex({ProcessId: 1});
 db.WorkflowProcessTransitionHistory.createIndex({ExecutorIdentityId: 1});
 db.WorkflowProcessTransitionHistory.createIndex({ActorIdentityId: 1});
