@@ -1,32 +1,108 @@
+.wfs-flex-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.wfs-flex-grid > * {
+    flex: 1;
+    margin: 5px;
+    display: flex;
+}
+
+.wfs-flex-grid > * > * {
+    flex: 1;
+}
+
+.wfs-flex-grid .empty {
+    height: 0;
+    margin: 0 10px;
+}
+
+
+@font-face {
+    font-family: 'rsuite-icon-font';
+    src: url('./fonts/rsuite-icon-font.ttf') format('truetype'), url('./fonts/rsuite-icon-font.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Adaptive */
+
+@media screen and (max-width: 670px) {
+    .dwkit-formadmin-header-left a {
+        display: none;
+    }
+}
+
 /* Header */
-.dwkit-formadmin-header-logo{
-    margin-left: 25px;
+.wfs-page-header {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.wfs-page-header > * {
+    margin-bottom: 5px;
+}
+
+.wfs-page-header .toolbar {
+    display: flex;
+    flex: 1;
+}
+
+.wfs-page-header .title {
+    margin-right: 40px;
+}
+
+.wfs-page-header .toolbar.left {
+    min-width: max-content;
+    margin-right: 40px;
+}
+
+.wfs-page-header .toolbar.right {
+    justify-content: end;
+}
+
+.wfs-designer-header {
+    height: 44px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Header */
+.dwkit-formadmin-header-logo {
+    margin-left: 10px;
     cursor: pointer;
 }
 
-.dwkit-formadmin-header{
+.dwkit-formadmin-header {
     height: 50px;
+    overflow: auto;
+    box-shadow: 0 1px 20px 0px rgb(0 0 0 / 11%);
 }
 
-.dwkit-formadmin-header-left{
-    width: 200px;
+.dwkit-formadmin-header.dark {
+    box-shadow: 0 1px 10px 0px rgb(84 255 0 / 11%);
+}
+
+.dwkit-formadmin-header-left {
     float: left;
-    margin-top: 18px;
+    margin-top: 7px;
 }
 
-.dwkit-formadmin-header-center{
+.dwkit-formadmin-header-center {
     float: left;
-    margin-top: 5px;
-    margin-left: 70px;
-    width: calc(100% - 500px);
-    color:red;
+    /* width: calc(100% - 500px); */
+    color: red;
 }
 
-.dwkit-formadmin-header-center .ui.fluid.search > .ui.icon.input{
+.dwkit-formadmin-header-center .ui.fluid.search > .ui.icon.input {
     width: 100%;
 }
 
-.dwkit-formadmin-header-center .ui.fluid.search > .ui.icon.input > input{
+.dwkit-formadmin-header-center .ui.fluid.search > .ui.icon.input > input {
     border: none;
     border-bottom-style: solid;
     border-bottom-color: #F24D00;
@@ -35,204 +111,132 @@
     border-bottom-right-radius: 0px;
     border-top-left-radius: 0px;
 }
-.dwkit-formadmin-header-right{
-    float:right;
-    margin-top: 5px;
+
+.dwkit-formadmin-header-right {
+    float: right;
+    margin-top: 7px;
     margin-right: 10px;
 }
-.dwkit-formadmin-header-right .username{
+
+.dwkit-formadmin-header-right .username {
     color: #475662;
     margin-left: 10px;
     margin-right: 10px;
 }
 
-
-
 /* Menu */
-.dwkit-formadmin-menu{
-    max-width: 250px;
+.dwkit-formadmin-menu {
+    max-width: 270px;
     float: left;
-    background-color: #508a2d;
-    /* height: 300px;
-    min-height: calc(100vh - 90px);
-    overflow-y: auto;  */
+    display: flex;
 }
 
-.ui.menu{
-    border: none;
+.dwkit-formadmin-menu .rs-sidenav-collapse-in {
+    width: 261px;
 }
 
-.dwkit-formadmin-menu > .ui.vertical.menu > .item{
-    color: white;
-}
-
-.dwkit-formadmin-menu .ui.vertical.menu .item > .menu > .item{
-    color: rgba(255,255,255,0.80);
-}
-
-.dwkit-formadmin-menu .ui.vertical.menu .item > .menu > .item:hover, 
-    .dwkit-formadmin-menu .ui.vertical.menu .item > .menu > .active.item:hover{
-    color: white;
-}
-
-.dwkit-formadmin-menu .ui.vertical.menu .item > .menu > .active.item{
-    color: white;
-}
-
-.dwkit-formadmin-menu > .ui.vertical.menu{
-    background: transparent;
-}
-
-.dwkit-formadmin-menu .ui.menu { 
-    font-family: 'Lato', 'sans-serif';
-    box-shadow: none;
-    background: transparent;
-    margin-left: 30px;
-    margin-right: 30px;
-}
-
-.dwkit-formadmin-menu .ui.vertical.menu {
-    width: 190px;
-    margin-top: 15px;
-}
-
-.dwkit-formadmin-menu .ui.menu > .item:last-child { 
-    border-bottom-style: none;
-}
-
-.dwkit-formadmin-menu .ui.menu > .item { 
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-color: rgba(255,255,255,0.40);
-}
-
-.dwkit-formadmin-menu .ui.menu > .item:hover { 
-    background: transparent!important;
-    color: white;
-    border-bottom-color: white;
-}
-
-.dwkit-formadmin-menu .ui.menu > .active.item:hover { 
-    background: transparent!important;
-    color: white;
-}
-
-.dwkit-formadmin-menu .ui.menu > .active.item { 
+.dwkit-formadmin-menu .rs-dropdown-toggle, .dwkit-formadmin-menu .rs-nav-item {
     font-weight: bold;
-    background: transparent;
 }
 
 .dwkit-formadmin {
-    display: flex; 
+    display: flex;
     align-items: stretch;
-    min-height: calc(100% - 50px);
+    height: calc(100vh - 50px);
+    overflow: auto;
 }
 
-/* Content */
-.dwkit-formadmin-basecontent{
-    width: calc(100% - 250px);
-    float: right;
-    /* background-color: #F9F9F9; */
-    /* height: 300px;*/
-    min-height: calc(100vh - 100px);
-}
-
-.dwkit-formadmin-top{
-    background-image: linear-gradient(-180deg, #F2F2F2 0%, rgba(254,254,254,0.00) 100%);
-    height: 15px;
+.dwkit-formadmin-right {
     width: 100%;
+    float: right;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.dwkit-formadmin-content{
-    margin-left: 15px;
-    margin-right: 15px;
+.dwkit-formadmin-content {
+    margin-top: 10px;
+    overflow: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.dwkit-formadmin-content h1{
-    color: #1362E2;
-    font-weight: normal;
-}
-
-.dwkit-formadmin-content h2{
-    color: #1362E2;
-    font-weight: normal;
-}
-
-.dwkit-formadmin-content h3{
-    color: #1362E2;
-    font-weight: normal;
-}
-
-.dwkit-formadmin-content .ui.message{
+.dwkit-formadmin-content .ui.message {
     background: transparent;
 }
 
 /* Form builder */
-.segment.dwkit-formadmind-sementtop{
-    color : white;
+.segment.dwkit-formadmind-sementtop {
+    color: white;
     background-color: #1443df;
 }
 
-.dwkitadmin-toolbar{
+.dwkitadmin-toolbar {
     margin-bottom: 10px;
 }
 
-.dwkit-admin-wfdesigner-buttons{
+#dwkit-admin-wfdesigner {
+    z-index: 1;
+}
+
+.dwkit-admin-wfdesigner-buttons {
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-.dwkit-admin-form-buttons{
+.dwkit-admin-form-buttons {
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-.container{
+.container {
     height: 100%;
+    overflow-y: hidden;
 }
 
-/* .container > div{
-    height: 100%;
-} */
 
-.dwkit-admin-formbuilder-container-fullscreen{
+.EditableTableRow {
+    border-bottom: 0;
+}
+
+.EditableTableRow .rs-table-cell-content {
+    padding: 13px 3px;
+}
+
+.dwkit-admin-formbuilder-container-fullscreen {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     min-height: 950px; /*100vh*/
-    z-index: 1;
+    z-index: 100;
     background: white;
 }
 
-.dwkit-admin-formbuilder-container-fullscreen > div{
+.dwkit-admin-formbuilder-container-fullscreen > div {
     margin: 5px 5px 5px 5px;
 }
 
-.ui.vertical.menu .item .menu .active.item{
+.ui.vertical.menu .item .menu .active.item {
     color: #1443df;
 }
 
-.ui.vertical.menu .item .menu .active.item:hover{
+.ui.vertical.menu .item .menu .active.item:hover {
     color: #1443df;
 }
 
-.dwkit-formbuilder-toolbox{
+.dwkit-formbuilder-toolbox {
     float: right !important;
 }
 
-.dwkit-formadmin-rolepersmissionsgroup > label{
+.dwkit-formadmin-rolepersmissionsgroup > label {
     margin-left: 15px;
     width: 70px;
 }
 
-.dwkit-formadmin-dashboard-buttons{
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.dwkit-formmapping-zone{
+.dwkit-formmapping-zone {
     min-height: 5px;
     padding: 5px;
     margin-top: 5px;
@@ -246,198 +250,256 @@
     border: 1px dashed #E1E9F6;
 }
 
-.dwkit-formmapping-zone-active{
+.dwkit-formmapping-zone-active {
     opacity: 0.5;
     background: #E1E9F6;
     border: 1px dashed #1362E2;
 }
 
-.dwkit-formmapping-zone-select{
+.dwkit-formmapping-zone-select {
     opacity: 1;
     background: #E1E9F6;
     border: 1px solid #1362E2;
 }
 
-.dwkit-formmapping-ref{
+.dwkit-formmapping-ref {
     margin-left: 15px;
     width: 400px;
     background: #F8F8F9;
 }
 
-.dwkit-formmapping-collection{
+.dwkit-formmapping-collection {
     padding-left: 0px;
 }
 
-.dwkit-formmapping-collection-row{
+.dwkit-formmapping-collection-row {
     margin-left: 7px;
 }
 
-.dwkit-formmapping-collection .dwkit-formmapping-collection-row:first{
+.dwkit-formmapping-collection .dwkit-formmapping-collection-row:first {
     margin-top: 1px;
 }
 
-.dwkit-formmapping-collection-row > .ui.form > .fields > .field > .ui.checkbox{
+.dwkit-formmapping-collection-row > .ui.form > .fields > .field > .ui.checkbox {
     margin-top: 30px;
 }
 
 /* Controls */
-.dwkit-buttonimage{
+.dwkit-buttonimage {
     height: 13px;
     cursor: pointer;
 }
 
-.dwkit-formadmin-content a{
-    color: #F24D00;
+.rs-btn-toolbar > :not(:first-child):not(.rs-btn-block) {
+    margin-left: 10px;
+}
+
+.dwkit-formadmin-content a {
+    /* color: #F24D00; */
     cursor: pointer;
 }
 
-.dwkit-formadmin-content hr{
-    background: rgba(148,149,154,0.20);
+.dwkit-formadmin-content hr {
+    background: rgba(148, 149, 154, 0.20);
 }
 
-.dwkit-formadmin-item{
+.dwkit-formadmin-item {
     margin-top: 30px;
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    border-bottom-color: rgba(148,149,154,0.20);
+    border-bottom-color: rgba(148, 149, 154, 0.20);
 }
 
-.dwkit-formadmin-item .ui.form div.field.operationflag{
+.dwkit-formadmin-item .ui.form div.field.operationflag {
     margin-top: 15px;
 }
 
-.dwkit-formadmin-segment{
+.dwkit-formadmin-segment {
     margin-top: 20px;
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    border-bottom-color: rgba(148,149,154,0.20);
+    border-bottom-color: rgba(148, 149, 154, 0.20);
 }
 
-.dwkit-formadmin-info{
-    color: rgba(104,104,104,0.80);
+.dwkit-formadmin-info {
+    color: rgba(104, 104, 104, 0.80);
     text-align: center;
 }
 
-.dwkit-formadmin-formedit{
-    max-width: 800px;
+.dwkit-formadmin-servicedrawerbuttons {
+    margin-bottom: 20px;
 }
 
-.dwkitadmin-toolbar-editform{
-    padding-bottom: 10px;
-    margin-top: 10px;
+.dwkit-formadmin-formedit {
+    max-width: 1000px;
+}
+
+.dwkit-plugin-panel .rs-panel-heading {
+    padding: 0;
+}
+
+.dwkit-plugin-panel .rs-panel-heading::before {
+    top: 0;
+}
+
+.dwkit-inline-form {
+    flex-grow: 1;
+    flex-wrap: wrap;
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+}
+
+.dwkit-list-form {
+    flex-grow: 1;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.dwkit-inline-form > * {
+    margin-right: 10px;
+    flex-grow: 1;
+    flex-basis: 0;
+    align-self: flex-start;
+}
+
+.dwkit-inline-form button {
+    align-self: flex-end;
+}
+
+@-moz-document url-prefix() {
+    .dwkit-inline-form > * {
+        align-self: flex-start;
+    }
+    .wfs-login button {
+        align-self: flex-end;
+        margin-bottom: 15px !important;
+    }
+}
+
+.dwkit-inline-form div:last-child {
+    margin-right: 0;
+}
+
+.VerticalPaddingBetween :not(:last-child) {
     margin-bottom: 10px;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-color: rgba(148,149,154,0.20);
 }
 
-.dwkitadmin-formmapping{
+.HorizontalPaddingBetween :not(:last-child) {
+    margin-right: 10px;
+}
+
+.dwkitadmin-formmapping {
     width: 900px;
 }
-.dwkitadmin-formmapping-left{
+
+.dwkitadmin-formmapping-left {
     width: 500px;
     float: left;
 }
-.dwkitadmin-formmapping-right{
+
+.dwkitadmin-formmapping-right {
     width: 300px;
     float: left;
     margin-left: 15px;
 }
 
-.dwkit-formadmin-imgbutton{
+.dwkit-formadmin-imgbutton {
     height: 15px;
     width: 15px;
 }
 
-.dwkit-formadmin-imgbuttondiv{
+.dwkit-formadmin-imgbuttondiv {
     margin-left: 7px;
 }
 
-.dwkitadmin-formmapping-left .ui.form .fields{
+.dwkitadmin-formmapping-left .ui.form .fields {
     margin-bottom: 0px;
     padding-right: 5px;
 }
 
-.dwkit-formmapping-ref .fields.dwkit-formadmin-mapping-attribute{
+.dwkit-formmapping-ref .fields.dwkit-formadmin-mapping-attribute {
     padding-left: 5px;
     padding-top: 5px;
 }
 
-.dwkit-formadmin-mapattributes .dwkit-formadmin-imgbuttondiv{
+.dwkit-formadmin-mapattributes .dwkit-formadmin-imgbuttondiv {
     margin-left: -15px;
     margin-top: 11px;
 }
 
-.gridcheckbox .ui.checkbox{
+.gridcheckbox .ui.checkbox {
     margin-top: 10px;
 }
 
-.dwkit-formadmin-mapattributes .dwkit-formmapping-zone{
+.dwkit-formadmin-mapattributes .dwkit-formmapping-zone {
     width: 100px;
     margin-bottom: 10px;
 }
 
-.dwkit-formmapping-collection-row .dwkit-formadmin-imgbuttondiv{
+.dwkit-formmapping-collection-row .dwkit-formadmin-imgbuttondiv {
     margin-left: -15px;
     margin-top: 10px;
 }
 
 
-.dwkit-formmapping-collection-row .dwkit-formadmin-imgbuttondiv2{
+.dwkit-formmapping-collection-row .dwkit-formadmin-imgbuttondiv2 {
     margin-left: 0px;
     margin-top: 31px;
 }
 
-.dwkit-formmapping-collection-row .dwkit-formmapping-zone{
+.dwkit-formmapping-collection-row .dwkit-formmapping-zone {
     width: 100px;
 }
 
-.dwkit-formmapping-collection-row .field{
+.dwkit-formmapping-collection-row .field {
     width: 150px;
 }
 
-.dwkit-formmapping-collection-row .children.field{
+.dwkit-formmapping-collection-row .children.field {
     margin-left: 30px
 }
 
 .dwkit-formadmin-imgbutton {
     cursor: pointer;
-    
+
 }
 
-.ui.form .dwkit-formadmin-mapattributes{
+.ui.form .dwkit-formadmin-mapattributes {
     margin-left: 25px;
 }
 
-.dwkit-formmapping-collection-toolbar{
+.dwkit-formmapping-collection-toolbar {
     margin-bottom: 10px;
 }
 
-.dwkit-admin-codeactions-definefunctionname{
-	color: #1262E2;
-	font-weight: 600;
+.dwkit-admin-codeactions-definefunctionname {
+    font-weight: 600;
 }
 
-.dwkit-admin-codeactions-define{
-       font-size: 16px;
+.dwkit-admin-codeactions-define {
+    font-size: 16px;
 }
 
-.dwkit-admin-codeactions-result{
+.dwkit-admin-codeactions-result {
     width: 100%;
     min-height: 150px;
     margin-top: 10px;
     border: 1px solid;
 }
 
-.mapdatacontrol{
+.mapdatacontrol {
     margin-top: 2px;
     margin-bottom: 18px;
-    
+
     padding-left: 10px;
     padding-right: 10px;
 
     background: #F9F9F9;
-    border: 1px solid rgba(148,149,154,0.20);
+    border: 1px solid rgba(148, 149, 154, 0.20);
     border-radius: 4px;
     font-size: 14px;
     color: #465662;
@@ -446,13 +508,13 @@
     cursor: pointer;
 }
 
-.dwkit-formmapping-collection-row .mapdatacontrol{
+.dwkit-formmapping-collection-row .mapdatacontrol {
     margin-top: 22px;
     margin-bottom: 17px;
     margin-right: 10px;
 }
 
-.dwkit-formmapping-collection-row .dwkit-formmapping-zone{
+.dwkit-formmapping-collection-row .dwkit-formmapping-zone {
     margin-right: 10px;
     margin-top: 20px;
     margin-bottom: 17px;
@@ -462,7 +524,7 @@
 Loading 
 //////*/
 
-.dwkit-formadmin-loadingscreen{
+.dwkit-formadmin-loadingscreen {
     text-align: center;
     top: 50%;
     left: 50%;
@@ -473,7 +535,7 @@ Loading
     margin-left: -225px;
 }
 
-.dwkit-formadmin-loadingscreen-logo{
+.dwkit-formadmin-loadingscreen-logo {
     height: 30px;
 }
 
@@ -481,66 +543,135 @@ Loading
  Others
 */
 
+.rs-table-pagination-toolbar {
+    flex-flow: row-reverse;
+}
+
+.dwkit-color-picker-popover .rs-popover {
+    padding: 0;
+}
+
+.dwkit-color-picker .chrome-picker {
+    background: initial !important;
+    box-shadow: none !important;
+}
+
+.dwkit-color-picker .chrome-picker input {
+    color: rgb(150, 150, 150) !important;
+    background: initial !important;
+    box-shadow: rgb(150 150 150) 0px 0px 0px 1px inset !important;
+}
+
+.dwkit-color-picker svg {
+    fill: rgb(150, 150, 150) !important;
+    background: initial !important;
+}
+
+.dwkit-color-picker .circle-picker {
+    width: 225px !important;
+    padding-left: 8px !important;
+    margin-top: 10px !important;
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.dwkit-color-picker .circle-picker > span > div {
+    margin-right: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+.rs-panel-collapsible > .rs-panel-heading::before {
+    left: 20px;
+    right: inherit;
+    margin-right: 10px;
+    top: 22px;
+}
+
+.rs-panel-collapsible .rs-panel-title {
+    margin-left: 20px;
+}
+
+.dwkit-panel.rs-panel-collapsible .rs-panel-heading {
+    padding-bottom: 0;
+}
+
+.dwkit-panel.rs-panel-collapsible .rs-panel-body {
+    padding-bottom: 0;
+}
+
+.workflow-api-nav-item .rs-nav-item-content {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 20px;
+    padding-right: 0;
+    white-space: break-spaces;
+}
+
+.workflow-api-nav-item.rs-nav-item {
+    margin-top: 4px !important;
+}
+
 div.field > label {
-    font-size: 12px!important;
-    color: #97A3B4!important;
-    line-height: 16px!important;
-    font-weight: inherit!important;
+    font-size: 12px !important;
+    color: #97A3B4 !important;
+    line-height: 16px !important;
+    font-weight: inherit !important;
 }
 
 .ui.dropdown .menu {
-	width: 100%!important;
+    width: 100% !important;
 }
 
 .ui.dropdown > .text {
-	width: calc(100% - 20px)!important;
+    width: calc(100% - 20px) !important;
 }
 
-.ui.secondary.pointing.menu .active.item, .ui.secondary.pointing.menu .active.item:hover{
+.ui.secondary.pointing.menu .active.item, .ui.secondary.pointing.menu .active.item:hover {
     border-color: #1362E2;
 }
 
-.ui.secondary.pointing.menu .active.item > span{
+.ui.secondary.pointing.menu .active.item > span {
     color: #1362E2;
 }
 
 
-.react-grid-Grid{
-    border:none;
+.react-grid-Grid {
+    border: none;
 }
-.react-grid-Main{
+
+.react-grid-Main {
     outline: none;
 }
 
-.react-grid-Header{
+.react-grid-Header {
     background: transparent;
     border-top-style: solid;
     border-top-width: 1px;
-    border-top-color: rgba(148,149,154,0.20);
+    border-top-color: rgba(148, 149, 154, 0.20);
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    border-bottom-color: rgba(148,149,154,0.20);
+    border-bottom-color: rgba(148, 149, 154, 0.20);
 }
 
-.react-grid-HeaderCell{
-    border:none;
+.react-grid-HeaderCell {
+    border: none;
     background: transparent;
 }
 
-.react-grid-Row{
+.react-grid-Row {
     cursor: pointer;
     border: none;
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    border-bottom-color: rgba(148,149,154,0.20);
+    border-bottom-color: rgba(148, 149, 154, 0.20);
 }
 
-.react-grid-Cell--locked:last-of-type{
-    border:none;
+.react-grid-Cell--locked:last-of-type {
+    border: none;
 }
 
-.react-grid-Cell{
-    border:none;
+.react-grid-Cell {
+    border: none;
     background: transparent;
 }
 
@@ -548,8 +679,48 @@ div.field > label {
     margin: 0 0 1em;
 }
 
-.dwkitadmin-formmapping-triggers{
+.dwkitadmin-formmapping-triggers {
     clear: both;
+}
+
+.dwkit-formadmin-configurationitem {
+    margin-bottom: 20px;
+    margin-left: 25px;
+}
+
+.dwkit-formadmin-configurationsubitem {
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+
+.dwkit-formadmin-configurationitem-selectall {
+    font-weight: 800;
+    margin-bottom: 20px;
+    margin-left: 11px;
+}
+
+
+.rs-form .error .rs-form-control-wrapper input, .rs-form .error .rs-form-control-wrapper .rs-picker-toggle {
+    color: #9f3a38;
+    border-color: #f04f43;
+}
+
+.dwkit-cell-error * {
+    border-color: #f04f43 !important;
+}
+
+.dwkit-cell-error .rs-btn-default {
+    border-color: #f04f43 !important;
+}
+
+.dwkit-input-form .error-message {
+    color: #f04f43;
+    margin-bottom: -20px;
+}
+
+
+.dwkit-input-form.error .rs-input, .dwkit-input-form.error .rs-picker-input {
+    border-color: #f04f43;
 }
 
 /* .ace_editor.fullScreen {
@@ -568,3 +739,176 @@ div.field > label {
 .fullScreen {
     overflow: hidden
 } */
+
+
+/*************************
+  EditForm
+*************************/
+
+.formbuilder-editform {
+    position: fixed;
+    overflow: visible; /* hack for IE */
+    border-radius: 4px;
+    padding: 10px;
+    top: 0px;
+    left: 0px;
+    min-height: min-content;
+    min-width: min-content;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 10px, rgba(0, 0, 0, 0.12) 0px 1px 18px,
+    rgba(0, 0, 16, 0.15) 0px 3px 5px;
+    z-index: 100;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.formbuilder-editform-container {
+    height: 100%;
+}
+
+.formbuilder-editform-container > h3 {
+    white-space: nowrap;
+}
+
+.formbuilder-editform-form {
+    height: calc(100% - 100px);
+    overflow: auto;
+}
+
+.formbuilder-editform-container .disabledCard {
+    color: silver;
+}
+
+.formbuilder-editform .v-tooltip__content {
+    position: fixed;
+}
+
+.formbuilder-editform-move {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 50px);
+    height: 20px;
+    cursor: move;
+    opacity: 0.4;
+}
+
+.formbuilder-editform-move-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: calc(100% - 50px);
+    height: 20px;
+    cursor: move;
+}
+
+.formbuilder-editform-resize {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 17px;
+    height: 17px;
+    cursor: nwse-resize;
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCAxMCAxMCIgZmlsbD0iI0JCQkJCQiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iOC40Nzk1NCIgY3k9IjguNDc5MyIgcj0iMS4yMjA3NSIgZmlsbD0iaW5oZXJpdCIvPgo8Y2lyY2xlIGN4PSI0Ljg1MDE1IiBjeT0iOC40NzkzIiByPSIxLjIyMDc1IiBmaWxsPSJpbmhlcml0Ii8+CjxjaXJjbGUgY3g9IjEuMjIwNzUiIGN5PSI4LjQ3OTMiIHI9IjEuMjIwNzUiIGZpbGw9ImluaGVyaXQiLz4KPGNpcmNsZSBjeD0iOC40Nzk1NCIgY3k9IjQuODUwMDMiIHI9IjEuMjIwNzUiIGZpbGw9ImluaGVyaXQiLz4KPGNpcmNsZSBjeD0iNC44NTAxNSIgY3k9IjQuODUwMDMiIHI9IjEuMjIwNzUiIGZpbGw9ImluaGVyaXQiLz4KPGNpcmNsZSBjeD0iOC40Nzk1NCIgY3k9IjEuMjIwNzUiIHI9IjEuMjIwNzUiIGZpbGw9ImluaGVyaXQiLz4KPC9zdmc+Cg==");
+}
+
+.formbuilder-editform-close {
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHrSURBVHgB7Zg9bsJAEEbHNkgp0/Jzh1ggenOCkI4uuUnIDXKDcATaVNCDkOlIlzSQkguAMyMBcqy18ezOdvMkBF4b7/e89u7IAIqiKIqiKNYEwCSO46TRaDyeTqfNer2eggAu52QJUEdRFM0v21mWTbDDN3Cg1+u9BkEwuQYKguFqtVrU/X8IDMIwTPLb1DEFAEuK4QkchQQYsATw6s/w65BvowD9fv8ZmJjC44geUGAKDCLOwbvd7rfdbn/hz3Fh1wjbv/f7/abOeSrCD9M03QIDlgCBIbetVusHA4wKu2pJ3AifAhO2AIEhUxsJ6fCElQDBlfARnrAWIOpK+ApPsBcyExjwBQN+GHY9YdAHX+EJEQGiQuIfkuEJp1soD91OnU6HLkhSdox0eEJMgMB1YlEm4SM8wVqJ64AhM1M73l7QbDZBGrFngDDNNgUOWE8Nl8ul2CiIjUDZVFk47B5HaD4YDGIQQkSgap7H9mK5LSrh/BDfWqRKHuw7PGbc7XY/qUAEB5wE6q6wPiWsBbjlgS8JKwHb2saHBFvAtTCTlmAJnOud93ybzQorKcGaRrGDpLBtXR7gm4eJaYo9Ho8jYMASwA6vQSVqG5MErtQLYMAuJc63UYxXaipVmF3OiZ8Z552QoiiKoiiKI39iMbpo8KMOEwAAAABJRU5ErkJggg==") round;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.formbuilder-editform-default {
+    top: calc(50% - 280px);
+    left: calc(50% - 400px);
+    width: 800px;
+    max-width: 95%;
+    max-height: 95%;
+    height: 560px;
+}
+
+.formbuilder-editform-default.formbuilder-editform-settings {
+    width: 450px;
+    height: 520px;
+}
+
+.formbuilder-editform-buttons {
+    position: relative;
+    right: 20px;
+    float: right;
+    display: flex;
+    margin-top: 20px;
+    flex-wrap: nowrap;
+    margin-left: 20px;
+}
+
+.formbuilder-editform-controltype {
+    position: absolute;
+    right: 30px;
+    top: 15px;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(133 133 133 / 40%);
+    border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(133 133 133);
+}
+
+.rs-form-vertical .rs-form-group .rs-input-group {
+    width: auto !important;
+    min-width: 100px;
+}
+
+.dwkit-sidemenu-button.expanded .rs-icon {
+    color: #6FB048;
+}
+
+.wfs-subtle-select .rs-picker-toggle {
+    width: auto;
+}
+
+.wfs-subtle-select .rs-picker-search-input {
+    width: 0;
+}
+
+.rs-picker-menu.creatable .rs-picker-none {
+    display: none;
+}
+
+.rs-picker-creatable {
+    padding: 6px 12px 12px;
+    color: #8e8e93;
+    cursor: default;
+}
+
+.rs-table-word-wrap .rs-table-cell-content {
+    word-break: break-word;
+}
+
+.rs-sidenav-collapse-in .rs-dropdown-toggle-caret, .rs-panel-collapsible > .rs-panel-heading::before {
+     transform: rotate(-90deg) !important;
+ }
+
+.rs-sidenav-collapse-in .rs-dropdown.rs-dropdown-expand .rs-dropdown-toggle-caret, .rs-panel-in > .rs-panel-heading::before {
+     transform: rotate(0deg) !important;
+ }

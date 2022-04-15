@@ -1,3 +1,16 @@
+
+
+@font-face {
+    font-family: 'Roboto-medium';
+    src: url('./fonts/Roboto-medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+body {
+    margin: 0;
+}
+
 div.field > label {
     font-size: 12px!important;
     color: #97A3B4!important;
@@ -333,7 +346,13 @@ div.field > label {
     display:flex;
 }
 
-.wfs-login-wrapper {
+.wfs-wrapper {
+    background: linear-gradient(90deg,
+    #508a2d 0%, rgba(80, 138, 45, 0.75) 100%);
+    font-family: Apple-System, 'Roboto-medium', Arial, Helvetica, sans-serif;
+}
+
+.wfs-login-wrapper, .auth-error-container  {
     height: 100vh;
     width: 100vw;
     display: -webkit-box;
@@ -347,38 +366,74 @@ div.field > label {
     justify-content: center;
 }
 
-.wfs-login-wrapper .wfs-login {
-    padding: 55px 90px 55px;
+.wfs-login-wrapper .wfs-login, .auth-error-block {
+    padding: 70px 90px 55px;
     background: #FFFFFF;
     -webkit-box-shadow: 0px 6px 10px rgba(18, 83, 204, 0.12), 0px 1px 18px rgba(18, 83, 204, 0.12), 0px 3px 5px rgba(18, 83, 204, 0.15);
     box-shadow: 0px 6px 10px rgba(18, 83, 204, 0.12), 0px 1px 18px rgba(18, 83, 204, 0.12), 0px 3px 5px rgba(18, 83, 204, 0.15);
     border-radius: 5px;
-    width: 600px;
-    max-width: 95%;
+    width: 500px;
+    max-width: 500px;
+    margin: 40px;
 }
 
-.wfs-logout{
-    margin-top: 10px;
-    margin-left: 10px;
-}
-
-@media only screen and (max-width: 620px) {
-    .wfs-login-wrapper .wfs-login {
-        width: 90%;
-        height: auto;
-        padding: 30px 40px 40px;
-    }
-}
-
-.wfs-login-logo{
+.wfs-login-logo, .auth-error-block img{
     display: block;
     margin-left: auto; 
     margin-right: auto; 
     height: 25px;
 }
 
-.wfs-login-divlogo{
+.wfs-login-divlogo {
     height: 60px;
+}
+
+.auth-error-description {
+    margin-top: 35px;
+}
+
+.auth-error-header {
+    text-align: center;;
+}
+
+@media only screen and (max-width: 620px) {    
+
+    .wfs-wrapper {
+        background: white;
+    }
+    .wfs-login-wrapper .wfs-login, .auth-error-block {
+        width: 100%;
+        height: auto;
+        padding: 30px 10px;
+        margin: 0;
+    }
+
+    .auth-error-block {
+        height: 100%;
+        padding: 0;
+    }
+
+
+    .auth-error-innerblock {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .auth-error-description {
+        padding: 30px 40px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+
+    .wfs-login-wrapper .wfs-login, .auth-error-block {
+        box-shadow: none;
+    }
+
+    .auth-error-block img{
+        margin-top: 20px;
+    }
 }
 
 /**
@@ -617,4 +672,12 @@ div.field > label {
 
 .gutter-horizontal{
     cursor: ew-resize;
+}
+
+.auth-error-innerdescription {
+    text-align: left;
+}
+
+.rs-picker-menu {
+    z-index: 200;
 }

@@ -2,6 +2,13 @@ if(ELEMENT && ELEMENT.lang){
     ELEMENT.locale(ELEMENT.lang.en);
 }
 
+function getBaseUrl () {
+    if (typeof(document.baseURI) !== 'undefined') return document.baseURI;
+
+    var baseTag = document.getElementsByTagName('base')[0];
+    return location.origin + (baseTag ? baseTag.getAttribute('href') : '');
+}
+
 var WorkflowServer = {
     VueConfig: {
         methods: {
@@ -18,19 +25,19 @@ var WorkflowServer = {
             user: {
                 name: null,
                 sub: null,
-                avatar: "/images/unknown.svg"
+                avatar: "images/unknown.svg"
             },
             id_token: null,
             sidebar:{
                 mini: false,
                 drawer: false,
                 menu: [
-                    { title: 'Dashboard', icon: 'el-icon-location', href: "/" },
-                    { title: 'Processes', icon: 'el-icon-document', href: "/all", count: null },
-                    { title: 'My', icon: 'el-icon-folder-opened', href: "/my", count: null, authRequired: true },
-                    { title: 'Inbox', icon: 'el-icon-reading', href: "/inbox", count: null, authRequired: true },
-                    { title: 'Outbox', icon: 'el-icon-document-checked', href: "/outbox", count: null, authRequired: true },
-                    { title: 'Profile', icon: 'el-icon-user', href: "/profile", authRequired: true },
+                    { title: 'Dashboard', icon: 'el-icon-location', href: "" },
+                    { title: 'Processes', icon: 'el-icon-document', href: "all", count: null },
+                    { title: 'My', icon: 'el-icon-folder-opened', href: "my", count: null, authRequired: true },
+                    { title: 'Inbox', icon: 'el-icon-reading', href: "inbox", count: null, authRequired: true },
+                    { title: 'Outbox', icon: 'el-icon-document-checked', href: "outbox", count: null, authRequired: true },
+                    { title: 'Profile', icon: 'el-icon-user', href: "profile", authRequired: true },
                   ]
             },
             breadcrumb: [],
@@ -52,7 +59,7 @@ var WorkflowServer = {
         },
         monitorSession: true,
         embedded: false,
-        formsServerUrl: window.location.origin,
+        formsServerUrl: getBaseUrl(),
         formUrl: null, // current form URL
         redirectUrl: null,
         logoutRedirectUrl: null,
@@ -90,6 +97,92 @@ var WorkflowServer = {
         }
         
     },
+    createForm: function() {
+        document.baseURI = getBaseUrl();
+
+        WorkflowServer.onCreated().then(function() {
+            WorkflowServer.registerRemoteComponent();
+
+            WorkflowServer.VueConfig.el = '#app';
+            WorkflowServer.App = new Vue(WorkflowServer.VueConfig);
+        });
+    },
+    createEmbeddedForm: function(authorityUrl, formsUrl, formUrl, containerId, redirectUrl, logoutRedirectUrl, locale) {
+        document.baseURI = getBaseUrl();
+
+        var correctFormsUrl = this.withTrailingSlash(formsUrl);
+
+        WorkflowServer.DataExtend({
+            authorityUrl: this.withTrailingSlash(authorityUrl),
+            formsServerUrl: correctFormsUrl,
+            formUrl,
+            monitorSession: false,
+            redirectUrl: redirectUrl,
+            logoutRedirectUrl: logoutRedirectUrl,
+            isEmbeddedIntoAnotherForm: true
+        });
+
+        ELEMENT.locale(locale || ELEMENT.lang.en);
+
+        WorkflowServer.onCreated().then(function() {
+            WorkflowServer.createMonitorFrame(correctFormsUrl + "monitorframe.html");
+            WorkflowServer.registerRemoteComponent(formUrl, true);
+            WorkflowServer.VueConfig.el = '#' + containerId;
+            WorkflowServer.App = new Vue(WorkflowServer.VueConfig);
+        });
+    },
+    createDesigner: function(designerApiUrl, containerId) {
+        document.baseURI = getBaseUrl();
+
+        WorkflowServer.loadStyle(WorkflowServer.Data.authorityUrl + "/css/workflowdesigner.min.css");
+
+        WorkflowServer.loadScriptsInOrder([
+            WorkflowServer.Data.authorityUrl + "/scripts/workflowdesigner.min.js",
+            WorkflowServer.Data.authorityUrl + "/scripts/workflowdesigner.localization.js",
+            WorkflowServer.Data.authorityUrl + "/scripts/pace.min.js",
+        ]).then(function () {
+            var designer =  WorkflowServer.Data.extra.designer;
+
+            designer.containerId = containerId;
+            designer.apiUrl = "/" + designerApiUrl;
+            designer.type = WorkflowServer.getUrlParameter('type');
+            designer.id = WorkflowServer.getUrlParameter('id');
+            WorkflowServer.redrawDesigner();
+        });
+    },
+    createEmbeddedDesigner: function(authorityUrl, formsUrl, designerApiUrl, containerId, type, id, deltaWidth,
+                                     deltaHeight, redirectUrl, logoutRedirectUrl, locale) {
+        document.baseURI = getBaseUrl();
+
+        var correctFormsUrl = this.withTrailingSlash(formsUrl);
+
+        WorkflowServer.DataExtend({
+            authorityUrl: this.withTrailingSlash(authorityUrl),
+            formsServerUrl: correctFormsUrl,
+            monitorSession: false,
+            redirectUrl: redirectUrl,
+            logoutRedirectUrl: logoutRedirectUrl,
+            isEmbeddedIntoAnotherForm: true
+        });
+
+        ELEMENT.locale(locale || ELEMENT.lang.en);
+
+        WorkflowServer.onCreated().then(WorkflowServer.preFetch).then(function() {
+
+            WorkflowServer.createMonitorFrame(correctFormsUrl + "./monitorframe.html");
+
+            var designer =  WorkflowServer.Data.extra.designer;
+
+            designer.containerId = containerId;
+            designer.apiUrl = "/" + designerApiUrl;
+            designer.type = type;
+            designer.id = id;
+            designer.deltaWidth = deltaWidth;
+            designer.deltaHeight = deltaHeight;
+
+            WorkflowServer.redrawDesigner();
+        });
+    },
     loadInstances: function(options){
         if(Array.isArray(options.sortBy) && options.sortBy.length > 0){
             options.sort = options.sortBy[0];
@@ -115,13 +208,15 @@ var WorkflowServer = {
         if(!type) {
             type = "workflow";
         }
-        return '/' + type + '/' + name + '/launch';
+        return '' + type + '/' + name + '/launch';
     },
     navigate: function(url) {
-
         if(!url) {
             WorkflowServer.reload();
         } else {
+            //TODO?
+            if (url.startsWith("/")) {url = "." + url}
+
             WorkflowServer.Data.extra.loading = true;
 
             if(WorkflowServer.Data.isEmbeddedIntoAnotherForm) {
@@ -135,7 +230,6 @@ var WorkflowServer = {
         }
     },
     launch: function(name, type) {
-
         return WorkflowServer.fetchJson(WorkflowServer.getLaunchUrl(name, type), {
             method: "POST",
             body: JSON.stringify({ data: WorkflowServer.Data.FormData })
@@ -172,7 +266,7 @@ var WorkflowServer = {
         }
         
         if(name) {
-            url = "/" + type + "/" + name;
+            url = "" + type + "/" + name;
             if(WorkflowServer.Data.isEmbeddedIntoAnotherForm) {
                 url = WorkflowServer.Data.formsServerUrl + url;
             }
@@ -225,10 +319,10 @@ var WorkflowServer = {
             });
     },
     loadSchemes: function(callback){
-        return WorkflowServer.fetchJson('/data/workflow');
+        return WorkflowServer.fetchJson( WorkflowServer.Data.formsServerUrl + 'data/workflow');
     },
     loadFlows: function(callback){
-        return WorkflowServer.fetchJson('/data/flow');
+        return WorkflowServer.fetchJson(WorkflowServer.Data.formsServerUrl +  'data/flow');
     },
     fetchJson: function(url, options){
         return WorkflowServer.fetch(url, options)
@@ -406,13 +500,13 @@ var WorkflowServer = {
     },
     getRedirectUrl: function() {
         if(!WorkflowServer.Data.isEmbeddedIntoAnotherForm) {
-            return WorkflowServer.getFormsUrl() + "/formssignincallback.html";
+            return WorkflowServer.getFormsUrl() + "formssignincallback.html";
         }
         return WorkflowServer.Data.redirectUrl || window.location.href;
     },
     getLogoutRedirectUrl: function() {
         if(!WorkflowServer.Data.isEmbeddedIntoAnotherForm) {
-            return WorkflowServer.getFormsUrl() + "/formssignoutcallback.html";
+            return WorkflowServer.getFormsUrl() + "formssignoutcallback.html";
         }
         return WorkflowServer.Data.logoutRedirectUrl || WorkflowServer.Data.redirectUrl || window.location.href;
     },
@@ -426,7 +520,7 @@ var WorkflowServer = {
             response_type: 'token id_token',
             scope: "openid profile Forms Designer email Roles ExternalLogins",
             authority: WorkflowServer.Data.authorityUrl,
-            silent_redirect_uri: WorkflowServer.getFormsUrl() + "/silentRenew.html",
+            silent_redirect_uri: WorkflowServer.getFormsUrl() + "silentRenew.html",
             automaticSilentRenew: true,
             filterProtocolClaims: true,
             loadUserInfo: true,
@@ -493,7 +587,7 @@ var WorkflowServer = {
         WorkflowServer.Data.extra.user = {
             name: null,
             sub: null,
-            avatar: "/images/unknown.svg"
+            avatar: "images/unknown.svg"
         };
         WorkflowServer.authHeader = null;
         var manager = WorkflowServer.getManager();
@@ -517,7 +611,7 @@ var WorkflowServer = {
     },
     updateProfile: function(user) {
 
-        return WorkflowServer.fetch('/user/updateprofile', {
+        return WorkflowServer.fetch('user/updateprofile', {
             method: "POST",
             body: JSON.stringify({
                 profile: user
@@ -539,7 +633,7 @@ var WorkflowServer = {
             });
     },
     deleteExternalLogin: function(id) {
-        return WorkflowServer.fetch('/user/deleteexternallogin/' + id).then(function(response) {
+        return WorkflowServer.fetch('user/deleteexternallogin/' + id).then(function(response) {
             if(response.ok){
                 WorkflowServer.getManager().signinSilent();
             }
@@ -562,7 +656,7 @@ var WorkflowServer = {
         WorkflowServer.Data.extra.user = user.profile;
 
         if(!WorkflowServer.Data.extra.user.avatar) {
-            WorkflowServer.Data.extra.user.avatar = "/images/unknown.svg";
+            WorkflowServer.Data.extra.user.avatar = "images/unknown.svg";
         }
 
         WorkflowServer.authHeader = 'Bearer ' + user.access_token;
@@ -599,6 +693,10 @@ var WorkflowServer = {
 
         if(!url) url = location.href;
 
+        //TODO
+        // Add slash in the end for base url case if need
+        if (document.baseURI && document.baseURI.substring(0, document.baseURI.length - 1) === location.href) url = document.baseURI;
+
         WorkflowServer.Data.embedded = !!embedded;      
 
         Vue.component("remote-form", function (resolve, reject) {
@@ -631,7 +729,8 @@ var WorkflowServer = {
     fetchForm: function(url, serverUrl) {
 
         if(serverUrl) {
-            url = serverUrl + url;
+            var urlWithoutSideSlashes = url.replace(/^\/|\/$/g, '');
+            url = serverUrl + urlWithoutSideSlashes;
         }
 
         WorkflowServer.Data.formUrl = url;
@@ -697,35 +796,11 @@ var WorkflowServer = {
             methods: WorkflowServer.VueConfig.methods
         }
     },
-    createForm: function() {
-
-        WorkflowServer.onCreated().then(function() {
-            WorkflowServer.registerRemoteComponent();
-         
-            WorkflowServer.VueConfig.el = '#app';
-            WorkflowServer.App = new Vue(WorkflowServer.VueConfig);
-        });
+    withTrailingSlash: function(url) {
+        if (url.endsWith("/")) return url
+        else return url + "/";
     },
-    createEmbeddedForm: function(authorityUrl, formsUrl, formUrl, containerId, redirectUrl, logoutRedirectUrl, locale) {
 
-        WorkflowServer.DataExtend({
-            authorityUrl: authorityUrl,
-            formsServerUrl: formsUrl,
-            monitorSession: false,
-            redirectUrl: redirectUrl,
-            logoutRedirectUrl: logoutRedirectUrl,
-            isEmbeddedIntoAnotherForm: true
-        });
-
-        ELEMENT.locale(locale || ELEMENT.lang.en);
-
-        WorkflowServer.onCreated().then(function() {
-            WorkflowServer.createMonitorFrame(formsUrl + "/monitorframe.html");
-            WorkflowServer.registerRemoteComponent(formUrl, true);
-            WorkflowServer.VueConfig.el = '#' + containerId;
-            WorkflowServer.App = new Vue(WorkflowServer.VueConfig);
-        });
-    },
     createMonitorFrame: function(url) {
         WorkflowServer.frame = window.document.createElement("iframe");
         WorkflowServer.frame.style.visibility = "hidden";
@@ -739,42 +814,12 @@ var WorkflowServer = {
         window.document.body.appendChild(WorkflowServer.frame);
         window.addEventListener("message", WorkflowServer.monitorFrameEventHandler, false);
     },
-  
+
     monitorFrameEventHandler: function(e) {
 
         if(e.data === "signout") {
             WorkflowServer.signOutHandler();
         }
-    },
-    createEmbeddedDesigner: function(authorityUrl, formsUrl, designerApiUrl, containerId, type, id, deltaWidth, 
-        deltaHeight, redirectUrl, logoutRedirectUrl, locale) {
-     
-        WorkflowServer.DataExtend({
-            authorityUrl: authorityUrl,
-            formsServerUrl: formsUrl,
-            monitorSession: false,
-            redirectUrl: redirectUrl,
-            logoutRedirectUrl: logoutRedirectUrl,
-            isEmbeddedIntoAnotherForm: true
-        });
-
-        ELEMENT.locale(locale || ELEMENT.lang.en);
-
-        WorkflowServer.onCreated().then(WorkflowServer.preFetch).then(function() {
-
-            WorkflowServer.createMonitorFrame(formsUrl + "/monitorframe.html");
-
-            var designer =  WorkflowServer.Data.extra.designer;
-    
-            designer.containerId = containerId;
-            designer.apiUrl = designerApiUrl;
-            designer.type = type;
-            designer.id = id;
-            designer.deltaWidth = deltaWidth;
-            designer.deltaHeight = deltaHeight;
-    
-            WorkflowServer.redrawDesigner();
-        });
     },
     loadScript: function(url) {
         return new Promise(function(resolve, reject) {
@@ -815,24 +860,6 @@ var WorkflowServer = {
     },
     loadStyle: function(url) {
         $('head').append($('<link rel="stylesheet" type="text/css" />').attr('href', url));
-    },
-    createDesigner: function(designerApiUrl, containerId) {
-            
-        WorkflowServer.loadStyle(WorkflowServer.Data.authorityUrl + "/css/workflowdesigner.min.css");
-
-        WorkflowServer.loadScriptsInOrder([
-            WorkflowServer.Data.authorityUrl + "/scripts/workflowdesigner.min.js",
-            WorkflowServer.Data.authorityUrl + "/scripts/workflowdesigner.localization.js",
-            WorkflowServer.Data.authorityUrl + "/scripts/pace.min.js",
-        ]).then(function () {
-            var designer =  WorkflowServer.Data.extra.designer;
-
-            designer.containerId = containerId;
-            designer.apiUrl = designerApiUrl;
-            designer.type = WorkflowServer.getUrlParameter('type');
-            designer.id = WorkflowServer.getUrlParameter('id');
-            WorkflowServer.redrawDesigner();
-        });
     },
     redrawDesigner: function() {
 
@@ -890,8 +917,10 @@ var WorkflowServer = {
     errorHandler: function(error) {
 
         if(error) {
-            if(error.split(" ").includes("401:")) { // Unauthorized
+            if(error.split && error.split(" ").includes("401:")) { // Unauthorized
                 WorkflowServer.createAuthorizationButton();
+            } else if (error.errorMessage && error.errorMessage.stack) {
+                console.error(error.errorMessage.stack);
             }
         }
     },

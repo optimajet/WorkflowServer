@@ -6,10 +6,10 @@
                 <span>{{ item.Code }}</span>                  
             </div>
             <div class="text item">
-                <a :href="'/workflow/' + item.Code" v-if="!item.AutoStart">
+                <a :href="'workflow/' + item.Code" v-if="!item.AutoStart">
                     <el-button type="info" plain>Open</el-button>
                 </a>
-                <el-button v-if="item.AutoStart && !item.InitialCommands.length" type="info" plain
+                <el-button v-if="item.AutoStart && !(item.InitialCommands && item.InitialCommands.length)" type="info" plain
                     @click="WorkflowServer.launch(item.Code)">
                     Launch
                 </el-button>
@@ -30,11 +30,11 @@
                 <span>{{ item.Name }}</span>                  
             </div>
             <div class="text item">
-                <a :href="'/flow/' + item.Name" v-if="!item.AutoStart">
+                <a :href="'flow/' + item.Name" v-if="!item.AutoStart">
                     <el-button  type="info" plain>Open</el-button>
                 </a>
                
-                <el-button v-if="item.AutoStart && !item.InitialCommands.length" type="info" plain 
+                <el-button v-if="item.AutoStart && !(item.InitialCommands && item.InitialCommands.length)" type="info" plain
                     @click="WorkflowServer.launch(item.Name, 'flow')">
                     Launch
                 </el-button>
@@ -47,7 +47,7 @@
             </div>                    
         </el-card>
     </div>
-    <script>
+    <script type="application/javascript">
         WorkflowServer.DataExtend({
             schemes: [],
             flows: []

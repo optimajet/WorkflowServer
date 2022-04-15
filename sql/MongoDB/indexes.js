@@ -37,3 +37,14 @@ db.WorkflowSync.createIndex({Name: 1});
 
 db.WorkflowApprovalHistory.createIndex({ProcessId: 1});
 db.WorkflowApprovalHistory.createIndex({IdentityId: 1});
+db.WorkflowServerStats.createIndex({ProcessId: 1});
+
+db.WorkflowServerProcessHistory.createIndex({ProcessId: 1});
+
+db.WorkflowServerLogs.createIndex({Timestamp: 1});
+db.WorkflowServerLogs.createIndex({Level: 1});
+db.WorkflowServerLogs.createIndex({RuntimeId: 1});
+
+db.WorkflowServerProcessLogs.createIndex({ProcessId: 1});
+db.WorkflowServerProcessLogs.createIndex({Timestamp: -1});
+db.WorkflowServerProcessLogs.createIndex({CreatedOn: -1});

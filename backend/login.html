@@ -2,23 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>OptimaJet WorkflowServer</title>
+        <base href="/"/>
         <link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon">
+        <meta name='viewport' content='width=device-width,initial-scale=1'/>
 
-        <script src="/scripts/jquery.js" type="text/javascript"></script>
-        <script src="/scripts/minified.js" type="text/javascript"></script>
-        <script src="/scripts/vue.js" type="text/javascript"></script>
-        <script src="/scripts/element.js" type="text/javascript"></script>
+        <script src="scripts/jquery.js" type="text/javascript"></script>
+        <script src="scripts/minified.js" type="text/javascript"></script>
+        <script src="scripts/vue.js" type="text/javascript"></script>
+        <script src="scripts/element.js" type="text/javascript"></script>
 
-        <link href="/css/element.css" rel="stylesheet" type="text/css" />
-        <link href="/css/workflowserver.css" rel="stylesheet" type="text/css" />
+        <link href="css/element.css" rel="stylesheet" type="text/css" />
+        <link href="css/workflowserver.css" rel="stylesheet" type="text/css" />
     </head>
     <style>
         body{
             margin: 0px;
-        }
-
-        .container .wfs-login-wrapper .wfs-login{
-            width: 400px;
         }
     </style>
     <body>
@@ -29,22 +27,27 @@
                     <div class="wfs-login">
                         <div id="wfs-content">
                             <div class="wfs-login-divlogo">
-                                <img src="/images/logo.svg" class="wfs-login-logo">
+                                <img src="images/logo.svg" class="wfs-login-logo">
                             </div>
                             <el-form :model="form" :rules="rules" ref="form">
                                 <el-form-item class="field" prop="login" label="Login">
                                     <el-input  v-model="form.login" @keyup.enter.native="submit('form')"></el-input>
                                 </el-form-item>
-                                <el-form-item class="field" prop="password" label="Password">
+                                <el-form-item class="field" prop="password" label="Password" style="margin-bottom: 12px;">
                                     <el-input show-password v-model="form.password" @keyup.enter.native="submit('form')"></el-input>
                                 </el-form-item>
-                                <el-form-item class="field">
+                                <el-form-item class="field" style="margin-bottom: 12px;">
                                     <el-checkbox v-model="form.remember">Remember me</el-checkbox>
                                 </el-form-item>
                                 <el-form-item>
-                                    <el-button style="width: 100%; background: #F24D00;color: #FFFFFF;" @click="submit('form')">Login</el-button>
+                                    <el-button style="width: 100%; background: #6FB048;color: #FFFFFF;" @click="submit('form')"><b>Login</b></el-button>
                                 </el-form-item>
-                                <el-row>
+                                <el-row v-if="!isSupported">
+                                    <el-alert  title="Warning!" type="warning">
+                                        <span>Sorry, but this type of authorization is not supported by the http protocol in your browser.</span>
+                                    </el-alert>
+                                </el-row>
+                                <el-row >
                                     <el-button type="primary" v-for="item in externals" :key="item.Name" @click="externalLogin(item.Name)">
                                         {{item.DisplayName}}
                                     </el-button>
@@ -75,7 +78,10 @@
                     ]
                 },
                 externals: [],
-                tenantId: null
+                tenantId: null,
+                isSupported: document.location.protocol === "https:"
+                    || (document.location.hostname === "localhost" || document.location.hostname === "127.0.0.1")
+                    && navigator.userAgent.search(/Chrome/) <= 0
             },
            
             methods: {
@@ -98,7 +104,7 @@
                             }
     
                             $.ajax({
-                                url: '/configapi',
+                                url: 'configapi',
                                 data: data,
                                 async: true,
                                 crossDomain: true,
@@ -135,6 +141,7 @@
                     var urlParams = new URLSearchParams(location.search);
     
                     var keys = urlParams.keys();
+    
                     let result = keys.next();
                     while (!result.done) {
                         if (result.value.toLowerCase() === 'returnurl') {
@@ -144,14 +151,14 @@
                         result = keys.next();
                     }
     
-                    window.location = newLocation;
+                window.location = newLocation;
                 },
                 getExternalProviders: function() {
     
                     var me = this;
     
                     $.getJSON(
-                        "/account/external", function(response) {
+                        "account/external", function(response) {
                             me.externals = response;
                         }).fail(function() {
                             me.$notify.error({
@@ -162,7 +169,7 @@
                 },
                 externalLogin: function(name) {
     
-                    var newLocation = "/account/challenge-external?name=" + name;
+                    var newLocation = "account/challenge-external?name=" + name;
     
                     var urlParams = new URLSearchParams(location.search);
     

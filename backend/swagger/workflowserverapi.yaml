@@ -5,14 +5,14 @@ info:
   version: 2.3.0
   title: Workflow Server API
   description: Describes the basic methods for managing WorkflowEngine processes
-  termsOfService: 'https://workflowengine.io/'
+  termsOfService: 'https://workflowserver.io/'
   contact:
     name: OptimaJet
     email: sales@optimajet.com
-    url: 'https://workflowengine.io'
+    url: 'https://workflowserver.io/'
   license:
-    name: Workflow Engine EULA 1.0
-    url: 'https://workflowengine.io/agreements/eula/'
+    name: Workflow Server EULA 1.0
+    url: 'https://workflowserver.io/agreements/eula/'
 host: localhost:8077
 basePath: '/workflowapi'
 schemes:

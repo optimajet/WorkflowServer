@@ -6,7 +6,7 @@ body{
 
 /* Main page */
 .wfs-maincontainer{
-
+    background-color: backgroundColor;
 }
 .wfs-container {
     position: relative;
@@ -29,6 +29,12 @@ body{
     align-items: center;
     -webkit-box-shadow: 0px 6px 10px rgba(242, 242, 242, 0.5), 0px 1px 18px rgba(242, 242, 242, 0.5), 0px 3px 5px rgba(242, 242, 242, 0.7);
     box-shadow: 0px 6px 10px rgba(242, 242, 242, 0.5), 0px 1px 18px rgba(242, 242, 242, 0.5), 0px 3px 5px rgba(242, 242, 242, 0.7);
+}
+
+.wfs-header .wfs-logo {
+    min-height: 15px;
+    min-width: 15px;
+    max-height: 40px;
 }
 
 .wfs-header > div {
@@ -155,6 +161,39 @@ body{
     .wfs-sidebar-container:not(.active) {
         left: -265px;
     }
+}
+
+/*forward html page*/
+.forward-container {
+    height: 100vh;
+    display: flex;
+}
+.forward-block {
+    display: block;
+    margin: auto;
+    text-align: center;
+    box-shadow: 0px 6px 10px rgba(18, 83, 204, 0.12), 0px 1px 18px rgba(18, 83, 204, 0.12), 0px 3px 5px rgba(18, 83, 204, 0.15);
+    color: #505050;
+    font-family: 'Lato';
+
+}
+.forward-inner-block {
+    padding: 55px 250px 150px;
+    display: block;
+}
+.forward-block img {
+    margin-top: 50px;
+    height: 45px;
+}
+.forward-block h1 {
+    font-size: 3em;
+    margin-bottom: 50px;
+}
+.forward-block p {
+    font-size: 1.25em;
+}
+.forward-description {
+    margin-top: 55px;
 }
 
 /* Main page Content */

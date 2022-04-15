@@ -24,7 +24,7 @@
         </div>
         <div v-else-if="item.value == 'actions'">
           <el-button type="danger" icon="el-icon-delete" circle @click="deleteItem(scope.row)"></el-button>
-          <el-button v-if="WorkflowServer.isAdminAccount()" type="primary" icon="el-icon-edit-outline" circle @click="openDesigner(scope.row)"></el-button>
+          <el-button v-if="WorkflowServer && WorkflowServer.isAdminAccount()" type="primary" icon="el-icon-edit-outline" circle @click="openDesigner(scope.row)"></el-button>
           
         </div>
 
@@ -80,10 +80,10 @@
     WorkflowServer.VueConfig.methods.getUrl = function(process) {
 
       if(process.flowName) {
-        return '/flow/' + process.flowName + '/' + process.Id;
+        return 'flow/' + process.flowName + '/' + process.Id;
       }
 
-      return '/workflow/' + process.SchemeCode + '/' + process.Id;
+      return 'workflow/' + process.SchemeCode + '/' + process.Id;
     }
 
     WorkflowServer.VueConfig.methods.onSearch = function(){ 
@@ -184,7 +184,7 @@
       });
     };
     WorkflowServer.VueConfig.methods.openDesigner = function(row){
-      location.href = "/designer?id=" + row.Id;
+      location.href = "designer?id=" + row.Id;
     };
 
     WorkflowServer.VueConfig.methods.getCommandType = function(command){

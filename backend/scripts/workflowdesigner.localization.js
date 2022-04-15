@@ -1,4 +1,4 @@
-var WorkflowDesignerConstants = {
+﻿var WorkflowDesignerConstants = {
     ActivityColor: '#ECF0F1',
     ActivityTextColor: '#333333',
     ActivityInitialColor: '#27AE60',
@@ -11,17 +11,12 @@ var WorkflowDesignerConstants = {
     SelectSubProcessColor: '#e3b015',
     SelectSubProcessTextColor: '#FFFFFF',
     ButtonActive: "#D4D8D9",
-    DateTimeFormat: "YYYY-MM-DD HH:mm:ss.SSS",
     BarColor: "white",
     BarSeparatorColor: "#D9DEE0",
-    IsRequiredColor: "#F56C6C",
-    ParameterFromProcessColor: "#1f8dd6",
     DeleteConfirm: 'Are you sure you want to delete selected item(s)?',
     DeleteConfirmCurrent: 'Are you sure you want to delete this item?',
     FieldIsRequired: 'Field is required!',
-    FieldIsNotCorrected: "Field is not corrected!",
     FieldMustBeUnique: 'Field must be unique!',
-    FieldMustContainAt:  "Field must contain @",
     ButtonTextDelete: 'Delete',
     ButtonTextCreate: 'Create',
     ButtonTextSave: 'Save',
@@ -62,11 +57,6 @@ var WorkflowDesignerConstants = {
         IsForSetState: 'For set state',
         IsAutoSchemeUpdate: 'Auto scheme update',
         DisablePersist: 'Disable persist',
-        DisablePersists: {
-            DisablePersistTransitionHistory: "Disable persist transition history",
-            DisablePersistState: "Disable persist process state",
-            DisablePersistParameters: "Disable persist process parameters"
-        },
         Implementation: 'Implementation',
         PreExecutionImplementation: 'PreExecution Implementation',
         ImpOrder: 'Order',
@@ -90,8 +80,7 @@ var WorkflowDesignerConstants = {
         Annotations: 'Annotations',
         AnnotationName: 'Name',
         AnnotationValue: 'Value',
-        Scheme: "Inline scheme",
-        UserComment: "Comment"
+        Scheme: "Inline scheme"
     },
     Decision: {
         Title: 'Decision',
@@ -118,7 +107,6 @@ var WorkflowDesignerConstants = {
         ConditionInversion: 'Invert result',
         ActionLabel: "Action",
         ExpressionLabel: "Expression",
-        UserComment: "Comment"
     },
     DecisionTable: {
         Title: 'Decision table',
@@ -144,7 +132,6 @@ var WorkflowDesignerConstants = {
         ConditionInversion: 'Invert result',
         ActionLabel: "Action",
         ExpressionLabel: "Expression",
-        UserComment: "Comment"
     },
 
     TransitionFormLabel: {
@@ -190,7 +177,6 @@ var WorkflowDesignerConstants = {
         ActionLabel: "Action",
         ExpressionLabel: "Expression",
         OtherwiseLabel: "Otherwise",
-        UserComment: "Comment",
         Subprocess: "Subprocess",
         SubprocessNone: "None",
         SubprocessStart: "Start",
@@ -236,27 +222,6 @@ var WorkflowDesignerConstants = {
         Types: ['Command', 'State', 'Parameter'],
         OverrideHint : "Override timer if exists",
         Override : "Override"
-    },
-
-    AssignmentFormLabel: {
-        Title: 'Assignments',
-        Code: 'Code',
-        Name: 'Name',
-        Executor: 'Executor',
-        ExecutorId: 'Executor Id',
-        Status: 'Status',
-        DateCreation: 'Date creation',
-        Description: 'Description',
-        DateStart: 'Date start',
-        DateFinish: 'Date finish',
-        DeadlineToStart: 'Deadline to start',
-        DeadlineToFinish: 'Deadline to finish',
-        Observers: 'Observers',
-        ObserverId: 'Observer Id',
-        Tags: 'Tags',
-        ProhibitedForExecution: 'Prohibited for execution',
-        AssignmentDeleted: 'Assignment deleted',
-        TypeSomething: 'Type something'
     },
 
     ParameterFormLabel: {
@@ -307,8 +272,6 @@ var WorkflowDesignerConstants = {
         HistoryTabToStateLabel: 'To State',
         HistoryTabExecutorIdLabel: 'Executor Id',
         HistoryTabActorIdLabel: 'Actor Id',
-        HistoryTabExecutorLabel: 'Executor',
-        HistoryTabActorLabel: 'Actor',
         HistoryTabTimeLabel: 'Time',
         HistoryTabStartTimeLabel: 'Start Time',
         HistoryTabDurationLabel: 'Duration (ms)',
@@ -347,9 +310,7 @@ var WorkflowDesignerConstants = {
         Checkbox: "Checkbox",
         Dropdown: "Dropdown",
         MultiSelect: "MultiSelect",
-        DateTime: "Date and time",
-        Date: "Date",
-        Time: "Time",
+        DateTime: "Date/Time",
         Values: 'Values',
         DropdownName: 'Name',
         DropdownValue: 'Value',
@@ -367,131 +328,6 @@ var WorkflowDesignerConstants = {
         SwitchToJson: "Switch to JSON editor",
         SwitchToConstructor: "Switch to parameter values editor",
         InvalidJson: "JSON object is invalid or does not match the model",
-        CustomForms: {
-            HTTPRequest: {
-                Name: "Name",
-                State: "State",
-                UseAuth: "Use authentication",
-                Heading: "Request",
-                Url: "Url",
-                Post: "Post",
-                StoreResponse: "Store response",
-                Username: "Username",
-                Password: "Password",
-                ParameterName: "Parameter name",
-                ParameterPurpose: "Parameter purpose",
-                ContentType: "Content type",
-                AddProcessInstanceParameters: "Add process instance parameters",
-                Parameters: "Parameters",
-                Headers: "Headers",
-            },
-            SendEmail:{
-                Name: "Name",
-                State: "State",
-                Heading: "Form",
-                UseAuth: "Use authentication",
-                MailServer: "Mail server",
-                MailServerPort: "Mail server port",
-                MailServerFrom: "Mail server from",
-                To: "To",
-                Subject: "Subject",
-                MailServerSsl: "MailServerSsl",
-                IsHTML: "IsHTML",
-                MailServerLogin: "Mail server login",
-                MailServerPass: "Mail server pass",
-                Body: "Body",
-            },
-            StartLoopFor: {
-                Name: "Name",
-                State: "State",
-                Heading: "Loop",
-                DateRange: "Date range",
-                RangeSeparator: "To",
-                StartDate: "Start date",
-                EndDate: "End date",
-                Reverse: "Reverse",
-                LoopName: "Loop name",
-                LoopStateParameterName: "Loop state parameter name",
-                LoopCounterValueParameterName: "Loop counter value parameter name",
-                CounterType: "Counter type",
-                StartValue: "Start value",
-                EndValue: "End value",
-                Step: "Step",
-                StepType: "Step type",
-                IncludeLastValue: "Include last value"
-            },
-            StartLoopForeach: {
-                Name: "Name",
-                State: "State",
-                Heading: "Loop",
-                ValuesError: "None value cannot be empty!",
-                Values: "Values",
-                LoopName: "Loop name",
-                LoopStateParameterName: "Loop state parameter name",
-                LoopCounterValueParameterName: "Loop counter value parameter name",
-                Reverse: "Reverse",
-            },
-            CreateProcess: {
-                Name: "Name",
-                State: "State",
-                Heading: "Main settings",
-                ParameterName: "Name",
-                ParameterPurpose: "Purpose",
-                ParameterValue: "Value",
-                Scheme: "Scheme",
-                ProcessId: "Process id",
-                ProcessCreationParameters: "Process creation parameters"
-            },
-            AssignmentCreate: {
-                Name: "Name",
-                State: "State",
-                Heading: "Assignment",
-                Code: "Code",
-                NewTag: "New Tag",
-                Executors: "Executors",
-                IsActive: "Is active",
-                Description: "Description",
-                DeadlineToStart: "Deadline to start",
-                DeadlineToComplete: "Deadline to complete",
-                Observers: "Observers",
-                Tags: "Tags",
-            },
-            AssignmentChange: {
-                Name: "Name",
-                State: "State",
-                Heading: "Assignment",
-                Code: "Code",
-                ReplacementExecutors: "Replacement of executors",
-                OldExecutor: "Old executor",
-                NewExecutor: "New executor",
-                AllExecutors: "All",
-                Change: "Change",
-                Status: "Status",
-                DeadlineToStart: "Deadline to start",
-                DeadlineToComplete: "Deadline to complete",
-                Tags: "Tags",
-                Observers: "Observers",
-                NewTag: "New Tag",
-                StatusState: "Status state",
-                IsActive: "Is active",
-            },
-            AssignmentsHaveStatus:{
-                Name: "Name",
-                State: "State",
-                Code: "Code",
-                Condition: "Condition",
-                IncludeInactive: "Include inactive",
-                StatusState: "Status state",
-                Assignments: "Assignments"
-            },
-            SetLoopState: {
-                Name: "Name",
-                State: "State",
-                LoopName: "Loop name",
-                LoopState: "Loop state"
-            }
-            // you can add custom parameter labels for specific form . example - SetLoopState
-        },
         IncorrectForm : "Your form contains greater than one element, and at least one element doesn't have a Name. Please specify the Name for each element."
     },
 
@@ -512,7 +348,6 @@ var WorkflowDesignerConstants = {
         Actors: 'Actors',
         Commands: 'Commands',
         Parameters: 'Parameters',
-        Assignments: 'Assignments',
         Localization: 'Localization',
         Timers: 'Timers',
         AdditionalParameters: 'Additional Parameters',
@@ -537,15 +372,6 @@ var WorkflowDesignerConstants = {
         Label: "Logs",
         ParamName: "LogEnabled",
         Description: "This parameter is the default value for logging processes based on this scheme",
-        AutoRefresh: "Auto refresh",
-        Empty: "Empty",
-        Timestamp: "Timestamp",
-        Message: "Message",
-        Exception: "Exception",
-        Show: "Show",
-        ExceptionInfo: "Exception info",
-        HideDetails: "Hide details",
-        ShowDetails: "Show details"
     },
     ErrorActivityIsInitialCountText: "One element must be marked flag Initial",
     ErrorActivityIsFinalCountText: "This scheme is Inlined. One or more elements must be marked flag Final",
@@ -576,7 +402,7 @@ var WorkflowDesignerConstants = {
      EditJSONLabel: {
         Title: "Edit value in JSON",
         CreateEmptyType: "Create",
-        Format: "Format",
+        Format: "Format"       
     },
     EditExpressionSettings:
     {
@@ -605,11 +431,6 @@ var WorkflowDesignerConstants = {
         InitialActivityDesc: "It a initial state.",
         FinalActivity: "Final Activity",
         FinalActivityDesc: "It a final state.",
-        SetLoopState: {
-            Title: "Set loop state",
-            Description: "The action for set loop state"
-        }
-        // you can add custom element labels. example - SetLoopState
     },
     OverviewMap: {
         show: true,
@@ -618,128 +439,5 @@ var WorkflowDesignerConstants = {
     },
     UndoDepth: 200,
     DefaultCulture: 'en-US',
-    ErrorInBrowserConsole: "See more info in the browser console.",
-    ELEMENT:{
-        el: {
-            colorpicker: {
-                confirm: 'OK',
-                clear: 'Clear'
-            },
-            datepicker: {
-                now: 'Now',
-                today: 'Today',
-                cancel: 'Cancel',
-                clear: 'Clear',
-                confirm: 'OK',
-                selectDate: 'Select date',
-                selectTime: 'Select time',
-                startDate: 'Start Date',
-                startTime: 'Start Time',
-                endDate: 'End Date',
-                endTime: 'End Time',
-                prevYear: 'Previous Year',
-                nextYear: 'Next Year',
-                prevMonth: 'Previous Month',
-                nextMonth: 'Next Month',
-                year: '',
-                month1: 'January',
-                month2: 'February',
-                month3: 'March',
-                month4: 'April',
-                month5: 'May',
-                month6: 'June',
-                month7: 'July',
-                month8: 'August',
-                month9: 'September',
-                month10: 'October',
-                month11: 'November',
-                month12: 'December',
-                week: 'week',
-                weeks: {
-                    sun: 'Sun',
-                    mon: 'Mon',
-                    tue: 'Tue',
-                    wed: 'Wed',
-                    thu: 'Thu',
-                    fri: 'Fri',
-                    sat: 'Sat'
-                },
-                months: {
-                    jan: 'Jan',
-                    feb: 'Feb',
-                    mar: 'Mar',
-                    apr: 'Apr',
-                    may: 'May',
-                    jun: 'Jun',
-                    jul: 'Jul',
-                    aug: 'Aug',
-                    sep: 'Sep',
-                    oct: 'Oct',
-                    nov: 'Nov',
-                    dec: 'Dec'
-                }
-            },
-            select: {
-                loading: 'Loading',
-                noMatch: 'No matching data',
-                noData: 'No data',
-                placeholder: 'Select'
-            },
-            cascader: {
-                noMatch: 'No matching data',
-                loading: 'Loading',
-                placeholder: 'Select',
-                noData: 'No data'
-            },
-            pagination: {
-                goto: 'Go to',
-                pagesize: '/page',
-                total: 'Total {total}',
-                pageClassifier: ''
-            },
-            messagebox: {
-                title: 'Message',
-                confirm: 'OK',
-                cancel: 'Cancel',
-                error: 'Illegal input'
-            },
-            upload: {
-                deleteTip: 'press delete to remove',
-                delete: 'Delete',
-                preview: 'Preview',
-                continue: 'Continue'
-            },
-            table: {
-                emptyText: 'No Data',
-                confirmFilter: 'Confirm',
-                resetFilter: 'Reset',
-                clearFilter: 'All',
-                sumText: 'Sum'
-            },
-            tree: {
-                emptyText: 'No Data'
-            },
-            transfer: {
-                noMatch: 'No matching data',
-                noData: 'No data',
-                titles: ['List 1', 'List 2'], // to be translated
-                filterPlaceholder: 'Enter keyword', // to be translated
-                noCheckedFormat: '{total} items', // to be translated
-                hasCheckedFormat: '{checked}/{total} checked' // to be translated
-            },
-            image: {
-                error: 'FAILED'
-            },
-            pageHeader: {
-                title: 'Back' // to be translated
-            },
-            popconfirm: {
-                confirmButtonText: 'Yes',
-                cancelButtonText: 'No'
-            },
-            empty: {
-                description: 'No Data'
-            }
-        }
-    }
+    ErrorInBrowserConsole: "See more info in the browser console."
 };

@@ -5,14 +5,14 @@ info:
   version: 2.0.0
   title: Callback Server for Workflow Server API
   description: Describes CallbackApi, a set of methods that will be called by the WFS, to execute external Actions, Conditions and Rules.
-  termsOfService: 'https://workflowengine.io/'
+  termsOfService: 'https://workflowserver.io/'
   contact:
     name: OptimaJet
     email: sales@optimajet.com
-    url: 'https://workflowengine.io'
+    url: 'https://workflowserver.io/'
   license:
-    name: Workflow Engine EULA 1.0
-    url: 'https://workflowengine.io/agreements/eula/'
+    name: Workflow Server EULA 1.0
+    url: 'https://workflowserver.io/agreements/eula/'
 host: localhost:5000
 basePath: '/callbackapi'
 schemes:

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
+    <base href="/"/>
     <body>
         <script src="scripts/oidc-client.min.js"></script>
         <script>
-
-            var formsUrl = window.location.protocol + "//" + window.location.host;
+            var formsUrl = location.origin + document.getElementsByTagName('base')[0].getAttribute('href');
 
             var userManagerConfig = {
                 client_id: 'forms',
@@ -12,7 +12,7 @@
                 response_type: 'token id_token',
                 scope: "openid profile Forms Designer email Roles ExternalLogins",
                 authority: AuthorityUrl,
-                silent_redirect_uri: formsUrl + "/silentRenew.html",
+                silent_redirect_uri: formsUrl + "silentRenew.html",
                 automaticSilentRenew: true,
                 filterProtocolClaims: true,
                 loadUserInfo: true,

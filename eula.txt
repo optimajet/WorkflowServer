@@ -107,7 +107,7 @@ Workflow Server’s JavaScript visual interface library:
 wfs-admin.js
 All CSS files and images required for the proper functioning of the visual interface of Workflow Server that are not part of third-party libraries.
 
-Workflow Server application downloadable from the ‘Downloads’ section of the https://workflowengine.io website.
+Workflow Server application downloadable from the ‘Downloads’ section of the https://workflowserver.io website.
 
 NuGet Package:
 
@@ -175,7 +175,7 @@ All title and copyrights in and to the SOFTWARE DEVELOPMENT PRODUCT(S) (includin
 The SOFTWARE DEVELOPMENT PRODUCT(S) is protected by copyright laws and international treaty provisions and therefore, you must treat the SOFTWARE DEVELOPMENT PRODUCT(S) like any other copyrighted material except that you may install and use the SOFTWARE DEVELOPMENT PRODUCT(S) as described in this EULA.
 
 9. DOWNLOAD OF SOFTWARE DEVELOPMENT PRODUCT(S)
-The SOFTWARE DEVELOPMENT PRODUCT(S) will be made available for download from workflowengine.io exclusively.
+The SOFTWARE DEVELOPMENT PRODUCT(S) will be made available for download from workflowserver.io exclusively.
 
 10. EXPORT RESTRICTIONS
 You, as Developer End User, must agree not to export or re-export the SOFTWARE DEVELOPMENT PRODUCT(S) within any created application to any country, person, entity or end user subject to Russian Federation.

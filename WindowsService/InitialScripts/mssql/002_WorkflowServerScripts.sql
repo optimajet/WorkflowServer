@@ -8,53 +8,53 @@ File: WorkflowServerScripts.sql
 IF NOT EXISTS (SELECT 1 FROM [INFORMATION_SCHEMA].[TABLES] WHERE [TABLE_NAME] = N'WorkflowServerStats')
 BEGIN
 
-	CREATE TABLE [dbo].[WorkflowServerStats](
-		[Id] [uniqueidentifier] NOT NULL,
-		[Type] [nvarchar](256) NOT NULL,
-		[DateFrom] [datetime] NOT NULL,
-		[DateTo] [datetime] NOT NULL,
-		[Duration] [int] NOT NULL,
-		[IsSuccess] [bit] NOT NULL,
-		[ProcessId] [uniqueidentifier] NULL,
-	 CONSTRAINT [PK_WorkflowServerStats] PRIMARY KEY NONCLUSTERED 
-	(
-		[Id] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY]
+CREATE TABLE [dbo].[WorkflowServerStats](
+    [Id] [uniqueidentifier] NOT NULL,
+    [Type] [nvarchar](256) NOT NULL,
+    [DateFrom] [datetime] NOT NULL,
+    [DateTo] [datetime] NOT NULL,
+    [Duration] [int] NOT NULL,
+    [IsSuccess] [bit] NOT NULL,
+    [ProcessId] [uniqueidentifier] NULL,
+    CONSTRAINT [PK_WorkflowServerStats] PRIMARY KEY NONCLUSTERED
+(
+[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+    ) ON [PRIMARY]
 
-	ALTER TABLE [dbo].[WorkflowServerStats] ADD  CONSTRAINT [DF_WorkflowServerStats_IsSuccess]  DEFAULT ((1)) FOR [IsSuccess]
+ALTER TABLE [dbo].[WorkflowServerStats] ADD  CONSTRAINT [DF_WorkflowServerStats_IsSuccess]  DEFAULT ((1)) FOR [IsSuccess]
 
 END
 
 IF NOT EXISTS (SELECT 1 FROM [INFORMATION_SCHEMA].[TABLES] WHERE [TABLE_NAME] = N'WorkflowServerProcessHistory')
 BEGIN
 
-	CREATE TABLE [dbo].[WorkflowServerProcessHistory] (
-		  Id UNIQUEIDENTIFIER NOT NULL
-		 ,ProcessId UNIQUEIDENTIFIER NOT NULL
-		 ,IdentityId NVARCHAR(256) NULL
-		 ,AllowedToEmployeeNames NVARCHAR(MAX) NOT NULL
-		 ,TransitionTime DATETIME NULL
-		 ,[Order] BIGINT IDENTITY
-		 ,InitialState NVARCHAR(1024) NOT NULL
-		 ,DestinationState NVARCHAR(1024) NOT NULL
-		 ,Command NVARCHAR(1024) NOT NULL
-		 ,CONSTRAINT PK_WorkflowServerProcessHistory PRIMARY KEY NONCLUSTERED (Id)
-	) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+CREATE TABLE [dbo].[WorkflowServerProcessHistory] (
+                                                      Id UNIQUEIDENTIFIER NOT NULL
+    ,ProcessId UNIQUEIDENTIFIER NOT NULL
+    ,IdentityId NVARCHAR(256) NULL
+    ,AllowedToEmployeeNames NVARCHAR(MAX) NOT NULL
+    ,TransitionTime DATETIME NULL
+    ,[Order] BIGINT IDENTITY
+    ,InitialState NVARCHAR(1024) NOT NULL
+    ,DestinationState NVARCHAR(1024) NOT NULL
+    ,Command NVARCHAR(1024) NOT NULL
+    ,CONSTRAINT PK_WorkflowServerProcessHistory PRIMARY KEY NONCLUSTERED (Id)
+    ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
-	CREATE CLUSTERED INDEX IX_WorkflowServerProcessHistory
+CREATE CLUSTERED INDEX IX_WorkflowServerProcessHistory
 	ON [dbo].[WorkflowServerProcessHistory] (ProcessId, [Order])
 	ON [PRIMARY]
-	
-	ALTER TABLE [dbo].[WorkflowServerProcessHistory]
-	ADD CONSTRAINT FK_WorkflowServerProcessHistory_WorkflowServerProcessHistory FOREIGN KEY (Id) REFERENCES dbo.WorkflowServerProcessHistory (Id)
+
+ALTER TABLE [dbo].[WorkflowServerProcessHistory]
+    ADD CONSTRAINT FK_WorkflowServerProcessHistory_WorkflowServerProcessHistory FOREIGN KEY (Id) REFERENCES dbo.WorkflowServerProcessHistory (Id)
 END
 
 ALTER TABLE [dbo].[WorkflowInbox] ALTER COLUMN [IdentityId] NVARCHAR(256) NOT NULL
 
-IF NOT EXISTS (SELECT 1 FROM sys.procedures WHERE name = N'WorkflowReportBySchemes')
+    IF NOT EXISTS (SELECT 1 FROM sys.procedures WHERE name = N'WorkflowReportBySchemes')
 BEGIN
-	EXECUTE('CREATE PROCEDURE [WorkflowReportBySchemes] 
+EXECUTE('CREATE PROCEDURE [WorkflowReportBySchemes] 
 	AS
 	BEGIN
 		SELECT
@@ -69,12 +69,12 @@ BEGIN
 		FROM WorkflowScheme ws
 	
 	END')
-	PRINT 'WorkflowReportBySchemes CREATE PROCEDURE'
+    PRINT 'WorkflowReportBySchemes CREATE PROCEDURE'
 END
 
 IF NOT EXISTS (SELECT 1 FROM sys.procedures WHERE name = N'WorkflowReportByTransitions')
 BEGIN
-	EXECUTE('CREATE PROCEDURE WorkflowReportByTransitions
+EXECUTE('CREATE PROCEDURE WorkflowReportByTransitions
 	@from datetime,
 	@to datetime,
 	@period int -- 0 - MONTH, 1 - DAY, 2 - HOUR, 3 - MINUTE, 4 - SECOND 
@@ -124,12 +124,12 @@ BEGIN
 		GROUP BY p.df, scheme.Code
 		ORDER BY p.df, scheme.Code
 	END')
-	PRINT 'WorkflowReportByTransitions CREATE PROCEDURE'
+    PRINT 'WorkflowReportByTransitions CREATE PROCEDURE'
 END
 
 IF NOT EXISTS (SELECT 1 FROM sys.procedures WHERE name = N'WorkflowReportByStats')
 BEGIN
-	EXECUTE('CREATE PROCEDURE [dbo].[WorkflowReportByStats] 	
+EXECUTE('CREATE PROCEDURE [dbo].[WorkflowReportByStats] 	
 	@from datetime,
 	@to datetime,
 	@period int -- 0 - MONTH, 1 - DAY, 2 - HOUR, 3 - MINUTE, 4 - SECOND 
@@ -212,7 +212,7 @@ BEGIN
 		GROUP BY p.df, scheme.Code, types.Code, success.Value
 		ORDER BY p.df, scheme.Code, types.Code, success.Value
 	END')
-	PRINT 'WorkflowReportByStats CREATE PROCEDURE'
+    PRINT 'WorkflowReportByStats CREATE PROCEDURE'
 END
 
 IF NOT EXISTS (
@@ -222,7 +222,7 @@ IF NOT EXISTS (
          AND name = 'DeleteFinalized'
 )
 BEGIN
- ALTER TABLE [dbo].[WorkflowScheme] ADD [DeleteFinalized] BIT NOT NULL DEFAULT (0)
+ALTER TABLE [dbo].[WorkflowScheme] ADD [DeleteFinalized] BIT NOT NULL DEFAULT (0)
 END
 
 IF NOT EXISTS (
@@ -232,7 +232,7 @@ IF NOT EXISTS (
          AND name = 'DontFillIndox'
 )
 BEGIN
- ALTER TABLE [dbo].[WorkflowScheme] ADD [DontFillIndox] BIT NOT NULL DEFAULT (0)
+ALTER TABLE [dbo].[WorkflowScheme] ADD [DontFillIndox] BIT NOT NULL DEFAULT (0)
 END
 
 IF NOT EXISTS (
@@ -242,7 +242,7 @@ IF NOT EXISTS (
          AND name = 'DontPreExecute'
 )
 BEGIN
- ALTER TABLE [dbo].[WorkflowScheme] ADD [DontPreExecute] BIT NOT NULL DEFAULT (0)
+ALTER TABLE [dbo].[WorkflowScheme] ADD [DontPreExecute] BIT NOT NULL DEFAULT (0)
 END
 
 IF NOT EXISTS (
@@ -252,7 +252,7 @@ IF NOT EXISTS (
          AND name = 'AutoStart'
 )
 BEGIN
- ALTER TABLE [dbo].[WorkflowScheme] ADD [AutoStart] BIT NOT NULL DEFAULT (0)
+ALTER TABLE [dbo].[WorkflowScheme] ADD [AutoStart] BIT NOT NULL DEFAULT (0)
 END
 
 IF NOT EXISTS (
@@ -262,28 +262,28 @@ IF NOT EXISTS (
          AND name = 'DefaultForm'
 )
 BEGIN
- ALTER TABLE [dbo].[WorkflowScheme] ADD [DefaultForm] nvarchar(max) NULL
+ALTER TABLE [dbo].[WorkflowScheme] ADD [DefaultForm] nvarchar(max) NULL
 END
 
 IF NOT EXISTS (SELECT 1 FROM [INFORMATION_SCHEMA].[TABLES] WHERE [TABLE_NAME] = N'WorkflowServerLogs')
 BEGIN
 
-	CREATE TABLE [dbo].[WorkflowServerLogs](
-		[Id] [uniqueidentifier] NOT NULL,
-		[Message] [nvarchar](max) NOT NULL,
-		[MessageTemplate] [nvarchar](max) NOT NULL,
-		[Timestamp] [datetime] NOT NULL,
-		[Exception] [nvarchar](max) NULL,
-		[PropertiesJson] [nvarchar](max) NULL,
-		[Level] [tinyint] NOT NULL,
-		[RuntimeId] [nvarchar](450) NOT NULL,
-	 CONSTRAINT [PK_WorkflowServerLogs] PRIMARY KEY NONCLUSTERED 
-	(
-		[Id] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+CREATE TABLE [dbo].[WorkflowServerLogs](
+    [Id] [uniqueidentifier] NOT NULL,
+    [Message] [nvarchar](max) NOT NULL,
+    [MessageTemplate] [nvarchar](max) NOT NULL,
+    [Timestamp] [datetime] NOT NULL,
+    [Exception] [nvarchar](max) NULL,
+    [PropertiesJson] [nvarchar](max) NULL,
+    [Level] [tinyint] NOT NULL,
+    [RuntimeId] [nvarchar](450) NOT NULL,
+    CONSTRAINT [PK_WorkflowServerLogs] PRIMARY KEY NONCLUSTERED
+(
+[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+    ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
-	CREATE CLUSTERED INDEX [IX_WorkflowServerLogs_Timestamp_Id]
+CREATE CLUSTERED INDEX [IX_WorkflowServerLogs_Timestamp_Id]
 	ON [dbo].[WorkflowServerLogs]([Timestamp] ASC, [Id] ASC)
 
 	CREATE NONCLUSTERED INDEX [IX_WorkflowServerLogs_RuntimeId] ON [dbo].[WorkflowServerLogs]
@@ -301,49 +301,81 @@ END
 
 IF NOT EXISTS (SELECT 1 FROM [INFORMATION_SCHEMA].[TABLES] WHERE [TABLE_NAME] = N'WorkflowServerUser')
 BEGIN
-	CREATE TABLE [WorkflowServerUser](
-		[Id] [uniqueidentifier] NOT NULL,
-		[Name] [nvarchar](256) NOT NULL,
-		[Email] [nvarchar](256) NULL,
-		[Phone] [nvarchar](256) NULL,
-		[ExternalId] [nvarchar](1024) NULL,
-		[Lock] [uniqueidentifier] NOT NULL,
-		[TenantId] [nvarchar](1024) NULL,
-		[IsLocked] [bit] NOT NULL,
-		[Roles] [nvarchar](max) NULL,
-		[Extensions] [nvarchar](max) NULL,
-	 CONSTRAINT [PK_WorkflowServerUser] PRIMARY KEY CLUSTERED
-	(
-		[Id] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY]
+CREATE TABLE [WorkflowServerUser](
+    [Id] [uniqueidentifier] NOT NULL,
+    [Name] [nvarchar](256) NOT NULL,
+    [Email] [nvarchar](256) NULL,
+    [Phone] [nvarchar](256) NULL,
+    [ExternalId] [nvarchar](1024) NULL,
+    [Lock] [uniqueidentifier] NOT NULL,
+    [TenantId] [nvarchar](1024) NULL,
+    [IsLocked] [bit] NOT NULL,
+    [Roles] [nvarchar](max) NULL,
+    [Extensions] [nvarchar](max) NULL,
+    CONSTRAINT [PK_WorkflowServerUser] PRIMARY KEY CLUSTERED
+(
+[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+    ) ON [PRIMARY]
 
 END
 
 IF NOT EXISTS (SELECT 1 FROM [INFORMATION_SCHEMA].[TABLES] WHERE [TABLE_NAME] = N'WorkflowServerUserCredential')
 BEGIN
-	CREATE TABLE [dbo].[WorkflowServerUserCredential](
-		[Id] [uniqueidentifier] NOT NULL,
-		[UserId] [uniqueidentifier] NOT NULL,
-		[TenantId] [nvarchar](1024) NULL,
-		[Login] [nvarchar](256) NOT NULL,
-		[AuthType] [tinyint] NOT NULL,
-		[PasswordSalt] [nvarchar](128) NULL,
-		[PasswordHash] [nvarchar](128) NULL,
-		[ExternalProviderName] [nvarchar](256) NULL,
-	 CONSTRAINT [PK_WorkflowServerUserCredential] PRIMARY KEY CLUSTERED 
-	(
-		[Id] ASC
-	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-	) ON [PRIMARY]
-	
+CREATE TABLE [dbo].[WorkflowServerUserCredential](
+    [Id] [uniqueidentifier] NOT NULL,
+    [UserId] [uniqueidentifier] NOT NULL,
+    [TenantId] [nvarchar](1024) NULL,
+    [Login] [nvarchar](256) NOT NULL,
+    [AuthType] [tinyint] NOT NULL,
+    [PasswordSalt] [nvarchar](128) NULL,
+    [PasswordHash] [nvarchar](128) NULL,
+    [ExternalProviderName] [nvarchar](256) NULL,
+    CONSTRAINT [PK_WorkflowServerUserCredential] PRIMARY KEY CLUSTERED
+(
+[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+    ) ON [PRIMARY]
 
-	ALTER TABLE [dbo].[WorkflowServerUserCredential] WITH CHECK ADD CONSTRAINT [FK_WorkflowServerUserCredential_WorkflowServerUser] FOREIGN KEY([UserId])
-	REFERENCES [dbo].[WorkflowServerUser] ([Id])
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
 
-	ALTER TABLE [dbo].[WorkflowServerUserCredential] CHECK CONSTRAINT [FK_WorkflowServerUserCredential_WorkflowServerUser]
+ALTER TABLE [dbo].[WorkflowServerUserCredential] WITH CHECK ADD CONSTRAINT [FK_WorkflowServerUserCredential_WorkflowServerUser] FOREIGN KEY([UserId])
+    REFERENCES [dbo].[WorkflowServerUser] ([Id])
+    ON UPDATE CASCADE
+       ON DELETE CASCADE
+
+ALTER TABLE [dbo].[WorkflowServerUserCredential] CHECK CONSTRAINT [FK_WorkflowServerUserCredential_WorkflowServerUser]
 
 
 END
+
+IF NOT EXISTS(SELECT 1 FROM [INFORMATION_SCHEMA].[TABLES] WHERE [TABLE_NAME] = N'WorkflowServerProcessLogs')
+BEGIN
+CREATE TABLE [dbo].[WorkflowServerProcessLogs]
+(
+    [Id]         [uniqueidentifier] NOT NULL,
+    [ProcessId]  [uniqueidentifier] NOT NULL,
+    [CreatedOn]  [datetime2](6)     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    [Timestamp]  [datetime2](6)     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    [SchemeCode] [nvarchar](256)    NULL,
+    [Message]    [nvarchar](max)    NOT NULL DEFAULT '',
+    [Properties] [nvarchar](max)    NOT NULL DEFAULT '',
+    [Exception]  [nvarchar](max)    NOT NULL DEFAULT '',
+    [TenantId]   [nvarchar](1024)   NULL
+    CONSTRAINT [PK_WorkflowServerProcessLogs] PRIMARY KEY NONCLUSTERED
+([Id] ASC) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+    ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+CREATE CLUSTERED INDEX [IX_WorkflowServerProcessLogs_Timestamp_Id]
+            ON [dbo].[WorkflowServerProcessLogs] ([Timestamp] ASC, [Id] ASC)
+
+        CREATE NONCLUSTERED INDEX [IX_WorkflowServerProcessLogs_CreatedOn_Id]
+            ON [dbo].[WorkflowServerProcessLogs] ([CreatedOn] ASC, [Id] ASC)
+
+        CREATE NONCLUSTERED INDEX [IX_WorkflowServerProcessLogs_ProcessId] ON [dbo].[WorkflowServerProcessLogs]
+            ([ProcessId] ASC) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+
+END
+
+
+
+

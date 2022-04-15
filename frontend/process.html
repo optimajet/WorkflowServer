@@ -68,7 +68,7 @@
         if(!WorkflowServer.Data.embedded) {
             WorkflowServer.Data.extra.breadcrumbs.push({
                 text: 'Dashboard',
-                href: '/',
+                href: '',
             });
         }
 
@@ -79,11 +79,11 @@
             }
             else if (WorkflowServer.Data.embedded)
             {
-                flowHref =  '/flow/' + WorkflowServer.Data.FormData.flowName + '?embedded=true'
+                flowHref =  'flow/' + WorkflowServer.Data.FormData.flowName + '?embedded=true'
             }
             else
             {
-                flowHref =  '/flow/' + WorkflowServer.Data.FormData.flowName;
+                flowHref =  'flow/' + WorkflowServer.Data.FormData.flowName;
             }
 
             WorkflowServer.Data.extra.breadcrumbs.push({
@@ -97,11 +97,11 @@
             }
             else if (WorkflowServer.Data.embedded)
             {
-                formHref =  '/workflow/' + WorkflowServer.Data.SchemeCode + '?embedded=true'
+                formHref =  'workflow/' + WorkflowServer.Data.SchemeCode + '?embedded=true'
             }
             else
             {
-                formHref =  '/workflow/' + WorkflowServer.Data.SchemeCode;
+                formHref =  'workflow/' + WorkflowServer.Data.SchemeCode;
             }
 
             WorkflowServer.Data.extra.breadcrumbs.push({

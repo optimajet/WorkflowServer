@@ -14,7 +14,7 @@
     </el-menu-item> -->
     <el-divider></el-divider>
     <a style="text-decoration: inherit;" :href="item.href" v-for="(item, index) in extra.sidebar.menu" 
-        v-if="!item.authRequired || (extra.user.sub && !WorkflowServer.isAdminAccount())">
+        v-if="!item.authRequired || (extra.user.sub && !(WorkflowServer && WorkflowServer.isAdminAccount()))">
         <el-menu-item :index="index" >
             <i :class="item.icon"></i>
             <span v-if="!extra.sidebar.mini" slot="title">{{ item.title }}</span>
@@ -22,7 +22,7 @@
     </a>
 </el-menu>
 <button class="wfs-sidebar-btn" onclick="sideBarOnClick();"></button>
-<script>
+<script type="application/javascript">
     WorkflowServer.VueConfig.methods.sidebarClick = function(){
         WorkflowServer.Data.extra.sidebar.mini = 
             !WorkflowServer.Data.extra.sidebar.mini;

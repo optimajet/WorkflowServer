@@ -5,11 +5,11 @@ $exeDirectory = $exepath.Directory
 $exe = $exepath.FullName
 $user =  "NT AUTHORITY\SYSTEM"
 
- $netCoreVer = dotnet --list-runtimes | Select-String -Pattern '3.1*'
+$netCoreVer = dotnet --list-runtimes | Select-String -Pattern '6\.0*'
 
  if (!$netCoreVer) {  
-    Write-Host ".NET Core not found. Please install .NET Core 3.1 to run this application"
-    Write-Host "For more information visit https://dotnet.microsoft.com/download/dotnet-core/3.1"
+    Write-Host ".NET not found. Please install .NET 6.0 to run this application"
+    Write-Host "For more information visit https://dotnet.microsoft.com/en-us/download"
     Exit; 
 }
 

@@ -18,7 +18,7 @@ LOGGING;
 --eos
 
 CREATE INDEX IDX_WORKFLOWSERVERSTATS_PROCESSID ON WORKFLOWSERVERSTATS (PROCESSID)
-LOGGING;
+    LOGGING;
 --eos
 
 CREATE TABLE WORKFLOWSERVERPROCESSHISTORY (
@@ -67,9 +67,9 @@ begin
             LEFT JOIN WORKFLOWPROCESSSCHEME ps on ps.ID = inst.SCHEMEID
             WHERE coalesce(ps.ROOTSCHEMECODE, ps.SCHEMECODE) = ws.CODE))
         BULK COLLECT INTO ResultReport
-        FROM WORKFLOWSCHEME ws;
+FROM WORKFLOWSCHEME ws;
 
-	RETURN ResultReport;
+RETURN ResultReport;
 end;
 --eof
 
@@ -100,21 +100,21 @@ BEGIN
 
 	IF datefrom > dateto THEN
 		RETURN NULL;
-	END IF;
+END IF;
 
 	curdate := TRUNC(datefrom, 'MM');
 	if period >= 1 then 
-		curdate := curdate + (EXTRACT(DAY FROM datefrom) - 1); 
-	end if;
+		curdate := curdate + (EXTRACT(DAY FROM datefrom) - 1);
+end if;
 	if period >= 2 then 
 		curdate := curdate + TO_NUMBER(TO_CHAR(datefrom, 'HH24')) / 24;
-	end if;
+end if;
 	if period >= 3 then 
 		curdate := curdate + TO_NUMBER(TO_CHAR(datefrom, 'MI')) / (24 * 60);
-	end if;
+end if;
 	if period >= 4 then 
 		curdate := curdate + TO_NUMBER(TO_CHAR(datefrom, 'SS')) / (24 * 60 * 60);
-	end if;
+end if;
 
 	WHILE curdate <= dateto LOOP
 		dateend := CASE 
@@ -123,13 +123,13 @@ BEGIN
 			WHEN period = 2 THEN curdate + 1 / 24
 			WHEN period = 3 THEN curdate + 1 / (24 * 60)
 			WHEN period = 4 THEN curdate + 1 / (24 * 60 * 60)
-        end;
+end;
         
         ReportTmp.EXTEND(1);
         ReportTmp(ReportTmp.LAST) := TREPORTENTRY(curdate, dateend);
                 
 		curdate := dateend;
-	END LOOP;
+END LOOP;
 
 	SELECT TREPORTBYTRANSITIONSENTRY(
 		p.df,
@@ -183,21 +183,21 @@ BEGIN
 
 	IF datefrom > dateto THEN
 		RETURN NULL;
-	END IF;
+END IF;
 
 	curdate := TRUNC(datefrom, 'MM');
 	if period >= 1 then 
-		curdate := curdate + (EXTRACT(DAY FROM datefrom) - 1); 
-	end if;
+		curdate := curdate + (EXTRACT(DAY FROM datefrom) - 1);
+end if;
 	if period >= 2 then 
 		curdate := curdate + TO_NUMBER(TO_CHAR(datefrom, 'HH24')) / 24;
-	end if;
+end if;
 	if period >= 3 then 
 		curdate := curdate + TO_NUMBER(TO_CHAR(datefrom, 'MI')) / (24 * 60);
-	end if;
+end if;
 	if period >= 4 then 
 		curdate := curdate + TO_NUMBER(TO_CHAR(datefrom, 'SS')) / (24 * 60 * 60);
-	end if;
+end if;
 
 	WHILE curdate <= dateto LOOP
 		dateend := CASE 
@@ -206,13 +206,13 @@ BEGIN
 			WHEN period = 2 THEN curdate + 1 / 24
 			WHEN period = 3 THEN curdate + 1 / (24 * 60)
 			WHEN period = 4 THEN curdate + 1 / (24 * 60 * 60)
-        end;
+end;
 
         ReportTmp.EXTEND(1);
         ReportTmp(ReportTmp.LAST) := TREPORTENTRY(curdate, dateend);
         
 		curdate := dateend;
-	END LOOP;
+END LOOP;
 
 	SELECT DISTINCT coalesce(ps.ROOTSCHEMECODE, ps.SCHEMECODE) 
     BULK COLLECT into SchemesTmp
@@ -293,39 +293,63 @@ LOGGING;
 --eos
 
 CREATE TABLE WORKFLOWSERVERUSER(
-	ID RAW(16),
-	NAME NVARCHAR2(256) NOT NULL,
-	EMAIL NVARCHAR2(256) NULL,
-	PHONE NVARCHAR2(256) NULL,
-	ISLOCKED CHAR(1 BYTE) DEFAULT 0 NOT NULL,
-	EXTERNALID NVARCHAR2(1024) NULL,
-  LOCKFLAG RAW(16) NOT NULL,
-	TENANTID NVARCHAR2(1024) NULL,
-	ROLES NCLOB NULL,
-	EXTENSIONS NCLOB NULL,
-    CONSTRAINT PK_WORKFLOWSERVERUSER PRIMARY KEY (ID) USING INDEX STORAGE ( INITIAL 64K NEXT 1M MAXEXTENTS UNLIMITED ))
-LOGGING;
+    ID         RAW(16),
+    NAME       NVARCHAR2(256)         NOT NULL,
+    EMAIL      NVARCHAR2(256)         NULL,
+    PHONE      NVARCHAR2(256)         NULL,
+    ISLOCKED   CHAR(1 BYTE) DEFAULT 0 NOT NULL,
+    EXTERNALID NVARCHAR2(1024)        NULL,
+    LOCKFLAG   RAW(16)                NOT NULL,
+    TENANTID   NVARCHAR2(1024)        NULL,
+    ROLES      NCLOB                  NULL,
+    EXTENSIONS NCLOB                  NULL,
+    CONSTRAINT PK_WORKFLOWSERVERUSER PRIMARY KEY (ID) USING INDEX STORAGE ( INITIAL 64 K NEXT 1 M MAXEXTENTS UNLIMITED )
+)
+    LOGGING;
 --eos
 
 CREATE TABLE WORKFLOWSERVERUSERCREDENTIAL(
-	ID RAW(16),
-	PASSWORDHASH NVARCHAR2(128) NULL,
-	PASSWORDSALT NVARCHAR2(128) NULL,
-	USERID RAW(16) NOT NULL,
-	LOGIN NVARCHAR2(256) NOT NULL,
-	AUTHTYPE NUMBER(3) NOT NULL,
-  TENANTID NVARCHAR2(1024) NULL,
-  EXTERNALPROVIDERNAME NVARCHAR2(128) NULL,
+    ID                   RAW(16),
+    PASSWORDHASH         NVARCHAR2(128)  NULL,
+    PASSWORDSALT         NVARCHAR2(128)  NULL,
+    USERID               RAW(16)         NOT NULL,
+    LOGIN                NVARCHAR2(256)  NOT NULL,
+    AUTHTYPE             NUMBER(3)       NOT NULL,
+    TENANTID             NVARCHAR2(1024) NULL,
+    EXTERNALPROVIDERNAME NVARCHAR2(128)  NULL,
     CONSTRAINT FK_WORKFLOWSERVERUSER_WORKFLOWSERVERUSERCREDENTIAL FOREIGN KEY (USERID)
-        REFERENCES WORKFLOWSERVERUSER(ID) ON DELETE CASCADE,
-    CONSTRAINT PK_WORKFLOWSERVERUSERCREDENTIAL PRIMARY KEY (ID) USING INDEX STORAGE ( INITIAL 64K NEXT 1M MAXEXTENTS UNLIMITED ))
-LOGGING;
+        REFERENCES WORKFLOWSERVERUSER (ID) ON DELETE CASCADE,
+    CONSTRAINT PK_WORKFLOWSERVERUSERCREDENTIAL PRIMARY KEY (ID) USING INDEX STORAGE ( INITIAL 64 K NEXT 1 M MAXEXTENTS UNLIMITED )
+)
+    LOGGING;
 --eos
 
 CREATE INDEX IX_WORKFLOWSERVERUSERCREDENTIAL_USERID ON WORKFLOWSERVERUSERCREDENTIAL (USERID);
 --eos
 
 CREATE INDEX IX_WORKFLOWSERVERUSERCREDENTIAL_LOGIN ON WORKFLOWSERVERUSERCREDENTIAL (LOGIN);
+--eos
+
+CREATE TABLE WORKFLOWSERVERPROCESSLOGS(
+    ID         RAW(16),
+    PROCESSID  RAW(16)                             NOT NULL,
+    CREATEDON  TIMESTAMP default current_timestamp NOT NULL,
+    TIMESTAMP  TIMESTAMP default current_timestamp NOT NULL,
+    SCHEMECODE NVARCHAR2(256)                      NULL,
+    MESSAGE    NCLOB     DEFAULT ' '               NOT NULL,
+    PROPERTIES NCLOB     DEFAULT ' '               NOT NULL,
+    EXCEPTION  NCLOB     DEFAULT ' '               NOT NULL,
+    TENANTID   NVARCHAR2(1024)                     NULL,
+    CONSTRAINT PK_WORKFLOWSERVERPROCESSLOGS PRIMARY KEY (ID) USING INDEX STORAGE ( INITIAL 64 K NEXT 1 M MAXEXTENTS UNLIMITED )
+)
+    LOGGING;
+--eos
+
+CREATE INDEX IDX_WORKFLOWSERVERPROCESSLOGS_TIMESTAMP ON WORKFLOWSERVERPROCESSLOGS (TIMESTAMP);
+--eos
+CREATE INDEX IDX_WORKFLOWSERVERPROCESSLOGS_CREATEDON ON WORKFLOWSERVERPROCESSLOGS (CREATEDON);
+--eos
+CREATE INDEX IDX_WORKFLOWSERVERPROCESSLOGS_PROCESSID ON WORKFLOWSERVERPROCESSLOGS (PROCESSID);
 --eos
 
 COMMIT;
