@@ -1,30 +1,30 @@
-<el-timeline v-if="history.length > 0">
-  <el-timeline-item v-for="(item, index) in history.slice().reverse().slice(0,1)"
-    :key="index"
-    :color="item.DestinationState == CurrentState ? 'blue' : 'grey'"
-    :timestamp="WorkflowServer.formatDate(item.TransitionTime)">
+<el-timeline v-if="history?.length > 0">
+  <el-timeline-item v-for="(item, index) in history?.slice?.().reverse().slice(0,1)"
+                    :key="index"
+                    :color="item.DestinationState == CurrentState ? 'blue' : 'grey'"
+                    :timestamp="formatDate(item.TransitionTime)">
     <b>{{ item.DestinationState }}</b>
   </el-timeline-item>
-  <el-timeline-item v-for="(item, index) in history.slice().reverse()"
-    :key="index"
-    :color="item.InitialState == CurrentState && !item.TransitionTime ? 'blue' : 'grey'"
-    :timestamp="WorkflowServer.formatDate(item.TransitionTime)">
-     <b>{{ item.InitialState }}</b>
-     <br/>
-      {{ item.AllowedToEmployeeNames }}
-     <span v-if="item.Command">( {{ item.Command }} )</span>
+  <el-timeline-item v-for="(item, index) in history?.slice?.().reverse()"
+                    :key="index"
+                    :color="item.InitialState == CurrentState && !item.TransitionTime ? 'blue' : 'grey'"
+                    :timestamp="formatDate(item.TransitionTime)">
+    <b>{{ item.InitialState }}</b>
+    <br/>
+    {{ item.AllowedToEmployeeNames }}
+    <span v-if="item.Command">( {{ item.Command }} )</span>
   </el-timeline-item>
 </el-timeline>
 
-<el-timeline v-if="history.length == 0">
+<el-timeline v-else-if="processHistory?.length > 0">
   <el-timeline-item color="orange">
-      <b>{{ localizedstate ? localizedstate : CurrentActivity }}</b>
+    <b>{{ localizedstate ? localizedstate : CurrentActivity }}</b>
   </el-timeline-item>
-  <el-timeline-item v-for="(item, index) in processHistory.slice().reverse()"
-    :key="index"
-    :color="item.InitialState == CurrentState ? 'blue' : 'grey'"
-    :timestamp="WorkflowServer.formatDate(item.TransitionTime)">
-      {{ item.FromStateName ? item.FromStateName : item.FromActivityName }}
-      <span v-if="item.TriggerName">( {{ item.TriggerName }} )</span>
+  <el-timeline-item v-for="(item, index) in processHistory?.slice?.().reverse()"
+                    :key="index"
+                    :color="item.InitialState == CurrentState ? 'blue' : 'grey'"
+                    :timestamp="formatDate(item.TransitionTime)">
+    {{ item.FromStateName ? item.FromStateName : item.FromActivityName }}
+    <span v-if="item.TriggerName">( {{ item.TriggerName }} )</span>
   </el-timeline-item>
 </el-timeline>

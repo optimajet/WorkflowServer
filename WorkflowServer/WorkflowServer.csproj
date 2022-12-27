@@ -11,7 +11,7 @@
     <PackageTags>workflow engine, state machine, wf, core, optimajet, workflow server</PackageTags>
     <Authors>OptimaJet LLC</Authors>
     <Company>OptimaJet LLC</Company>
-    <Version>3.0.2</Version>
+    <Version>3.1.0</Version>
     <PublishProtocol>FileSystem</PublishProtocol>
     <PublishDir>bin\Release\PublishOutput</PublishDir>
   </PropertyGroup>
@@ -30,8 +30,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WorkflowEngine.NET-Server" Version="3.0.2" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
+    <PackageReference Include="WorkflowEngine.NET-Server" Version="3.1.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.9" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.9" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.9" />

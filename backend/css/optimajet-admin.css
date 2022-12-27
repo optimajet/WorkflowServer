@@ -1,24 +1,3 @@
-.wfs-flex-grid {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.wfs-flex-grid > * {
-    flex: 1;
-    margin: 5px;
-    display: flex;
-}
-
-.wfs-flex-grid > * > * {
-    flex: 1;
-}
-
-.wfs-flex-grid .empty {
-    height: 0;
-    margin: 0 10px;
-}
-
-
 @font-face {
     font-family: 'rsuite-icon-font';
     src: url('./fonts/rsuite-icon-font.ttf') format('truetype'), url('./fonts/rsuite-icon-font.woff') format('woff');
@@ -35,33 +14,6 @@
 }
 
 /* Header */
-.wfs-page-header {
-    display: flex;
-    align-items: flex-end;
-    flex-wrap: wrap;
-}
-
-.wfs-page-header > * {
-    margin-bottom: 5px;
-}
-
-.wfs-page-header .toolbar {
-    display: flex;
-    flex: 1;
-}
-
-.wfs-page-header .title {
-    margin-right: 40px;
-}
-
-.wfs-page-header .toolbar.left {
-    min-width: max-content;
-    margin-right: 40px;
-}
-
-.wfs-page-header .toolbar.right {
-    justify-content: end;
-}
 
 .wfs-designer-header {
     height: 44px;
@@ -71,25 +23,23 @@
     justify-content: space-between;
 }
 
-/* Header */
 .dwkit-formadmin-header-logo {
     margin-left: 10px;
     cursor: pointer;
 }
 
 .dwkit-formadmin-header {
-    height: 50px;
-    overflow: auto;
+    padding-block: 7px;
+    background-color: white;
     box-shadow: 0 1px 20px 0px rgb(0 0 0 / 11%);
 }
 
 .dwkit-formadmin-header.dark {
-    box-shadow: 0 1px 10px 0px rgb(84 255 0 / 11%);
+    background-color: #1a1d24;
 }
 
 .dwkit-formadmin-header-left {
     float: left;
-    margin-top: 7px;
 }
 
 .dwkit-formadmin-header-center {
@@ -114,7 +64,6 @@
 
 .dwkit-formadmin-header-right {
     float: right;
-    margin-top: 7px;
     margin-right: 10px;
 }
 
@@ -127,7 +76,6 @@
 /* Menu */
 .dwkit-formadmin-menu {
     max-width: 270px;
-    float: left;
     display: flex;
 }
 
@@ -141,16 +89,14 @@
 
 .dwkit-formadmin {
     display: flex;
-    align-items: stretch;
-    height: calc(100vh - 50px);
-    overflow: auto;
+    overflow: hidden;
+    flex: 1;
 }
 
 .dwkit-formadmin-right {
-    width: 100%;
-    float: right;
     flex: 1;
     display: flex;
+    overflow: auto;
     flex-direction: column;
 }
 
@@ -191,8 +137,10 @@
 }
 
 .container {
-    height: 100%;
-    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
 }
 
 
@@ -201,7 +149,11 @@
 }
 
 .EditableTableRow .rs-table-cell-content {
-    padding: 13px 3px;
+    padding: 0 3px;
+}
+
+.EditableTableRow.rs-table-row-header .rs-table-cell-content {
+    padding: 13px 10px;
 }
 
 .dwkit-admin-formbuilder-container-fullscreen {
@@ -348,6 +300,7 @@
     display: flex;
     width: 100%;
     align-items: flex-end;
+    gap: 10px;
 }
 
 .dwkit-list-form {
@@ -360,13 +313,12 @@
 }
 
 .dwkit-inline-form > * {
-    margin-right: 10px;
     flex-grow: 1;
     flex-basis: 0;
     align-self: flex-start;
 }
 
-.dwkit-inline-form button {
+.dwkit-inline-form button, .dwkit-inline-form .rs-checkbox {
     align-self: flex-end;
 }
 
@@ -542,6 +494,10 @@ Loading
 /*
  Others
 */
+
+.rs-table, .rs-table-cell, .rs-table-row-header {
+    background: initial;
+}
 
 .rs-table-pagination-toolbar {
     flex-flow: row-reverse;

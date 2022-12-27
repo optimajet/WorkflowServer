@@ -3,19 +3,16 @@
 <head>
     <title>OptimaJet Workflow Server Forward</title>
     <base href="/"/>
-    <link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon">
+    <link rel="Shortcut Icon" :href="formsServerUrl + 'images/favicon.ico'" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 <body>
-<link href="css/element.css" rel="stylesheet" type="text/css" />
-<link href="css/style.css" rel="stylesheet" type="text/css" />
-
 <div class="forward-container">
     <div class="forward-block">
         <div class="forward-inner-block">
-            <img src="images/logo.svg" alt="WorkflowServer Logo">
+          <img :src="formsServerUrl + 'images/logo.svg'" alt="WorkflowServer Logo">
             <div class="forward-description">
                 <h1>Forms launched with the path base </h1>
                 <h2>Site is available by <a href="">link</a></h2>

@@ -1,14 +1,14 @@
-<el-form 
-    v-if="Array.isArray(WorkflowServer.Data.fields) && WorkflowServer.Data.fields.length > 0" 
-    :model="FormData" 
-    ref="form" 
+<el-form
+    v-if="Array.isArray(fields) && fields.length > 0"
+    :model="FormData"
+    ref="form"
     label-width="100px">
-       
-    <div wfs-placeholder="fields"></div>
 
-    <el-form-item v-if="WorkflowServer.Data.processInstance && !isreadonly()">
-        <el-button type="primary" :loading="extra.loading"  @click="submit()">Save</el-button>
-    </el-form-item>
+  <div wfs-placeholder="fields"></div>
+
+  <el-form-item v-if="processInstance && !isreadonly()">
+    <el-button type="primary" :loading="extra.loading" @click="submit()">Save</el-button>
+  </el-form-item>
 </el-form>
 
 <div wfs-placeholder="formcustom">

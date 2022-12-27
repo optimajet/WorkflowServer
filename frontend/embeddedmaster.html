@@ -5,17 +5,17 @@
 
             <el-menu mode="horizontal" style="max-width: 700px; margin-bottom: 20px;">
                 <el-menu-item index="top" >
-                    <el-image fit="fill" :src="formsServerUrl + extra.user.avatar" ></el-image>
+                    <el-image fit="fill" :src="formsServerUrl + (extra.user.avatar ?? 'images/unknown.svg')"></el-image>
                     <span v-if="!extra.sidebar.mini" slot="title">{{ extra.user.name }}</span>
                 </el-menu-item>
-                <el-menu-item index="logoff" @click="WorkflowServer.logoff()" v-if="extra.user.sub" >
-                    <i class="el-icon-close"></i>
-                    <span v-if="!extra.sidebar.mini" slot="title">Logout</span>
+                <el-menu-item index="logoff" @click="logoff()" v-if="extra.user.sub">
+                  <i class="el-icon-close"></i>
+                  <span v-if="!extra.sidebar.mini" slot="title">Logout</span>
                 </el-menu-item>
-                <el-menu-item index="logon" @click="WorkflowServer.logon()" v-if="!extra.user.sub" >
-                    <i class="el-icon-check"></i>
-                    <span v-if="!extra.sidebar.mini" slot="title">Login</span>
-                </el-menu-item>
+              <el-menu-item index="logon" @click="logon()" v-if="!extra.user.sub">
+                <i class="el-icon-check"></i>
+                <span v-if="!extra.sidebar.mini" slot="title">Login</span>
+              </el-menu-item>
             </el-menu>
         
             <div wfs-placeholder="content"></div>

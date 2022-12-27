@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<base href="/"/>
 <script src="scripts/oidc-client.min.js"></script>
 <script src="scripts/silent-renew.js"></script>
 <script>
   var mgr = new Oidc.UserManager({
-    iframeNavigator: new IFrameNavigator({ origin: OriginUrl })
+    iframeNavigator: new IFrameNavigator({origin: OriginUrl})
   });
-  mgr.signinSilentCallback().catch(function(error) {
-      console.error(error);
+  mgr.signinSilentCallback().catch(function (error) {
+    console.error(error);
   });
 </script>

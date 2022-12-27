@@ -1,0 +1,28 @@
+{
+  "name": "frontend",
+  "version": "3.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dist": "webpack",
+    "build-dev": "webpack --env development --config webpack.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@optimajet/workflow-designer": "^7.2.0",
+    "@optimajet/workflow-designer-react": "^7.2.3",
+    "element-ui": "^2.15.10",
+    "jquery": "^3.6.3",
+    "lodash": "^4.17.21",
+    "oidc-client": "^1.11.5",
+    "vue": "^2.6.14"
+  },
+  "devDependencies": {
+    "css-loader": "^6.7.1",
+    "mini-css-extract-plugin": "^2.6.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^5.53.0",
+    "webpack-cli": "^4.8.0"
+  }
+}

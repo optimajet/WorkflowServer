@@ -1,0 +1,1 @@
+WorkflowServer.createDesigner("designerapi", "designer")

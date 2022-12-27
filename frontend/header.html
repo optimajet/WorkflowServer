@@ -1,15 +1,18 @@
-<div style="display: flex; justify-content: space-between; margin-left: 25px; margin-right: 25px" >
-    <div style="display: flex; align-items: center;"> 
-        <a href=""><img class="wfs-logo" src="images/logo.svg" ></a>
-    </div>
-    <div>
-        <el-button @click="WorkflowServer.logon()" v-if="!extra.user.sub">
-            <i class="el-icon-check"></i>
-            LogIn
-        </el-button>
-        <el-button @click="WorkflowServer.logoff()" v-if="extra.user.sub">
-            <i class="el-icon-close"></i>
-            Logout
-        </el-button>
+<div style="display: flex; justify-content: space-between; margin-left: 25px; margin-right: 25px">
+  <div style="display: flex; align-items: center;">
+    <el-button class="wfs-sidebar-btn" icon="el-icon-menu" onclick="sideBarOnClick();"
+               style="margin-left: -20px"></el-button>
+    <a href=""><img class="wfs-logo" :src="formsServerUrl + 'images/logo.svg'"></a>
+  </div>
+  <div>
+    <el-button @click="logon()" v-if="!extra.user.sub">
+      <i class="el-icon-check"></i>
+      LogIn
+    </el-button>
+    <el-button @click="logoff()" v-if="extra.user.sub">
+      <i class="el-icon-close"></i>
+      Logout
+    </el-button>
     </div>
 </div>
+

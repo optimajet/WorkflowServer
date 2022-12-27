@@ -1,27 +1,19 @@
 <el-menu :collapse="extra.sidebar.mini" style="height: 100%;">
+  <el-button class="wfs-sidebar-btn" icon="el-icon-menu" onclick="sideBarOnClick();"></el-button>
     <div style="width: 255px;"></div>
     <el-menu-item index="top" @click="sidebarClick()" >
-        <el-image :src="extra.user.avatar" ></el-image>
+      <el-image :src="WorkflowServer.Data.formsServerUrl + 'images/unknown.svg'"></el-image>
         <span v-if="!extra.sidebar.mini" slot="title" style="margin-left: 5px; ">{{ extra.user.name }}</span>
     </el-menu-item>
-    <!-- <el-menu-item index="logon" @click="WorkflowServer.logon()" v-if="!extra.user.sub" >
-        <i class="el-icon-check"></i>
-        <span v-if="!extra.sidebar.mini" slot="title">Log in</span>
-    </el-menu-item>
-    <el-menu-item index="logoff" @click="WorkflowServer.logoff()" v-if="extra.user.sub" >
-        <i class="el-icon-close"></i>
-        <span v-if="!extra.sidebar.mini" slot="title">Logout</span>
-    </el-menu-item> -->
     <el-divider></el-divider>
-    <a style="text-decoration: inherit;" :href="item.href" v-for="(item, index) in extra.sidebar.menu" 
-        v-if="!item.authRequired || (extra.user.sub && !(WorkflowServer && WorkflowServer.isAdminAccount()))">
-        <el-menu-item :index="index" >
-            <i :class="item.icon"></i>
-            <span v-if="!extra.sidebar.mini" slot="title">{{ item.title }}</span>
-        </el-menu-item>
+    <a style="text-decoration: inherit;" :href="item.href" v-for="(item, index) in extra.sidebar.menu"
+       v-if="!item.authRequired || (extra.user.sub && !isAdminAccount())">
+      <el-menu-item :index="index">
+        <i :class="item.icon"></i>
+        <span v-if="!extra.sidebar.mini" slot="title">{{ item.title }}</span>
+      </el-menu-item>
     </a>
 </el-menu>
-<button class="wfs-sidebar-btn" onclick="sideBarOnClick();"></button>
 <script type="application/javascript">
     WorkflowServer.VueConfig.methods.sidebarClick = function(){
         WorkflowServer.Data.extra.sidebar.mini = 

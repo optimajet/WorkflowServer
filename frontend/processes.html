@@ -16,7 +16,9 @@
     >
     <el-table-column v-for="item in columns" :sortable="item.sortable ? 'custom' : false" :label="item.text" :prop="item.value" resizable="true">
       <template slot-scope="scope">
-        <a v-if="item.value == 'title'" :href="getUrl(scope.row)" style="text-overflow: ellipsis;white-space: nowrap;">{{ WorkflowServer.getTitle(scope.row) }}</a>
+        <a v-if="item.value == 'title'" :href="getUrl(scope.row)" style="text-overflow: ellipsis;white-space: nowrap;">{{
+            getTitle(scope.row)
+          }}</a>
         <div v-else-if="item.value == 'commands'" style="max-width: 500px;">
           <span v-for="command in scope.row.commands">
             <el-button style="margin:5px;" :type="getCommandType(command)" size="small" @click="executeCommand(scope.row, command)">{{command.LocalizedName}}</el-button>
@@ -24,7 +26,8 @@
         </div>
         <div v-else-if="item.value == 'actions'">
           <el-button type="danger" icon="el-icon-delete" circle @click="deleteItem(scope.row)"></el-button>
-          <el-button v-if="WorkflowServer && WorkflowServer.isAdminAccount()" type="primary" icon="el-icon-edit-outline" circle @click="openDesigner(scope.row)"></el-button>
+          <el-button v-if="isAdminAccount()" type="primary" icon="el-icon-edit-outline" circle
+                     @click="openDesigner(scope.row)"></el-button>
           
         </div>
 
@@ -44,7 +47,7 @@
   </el-pagination>
   <script>
 
-    if(Array.isArray(WorkflowServer.Data.fields)){
+    if (Array.isArray(WorkflowServer.Data.fields) && WorkflowServer.Data.fields.length > 0) {
       var fields = WorkflowServer.Data.fields;
       WorkflowServer.Data.columns = [];
       fields.forEach(function(c){

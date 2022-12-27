@@ -3,7 +3,7 @@ version: '3.4'
 services:
   db:
      container_name: workflowserver-mongo
-     image: mongo
+     image: mongo:5.0.14
      environment:
        MONGO_INITDB_ROOT_USERNAME: root
        MONGO_INITDB_ROOT_PASSWORD: mongopassword
@@ -14,7 +14,7 @@ services:
        - "27017:27017"
   start_db:
     container_name: workflowserver-mongo-wait
-    image: mongo
+    image: mongo:5.0.14
     depends_on:
        - db
     volumes:

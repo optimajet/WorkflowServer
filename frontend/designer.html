@@ -1,9 +1,5 @@
 <div wfs-content="content">
-
-    <div id="designer"></div>
-
-    <script>
-        WorkflowServer.createDesigner("designerapi", "designer");
-    </script>
-
+  <div id="designer"></div>
+  <!-- defer (execute script when DOMContentLoaded) working only with external scripts -->
+  <script src="scripts/createDesigner.js" defer type="application/javascript"></script>
 </div>

@@ -112,38 +112,22 @@ body{
 .wfs-sidebar-btn,
 .wfs-sidebar-btn:hover {
     display: none;
-    -webkit-transition: .3s;
-    transition: .3s;
-    z-index: 2;
     width: 41px;
     height: 41px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
     border: none;
     padding: 0;
-    background-color: rgb(80, 138, 45);
-    background-image: url('../images/mobile-sidebar.png');
-    background-position: center center;
-    background-repeat: no-repeat;
 }
 
 @media only screen and (max-width: 997px) {
     .wfs-sidebar-btn,
     .wfs-sidebar-btn:hover {
         display: block;
-        position: fixed;
-        left: 0;
-        top: 5px;
     }
 
     .wfs-sidebar-btn.active {
         left: 256px;
     }
 }
-
- .wfs-sidebar-container {
-
-} 
 
 @media only screen and (max-width: 997px)
 {

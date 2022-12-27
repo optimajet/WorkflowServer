@@ -9,15 +9,16 @@
                 <a :href="'workflow/' + item.Code" v-if="!item.AutoStart">
                     <el-button type="info" plain>Open</el-button>
                 </a>
-                <el-button v-if="item.AutoStart && !(item.InitialCommands && item.InitialCommands.length)" type="info" plain
-                    @click="WorkflowServer.launch(item.Code)">
-                    Launch
+                <el-button v-if="item.AutoStart && !(item.InitialCommands && item.InitialCommands.length)" type="info"
+                           plain
+                           @click="launch(item.Code)">
+                  Launch
                 </el-button>
-                
-                <el-button v-for="command in item.InitialCommands" v-if="item.AutoStart"
-                    @click="WorkflowServer.executeCommand(undefined, command.CommandName, item.Code)">
-                    {{ command.LocalizedName }}
-                </el-button>
+
+              <el-button v-for="command in item.InitialCommands" v-if="item.AutoStart"
+                         @click="executeCommand(undefined, command.CommandName, item.Code)">
+                {{ command.LocalizedName }}
+              </el-button>
                 
             </div>                    
         </el-card>
@@ -33,16 +34,17 @@
                 <a :href="'flow/' + item.Name" v-if="!item.AutoStart">
                     <el-button  type="info" plain>Open</el-button>
                 </a>
-               
-                <el-button v-if="item.AutoStart && !(item.InitialCommands && item.InitialCommands.length)" type="info" plain
-                    @click="WorkflowServer.launch(item.Name, 'flow')">
-                    Launch
-                </el-button>
-                
-                <el-button v-for="command in item.InitialCommands" v-if="item.AutoStart" 
-                    @click="WorkflowServer.executeCommand(undefined, command.CommandName, { name: item.Name, type: 'flow'})">
-                    {{ command.LocalizedName }}
-                </el-button>
+
+              <el-button v-if="item.AutoStart && !(item.InitialCommands && item.InitialCommands.length)" type="info"
+                         plain
+                         @click="launch(item.Name, 'flow')">
+                Launch
+              </el-button>
+
+              <el-button v-for="command in item.InitialCommands" v-if="item.AutoStart"
+                         @click="executeCommand(undefined, command.CommandName, { name: item.Name, type: 'flow'})">
+                {{ command.LocalizedName }}
+              </el-button>
                
             </div>                    
         </el-card>

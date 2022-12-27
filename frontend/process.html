@@ -3,54 +3,56 @@
         <el-breadcrumb-item v-for="item in extra.breadcrumbs">
             <a :href="item.href">{{ item.text }}</a>
         </el-breadcrumb-item>
-    </el-breadcrumb>   
-    <div v-if="WorkflowServer.Data.processInstance">        
-        <div class="wfs-formtoolbar">
-            <el-card style="max-width:700px" class="wfs-processnotstarted" >
-                <div class="text item">
-                    <div v-if="commands.length == 0">
-                        <i class="el-icon-info"></i>
-                        No commands
-                    </div>
-                   
-                        <el-button 
-                            v-for="command in commands" 
-                            :loading="extra.loading" 
-                            :type="getCommandType(command)" 
-                            style="margin: 10px 10px 0px 0px;" 
+    </el-breadcrumb>
+    <div v-if="processInstance">
+      <div class="wfs-formtoolbar">
+        <el-card style="max-width:700px" class="wfs-processnotstarted">
+          <div class="text item">
+            <div v-if="commands.length == 0">
+              <i class="el-icon-info"></i>
+              No commands
+            </div>
+
+            <el-button
+                v-for="command in commands"
+                            :loading="extra.loading"
+                            :type="getCommandType(command)"
+                            style="margin: 10px 10px 0px 0px;"
                             @click="executeCommand(command)">{{command.LocalizedName}}</el-button>
-                    
+
                 </div>
-            </el-card>     
+            </el-card>
         </div>
         <div class="wfs-formblocks">
-            <div wfs-form="processform" v-if="Array.isArray(WorkflowServer.Data.fields) && WorkflowServer.Data.fields.length > 0"></div>
+          <div wfs-form="processform" v-if="Array.isArray(fields) && fields.length > 0"></div>
             <div wfs-form="processtimeline"></div>
         </div>
     </div>
-    <div v-if="!WorkflowServer.Data.processInstance">  
-        <el-card style="max-width:700px" class="wfs-processnotstarted" >
-            <div slot="header" class="clearfix">
-                <span><b>{{ SchemeCode }}</b></span>
-            </div>
-            <div class="text item">
-                <div>
-                    The process is not started.</br/>
-                    Click on a button for starting the workflow.
-                </div>
-                <div v-if="Array.isArray(WorkflowServer.Data.commands) && WorkflowServer.Data.commands.length > 0">
+  <div v-if="!processInstance">
+    <el-card style="max-width:700px" class="wfs-processnotstarted">
+      <div slot="header" class="clearfix">
+        <span><b>{{ SchemeCode }}</b></span>
+      </div>
+      <div class="text item">
+        <div>
+          The process is not started.</br/>
+          Click on a button for starting the workflow.
+        </div>
+        <div v-if="Array.isArray(commands) && commands.length > 0">
                     <span v-for="command in commands">
-                        <el-button :loading="extra.loading" style="margin: 10px 10px 0px 0px;" :type="getCommandType(command)"  @click="executeCommand(command)">{{command.LocalizedName}}</el-button>
+                        <el-button :loading="extra.loading" style="margin: 10px 10px 0px 0px;"
+                                   :type="getCommandType(command)"
+                                   @click="executeCommand(command)">{{ command.LocalizedName }}</el-button>
                         <br/>
-                    </span>                              
-                </div>
-                <div v-if="!Array.isArray(WorkflowServer.Data.commands) || WorkflowServer.Data.commands.length == 0">
-                    <el-button type="info" style="margin: 10px 0px 0px 0px;" @click="WorkflowServer.launch(SchemeCode)">Launch</el-button>
-                </div>
-            </div>
+                    </span>
+        </div>
+        <div v-if="!Array.isArray(commands) || commands.length == 0">
+          <el-button type="info" style="margin: 10px 0px 0px 0px;" @click="launch(SchemeCode)">Launch</el-button>
+        </div>
+      </div>
         </el-card>
         <div class="wfs-formblocks">
-            <div wfs-form="processform"></div>            
+            <div wfs-form="processform"></div>
         </div>
     </div>
     <script>
@@ -111,10 +113,8 @@
         }
 
         WorkflowServer.Data.extra.breadcrumbs.push({
-            text: WorkflowServer.getTitle()      
+          text: WorkflowServer.getTitle()
         });
-
-   
 
         WorkflowServer.VueConfig.methods.submit = function() {
             if(this.$refs && this.$refs.form){
@@ -134,7 +134,7 @@
         WorkflowServer.VueConfig.methods.getCommandType = function(command){
            return WorkflowServer.getCommandType(command);
         };
-        
+
         WorkflowServer.VueConfig.methods.executeCommand = function(command) {
             if(this.$refs && this.$refs.form) {
                 this.$refs.form.validate(function(valid) {
