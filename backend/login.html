@@ -44,7 +44,11 @@
                                 </el-form-item>
                                 <el-row v-if="!isSupported">
                                     <el-alert  title="Warning!" type="warning">
-                                        <span>Sorry, but this type of authorization is not supported by the http protocol in your browser.</span>
+                                        <div>
+                                            The <strong>HTTP</strong> protocol in your current browser doesn't support this type
+                                            of authorization. You may want to consider trying a different browser, such as Firefox,
+                                            or switching to the more secure <strong>HTTPS</strong> protocol for entire functionality.
+                                        </div>
                                     </el-alert>
                                 </el-row>
                                 <el-row >

@@ -73,8 +73,8 @@ CREATE PROCEDURE WorkflowReportBySchemes()
 begin
 	SELECT
 		ws.`Code`,
-		(SELECT COUNT(inst.`Id`) FROM `WorkflowProcessInstance` inst
-			LEFT JOIN `WorkflowProcessScheme` ps on ps.`Id` = inst.`SchemeId`
+		(SELECT COUNT(inst.`Id`) FROM `workflowprocessinstance` inst
+			LEFT JOIN `workflowprocessscheme` ps on ps.`Id` = inst.`SchemeId`
 			WHERE coalesce(ps.`RootSchemeCode`, ps.`SchemeCode`) = ws.`Code`) as `ProcessCount`,
 		(SELECT COUNT(history.`Id`) FROM `workflowprocesstransitionhistory` history
 		LEFT JOIN `workflowprocessinstance` inst on history.`ProcessId` = inst.`Id`
