@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@optimajet/workflow-designer": "^7.2.0",
-    "@optimajet/workflow-designer-react": "^8.1.0",
+    "@optimajet/workflow-designer-react": "^9.0.0",
     "element-ui": "^2.15.10",
     "jquery": "^3.6.3",
     "lodash": "^4.17.21",
