@@ -11,7 +11,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Hosting.WindowsServices": "3.1.9",
           "Microsoft.Extensions.Logging.EventLog": "3.1.9",
-          "WorkflowEngine.NET-Server": "3.3.1",
+          "WorkflowEngine.NET-Server": "3.3.2",
           "OptimaJet.WorkflowServer": "3.3.0.0"
         },
         "runtime": {
@@ -2373,7 +2373,7 @@
           }
         }
       },
-      "OptimaJet.Logging/3.3.1": {
+      "OptimaJet.Logging/3.3.2": {
         "dependencies": {
           "Serilog": "2.7.1",
           "Serilog.AspNetCore": "2.1.1",
@@ -2391,7 +2391,7 @@
           "OptimaJet.Logging.dll": {}
         }
       },
-      "WorkflowEngine.NET-Server/3.3.1": {
+      "WorkflowEngine.NET-Server/3.3.2": {
         "dependencies": {
           "AngleSharp": "0.13.0",
           "IdentityServer4": "4.1.1",
@@ -2405,7 +2405,7 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "3.1.9",
           "Nito.AsyncEx": "5.1.2",
           "Novell.Directory.Ldap.NETStandard": "3.6.0",
-          "OptimaJet.Logging": "3.3.1",
+          "OptimaJet.Logging": "3.3.2",
           "WorkflowEngine.NETCore-Core": "9.0.0",
           "WorkflowEngine.NETCore-FilesPlugin": "9.0.0",
           "WorkflowEngine.NETCore-ProviderForMSSQL": "9.0.0",
@@ -4135,12 +4135,12 @@
       "path": "workflowengine.netcore-providerforpostgresql/9.0.0",
       "hashPath": "workflowengine.netcore-providerforpostgresql.9.0.0.nupkg.sha512"
     },
-    "OptimaJet.Logging/3.3.1": {
+    "OptimaJet.Logging/3.3.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "WorkflowEngine.NET-Server/3.3.1": {
+    "WorkflowEngine.NET-Server/3.3.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
