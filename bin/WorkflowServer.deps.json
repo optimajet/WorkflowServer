@@ -6,13 +6,13 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "WorkflowServer/3.4.1": {
+      "WorkflowServer/3.4.2": {
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "Microsoft.Extensions.Configuration.Binder": "3.1.9",
           "Microsoft.Extensions.Configuration.EnvironmentVariables": "3.1.9",
           "Microsoft.Extensions.Configuration.Json": "3.1.9",
-          "WorkflowEngine.NET-Server": "3.4.1",
+          "WorkflowEngine.NET-Server": "3.4.2",
           "WorkflowEngine.NETCore-Core": "9.1.1",
           "OptimaJet.WorkflowServer": "3.4.0.0"
         },
@@ -2339,7 +2339,7 @@
           }
         }
       },
-      "OptimaJet.Logging/3.4.1": {
+      "OptimaJet.Logging/3.4.2": {
         "dependencies": {
           "Serilog": "2.7.1",
           "Serilog.AspNetCore": "2.1.1",
@@ -2357,7 +2357,7 @@
           "OptimaJet.Logging.dll": {}
         }
       },
-      "WorkflowEngine.NET-Server/3.4.1": {
+      "WorkflowEngine.NET-Server/3.4.2": {
         "dependencies": {
           "AngleSharp": "0.13.0",
           "IdentityServer4": "4.1.1",
@@ -2371,7 +2371,7 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "3.1.9",
           "Nito.AsyncEx": "5.1.2",
           "Novell.Directory.Ldap.NETStandard": "3.6.0",
-          "OptimaJet.Logging": "3.4.1",
+          "OptimaJet.Logging": "3.4.2",
           "WorkflowEngine.NETCore-Core": "9.1.1",
           "WorkflowEngine.NETCore-FilesPlugin": "9.1.1",
           "WorkflowEngine.NETCore-ProviderForMSSQL": "9.1.1",
@@ -2395,7 +2395,7 @@
     }
   },
   "libraries": {
-    "WorkflowServer/3.4.1": {
+    "WorkflowServer/3.4.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -3898,12 +3898,12 @@
       "path": "workflowengine.netcore-providerforpostgresql/9.1.1",
       "hashPath": "workflowengine.netcore-providerforpostgresql.9.1.1.nupkg.sha512"
     },
-    "OptimaJet.Logging/3.4.1": {
+    "OptimaJet.Logging/3.4.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "WorkflowEngine.NET-Server/3.4.1": {
+    "WorkflowEngine.NET-Server/3.4.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
