@@ -1,0 +1,281 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OptimaJet.WorkflowServer</name>
+    </assembly>
+    <members>
+        <member name="M:OptimaJet.WorkflowServer.ConfigApi.UpdateConfigurationSettings(OptimaJet.WorkflowServer.WorkflowServerRuntime,System.String)">
+            <summary> Update configuration settings. </summary>
+            <param name="data"> json string for deserialize to object. </param>
+            <returns> SuccessResponse or FailResponse</returns>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Cryptography.EncryptAsync(System.String,System.String)">
+            <summary>
+            Encrypts a text to ciphertext using salt to generate a key
+            </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Cryptography.DecryptAsync(System.Byte[],System.String)">
+            <summary>
+            Decrypts a byte array using salt to generate a key
+            </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Cryptography.CreateKey16Bytes(System.String)">
+            <summary>
+            Creates a 16-byte array from string by md5 hash func
+            </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Cryptography.EncryptStringToBytesAsync(System.String,System.Byte[],System.Byte[])">
+            <summary>
+            Encrypts any string into a byte array cipher
+            </summary>
+            <param name="text">Input string</param>
+            <param name="key">16,20,24,28,32 byte array key</param>
+            <param name="iv">16 byte array initialization vector</param>
+            <returns>byte array cipher</returns>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Cryptography.DecryptStringFromBytesAsync(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Decrypts a byte array cipher into a string
+            </summary>
+            <param name="cipher">byte array cipher</param>
+            <param name="key">16,20,24,28,32 byte array key</param>
+            <param name="iv">16 byte array initialization vector</param>
+            <returns>Decrypted text string</returns>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Cryptography.CheckAesArguments(System.Byte[],System.Byte[])">
+            <summary>
+            Checks if arguments are suitable for use in the aes algorithm, throws an exception if they ain't
+            </summary>
+            <param name="key">16,20,24,28,32 byte array key</param>
+            <param name="iv">16 byte array initialization vector</param>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.DatabaseOperations.ProcessTags(System.Collections.Generic.List{OptimaJet.WorkflowServer.Model.WorkflowScheme})">
+            <summary>
+            Tags in db end of comma
+            </summary>
+            <param name="result"></param>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.DatabaseOperations.AddZerosToProccessesStatusesThatNotSubmitted(System.Collections.Generic.Dictionary{System.Byte,System.Int64})">
+            <summary>
+            this operation need to prepare response to deep merge with other response (now, 8.09.19) only on client-side;
+            </summary>
+            <param name="response"></param>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Hubs.AutocompleteHub.Get(System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.List{OptimaJet.Workflow.Core.Runtime.CodeAutocomplete.AutocompleteVariable},System.Int32)">
+            <summary>
+            Get autocomplete from all autocompleters that are already initialized
+            </summary>
+            <param name="pattern">text for search (like "System.Thr")</param>
+            <param name="usings">list of usings (like "System", "System.Threading")</param>
+            <param name="variables">list of allow variables to autocomplete</param>
+            <param name="id">id that will be returned in response (to working with signalR)</param>
+            <returns></returns>
+        </member>
+        <member name="T:OptimaJet.WorkflowServer.Integration.Base.Classes.Fake">
+            <summary>
+            It's a fake class to save the namespace
+            </summary>
+        </member>
+        <member name="T:OptimaJet.WorkflowServer.Integration.Base.Interfaces.Fake">
+            <summary>
+            It's a fake class to save the namespace
+            </summary>
+        </member>
+        <member name="T:OptimaJet.WorkflowServer.License.WorkflowServerRestrictions">
+            <summary>
+            Represent restriction settings for WorkflowServer
+            </summary>
+        </member>
+        <member name="T:OptimaJet.WorkflowServer.License.LicenseKey`1">
+            <summary>
+            Represent a license key
+            </summary>
+            <typeparam name="T">Type of restriction object</typeparam>
+        </member>
+        <member name="T:OptimaJet.WorkflowServer.License.Licensing">
+            <summary>
+            License help methods
+            </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Logging.ProcessLogPersistenceProvider.GetEntry(Serilog.Events.LogEvent)">
+            <summary> Convert <see cref="T:Serilog.Events.LogEvent"/> to <see cref="T:OptimaJet.Logging.Database.ProcessLog"/> </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Model.Settings.GetParametersAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,System.Boolean)">
+            <summary> Get list of settings. </summary>
+            <param name="wsRuntime"></param>
+            <param name="useAbsoluteUrl"> Change Relative url on absolute if exists "baseurl". </param>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Model.Settings.GetParametersAsync(OptimaJet.Workflow.Core.Runtime.WorkflowRuntime,System.Boolean)">
+            <summary> Get list of settings. </summary>
+            <param name="runtime"></param>
+            <param name="useAbsoluteUrl"> Change Relative url on absolute if exists "baseurl". </param>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Model.Settings.GetParametersAsync(OptimaJet.Workflow.Core.Persistence.IPersistenceProvider,System.Boolean)">
+            <summary> Get list of settings. </summary>
+            <param name="persistenceProvider"></param>
+            <param name="useAbsoluteUrl"> Change Relative url on absolute if exists "baseurl". </param>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Model.Settings.ChangeRelativeToAbsoluteUrl(System.Collections.Generic.List{OptimaJet.WorkflowServer.Model.Settings})">
+            <summary> Change Relative url on absolute if exists baseurl. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.Configuration.ExportAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,OptimaJet.WorkflowServer.Persistence.ExportSettings)">
+            <summary> Export configuration to the zip file. </summary>
+            <returns>StreamResponse</returns>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.Configuration.ImportAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,System.IO.Stream,System.String)">
+            <summary> Import configuration from zip file. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.Configuration.BackupAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,System.String)">
+            <summary> Create backup metadata from database. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.Configuration.UpdateAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime)">
+            <summary> Update database configuration from file system. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.Configuration.AddAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime)">
+            <summary> Add database configuration from file system. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.Configuration.DownloadAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime)">
+            <summary> Download configuration to the file system. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.ExportSettings.GetFullLoadExportSettings">
+            <summary>
+             Get new <see cref="T:OptimaJet.WorkflowServer.Persistence.ExportSettings"/> instance
+             with full included options
+             </summary>
+        </member>
+        <member name="T:OptimaJet.WorkflowServer.Persistence.FilePersistence">
+            <summary>
+            Scheme persistence in file system.
+            </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.FilePersistence.AddVersionEntryAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,System.IO.Compression.ZipArchive)">
+            <summary> Add entry version txt file in zip archive </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.Form.GetFormNames">
+            <summary> Get form names from file system. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.Form.GetFormNames(System.Collections.Generic.Dictionary{System.String,System.IO.Stream})">
+            <summary> Get form names from stream items. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.Form.GetFormNames(System.Collections.Generic.List{OptimaJet.WorkflowServer.Model.Form})">
+            <summary> Get form names from list of form. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.Form.SaveAllAsync">
+            <summary> Save all forms from database in file system. </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.Form.SaveFile(OptimaJet.WorkflowServer.Model.Form)">
+            <summary> Save on file system. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.Form.DeleteFile(System.String)">
+            <summary> Delete target file from file system </summary>
+            <param name="name">Name of file</param>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.Form.AddEntryAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,System.IO.Compression.ZipArchive)">
+            <summary> Add entry in zip archive </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.Form.GetFileList(System.String,System.Boolean)">
+            <summary> Get list of files. </summary>
+            <param name="searchPattern">Kind of "*.json".</param>
+            <param name="withExtension">File with or without extension</param>
+            <returns> File list without extension. </returns>
+        </member>
+        <member name="T:OptimaJet.WorkflowServer.Persistence.Metadata">
+            <summary> Metadata which use for transfer between instances. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.Metadata.Save">
+            <summary> Save on file system. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.Metadata.AddEntryAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,System.IO.Compression.ZipArchive,OptimaJet.WorkflowServer.Persistence.ExportSettings)">
+            <summary> Add entry in zip archive </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.SchemeExtension.SaveFileAsync(OptimaJet.WorkflowServer.Model.WorkflowScheme)">
+            <summary> Save on file system </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.SchemeExtension.AddEntryAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,System.IO.Compression.ZipArchive)">
+            <summary> Add entry in zip archive </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.User.TryFileSaveAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime)">
+            <summary> Try save all users on the file system. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.User.TryFileSaveAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,OptimaJet.WorkflowServer.Model.User)">
+            <summary> Try save user on the file system. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.User.TryFileDeleteAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,System.Guid)">
+            <summary> Try delete user on the file system. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.User.TryFileDeleteAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,System.Collections.Generic.IEnumerable{System.Guid})">
+            <summary> Try delete users on the file system. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.User.AddEntryAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,System.IO.Compression.ZipArchive,OptimaJet.WorkflowServer.Persistence.ExportSettings)">
+            <summary> Add entry in zip archive. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.User.SaveAllFilesAsync">
+            <summary> Save on file system. </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Persistence.User.GetStreamAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,System.Boolean)">
+            <summary> Get stream with all users </summary>
+        </member>
+        <member name="T:OptimaJet.WorkflowServer.Plugins.Fake">
+            <summary>
+            It's a fake class to save the namespace
+            </summary>
+        </member>
+        <member name="P:OptimaJet.WorkflowServer.ProxySettings.Enabled">
+            <summary>
+            Used to enable ProxySettings from an environment variable
+            </summary>
+        </member>
+        <member name="P:OptimaJet.WorkflowServer.ServerSettings.GlobalCommandTimeout">
+            <summary>
+            Sets a global timeout in seconds for executing commands to the persistence provider. 30 as default.
+            </summary>
+        </member>
+        <member name="P:OptimaJet.WorkflowServer.ServerSettings.AlwaysShowOpenFormButton">
+            <summary>
+            Always show the "Open form" button on the scheme page
+            </summary>
+        </member>
+        <member name="P:OptimaJet.WorkflowServer.ServerSettings.AssertNullTenantId">
+            <summary>
+            If the value of the AssertNullTenantId parameter is true,
+            then the tenantId parameter in the request to the WorkflowApi
+            and the process instance TenantId must always be equal.
+            An empty or whitespace TenantId is set to null.
+            </summary>
+        </member>
+        <member name="P:OptimaJet.WorkflowServer.ServerSettings.Salt">
+            <summary>
+            Cryptographic salt for any encryption
+            </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Initializing.WorkflowServerInitializer.BuildWebHost(System.Action{OptimaJet.WorkflowServer.WorkflowServerRuntime},System.Action{Microsoft.AspNetCore.Hosting.IWebHostBuilder})">
+            <summary>
+            can be run only one time
+            </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Initializing.WorkflowServerInitializer.BuildWebHost(System.Action{OptimaJet.WorkflowServer.WorkflowServerRuntime},System.String,System.Action{Microsoft.AspNetCore.Hosting.IWebHostBuilder})">
+            <summary>
+            can be run only one time
+            </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.Initializing.WorkflowServerInitializer.PrepareUrlInfo(OptimaJet.WorkflowServer.WorkflowServerRuntime)">
+            <returns>can return null on failure</returns>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.WorkflowServerRuntime.DeserializeOrSplit(System.String,System.String)">
+            <summary> Get list of string from serialized or separated by commons string value </summary>
+        </member>
+        <member name="M:OptimaJet.WorkflowServer.WorkflowServerRuntime.ChangeServerSetting(System.String,System.String,System.String)">
+            <summary>
+            Rewrite config.json on new value. Uses string match to find the setting by name and its oldValue.
+            </summary>
+            <param name="settingName">Can use "nameof" for property of ServerSettings class.</param>
+            <param name="oldValue">Should look some like value in config.json.</param>
+            <param name="newValue">Should look some like value in config.json.</param>
+            <returns>if value has been successfully changed return "true".</returns>
+        </member>
+        <member name="T:OptimaJet.Logging.Database.ProcessLog">
+            <summary> Model database </summary>
+        </member>
+    </members>
+</doc>

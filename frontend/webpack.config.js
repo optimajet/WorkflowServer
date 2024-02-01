@@ -1,6 +1,6 @@
 const path = require('path')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = ({development}) => ({
   entry: {
@@ -16,7 +16,7 @@ module.exports = ({development}) => ({
   mode: development ? 'development' : 'production',
 
   optimization: {
-    minimizer: development ? [] : [new UglifyJsPlugin()],
+    minimizer: development ? [] : [new TerserPlugin()],
   },
   resolve: {
     alias: {

@@ -1,50 +1,60 @@
-version: '3.4'
+version: '3.8'
 
 services:
   db:
-     container_name: workflowserver-mongo
-     image: mongo:5.0.14
-     environment:
-       MONGO_INITDB_ROOT_USERNAME: root
-       MONGO_INITDB_ROOT_PASSWORD: mongopassword
-     volumes:
-       - dbdata:/data/db
-     restart: always
-     ports:
-       - "27017:27017"
+    container_name: workflowserver-mongo
+    image: mongo:7.0
+    command: [ "--replSet", "rs0", "--bind_ip_all", "--port", "27017" ]
+    volumes:
+      - dbdata:/data/db
+      - dbconfig:/data/configfb
+    restart: always
+    ports:
+      - "27017:27017"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: echo "try { rs.status() } catch (err) { rs.initiate({_id:'rs0',members:[{_id:0,host:'host.docker.internal:27017'}]}) }" | mongosh --port 27017 --quiet
+      interval: 5s
+      timeout: 30s
+      start_period: 0s
+      start_interval: 1s
+      retries: 30
   start_db:
     container_name: workflowserver-mongo-wait
-    image: mongo:5.0.14
+    image: mongo:7.0
     depends_on:
-       - db
+      - db
     volumes:
-       - ./:/home/.docker
+      - ./:/home/.docker
     entrypoint: /home/.docker/wait-for-mongo.sh workflowserver-mongo root mongopassword
   workflowserver:
     container_name: workflowserver
     depends_on:
-       - db
+      - db
     build:
       context: ..
       dockerfile: ./WorkflowServer/Dockerfile
     ports:
-       - "8077:8077"
-       - "8078:8078"
+      - "8077:8077"
+      - "8078:8078"
     volumes:
-       - ./../logs:/app/wfs/logs
-       - ./../license:/app/wfs/license
-       - ./../metadata:/app/wfs/metadata
-       - ./../InitialScripts:/app/wfs/InitialScripts
+      - ./../logs:/app/wfs/logs
+      - ./../license:/app/wfs/license
+      - ./../metadata:/app/wfs/metadata
+      - ./../InitialScripts:/app/wfs/InitialScripts
     environment:
       ConnectionString: mongodb://root:mongopassword@workflowserver-mongo:27017/ws?authSource=admin
       Provider: mongodb
-      LicensePath: /app/wfs/license/  
-      MetadataFolder: /app/wfs/metadata/ 
+      LicensePath: /app/wfs/license/
+      MetadataFolder: /app/wfs/metadata/
       DefaultLoggerConfig__FileTarget__0: Information
       DefaultLoggerConfig__FileTarget__1: Error
       DefaultLoggerConfig__FileSettings__FileName: /app/wfs/logs/log.txt
       DefaultLoggerConfig__FileSettings__RollingInterval: Day
       DefaultLoggerConfig__FileSettings__RetainedFileCountLimit: 30
 volumes:
-    dbdata:
-      name: wfs-mongo-data
+  dbdata:
+    name: wfs-mongo-data
+  dbconfig:
+    name: wfs-mongo-config

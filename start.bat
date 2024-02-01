@@ -10,5 +10,5 @@ pause
 exit
 
 :NO_DOTNETCORE
-echo .NET not found. Please install .NET 6.0 to run this application
+echo .NET not found. Please install .NET 8.0 to run this application
 echo For more information visit https://dotnet.microsoft.com/en-us/download
