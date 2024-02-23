@@ -11,8 +11,8 @@
         "dependencies": {
           "Microsoft.AspNetCore.Hosting.WindowsServices": "8.0.0",
           "Microsoft.Extensions.Logging.EventLog": "8.0.0",
-          "WorkflowEngine.NET-Server": "5.0.0",
-          "OptimaJet.WorkflowServer": "5.0.0.0"
+          "WorkflowEngine.NET-Server": "5.1.0",
+          "OptimaJet.WorkflowServer": "5.1.0.0"
         },
         "runtime": {
           "WorkflowServerService.dll": {}
@@ -2034,7 +2034,7 @@
           }
         }
       },
-      "WorkflowEngine.NETCore-Core/12.1.1": {
+      "WorkflowEngine.NETCore-Core/12.2.0": {
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp": "4.1.0",
           "Microsoft.CodeAnalysis.CSharp.Scripting": "4.1.0",
@@ -2047,82 +2047,82 @@
         },
         "runtime": {
           "lib/netstandard2.0/OptimaJet.Workflow.Core.dll": {
-            "assemblyVersion": "12.1.0.0",
-            "fileVersion": "12.1.0.0"
+            "assemblyVersion": "12.2.0.0",
+            "fileVersion": "12.2.0.0"
           }
         }
       },
-      "WorkflowEngine.NETCore-FilesPlugin/12.1.1": {
+      "WorkflowEngine.NETCore-FilesPlugin/12.2.0": {
         "dependencies": {
           "FluentFTP": "32.4.3",
           "SSH.NET": "2020.0.2",
           "SharpZipLib": "1.4.2",
-          "WorkflowEngine.NETCore-Core": "12.1.1"
+          "WorkflowEngine.NETCore-Core": "12.2.0"
         },
         "runtime": {
           "lib/netstandard2.0/OptimaJet.Workflow.FilesPlugin.dll": {
-            "assemblyVersion": "12.1.0.0",
-            "fileVersion": "12.1.0.0"
+            "assemblyVersion": "12.2.0.0",
+            "fileVersion": "12.2.0.0"
           }
         }
       },
-      "WorkflowEngine.NETCore-ProviderForMongoDB/12.1.1": {
+      "WorkflowEngine.NETCore-ProviderForMongoDB/12.2.0": {
         "dependencies": {
           "MongoDB.Driver.signed": "2.19.0",
-          "WorkflowEngine.NETCore-Core": "12.1.1"
+          "WorkflowEngine.NETCore-Core": "12.2.0"
         },
         "runtime": {
           "lib/netstandard2.0/OptimaJet.Workflow.MongoDB.dll": {
-            "assemblyVersion": "12.1.0.0",
-            "fileVersion": "12.1.0.0"
+            "assemblyVersion": "12.2.0.0",
+            "fileVersion": "12.2.0.0"
           }
         }
       },
-      "WorkflowEngine.NETCore-ProviderForMSSQL/12.1.1": {
+      "WorkflowEngine.NETCore-ProviderForMSSQL/12.2.0": {
         "dependencies": {
           "Microsoft.Data.SqlClient": "2.1.7",
-          "WorkflowEngine.NETCore-Core": "12.1.1"
+          "WorkflowEngine.NETCore-Core": "12.2.0"
         },
         "runtime": {
           "lib/netstandard2.0/OptimaJet.Workflow.MSSQL.dll": {
-            "assemblyVersion": "12.1.0.0",
-            "fileVersion": "12.1.0.0"
+            "assemblyVersion": "12.2.0.0",
+            "fileVersion": "12.2.0.0"
           }
         }
       },
-      "WorkflowEngine.NETCore-ProviderForMySQL/12.1.1": {
+      "WorkflowEngine.NETCore-ProviderForMySQL/12.2.0": {
         "dependencies": {
           "MySql.Data": "8.0.30",
-          "WorkflowEngine.NETCore-Core": "12.1.1"
+          "WorkflowEngine.NETCore-Core": "12.2.0"
         },
         "runtime": {
           "lib/netstandard2.0/OptimaJet.Workflow.MySQL.dll": {
-            "assemblyVersion": "12.1.0.0",
-            "fileVersion": "12.1.0.0"
+            "assemblyVersion": "12.2.0.0",
+            "fileVersion": "12.2.0.0"
           }
         }
       },
-      "WorkflowEngine.NETCore-ProviderForOracle/12.1.1": {
+      "WorkflowEngine.NETCore-ProviderForOracle/12.2.0": {
         "dependencies": {
           "Oracle.ManagedDataAccess.Core": "3.21.100",
-          "WorkflowEngine.NETCore-Core": "12.1.1"
+          "WorkflowEngine.NETCore-Core": "12.2.0"
         },
         "runtime": {
           "lib/netstandard2.1/OptimaJet.Workflow.Oracle.dll": {
-            "assemblyVersion": "12.1.0.0",
-            "fileVersion": "12.1.0.0"
+            "assemblyVersion": "12.2.0.0",
+            "fileVersion": "12.2.0.0"
           }
         }
       },
-      "WorkflowEngine.NETCore-ProviderForPostgreSQL/12.1.1": {
+      "WorkflowEngine.NETCore-ProviderForPostgreSQL/12.2.0": {
         "dependencies": {
           "Npgsql": "4.1.3.1",
-          "WorkflowEngine.NETCore-Core": "12.1.1"
+          "WorkflowEngine.NETCore-Core": "12.2.0"
         },
         "runtime": {
           "lib/netstandard2.0/OptimaJet.Workflow.PostgreSQL.dll": {
-            "assemblyVersion": "12.1.0.0",
-            "fileVersion": "12.1.0.0"
+            "assemblyVersion": "12.2.0.0",
+            "fileVersion": "12.2.0.0"
           }
         }
       },
@@ -2134,7 +2134,7 @@
           }
         }
       },
-      "OptimaJet.Logging/5.0.0": {
+      "OptimaJet.Logging/5.1.0": {
         "dependencies": {
           "Serilog": "2.7.1",
           "Serilog.AspNetCore": "2.1.1",
@@ -2145,13 +2145,13 @@
           "Serilog.Sinks.EventLog": "3.1.0",
           "Serilog.Sinks.File": "4.0.0",
           "Serilog.Sinks.PeriodicBatching": "2.3.0",
-          "WorkflowEngine.NETCore-Core": "12.1.1"
+          "WorkflowEngine.NETCore-Core": "12.2.0"
         },
         "runtime": {
           "OptimaJet.Logging.dll": {}
         }
       },
-      "WorkflowEngine.NET-Server/5.0.0": {
+      "WorkflowEngine.NET-Server/5.1.0": {
         "dependencies": {
           "AngleSharp": "0.13.0",
           "IdentityServer4": "4.1.2",
@@ -2166,24 +2166,24 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
           "Nito.AsyncEx": "5.1.2",
           "Novell.Directory.Ldap.NETStandard": "3.6.0",
-          "OptimaJet.Logging": "5.0.0",
-          "WorkflowEngine.NETCore-Core": "12.1.1",
-          "WorkflowEngine.NETCore-FilesPlugin": "12.1.1",
-          "WorkflowEngine.NETCore-ProviderForMSSQL": "12.1.1",
-          "WorkflowEngine.NETCore-ProviderForMongoDB": "12.1.1",
-          "WorkflowEngine.NETCore-ProviderForMySQL": "12.1.1",
-          "WorkflowEngine.NETCore-ProviderForOracle": "12.1.1",
-          "WorkflowEngine.NETCore-ProviderForPostgreSQL": "12.1.1"
+          "OptimaJet.Logging": "5.1.0",
+          "WorkflowEngine.NETCore-Core": "12.2.0",
+          "WorkflowEngine.NETCore-FilesPlugin": "12.2.0",
+          "WorkflowEngine.NETCore-ProviderForMSSQL": "12.2.0",
+          "WorkflowEngine.NETCore-ProviderForMongoDB": "12.2.0",
+          "WorkflowEngine.NETCore-ProviderForMySQL": "12.2.0",
+          "WorkflowEngine.NETCore-ProviderForOracle": "12.2.0",
+          "WorkflowEngine.NETCore-ProviderForPostgreSQL": "12.2.0"
         },
         "runtime": {
           "OptimaJet.WorkflowServer.dll": {}
         }
       },
-      "OptimaJet.WorkflowServer/5.0.0.0": {
+      "OptimaJet.WorkflowServer/5.1.0.0": {
         "runtime": {
           "OptimaJet.WorkflowServer.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.0.0"
+            "assemblyVersion": "5.1.0.0",
+            "fileVersion": "5.1.0.0"
           }
         }
       }
@@ -3728,54 +3728,54 @@
       "path": "thomaslevesque.weakevent/4.1.0",
       "hashPath": "thomaslevesque.weakevent.4.1.0.nupkg.sha512"
     },
-    "WorkflowEngine.NETCore-Core/12.1.1": {
+    "WorkflowEngine.NETCore-Core/12.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-xuxMAkZsAsIwlpO4BMpTZEHZ5mwnr0Fx+BoKCQg5MGMbppIYFJiCz18L7EoRZHGM9ghOcvDsgyYm2mxGTv23Kw==",
-      "path": "workflowengine.netcore-core/12.1.1",
-      "hashPath": "workflowengine.netcore-core.12.1.1.nupkg.sha512"
+      "sha512": "sha512-nqcPp0cwRBZxO/h0fmYWIKDbl3d35hcTioX/DgDlhicaSZujXZYNXVPmJLFHzn97JBVnfhXGk3w5lC+VH94UMg==",
+      "path": "workflowengine.netcore-core/12.2.0",
+      "hashPath": "workflowengine.netcore-core.12.2.0.nupkg.sha512"
     },
-    "WorkflowEngine.NETCore-FilesPlugin/12.1.1": {
+    "WorkflowEngine.NETCore-FilesPlugin/12.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-N2YpwXdSXyYy8Cm7w+tqtb4snn+FezT7k7unozl/um6wl6DJeGSLGbKwZK5YX23fbJZtnx/7k2QZQ6oOYrQ7hQ==",
-      "path": "workflowengine.netcore-filesplugin/12.1.1",
-      "hashPath": "workflowengine.netcore-filesplugin.12.1.1.nupkg.sha512"
+      "sha512": "sha512-z7DYXcckQohcuR80SxBvBz0QV4JmWqhy6oU6268mc+83lOSIKPT9gGTl+fYqT3/kePPXH0z7FD6YmqzNVpCGAQ==",
+      "path": "workflowengine.netcore-filesplugin/12.2.0",
+      "hashPath": "workflowengine.netcore-filesplugin.12.2.0.nupkg.sha512"
     },
-    "WorkflowEngine.NETCore-ProviderForMongoDB/12.1.1": {
+    "WorkflowEngine.NETCore-ProviderForMongoDB/12.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-RIAqMk+4SIjmKJ8GBOL/msxWfHILgw2KuxhW1AdsuXumcfTAbwEebXlKIhToaZbLwVspqANaVSj+vA9785Hhaw==",
-      "path": "workflowengine.netcore-providerformongodb/12.1.1",
-      "hashPath": "workflowengine.netcore-providerformongodb.12.1.1.nupkg.sha512"
+      "sha512": "sha512-Vr+b4VAqeX0WaaGb6olOCf6oshLZh7pntkSAtMYEo74CGJ5UvPozcvSWKPhCSAZh6gYoSpf3h27/tZ0i0y8/6w==",
+      "path": "workflowengine.netcore-providerformongodb/12.2.0",
+      "hashPath": "workflowengine.netcore-providerformongodb.12.2.0.nupkg.sha512"
     },
-    "WorkflowEngine.NETCore-ProviderForMSSQL/12.1.1": {
+    "WorkflowEngine.NETCore-ProviderForMSSQL/12.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-YHirxidnaQtGecs94kZUICXsFMRWIzyzgYD36CcCgp9Z3Dm6i3/hrqWTTVWw6ZqfzIrZSSdvuLkftMw/bQuq5A==",
-      "path": "workflowengine.netcore-providerformssql/12.1.1",
-      "hashPath": "workflowengine.netcore-providerformssql.12.1.1.nupkg.sha512"
+      "sha512": "sha512-NaKxYI5lnONc8gG2yDKbqyfk1KyW8PYV9ca3g+6vhaH+DKeHvVvC94NGhMkM8HZHNSRJ2cTHx01mtiP/kt5/tg==",
+      "path": "workflowengine.netcore-providerformssql/12.2.0",
+      "hashPath": "workflowengine.netcore-providerformssql.12.2.0.nupkg.sha512"
     },
-    "WorkflowEngine.NETCore-ProviderForMySQL/12.1.1": {
+    "WorkflowEngine.NETCore-ProviderForMySQL/12.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-qvgLgGCxXCIjstWaJ3gQ00s+Sfv87xvfjtrViUO+BGwiXh+VSwPa37jOjhFawaakZj6wfoqH+A18MYCsyhc9xg==",
-      "path": "workflowengine.netcore-providerformysql/12.1.1",
-      "hashPath": "workflowengine.netcore-providerformysql.12.1.1.nupkg.sha512"
+      "sha512": "sha512-TYxlBI30nEaDS8LoqBuEzPIjlucyo1JE8h6BpUC8qVGIMo+c2wPAKzhVGU1LcomGWLKokQ/qhCecwAH0QBZG5Q==",
+      "path": "workflowengine.netcore-providerformysql/12.2.0",
+      "hashPath": "workflowengine.netcore-providerformysql.12.2.0.nupkg.sha512"
     },
-    "WorkflowEngine.NETCore-ProviderForOracle/12.1.1": {
+    "WorkflowEngine.NETCore-ProviderForOracle/12.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-8tWZ8+Sd3XXSlisAKXgLJWethaXGq7XB/fwRrn8yB1TA9b6Muhcyh5cAdYSU96Ln7s4KL/C3gTWxvFKTgtG8rw==",
-      "path": "workflowengine.netcore-providerfororacle/12.1.1",
-      "hashPath": "workflowengine.netcore-providerfororacle.12.1.1.nupkg.sha512"
+      "sha512": "sha512-YKCuuDEdOaiR/A8QYjy/Vz2jGPAFCGg/ktSDNj5ljXqRWuHNbqC6uNPd+vZNL+2S3VeV2V5dgk0QUrQBnJaP0w==",
+      "path": "workflowengine.netcore-providerfororacle/12.2.0",
+      "hashPath": "workflowengine.netcore-providerfororacle.12.2.0.nupkg.sha512"
     },
-    "WorkflowEngine.NETCore-ProviderForPostgreSQL/12.1.1": {
+    "WorkflowEngine.NETCore-ProviderForPostgreSQL/12.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-hPUZ9mbM0XWdQJMzbV4e10MJwB3BWu/eTBt3VOKr4u9bMTAs/6i0kYpYRV9WEwqTTX8rWH4pmDmnGqaCNbvXKA==",
-      "path": "workflowengine.netcore-providerforpostgresql/12.1.1",
-      "hashPath": "workflowengine.netcore-providerforpostgresql.12.1.1.nupkg.sha512"
+      "sha512": "sha512-mq/f/JQdItm7g958R8zVmLJgjj1cXNnznm2ZjxVjIAGdbc9tC0ANbUvDbYz24RGfkQrXkeC78yNGPtR5CAHBSA==",
+      "path": "workflowengine.netcore-providerforpostgresql/12.2.0",
+      "hashPath": "workflowengine.netcore-providerforpostgresql.12.2.0.nupkg.sha512"
     },
     "ZstdSharp.Port/0.6.2": {
       "type": "package",
@@ -3784,17 +3784,17 @@
       "path": "zstdsharp.port/0.6.2",
       "hashPath": "zstdsharp.port.0.6.2.nupkg.sha512"
     },
-    "OptimaJet.Logging/5.0.0": {
+    "OptimaJet.Logging/5.1.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "WorkflowEngine.NET-Server/5.0.0": {
+    "WorkflowEngine.NET-Server/5.1.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "OptimaJet.WorkflowServer/5.0.0.0": {
+    "OptimaJet.WorkflowServer/5.1.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
