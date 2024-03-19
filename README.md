@@ -13,6 +13,29 @@ Workflow Server is a ready-to-use Workflow Engine-based application that you can
     border: 1px solid;
     border-color: #3e4d5c;"></a>
 
+## How to launch
+
+1. Clone the repository.
+   ```bash
+   git clone git@github.com:optimajet/WorkflowServer.git
+   ```
+2. Go to the directory.
+   ```bash
+   cd WorkflowServer
+   ```
+3. Next, you can follow the instructions below for launching the Docker container.
+
+   Windows:
+   ```bash
+   startcontainer.bat
+   ```
+   Linux/MacOS:
+   ```bash
+   chmod +x docker-files/wait-for-postgres.sh
+   chmod +x startcontainer.sh
+   ./startcontainer.sh
+   ```
+
 ## Features
 
 ### Rest API
