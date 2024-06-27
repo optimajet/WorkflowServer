@@ -1,0 +1,393 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WorkflowServer.Migrator.Oracle</name>
+    </assembly>
+    <members>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000010WorkflowServerStats">
+            <summary>
+            The migration that creates the ‘WORKFLOWSERVERSTATS’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000010WorkflowServerStats.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000010WorkflowServerStats.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000020WorkflowServerStatsIndexProcessId">
+            <summary>
+            The migration that creates the ‘IDX_WORKFLOWSERVERSTATS_PROCESSID’ index.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000020WorkflowServerStatsIndexProcessId.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000020WorkflowServerStatsIndexProcessId.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000030WorkflowServerProcessHistory">
+            <summary>
+            The migration that creates the ‘WORKFLOWSERVERPROCESSHISTORY’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000030WorkflowServerProcessHistory.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000030WorkflowServerProcessHistory.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000040WorkflowServerProcessHistoryIndexProcessId">
+            <summary>
+            The migration that creates the ‘IDX_WORKFLOWSERVERPROCESSHISTORY_PROCESSID’ index.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000040WorkflowServerProcessHistoryIndexProcessId.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000040WorkflowServerProcessHistoryIndexProcessId.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000050WorkflowInboxAlterIdentityId">
+            <summary>
+            The migration that changes the type of the ‘IDENTITYID’ column in the ‘WORKFLOWINBOX’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000050WorkflowInboxAlterIdentityId.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000050WorkflowInboxAlterIdentityId.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000060TReportBySchemeEntry">
+            <summary>
+            The migration that creates the type ‘TREPORTBYSCHEMEENTRY’.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000060TReportBySchemeEntry.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000060TReportBySchemeEntry.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000070TReportByScheme">
+            <summary>
+            The migration that creates the type ‘TREPORTBYSCHEME’.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000070TReportByScheme.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000070TReportByScheme.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000080WorkflowReportBySchemes">
+            <summary>
+            The migration that creates the ‘WORKFLOWREPORTBYSCHEMES’ function.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000080WorkflowReportBySchemes.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000080WorkflowReportBySchemes.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000090TReportByTransitionsEntry">
+            <summary>
+            The migration that creates the type ‘TREPORTBYTRANSITIONSENTRY’.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000090TReportByTransitionsEntry.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000090TReportByTransitionsEntry.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000100TReportByTransitions">
+            <summary>
+            The migration that creates the type ‘TREPORTBYTRANSITIONS’.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000100TReportByTransitions.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000100TReportByTransitions.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000110TReportEntry">
+            <summary>
+            The migration that creates the type ‘TREPORTENTRY’.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000110TReportEntry.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000110TReportEntry.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000120TReport">
+            <summary>
+            The migration that creates the type ‘TREPORT’.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000120TReport.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000120TReport.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000130WorkflowReportByTransitions">
+            <summary>
+            Migration that creates the ‘WORKFLOWREPORTBYTRANSITIONS’ function.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000130WorkflowReportByTransitions.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000130WorkflowReportByTransitions.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000140TReportByStatsEntry">
+            <summary>
+            The migration that creates the type ‘TREPORTBYSTATSENTRY’.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000140TReportByStatsEntry.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000140TReportByStatsEntry.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000150TReportByStats">
+            <summary>
+            The migration that creates the type ‘TREPORTBYSTATS’.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000150TReportByStats.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000150TReportByStats.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000160TCodes">
+            <summary>
+            The migration that creates the type ‘TCODES’.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000160TCodes.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000160TCodes.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000170TStatSuccess">
+            <summary>
+            The migration that creates the type ‘TSTATSUCCESS’.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000170TStatSuccess.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000170TStatSuccess.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000180WorkflowReportByStats">
+            <summary>
+            The migration that creates the ‘WORKFLOWREPORTBYSTATS’ function.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000180WorkflowReportByStats.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000180WorkflowReportByStats.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000190WorkflowSchemeAlterDeleteFinalized">
+            <summary>
+            The migration that adds an ‘DELETEFINALIZED’ column to the ‘WORKFLOWSCHEME’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000190WorkflowSchemeAlterDeleteFinalized.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000190WorkflowSchemeAlterDeleteFinalized.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000200WorkflowSchemeAlterDontFillInbox">
+            <summary>
+            The migration that adds an ‘DONTFILLINDOX’ column to the ‘WORKFLOWSCHEME’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000200WorkflowSchemeAlterDontFillInbox.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000200WorkflowSchemeAlterDontFillInbox.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000210WorkflowSchemeAlterDontPreExecute">
+            <summary>
+            The migration that adds an ‘DONTPREEXECUTE’ column to the ‘WORKFLOWSCHEME’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000210WorkflowSchemeAlterDontPreExecute.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000210WorkflowSchemeAlterDontPreExecute.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000220WorkflowSchemeAlterAutoStart">
+            <summary>
+            The migration that adds an ‘AUTOSTART’ column to the ‘WORKFLOWSCHEME’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000220WorkflowSchemeAlterAutoStart.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000220WorkflowSchemeAlterAutoStart.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000230WorkflowSchemeAlterDefaultForm">
+            <summary>
+            The migration that adds an ‘DEFAULTFORM’ column to the ‘WORKFLOWSCHEME’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000230WorkflowSchemeAlterDefaultForm.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000230WorkflowSchemeAlterDefaultForm.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000240WorkflowServerLogs">
+            <summary>
+            The migration that creates the ‘WORKFLOWSERVERLOGS’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000240WorkflowServerLogs.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000240WorkflowServerLogs.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000250WorkflowServerLogsIndexTimeStamp">
+            <summary>
+            The migration that creates the ‘IDX_WORKFLOWSERVERLOGS_TIMESTAMP’ index.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000250WorkflowServerLogsIndexTimeStamp.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000250WorkflowServerLogsIndexTimeStamp.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000260WorkflowServerLogsIndexLogLevel">
+            <summary>
+            The migration that creates the ‘IDX_WORKFLOWSERVERLOGS_LEVEL’ index.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000260WorkflowServerLogsIndexLogLevel.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000260WorkflowServerLogsIndexLogLevel.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000270WorkflowServerLogsIndexRuntimeId">
+            <summary>
+            The migration that creates the ‘IDX_RUNTIMEID_LEVEL’ index.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000270WorkflowServerLogsIndexRuntimeId.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000270WorkflowServerLogsIndexRuntimeId.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000280WorkflowServerUser">
+            <summary>
+            The migration that creates the ‘WORKFLOWSERVERUSER’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000280WorkflowServerUser.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000280WorkflowServerUser.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000290WorkflowServerUserCredential">
+            <summary>
+            The migration that creates the ‘WORKFLOWSERVERUSERCREDENTIAL’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000290WorkflowServerUserCredential.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000290WorkflowServerUserCredential.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000300WorkflowServerUserCredentialIndexUserId">
+            <summary>
+            The migration that creates the ‘IX_WORKFLOWSERVERUSERCREDENTIAL_USERID’ index.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000300WorkflowServerUserCredentialIndexUserId.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000300WorkflowServerUserCredentialIndexUserId.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000310WorkflowServerUserCredentialIndexLogin">
+            <summary>
+            The migration that creates the ‘IX_WORKFLOWSERVERUSERCREDENTIAL_LOGIN’ index.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000310WorkflowServerUserCredentialIndexLogin.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000310WorkflowServerUserCredentialIndexLogin.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000320WorkflowServerProcessLogs">
+            <summary>
+            The migration that creates the ‘WORKFLOWSERVERPROCESSLOGS’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000320WorkflowServerProcessLogs.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000320WorkflowServerProcessLogs.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000330WorkflowServerProcessLogsIndexTimeStamp">
+            <summary>
+            The migration that creates the ‘IDX_WORKFLOWSERVERPROCESSLOGS_TIMESTAMP’ index.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000330WorkflowServerProcessLogsIndexTimeStamp.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000330WorkflowServerProcessLogsIndexTimeStamp.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000340WorkflowServerProcessLogsIndexCreatedOn">
+            <summary>
+            The migration that creates the ‘IDX_WORKFLOWSERVERPROCESSLOGS_CREATEDON’ index.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000340WorkflowServerProcessLogsIndexCreatedOn.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000340WorkflowServerProcessLogsIndexCreatedOn.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.Oracle.Migrations.Migration2000350WorkflowServerProcessLogsIndexProcessId">
+            <summary>
+            The migration that creates the ‘IDX_WORKFLOWSERVERPROCESSLOGS_PROCESSID’ index.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000350WorkflowServerProcessLogsIndexProcessId.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.Oracle.Migrations.Migration2000350WorkflowServerProcessLogsIndexProcessId.Down">
+            @inheritdoc
+        </member>
+    </members>
+</doc>

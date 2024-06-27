@@ -36,7 +36,7 @@ services:
        - ./../metadata:/app/wfs/metadata
        - ./../InitialScripts:/app/wfs/InitialScripts
     environment:
-      ConnectionString: Data Source=workflowserver-mssql;Initial Catalog=wfs;Integrated Security=False;User ID=sa;Password=MyStRoNgPWD12345678
+      ConnectionString: Data Source=workflowserver-mssql;Initial Catalog=wfs;Integrated Security=False;User ID=sa;Password=MyStRoNgPWD12345678;TrustServerCertificate=True;
       Provider: mssql
       LicensePath: /app/wfs/license/
       MetadataFolder: /app/wfs/metadata/ 

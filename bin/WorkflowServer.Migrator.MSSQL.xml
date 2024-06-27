@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WorkflowServer.Migrator.MSSQL</name>
+    </assembly>
+    <members>
+        <member name="T:WorkflowServer.Migrator.MSSQL.Migrations.Migration2000010WorkflowServer">
+            <summary>
+            The migration that creates a data schema for Workflow Server.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MSSQL.Migrations.Migration2000010WorkflowServer.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MSSQL.Migrations.Migration2000010WorkflowServer.Down">
+            @inheritdoc
+        </member>
+    </members>
+</doc>

@@ -11,9 +11,12 @@
     <PackageTags>workflow engine, state machine, wf, core, optimajet, workflow server</PackageTags>
     <Authors>Optimajet Limited</Authors>
     <Company>Optimajet Limited</Company>
-    <Version>5.1.0</Version>
+    <Version>5.2.0</Version>
     <PublishProtocol>FileSystem</PublishProtocol>
     <PublishDir>bin\Release\PublishOutput</PublishDir>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>../bin/</OutputPath>
@@ -30,7 +33,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WorkflowEngine.NET-Server" Version="5.1.0" />
+    <PackageReference Include="WorkflowEngine.NET-Server" Version="5.2.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />

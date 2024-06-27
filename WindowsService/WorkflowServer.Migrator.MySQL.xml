@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WorkflowServer.Migrator.MySQL</name>
+    </assembly>
+    <members>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000010WorkflowServerStats">
+            <summary>
+            The migration that creates the ‘workflowserverstats’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000010WorkflowServerStats.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000010WorkflowServerStats.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000020WorkflowServerProcessHistory">
+            <summary>
+            The migration that creates the ‘workflowserverprocesshistory’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000020WorkflowServerProcessHistory.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000020WorkflowServerProcessHistory.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000030WorkflowServerStatsIndex">
+            <summary>
+            The migration that creates the ‘ix_workflowserverstats_processid’ index.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000030WorkflowServerStatsIndex.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000030WorkflowServerStatsIndex.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000040WorkflowServerProcessHistoryIndex">
+            <summary>
+            The migration that creates the ‘ix_workflowServerprocesshistory_processid’ index.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000040WorkflowServerProcessHistoryIndex.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000040WorkflowServerProcessHistoryIndex.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000050AlterWorkflowInbox">
+            <summary>
+            The migration that adds an ‘IdentityId’ column to the ‘workflowinbox’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000050AlterWorkflowInbox.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000050AlterWorkflowInbox.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000060WorkflowReportBySchemes">
+            <summary>
+            The migration that creates the ‘WorkflowReportBySchemes’ procedure.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000060WorkflowReportBySchemes.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000060WorkflowReportBySchemes.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000070WorkflowReportByTransitions">
+            <summary>
+            The migration that creates the ‘WorkflowReportByTransitions’ procedure.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000070WorkflowReportByTransitions.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000070WorkflowReportByTransitions.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000080WorkflowReportByStats">
+            <summary>
+            The migration that creates the ‘WorkflowReportByStats’ procedure.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000080WorkflowReportByStats.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000080WorkflowReportByStats.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000090AddColumnDeleteFinalized">
+            <summary>
+            The migration that adds an ‘DeleteFinalized’ column to the ‘workflowscheme’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000090AddColumnDeleteFinalized.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000090AddColumnDeleteFinalized.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000100AddColumnDontFillInbox">
+            <summary>
+            The migration that adds an ‘DontFillIndox’ column to the ‘workflowscheme’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000100AddColumnDontFillInbox.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000100AddColumnDontFillInbox.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000110AddColumnDontPreExecute">
+            <summary>
+            The migration that adds an ‘DontPreExecute’ column to the ‘workflowscheme’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000110AddColumnDontPreExecute.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000110AddColumnDontPreExecute.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000120AddColumnAutoStart">
+            <summary>
+            The migration that adds an ‘AutoStart’ column to the ‘workflowscheme’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000120AddColumnAutoStart.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000120AddColumnAutoStart.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000130AddColumnDefaultForm">
+            <summary>
+            The migration that adds an ‘DefaultForm’ column to the ‘workflowscheme’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000130AddColumnDefaultForm.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000130AddColumnDefaultForm.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000140WorkflowServerLogs">
+            <summary>
+            The migration that creates the ‘workflowserverlogs’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000140WorkflowServerLogs.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000140WorkflowServerLogs.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000150WorkflowServerUser">
+            <summary>
+            The migration that creates the ‘workflowserveruser’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000150WorkflowServerUser.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000150WorkflowServerUser.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000160WorkflowServerUserCredential">
+            <summary>
+            The migration that creates the ‘workflowserverusercredential’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000160WorkflowServerUserCredential.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000160WorkflowServerUserCredential.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000170WorkflowServerProcessLogs">
+            <summary>
+            The migration that creates the ‘workflowserverprocesslogs’ table.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000170WorkflowServerProcessLogs.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000170WorkflowServerProcessLogs.Down">
+            @inheritdoc
+        </member>
+    </members>
+</doc>
