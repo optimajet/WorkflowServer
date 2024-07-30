@@ -191,5 +191,27 @@
         <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000170WorkflowServerProcessLogs.Down">
             @inheritdoc
         </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000180WorkflowReportByTransitions">
+            <summary>
+            The migration that updates the ‘WorkflowReportByTransitions’ procedure.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000180WorkflowReportByTransitions.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000180WorkflowReportByTransitions.Down">
+            @inheritdoc
+        </member>
+        <member name="T:WorkflowServer.Migrator.MySQL.Migrations.Migration2000190WorkflowReportByStats">
+            <summary>
+            The migration that updates the ‘WorkflowReportByStats’ procedure.
+            </summary>
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000190WorkflowReportByStats.Up">
+            @inheritdoc
+        </member>
+        <member name="M:WorkflowServer.Migrator.MySQL.Migrations.Migration2000190WorkflowReportByStats.Down">
+            @inheritdoc
+        </member>
     </members>
 </doc>
