@@ -1,1 +1,1 @@
-Workflow Server 5.2.2 - 09/08/2024
+Workflow Server 5.2.3 - 21/08/2024
