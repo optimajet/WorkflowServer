@@ -1,7 +1,7 @@
 ﻿/*
 Company: OptimaJet
 Project: WorkflowEngine.NET Provider for PostgreSQL
-Version: 12.2
+Version: 16.1
 File: CreatePersistenceObjects.sql
 */
 -- WorkflowInbox
