@@ -1,7 +1,7 @@
 /*
 Company: OptimaJet
 Project: WorkflowServer Oracle
-Version: 6.0
+Version: 6.1
 File: WorkflowServerScripts.sql
 */
 

@@ -100,6 +100,10 @@
         <member name="M:OptimaJet.WorkflowServer.Logging.ProcessLogPersistenceProvider.GetEntry(Serilog.Events.LogEvent)">
             <summary> Convert <see cref="T:Serilog.Events.LogEvent"/> to <see cref="T:OptimaJet.Logging.Database.ProcessLog"/> </summary>
         </member>
+        <member name="F:OptimaJet.WorkflowServer.Model.Plugin.ExcludedPlugins">
+            List of excluded plugins. If there was an unsuccessful attempt to load a plug-in,
+            the plug-in is still listed in WorkflowRuntime.
+        </member>
         <member name="M:OptimaJet.WorkflowServer.Model.Settings.GetParametersAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,System.Boolean)">
             <summary> Get list of settings. </summary>
             <param name="wsRuntime"></param>
@@ -215,6 +219,9 @@
         </member>
         <member name="M:OptimaJet.WorkflowServer.Persistence.User.GetStreamAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,System.Boolean)">
             <summary> Get stream with all users </summary>
+        </member>
+        <member name="T:OptimaJet.WorkflowServer.Plugins.BpmnPlugin">
+            Wrapper for BpmnPlugin. Adds only constructor without parameters.
         </member>
         <member name="T:OptimaJet.WorkflowServer.Plugins.Fake">
             <summary>
