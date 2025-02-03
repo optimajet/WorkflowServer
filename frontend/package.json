@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "version": "6.1.0",
+  "version": "6.2.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@optimajet/workflow-designer": "^16.1.0",
-    "@optimajet/workflow-designer-react": "^16.1.0",
+    "@optimajet/workflow-designer": "^16.3.0",
+    "@optimajet/workflow-designer-react": "^16.3.0",
     "element-ui": "^2.15.10",
     "jquery": "^3.6.3",
     "lodash": "^4.17.21",
@@ -24,5 +24,9 @@
     "terser-webpack-plugin": "^5.3.9",
     "webpack": "^5.53.0",
     "webpack-cli": "^4.8.0"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }

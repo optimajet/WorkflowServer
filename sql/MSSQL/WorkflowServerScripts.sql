@@ -1,7 +1,7 @@
 /*
 Company: OptimaJet
 Project: WorkflowServer MSSQL
-Version: 6.1
+Version: 6.2
 File: WorkflowServerScripts.sql
 */
 

@@ -1,7 +1,7 @@
 <base href="/"/>
-<script src="scripts/oidc-client.min.js"></script>
+<script src="scripts/oidc-client-ts.min.js"></script>
 <script>
-  var mgr = new Oidc.UserManager();
+  var mgr = new UserManager();
   mgr.signinSilentCallback().catch(function(error){
         console.error(error);
     });
