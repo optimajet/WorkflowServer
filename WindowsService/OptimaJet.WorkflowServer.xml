@@ -220,9 +220,6 @@
         <member name="M:OptimaJet.WorkflowServer.Persistence.User.GetStreamAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,System.Boolean)">
             <summary> Get stream with all users </summary>
         </member>
-        <member name="T:OptimaJet.WorkflowServer.Plugins.BpmnPlugin">
-            Wrapper for BpmnPlugin. Adds only constructor without parameters.
-        </member>
         <member name="T:OptimaJet.WorkflowServer.Plugins.Fake">
             <summary>
             It's a fake class to save the namespace
