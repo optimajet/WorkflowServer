@@ -253,6 +253,26 @@
             Cryptographic salt for any encryption
             </summary>
         </member>
+        <member name="T:OptimaJet.WorkflowServer.Services.MsSql.Fake">
+            <summary>
+            It's a fake class to save the namespace
+            </summary>
+        </member>
+        <member name="T:OptimaJet.WorkflowServer.Services.MySql.Fake">
+            <summary>
+            It's a fake class to save the namespace
+            </summary>
+        </member>
+        <member name="T:OptimaJet.WorkflowServer.Services.Oracle.Fake">
+            <summary>
+            It's a fake class to save the namespace
+            </summary>
+        </member>
+        <member name="T:OptimaJet.WorkflowServer.Services.PostgreSql.Fake">
+            <summary>
+            It's a fake class to save the namespace
+            </summary>
+        </member>
         <member name="M:OptimaJet.WorkflowServer.Initializing.WorkflowServerInitializer.BuildWebHost(System.Action{OptimaJet.WorkflowServer.WorkflowServerRuntime},System.Action{Microsoft.AspNetCore.Hosting.IWebHostBuilder})">
             <summary>
             can be run only one time

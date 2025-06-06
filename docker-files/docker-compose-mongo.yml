@@ -38,6 +38,11 @@ services:
     ports:
       - "8077:8077"
       - "8078:8078"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8077/liveness" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
     volumes:
       - ./../logs:/app/wfs/logs
       - ./../license:/app/wfs/license

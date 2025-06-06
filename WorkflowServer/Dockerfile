@@ -4,6 +4,7 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY ./WorkflowServer WorkflowServer/
+COPY ../Directory.Packages.props .
 RUN dotnet restore WorkflowServer/WorkflowServer.csproj --source https://api.nuget.org/v3/index.json
 WORKDIR /src/WorkflowServer
 RUN dotnet build WorkflowServer.csproj -c Release -o /app
