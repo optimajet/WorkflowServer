@@ -1,1 +1,1 @@
-Workflow Server 7.1.0 - 26/06/2025
+Workflow Server 7.2.0 - 14/08/2025
