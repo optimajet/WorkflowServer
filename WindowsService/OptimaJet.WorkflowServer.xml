@@ -71,6 +71,21 @@
             <param name="id">id that will be returned in response (to working with signalR)</param>
             <returns></returns>
         </member>
+        <member name="T:OptimaJet.WorkflowServer.Identity.IdentityDataProvider.Fake">
+            <summary>
+            It's a fake class to save the namespace
+            </summary>
+        </member>
+        <member name="T:OptimaJet.WorkflowServer.Identity.Native.Fake">
+            <summary>
+            It's a fake class to save the namespace
+            </summary>
+        </member>
+        <member name="T:OptimaJet.WorkflowServer.Identity.Sync.Fake">
+            <summary>
+            It's a fake class to save the namespace
+            </summary>
+        </member>
         <member name="T:OptimaJet.WorkflowServer.Integration.Base.Classes.Fake">
             <summary>
             It's a fake class to save the namespace
@@ -155,35 +170,6 @@
         <member name="M:OptimaJet.WorkflowServer.Persistence.FilePersistence.AddVersionEntryAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,System.IO.Compression.ZipArchive)">
             <summary> Add entry version txt file in zip archive </summary>
         </member>
-        <member name="M:OptimaJet.WorkflowServer.Persistence.Form.GetFormNames">
-            <summary> Get form names from file system. </summary>
-        </member>
-        <member name="M:OptimaJet.WorkflowServer.Persistence.Form.GetFormNames(System.Collections.Generic.Dictionary{System.String,System.IO.Stream})">
-            <summary> Get form names from stream items. </summary>
-        </member>
-        <member name="M:OptimaJet.WorkflowServer.Persistence.Form.GetFormNames(System.Collections.Generic.List{OptimaJet.WorkflowServer.Model.Form})">
-            <summary> Get form names from list of form. </summary>
-        </member>
-        <member name="M:OptimaJet.WorkflowServer.Persistence.Form.SaveAllAsync">
-            <summary> Save all forms from database in file system. </summary>
-            <returns></returns>
-        </member>
-        <member name="M:OptimaJet.WorkflowServer.Persistence.Form.SaveFile(OptimaJet.WorkflowServer.Model.Form)">
-            <summary> Save on file system. </summary>
-        </member>
-        <member name="M:OptimaJet.WorkflowServer.Persistence.Form.DeleteFile(System.String)">
-            <summary> Delete target file from file system </summary>
-            <param name="name">Name of file</param>
-        </member>
-        <member name="M:OptimaJet.WorkflowServer.Persistence.Form.AddEntryAsync(OptimaJet.WorkflowServer.WorkflowServerRuntime,System.IO.Compression.ZipArchive)">
-            <summary> Add entry in zip archive </summary>
-        </member>
-        <member name="M:OptimaJet.WorkflowServer.Persistence.Form.GetFileList(System.String,System.Boolean)">
-            <summary> Get list of files. </summary>
-            <param name="searchPattern">Kind of "*.json".</param>
-            <param name="withExtension">File with or without extension</param>
-            <returns> File list without extension. </returns>
-        </member>
         <member name="T:OptimaJet.WorkflowServer.Persistence.Metadata">
             <summary> Metadata which use for transfer between instances. </summary>
         </member>
@@ -233,11 +219,6 @@
         <member name="P:OptimaJet.WorkflowServer.ServerSettings.GlobalCommandTimeout">
             <summary>
             Sets a global timeout in seconds for executing commands to the persistence provider. 30 as default.
-            </summary>
-        </member>
-        <member name="P:OptimaJet.WorkflowServer.ServerSettings.AlwaysShowOpenFormButton">
-            <summary>
-            Always show the "Open form" button on the scheme page
             </summary>
         </member>
         <member name="P:OptimaJet.WorkflowServer.ServerSettings.AssertNullTenantId">

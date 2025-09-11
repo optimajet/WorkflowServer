@@ -17,7 +17,6 @@ FROM base AS final
 WORKDIR /app/wfs
 COPY --from=publish /app ./bin
 COPY ./backend ./backend
-COPY ./frontend ./frontend
 COPY ./config.json .
 
 RUN useradd --user-group --uid 1000 wfs

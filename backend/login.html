@@ -182,7 +182,9 @@
                     while (!result.done) {
                         if (result.value.toLowerCase() === 'returnurl') {
                             newLocation = newLocation + "&returnUrl=" + encodeURIComponent(urlParams.get(result.value));
-                            break;
+                        }
+                        if (result.value.toLowerCase() === 'client_id') {
+                            newLocation = newLocation + '&client_id=' + encodeURIComponent(urlParams.get(result.value));
                         }
                         result = keys.next();
                     }

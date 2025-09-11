@@ -1,8 +1,12 @@
 <base href="/"/>
 <script src="scripts/oidc-client-ts.min.js"></script>
 <script>
-  var mgr = new UserManager();
-  mgr.signinSilentCallback().catch(function(error){
-        console.error(error);
-    });
+  const config = localStorage.getItem("userManagerConfig")
+  if (!config) {
+      throw new Error("No user manager configuration found");
+  }
+  var mgr = new oidc.UserManager(config);
+  mgr.signinSilentCallback().catch(function(error) {
+    console.error(error);
+  });
 </script>

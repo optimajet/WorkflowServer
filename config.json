@@ -1,13 +1,8 @@
 {
   "IsMultiServer": false,
   "DeveloperMode": false,
-  "ServerType": "All", // Under IIS you SHOULD (!!!) change to Admin or Forms value
-  //"RuntimeId": "someruntimeid", //specify runtime name for multi-server mode here
-  "AlwaysShowOpenFormButton": false,
   "url": "http://*:8077/",
   "PathBase": "/",
-  "FrontendFolder": "../frontend",
-  "DefaultFrontendPort": "8078",
   "BackendFolder": "../backend",
   "MetadataFolder": "../metadata",
   "LicensePath": "../license",
@@ -31,12 +26,12 @@
   "AssertNullOrWhitespaceTenantId": false,
   "Salt": "5b4c5099534d48f3873648b8793c9b85",
   "AuthorityUrl" : "http://localhost:8077",
-  "IdentityServerSettings": {
-    "CertificateFile": "IdentityServer4Auth.pfx",
+  "DisableOpenIddictServer": true,
+  "OpenIddictServerSettings": {
+    "CertificateFile": "../../../localhost.pfx",
     "CertificatePassword": "password",
-    "RedirectHosts": [ "http://localhost:8077", "http://localhost:8078" ],
-    "RedirectUrls": [],
-    "UseHostRedirectValidator": false
+    "RedirectHosts": [ "https://localhost:8077", "https://localhost:8091" ],
+    "RedirectUrls": []
   },
   "WorkflowApi": {
     "BlockUserApi": false
