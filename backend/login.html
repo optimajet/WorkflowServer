@@ -1,221 +1,314 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>OptimaJet WorkflowServer</title>
-        <base href="/"/>
-        <link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon">
-        <meta name='viewport' content='width=device-width,initial-scale=1'/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WorkflowServer Login</title>
+  <link rel="stylesheet" href="css/workflowserver.css">
+  <style>
+    .field > input:not([type="checkbox"]) {
+        width: 100%;
+        padding: 0 15px;
+        border: 1px solid #DCDFE6;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+        line-height: 40px;
+        transition: border-color .2s;
+    }
 
-        <script src="scripts/jquery.js" type="text/javascript"></script>
-        <script src="scripts/minified.js" type="text/javascript"></script>
-        <script src="scripts/vue.js" type="text/javascript"></script>
-        <script src="scripts/element.js" type="text/javascript"></script>
+    .wfs-checkbox > label {
+        font-size: 14px;
+        color: #606266;
+        user-select: none;
+        cursor: pointer;
+        font-weight: 500;
+    }
 
-        <link href="css/element.css" rel="stylesheet" type="text/css" />
-        <link href="css/workflowserver.css" rel="stylesheet" type="text/css" />
-    </head>
-    <style>
-        body{
-            margin: 0px;
-        }
-    </style>
-    <body>
+    .wfs-checkbox > input[type="checkbox"]:checked ~ label {
+        color: #409EFF;
+    }
 
-        <div id="app" class="container">
-            <div class="wfs-wrapper">
-                <div class="wfs-login-wrapper">
-                    <div class="wfs-login">
-                        <div id="wfs-content">
-                            <div class="wfs-login-divlogo">
-                                <img src="images/logo.svg" class="wfs-login-logo">
-                            </div>
-                            <el-form :model="form" :rules="rules" ref="form">
-                                <el-form-item class="field" prop="login" label="Login">
-                                    <el-input  v-model="form.login" @keyup.enter.native="submit('form')"></el-input>
-                                </el-form-item>
-                                <el-form-item class="field" prop="password" label="Password" style="margin-bottom: 12px;">
-                                    <el-input show-password v-model="form.password" @keyup.enter.native="submit('form')"></el-input>
-                                </el-form-item>
-                                <el-form-item class="field" style="margin-bottom: 12px;">
-                                    <el-checkbox v-model="form.remember">Remember me</el-checkbox>
-                                </el-form-item>
-                                <el-form-item>
-                                    <el-button style="width: 100%; background: #6FB048;color: #FFFFFF;" @click="submit('form')"><b>Login</b></el-button>
-                                </el-form-item>
-                                <el-row v-if="!isSupported">
-                                    <el-alert  title="Warning!" type="warning">
-                                        <div>
-                                            The <strong>HTTP</strong> protocol in your current browser doesn't support this type
-                                            of authorization. You may want to consider trying a different browser, such as Firefox,
-                                            or switching to the more secure <strong>HTTPS</strong> protocol for entire functionality.
-                                        </div>
-                                    </el-alert>
-                                </el-row>
-                                <el-row >
-                                    <el-button type="primary" v-for="item in externals" :key="item.Name" @click="externalLogin(item.Name)">
-                                        {{item.DisplayName}}
-                                    </el-button>
-                                </el-row>
-                            </el-form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
-    <script type="text/javascript">
+    .field, .wfs-checkbox {
+        margin-bottom: 22px;
+    }
 
-        var vue = new Vue({
-            el: "#app",
-            data: {
-                form : {
-                    login: "",
-                    password: "",
-                    remember: true
-                },
-                rules: {
-                    login: [
-                        { required: true, message: 'Please input the login', trigger: 'blur' }
-                    ],
-                    password: [
-                        { required: true, message: 'Please input the password', trigger: 'blur' }
-                    ]
-                },
-                externals: [],
-                tenantId: null,
-                isSupported: document.location.protocol === "https:"
-                    || (document.location.hostname === "localhost" || document.location.hostname === "127.0.0.1")
-                    && navigator.userAgent.search(/Chrome/) <= 0
-            },
-           
-            methods: {
-                submit: function (formName) {
-    
-                    var me = this;
-    
-                    this.$refs[formName].validate(function (valid) {
-    
-                        if (valid) {
-    
-                            var data = new Array();
-                            data.push({ name: 'operation', value: 'login' });
-                            data.push({ name: 'login', value: me.form.login });
-                            data.push({ name: 'password', value: me.form.password });
-                            data.push({ name: 'remember', value: me.form.remember });
-    
-                            if(me.tenantId) {
-                                data.push({ name: 'tenantId', value: me.tenantId });
-                            }
-    
-                            $.ajax({
-                                url: 'configapi',
-                                data: data,
-                                async: true,
-                                crossDomain: true,
-                                method: 'POST',
-                                success: function(response, status, xhr) {
-    
-                                    if (response.success) {
-                                        me.redirectToApp();
-                                    }
-                                    else {
-                                        me.$notify.error({
-                                            title: 'Error',
-                                            message: response.message
-                                        });
-                                    }
-                                },
-                                error: function(jqXHR, exception) {
-    
-                                    me.$notify.error({
-                                        title: 'Error',
-                                        message: "Auth failed"
-                                    });
-                                }
-                            });
-                          
-                        } else {
-                            return false;
-                        }
-                    });              
-                },
-                redirectToApp: function() {
-    
-                    var newLocation = '/';
-                    var urlParams = new URLSearchParams(location.search);
-    
-                    var keys = urlParams.keys();
-    
-                    let result = keys.next();
-                    while (!result.done) {
-                        if (result.value.toLowerCase() === 'returnurl') {
-                            newLocation = urlParams.get(result.value);
-                            break;
-                        }
-                        result = keys.next();
-                    }
-    
-                window.location = newLocation;
-                },
-                getExternalProviders: function() {
-    
-                    var me = this;
-    
-                    $.getJSON(
-                        "account/external", function(response) {
-                            me.externals = response;
-                        }).fail(function() {
-                            me.$notify.error({
-                                title: 'Error',
-                                message: "Error on the server!"
-                            });
-                        });
-                },
-                externalLogin: function(name) {
-    
-                    var newLocation = "account/challenge-external?name=" + name;
-    
-                    var urlParams = new URLSearchParams(location.search);
-    
-                    let keys = urlParams.keys();
-                    let result = keys.next();
-                    while (!result.done) {
-                        if (result.value.toLowerCase() === 'returnurl') {
-                            newLocation = newLocation + "&returnUrl=" + encodeURIComponent(urlParams.get(result.value));
-                        }
-                        if (result.value.toLowerCase() === 'client_id') {
-                            newLocation = newLocation + '&client_id=' + encodeURIComponent(urlParams.get(result.value));
-                        }
-                        result = keys.next();
-                    }
-    
-                    if(this.tenantId) {
-                        newLocation = newLocation + "&=" + encodeURIComponent(this.tenantId);
-                    }
-    
-                    location.href = newLocation;
-    
-                },
-                getTenantId: function() {
-                    var urlParams = new URLSearchParams(location.search);
-    
-                    let keys = urlParams.keys();
-    
-                    let result = keys.next();
-                    while (!result.done) {
-                        if (result.value.toLowerCase() === 'tenantid') {
-                            this.tenantId = urlParams.get(result.value);
-                            break;
-                        }
-                        result = keys.next();
-                    }
-                }
-            }
+    .field > input:focus {
+        outline: none;
+        border-color: #409EFF;
+    }
+
+    .field-required > label:before {
+        content: '*';
+        color: #F56C6C;
+        margin-right: 4px;
+    }
+
+    .field-error {
+        border-color: #f56c6c!important;
+    }
+
+    .error-message {
+        font-size: 12px;
+        color: #f56c6c;
+        line-height: 1;
+        padding-top: 4px;
+    }
+
+    .wfs-btn {
+        width: 100%;
+        background: #6FB048;
+        color: #fff;
+        border: none;
+        border-radius: 2px;
+        font-weight: bold;
+        font-size: 14px;
+        padding: 10px 0;
+        cursor: pointer;
+        transition: background .2s;
+    }
+
+    .wfs-btn:hover {
+        background: #5ba03c;
+    }
+
+    .wfs-external-btn {
+        display: inline-block;
+        line-height: 1;
+        white-space: nowrap;
+        cursor: pointer;
+        background-color: #409EFF;
+        border: 1px solid #409EFF;
+        color: #FFF;
+        -webkit-appearance: none;
+        text-align: center;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        outline: 0;
+        margin: 0;
+        -webkit-transition: .1s;
+        transition: .1s;
+        font-weight: 500;
+        padding: 12px 20px;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+
+    .wfs-external-btn:hover {
+        background-color: #66b1ff;
+        border-color: #66b1ff;
+    }
+
+    .wfs-external-btn:active {
+        background-color: #3a8ee6;
+        border-color: #3a8ee6;
+    }
+  </style>
+</head>
+<body class="wfs-wrapper">
+<div class="wfs-login-wrapper">
+  <div class="wfs-login">
+    <div class="wfs-login-divlogo">
+      <img src="images/logo.svg" alt="WorkflowServer" class="wfs-login-logo">
+    </div>
+
+    <form id="loginForm" class="wfs-form">
+      <div class="field field-required">
+        <label for="login">Login</label>
+        <input type="text" id="login" name="login">
+        <div id="loginError" class="error-message" style="visibility: hidden;">Please input the login</div>
+      </div>
+      <div class="field field-required">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password">
+        <div id="passwordError" class="error-message" style="visibility: hidden;">Please input the password</div>
+      </div>
+      <div class="wfs-checkbox">
+        <input type="checkbox" id="remember" checked>
+        <label for="remember">Remember me</label>
+      </div>
+      <div class="field">
+        <button type="submit" class="wfs-btn">Login</button>
+      </div>
+
+      <div id="externalButtons"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+  (function () {
+    let tenantId = null;
+
+    const loginForm = document.getElementById('loginForm');
+    const loginInput = document.getElementById('login');
+    const passwordInput = document.getElementById('password');
+    const rememberInput = document.getElementById('remember');
+    const loginError = document.getElementById('loginError');
+    const passwordError = document.getElementById('passwordError');
+    const externalButtons = document.getElementById('externalButtons');
+
+    function getTenantId() {
+      const params = new URLSearchParams(location.search);
+      if (params.has("tenantid")) {
+        tenantId = params.get("tenantid");
+      }
+    }
+
+    function inputEvent(e, input, label) {
+      if (e.target.value === ""){
+        input.classList.add("field-error");
+        label.style.visibility = "visible";
+      } else {
+        input.classList.remove("field-error");
+        label.style.visibility = "hidden"
+      }
+    }
+
+    loginInput.addEventListener("input", (e) => inputEvent(e, loginInput, loginError));
+    loginInput.addEventListener("focusout", (e) => inputEvent(e, loginInput, loginError));
+    passwordInput.addEventListener("input", (e) => inputEvent(e, passwordInput, passwordError));
+    passwordInput.addEventListener("focusout", (e) => inputEvent(e, passwordInput, passwordError));
+
+    loginForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const login = loginInput.value.trim();
+      const password = passwordInput.value.trim();
+      const remember = rememberInput.checked;
+
+      let valid = true;
+
+      if (!login) {
+        loginError.style.visibility = "visible";
+        loginInput.classList.add("field-error");
+        valid = false;
+      }
+
+      if (!password) {
+        passwordError.style.visibility = "visible";
+        passwordInput.classList.add("field-error");
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      const formData = new URLSearchParams();
+      formData.append('operation', 'login');
+      formData.append('login', login);
+      formData.append('password', password);
+      formData.append('remember', remember);
+      if (tenantId) {
+        formData.append('tenantId', tenantId);
+      }
+
+      try {
+        const response = await fetch('configapi', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: formData.toString()
         });
-    
-        vue.getTenantId();
-        vue.getExternalProviders();
-    
-    </script>
-    
+        if (!response.ok) {
+          showError("Authentication failed");
+          return;
+        }
+
+        const data = await response.json();
+
+        if (data.success) {
+          redirectToApp();
+        } else {
+          showError("Authentication failed");
+        }
+      } catch (error) {
+        showError("Auth failed: " + error.message);
+      }
+    });
+
+
+    function redirectToApp() {
+      let newLocation = "/";
+      const params = new URLSearchParams(location.search);
+      for (const [key, value] of params.entries()) {
+        if (key.toLowerCase() === "returnurl") {
+          newLocation = value;
+          break;
+        }
+      }
+      window.location = newLocation;
+    }
+
+    async function getExternalProviders() {
+      try {
+        const response = await fetch("account/external");
+        if (!response.ok) throw new Error("Server error");
+        const externals = await response.json();
+        renderExternalButtons(externals);
+      } catch (err) {
+        throw new Error("Something was wrong");
+      }
+    }
+
+    function renderExternalButtons(externals) {
+      externalButtons.innerHTML = "";
+      externals.forEach(item => {
+        const btn = document.createElement("button");
+        btn.classList.add("wfs-external-btn")
+        btn.textContent = item.DisplayName;
+        btn.addEventListener("click", () => externalLogin(item.Name));
+        externalButtons.appendChild(btn);
+      })
+    }
+
+    function externalLogin(name) {
+      let newLocation = "account/challenge-external?name=" + encodeURIComponent(name);
+      const params = new URLSearchParams(location.search);
+
+      for (const [key, value] of params.entries()) {
+        if (key.toLowerCase() === 'returnurl') {
+          newLocation += "&returnUrl=" + encodeURIComponent(value);
+        }
+        if (key.toLowerCase() === 'client_id') {
+          newLocation += "&client_id=" + encodeURIComponent(value);
+        }
+      }
+
+      if (tenantId) {
+        newLocation += "&tenantId=" + encodeURIComponent(tenantId);
+      }
+
+      location.href = newLocation;
+    }
+
+    function showError(message) {
+      showLog(message, "error");
+    }
+
+    let logsContainer = document.querySelector('.alertify-logs');
+    if (!logsContainer) {
+      logsContainer = document.createElement('div');
+      logsContainer.className = 'alertify-logs';
+      document.body.appendChild(logsContainer);
+    }
+
+    function showLog(message, type = '') {
+      const log = document.createElement('div');
+      log.className = 'alertify-log alertify-log-show';
+      if (type) log.classList.add('alertify-log-' + type);
+      log.textContent = message;
+      logsContainer.appendChild(log);
+
+      requestAnimationFrame(() => log.classList.add('alertify-show'));
+
+      setTimeout(() => {
+        log.classList.remove('alertify-log-show');
+        log.classList.add('alertify-log-hide');
+        setTimeout(() => log.remove(), 500);
+      }, 5000);
+    }
+
+    getTenantId();
+    getExternalProviders();
+  })()
+</script>
+</body>
 </html>

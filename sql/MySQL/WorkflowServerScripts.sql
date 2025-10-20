@@ -1,7 +1,7 @@
 /*
 Company: OptimaJet
 Project: WorkflowServer MySQL
-Version: 8.0
+Version: 8.1
 File: WorkflowServerScripts.sql
 */
 
