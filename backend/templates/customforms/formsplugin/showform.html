@@ -1,0 +1,513 @@
+<h3>{{ customTitle ? customTitle : labels.Title }}</h3>
+<el-form
+  ref="form"
+  :model="FormData"
+  class="WorkflowDesignerWindowForm"
+  label-position="top"
+  label-width="150px">
+
+  <el-form-item>
+    <el-button v-if="pluginSettings.FormsManagerUrl" type="info" @click="createForm" :disabled="!FormData.FormName">
+      {{ labels.ManageForms }}
+    </el-button>
+  </el-form-item>
+
+  <div class="SettingsWithPadding" v-if="!calledFromParameter">
+    <div class="el-form--inline el-form--label-top">
+      <el-form-item :label="labels.Name" :rules="getActivityNameRules()" class="el-form-item" prop="Name" style="flex-grow: 1;">
+        <el-input v-model="FormData.Name" :placeholder="labels.Name" :readonly="readonly" @input="nameOnChange"></el-input>
+      </el-form-item>
+      <el-form-item :label="labels.State" class="el-form-item" prop="State" style="flex-grow: 1;">
+        <el-input v-model="FormData.State" :placeholder="labels.State" :readonly="readonly"></el-input>
+      </el-form-item>
+    </div>
+  </div>
+
+  <div class="SettingsWithPadding" style="margin-bottom: 10px;">
+    <div class="el-form--inline el-form--label-top">
+      <el-form-item :label="labels.FormName" prop="FormName" style="flex-grow: 1;" :rules="getRequiredRules()">
+        <el-select
+          v-model="FormData.FormName"
+          :disabled="readonly"
+          allow-create
+          filterable
+          @change="formNameOnChange"
+        >
+          <el-option
+            v-for="name in currentFormNames"
+            :key="name"
+            :label="name"
+            :value="name">
+          </el-option>
+        </el-select>
+      </el-form-item>
+
+      <el-form-item :label="labels.FormVersion" prop="FormVersion" style="flex-grow: 1;">
+        <el-select
+          v-model="FormData.FormVersion"
+          :disabled="readonly"
+          filterable
+        >
+          <el-option
+            v-for="version in currentFormVersions"
+            :key="version"
+            :label="version"
+            :value="version !== 'latest' ? version : 'latest'">
+          </el-option>
+        </el-select>
+      </el-form-item>
+    </div>
+    <el-form-item :label="labels.InParameterName" prop="InParameterName" :rules="getRequiredRules()">
+      <el-autocomplete v-model="FormData.InParameterName" :disabled="readonly"
+                       @input="inParameterNameOnChange"
+                       :fetch-suggestions="getParameterNames"
+                       :placeholder="labels.InParameterName"
+                       style="width: 100%;">
+      </el-autocomplete>
+    </el-form-item>
+
+    <el-form-item :label="labels.DraftParameterName" prop="DraftParameterName" :rules="getRequiredRules()">
+      <el-autocomplete v-model="FormData.DraftParameterName" :disabled="readonly"
+                       :fetch-suggestions="getParameterNames"
+                       :placeholder="labels.DraftParameterName"
+                       style="width: 100%;">
+      </el-autocomplete>
+    </el-form-item>
+
+    <el-form-item :label="labels.OutParameterName" prop="OutParameterName" :rules="getRequiredRules()">
+      <el-autocomplete v-model="FormData.OutParameterName" :disabled="readonly"
+                       :fetch-suggestions="getParameterNames"
+                       :placeholder="labels.OutParameterName"
+                       style="width: 100%;">
+      </el-autocomplete>
+    </el-form-item>
+  </div>
+
+  <div style="margin-bottom: 10px;">
+    <h4 class="WorkflowDesignerTitleWithCreate Underline">
+      {{ labels.AssociatedCommands }}
+      <a v-if="!readonly && currentActivityCommands.length > 0"
+         @click="addAssociatedCommand(FormData.AssociatedCommands)">{{ labels.ButtonCreate }}</a>
+      <el-tooltip v-if="currentActivityCommands.length < 1" :content="labels.NoCommandsWarning" placement="top-start">
+        <div>
+          <i class="el-icon-warning" style="display: contents; color: #FF3300; opacity: 0.6; margin-left: 3px;"></i>
+        </div>
+      </el-tooltip>
+      <el-tooltip v-if="FormData.AssociatedCommands.length < 1 && currentActivityCommands.length > 0" :content="labels.NoAssociatedCommands"
+                  placement="top-start">
+        <div>
+          <i class="el-icon-warning" style="display: contents; color: #FF3300; opacity: 0.6; margin-left: 3px;"></i>
+        </div>
+      </el-tooltip>
+    </h4>
+    <table v-if="currentActivityCommands.length > 0 && FormData.AssociatedCommands.length > 0" class="WorkflowDesignerTable">
+      <tr>
+        <th></th>
+        <th>{{ labels.Command }}</th>
+        <th>{{ labels.SaveStrategy }}</th>
+      </tr>
+      <tr
+        v-for="(associatedCommand, index) in FormData.AssociatedCommands"
+        :key="index"
+        :class="dragOverIndex == index && dragOverBlock == associatedCommand ? 'dragOver' : ''"
+        @dragend="dragend($event)"
+        @dragover="dragover(associatedCommand, index, $event)"
+        @dragstart="dragstart(index, $event, FormData.AssociatedCommands)"
+      >
+        <td :draggable="!readonly" class='WorkflowDesignerTableMoveCol'>
+          <div v-if="!readonly" class='WorkflowDesignerTableMoveButton'></div>
+        </td>
+        <td>
+          <el-select
+            v-model="associatedCommand.CommandName"
+            :class="validateField(notEmpty, associatedCommand.CommandName) ? 'WorkflowDesignerInputError' : ''"
+            :disabled="readonly"
+            filterable
+          >
+            <el-option
+              v-for="command in currentActivityCommands"
+              :key="command"
+              :label="command"
+              :value="command">
+            </el-option>
+          </el-select>
+        </td>
+        <td>
+          <el-select
+            v-model="associatedCommand.SaveStrategy"
+            :class="validateField(notEmpty, associatedCommand.SaveStrategy) ? 'WorkflowDesignerInputError' : ''"
+            :disabled="readonly"
+            filterable
+          >
+            <el-option
+              key="ValidateAndSave"
+              label="ValidateAndSave"
+              value="ValidateAndSave">
+            </el-option>
+            <el-option
+              key="NoSave"
+              label="NoSave"
+              value="NoSave">
+            </el-option>
+          </el-select>
+        </td>
+        <td v-if="!readonly" class="WorkflowDesignerTableEditButtons">
+          <el-button-group>
+            <el-button class="WorkflowDesignerTableDeleteButton"
+                       @click="removeAssociatedCommand(FormData.AssociatedCommands, index)"></el-button>
+          </el-button-group>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</el-form>
+<div class="WorkflowDesignerButtons">
+  <el-button v-if="!readonly" type="primary" @click="onSave">{{ ButtonTextSave }}</el-button>
+  <el-button @click="onClose">{{ ButtonTextCancel }}</el-button>
+</div>
+
+<script type="application/javascript">
+  function showform_Data(me) {
+    return {
+      pluginSettings: {},
+      customTitle: undefined,
+      FormData: {
+        FormName: '',
+        AssociatedCommands: [],
+        FormVersion: null
+      },
+      parameterFromProcess: {},
+      readonly: false,
+      loading: false,
+      currentActivityCommands: [],
+      currentFormVersions: ['latest'],
+      currentFormNames: [],
+      currentActivityCommandsStore: me.graph.data.Transitions,
+      calledFromParameter: {},
+      prevInParamName: ''
+    }
+  }
+
+  function showform_Init(me) {
+    const {VueConfig} = me;
+    const {state: data, methods} = VueConfig;
+
+    methods.UpdateLanguage = function () {
+      Object.assign(data, {
+        labels: WorkflowDesignerConstants.FormActionFormLabel,
+        ButtonTextSave: WorkflowDesignerConstants.ButtonTextSave,
+        ButtonTextCancel: WorkflowDesignerConstants.ButtonTextCancel
+      })
+    }
+
+    methods.UpdateLanguage();
+
+    methods.sendPost = function (data) {
+      return new Promise(function (resolve, reject) {
+        $.ajax({
+          url: me.graph.designer.Settings.apiurl,
+          data: data,
+          type: 'POST',
+          success: response => {
+            const data = JSON.parse(response)
+            if (data.isError === true) {
+              throw new Error(data.errorMessage);
+            }
+            resolve(data);
+          },
+          error: (...args) => reject(args)
+        });
+      });
+    }
+
+    methods.LoadPluginSettings = async function () {
+      const formBody = ['operation=formsplugin_getsettings'];
+      const data = formBody.join('&');
+      return await methods.sendPost(data);
+    }
+
+    methods.LoadFormVersions = async function (formName) {
+      const formBody = ['operation=formsplugin_getformversions', `formName=${formName}`];
+      const data = formBody.join('&');
+      return await methods.sendPost(data);
+    }
+
+    methods.LoadFormNames = async function () {
+      const formBody = ['operation=formsplugin_getformnames'];
+      const data = formBody.join('&');
+      return await methods.sendPost(data);
+    }
+
+    methods.onVueAppCreated = function () {
+      methods.LoadPluginSettings()
+        .then(d => data.pluginSettings = d)
+        .catch(console.error)
+    }
+
+
+
+    const getCurrentActivityCommands = function () {
+      const transitions = me.graph.data.Transitions.filter(t =>
+        t.From.Name === data.originalActivityName && t.Trigger.Type === 'Command' && !!t.Trigger?.Command);
+      const commandNames = transitions.map(t => t.Trigger.Command.Name);
+      return [...new Set(commandNames)];
+    };
+
+    me.VueConfig.watch = {
+      currentActivityCommandsStore: {
+        handler: function (val) {
+          data.currentActivityCommands = getCurrentActivityCommands();
+        },
+        deep: true
+      },
+      'FormData.FormName': async function (val) {
+        clearTimeout(me.formNameDebounceTimer);
+        me.formNameDebounceTimer = setTimeout(async () => {
+          const versions = await methods.LoadFormVersions(val);
+          methods.SetFormVersions(versions)
+        }, 250);
+      }
+    };
+
+    methods.SetFormVersions = function (versions) {
+      const newVersions = [...versions]
+      newVersions.unshift('latest')
+      data.currentFormVersions = newVersions;
+      if (data.currentFormVersions.find(v => v === data.FormData.FormVersion) === undefined) {
+        data.FormData.FormVersion = null
+      }
+    }
+
+    methods.onUpdate = function (value) {
+      data.calledFromParameter = me.options.callerElement !== undefined && me.options.callerElement !== null;
+      data.readonly = me.graph.Settings.readonly;
+      let formData = {};
+      if (data.calledFromParameter) {
+        formData = JSON.parse(!value ? '{}' : value);
+        formData.AssociatedCommands ??= [];
+        if (typeof formData.FormVersion === 'undefined') {
+          formData.FormVersion = 'latest'
+        }
+        data.originalActivityName = me.options.callerElement.Name;
+      } else {
+        me.linkItem = value;
+        formData.Name = value.Name;
+        formData.State = value.State;
+        formData.AssociatedCommands = JSON.parse(value.Annotations.find(a => a.Name === 'AssociatedCommands')?.JsonValue ?? '[]');
+        formData.FormName = value.Annotations.find(a => a.Name === 'FormName')?.JsonValue;
+        const formVersionString = value.Annotations.find(a => a.Name === 'FormVersion')?.JsonValue;
+        formData.FormVersion = formVersionString ? parseInt(formVersionString) : 'latest';
+        formData.InParameterName = value.Annotations.find(a => a.Name === 'InParameterName')?.JsonValue;
+        formData.DraftParameterName = value.Annotations.find(a => a.Name === 'DraftParameterName')?.JsonValue;
+        formData.OutParameterName = value.Annotations.find(a => a.Name === 'OutParameterName')?.JsonValue;
+        data.originalActivityName = formData.Name;
+      }
+
+      data.FormData = formData;
+      data.originalItem = WorkflowDesignerCommon.clone(formData);
+      data.prevName = formData.Name;
+      data.prevInParamName = formData.InParameterName;
+
+      data.currentActivityCommands = getCurrentActivityCommands();
+      methods.LoadFormNames().then(data => {
+        data.currentFormNames = data ?? [];
+      })
+      if (formData.FormName) {
+        methods.LoadFormVersions(formData.FormName).then((data) => {
+          methods.SetFormVersions(data)
+        })
+      }
+    };
+
+    methods.addAssociatedCommand = function (arr) {
+      arr.push({
+        SaveStrategy: 'ValidateAndSave'
+      });
+    };
+
+    methods.removeAssociatedCommand = function (items, index) {
+      items.splice(index, 1);
+    };
+
+    methods.validateField = function (rules, value) {
+      for (let i = 0; i < arguments.length - 1; i++) {
+        const error = arguments[i](value);
+        if (error)
+          return error;
+      }
+    };
+
+    methods.validate = function () {
+      const validateFunc = methods.validateField;
+      const d = data.FormData;
+      const notEmptyRule = methods.notEmpty;
+      for (let i = 0; i < d.AssociatedCommands.length; i++) {
+        const item = d.AssociatedCommands[i];
+        if (validateFunc(notEmptyRule, item.CommandName)) {
+          return false;
+        }
+        if (validateFunc(notEmptyRule, item.SaveStrategy)) {
+          return false;
+        }
+      }
+
+      return true;
+    };
+
+    methods.onSave = function () {
+      if (this.$refs) {
+        WorkflowDesignerCommon.validateForms(this.$refs).then(isValid => {
+          if (isValid && methods.validate()) {
+            if (data.FormData.FormVersion === 'latest') {
+              data.FormData.FormVersion = undefined
+            }
+            if (data.calledFromParameter) {
+              me.onSuccess(JSON.stringify(data.FormData));
+            } else {
+              me.onSuccess(data.FormData);
+            }
+
+            me.onClose(true);
+          }
+        }).catch(() => { }) // Validation failed
+      }
+    };
+
+    methods.onClose = function () {
+      if (data.readonly) {
+        me.onClose(true);
+        return;
+      }
+
+      const originalItem = data.originalItem;
+      const item = data.FormData;
+
+      if (item.FormVersion === undefined && originalItem.FormVersion === null) {
+        item.FormVersion = null;
+      }
+
+      if (WorkflowDesignerCommon.deepCompare(originalItem, item)) {
+        me.onClose(true);
+      } else {
+        me.showConfirm();
+        return false;
+      }
+    };
+
+    methods.onCloseSave = function () {
+      me.onClose(true);
+    };
+
+    me.showConfirm = function () {
+      methods.showConfirm({
+        title: WorkflowDesignerConstants.DialogConfirmText,
+        message: WorkflowDesignerConstants.CloseWithoutSaving,
+        onSuccess: function () {
+          methods.onCloseSave();
+        }
+      });
+    }
+
+    methods.getFormSettings = function () {
+      return {
+        formName: data.FormData.FormName,
+        formVersion: data.FormData.FormVersion,
+      }
+    }
+
+    me.createFormUrl = function (baseUrl) {
+      const params = new URLSearchParams(baseUrl)
+      const settings = methods.getFormSettings()
+      let prefix = params.keys.length > 0 ? '&' : '?'
+      let result = baseUrl + prefix + 'formName=' + encodeURIComponent(settings.formName)
+      if (settings.formVersion) result += '&formVersion=' + encodeURIComponent(settings.formVersion)
+      result += '&createFormIfNotExists=true'
+      return result
+    }
+
+    methods.createForm = function () {
+      window.open(me.createFormUrl(data.pluginSettings.FormsManagerUrl), '_blank');
+    };
+
+    methods.getParameterNames = function (queryString, cb) {
+      if (data.readonly)
+        return cb([]);
+      const res = me.graph.getNonSystemParameters().map(p => {
+        return {
+          'value': p.Name
+        }
+      }).filter(p => !!queryString ? p.value.includes(queryString) : true);
+      cb(res);
+    }
+
+    methods.setCurrentItem = function (item) {
+      this.currentItem = item;
+    };
+
+    methods.formNameOnChange = function (value) {
+      if (!data.currentFormNames.find(fn => fn === value)) {
+        data.currentFormNames.push(value);
+      }
+    };
+
+    methods.nameOnChange = function (value) {
+      const formData = data.FormData;
+      if (formData.State === data.prevName) {
+        formData.State = value;
+      }
+      data.prevName = value;
+    };
+
+    methods.inParameterNameOnChange = function (value) {
+      const formData = data.FormData;
+      if (formData.DraftParameterName === data.prevInParamName) {
+        formData.DraftParameterName = value;
+      }
+      if (formData.OutParameterName === data.prevInParamName) {
+        formData.OutParameterName = value;
+      }
+      data.prevInParamName = value;
+    };
+
+    methods.validateField = function (rules, value) {
+      for (let i = 0; i < arguments.length - 1; i++) {
+        const error = arguments[i](value);
+        if (error)
+          return error;
+      }
+    };
+
+    methods.notEmpty = function (value) {
+      let isValid = true;
+      if (!methods.objectCorrect(value))
+        isValid = false;
+
+      if (Object.prototype.toString.call(value) === '[object Array]') {
+        if (value.length < 1)
+          isValid = false;
+      }
+
+      if (!isValid)
+        return WorkflowDesignerConstants.FieldIsRequired;
+    }
+
+    methods.getRequiredRules = function () {
+      return me.requiredRule();
+    }
+
+    methods.getActivityNameRules = function () {
+      const res = me.requiredRule();
+
+      const validator = function (rule, value, callback) {
+        const hasEqualNames = me.graph.data.Activities.find(function (a) {
+          return a !== me.linkItem && a.Name === value;
+        });
+
+        hasEqualNames ? callback(new Error(rule.message)) : callback();
+      };
+      res.push({validator: validator, message: WorkflowDesignerConstants.FieldMustBeUnique});
+      return res;
+    }
+  }
+</script>

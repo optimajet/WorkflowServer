@@ -54,7 +54,7 @@
       },
       "Azure.Core/1.46.1": {
         "dependencies": {
-          "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
+          "Microsoft.Bcl.AsyncInterfaces": "9.0.5",
           "System.ClientModel": "1.4.1",
           "System.Memory.Data": "6.0.1"
         },
@@ -76,6 +76,25 @@
           "lib/net8.0/Azure.Identity.dll": {
             "assemblyVersion": "1.14.0.0",
             "fileVersion": "1.1400.25.26304"
+          }
+        }
+      },
+      "Dapper.Oracle.StrongName/2.0.3": {
+        "dependencies": {
+          "Dapper.StrongName": "2.1.15"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Dapper.Oracle.StrongName.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.3.0"
+          }
+        }
+      },
+      "Dapper.StrongName/2.1.15": {
+        "runtime": {
+          "lib/net5.0/Dapper.StrongName.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.1.15.52653"
           }
         }
       },
@@ -366,6 +385,14 @@
           }
         }
       },
+      "Humanizer.Core/2.8.26": {
+        "runtime": {
+          "lib/netstandard2.0/Humanizer.dll": {
+            "assemblyVersion": "2.8.0.0",
+            "fileVersion": "2.8.26.1919"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Authentication.JwtBearer/8.0.12": {
         "dependencies": {
           "Microsoft.IdentityModel.Protocols.OpenIdConnect": "7.5.0"
@@ -405,6 +432,17 @@
           }
         }
       },
+      "Microsoft.AspNetCore.OpenApi/8.0.6": {
+        "dependencies": {
+          "Microsoft.OpenApi": "1.4.3"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.OpenApi.dll": {
+            "assemblyVersion": "8.0.6.0",
+            "fileVersion": "8.0.624.26909"
+          }
+        }
+      },
       "Microsoft.AspNetCore.SignalR.Common/8.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Connections.Abstractions": "8.0.0",
@@ -423,11 +461,11 @@
           }
         }
       },
-      "Microsoft.Bcl.AsyncInterfaces/8.0.0": {
+      "Microsoft.Bcl.AsyncInterfaces/9.0.5": {
         "runtime": {
           "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
-            "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.23.53103"
+            "assemblyVersion": "9.0.0.5",
+            "fileVersion": "9.0.525.21509"
           }
         }
       },
@@ -1304,6 +1342,14 @@
       },
       "Microsoft.NETCore.Platforms/2.1.2": {},
       "Microsoft.NETCore.Targets/1.1.3": {},
+      "Microsoft.OpenApi/1.4.3": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.OpenApi.dll": {
+            "assemblyVersion": "1.4.3.0",
+            "fileVersion": "1.4.3.0"
+          }
+        }
+      },
       "Microsoft.SqlServer.Server/1.0.0": {
         "runtime": {
           "lib/netstandard2.0/Microsoft.SqlServer.Server.dll": {
@@ -1770,6 +1816,201 @@
           "lib/net8.0/OpenIddict.Validation.SystemNetHttp.dll": {
             "assemblyVersion": "7.1.0.0",
             "fileVersion": "7.100.25.46074"
+          }
+        }
+      },
+      "OptimaJet.DataEngine/1.2.0": {
+        "dependencies": {
+          "Dapper.Oracle.StrongName": "2.0.3",
+          "Microsoft.Bcl.AsyncInterfaces": "9.0.5",
+          "OptimaJet.SqlKata": "1.0.0",
+          "OptimaJet.SqlKata.Execution": "1.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/OptimaJet.DataEngine.dll": {
+            "assemblyVersion": "1.2.0.0",
+            "fileVersion": "1.2.0.0"
+          }
+        }
+      },
+      "OptimaJet.DataEngine.Mssql/1.2.0": {
+        "dependencies": {
+          "Microsoft.Data.SqlClient": "6.0.1",
+          "Microsoft.IdentityModel.JsonWebTokens": "8.14.0",
+          "OptimaJet.DataEngine.Sql": "1.2.0",
+          "System.IdentityModel.Tokens.Jwt": "8.10.0",
+          "System.Runtime.Caching": "8.0.1",
+          "System.Text.RegularExpressions": "4.3.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/OptimaJet.DataEngine.Mssql.dll": {
+            "assemblyVersion": "1.2.0.0",
+            "fileVersion": "1.2.0.0"
+          }
+        }
+      },
+      "OptimaJet.DataEngine.Mysql/1.2.0": {
+        "dependencies": {
+          "MySqlConnector": "2.4.0",
+          "OptimaJet.DataEngine.Sql": "1.2.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/OptimaJet.DataEngine.Mysql.dll": {
+            "assemblyVersion": "1.2.0.0",
+            "fileVersion": "1.2.0.0"
+          }
+        }
+      },
+      "OptimaJet.DataEngine.Oracle/1.2.0": {
+        "dependencies": {
+          "Dapper.StrongName": "2.1.15",
+          "OptimaJet.DataEngine.Sql": "1.2.0",
+          "Oracle.ManagedDataAccess.Core": "3.21.100",
+          "System.Text.Json": "9.0.5"
+        },
+        "runtime": {
+          "lib/netstandard2.1/OptimaJet.DataEngine.Oracle.dll": {
+            "assemblyVersion": "1.2.0.0",
+            "fileVersion": "1.2.0.0"
+          }
+        }
+      },
+      "OptimaJet.DataEngine.Postgres/1.2.0": {
+        "dependencies": {
+          "Npgsql": "8.0.3",
+          "OptimaJet.DataEngine.Sql": "1.2.0",
+          "System.Text.Json": "9.0.5"
+        },
+        "runtime": {
+          "lib/netstandard2.0/OptimaJet.DataEngine.Postgres.dll": {
+            "assemblyVersion": "1.2.0.0",
+            "fileVersion": "1.2.0.0"
+          }
+        }
+      },
+      "OptimaJet.DataEngine.Sql/1.2.0": {
+        "dependencies": {
+          "OptimaJet.DataEngine": "1.2.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/OptimaJet.DataEngine.Sql.dll": {
+            "assemblyVersion": "1.2.0.0",
+            "fileVersion": "1.2.0.0"
+          }
+        }
+      },
+      "OptimaJet.SqlKata/1.0.0": {
+        "dependencies": {
+          "System.Collections.Concurrent": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/OptimaJet.SqlKata.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "OptimaJet.SqlKata.Execution/1.0.0": {
+        "dependencies": {
+          "Dapper.StrongName": "2.1.15",
+          "Humanizer.Core": "2.8.26",
+          "OptimaJet.SqlKata": "1.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/OptimaJet.SqlKata.Execution.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "OptimaJet.Workflow.Api/20.0.2": {
+        "dependencies": {
+          "Microsoft.AspNetCore.OpenApi": "8.0.6",
+          "WorkflowEngine.NETCore-Core": "20.0.2",
+          "WorkflowEngine.NETCore-Migrator": "20.0.2"
+        },
+        "runtime": {
+          "lib/net8.0/OptimaJet.Workflow.Api.dll": {
+            "assemblyVersion": "20.0.2.0",
+            "fileVersion": "20.0.2.0"
+          }
+        }
+      },
+      "OptimaJet.Workflow.Api.Mongo/20.0.2": {
+        "dependencies": {
+          "OptimaJet.Workflow.Api": "20.0.2",
+          "WorkflowEngine.NETCore-ProviderForMongoDB": "20.0.2"
+        },
+        "runtime": {
+          "lib/net8.0/OptimaJet.Workflow.Api.Mongo.dll": {
+            "assemblyVersion": "20.0.2.0",
+            "fileVersion": "20.0.2.0"
+          }
+        }
+      },
+      "OptimaJet.Workflow.Api.Mssql/20.0.2": {
+        "dependencies": {
+          "OptimaJet.DataEngine.Mssql": "1.2.0",
+          "OptimaJet.Workflow.Api.Sql": "20.0.2",
+          "System.Text.Json": "9.0.5",
+          "WorkflowEngine.NETCore-ProviderForMSSQL": "20.0.2"
+        },
+        "runtime": {
+          "lib/net8.0/OptimaJet.Workflow.Api.Mssql.dll": {
+            "assemblyVersion": "20.0.2.0",
+            "fileVersion": "20.0.2.0"
+          }
+        }
+      },
+      "OptimaJet.Workflow.Api.Mysql/20.0.2": {
+        "dependencies": {
+          "OptimaJet.DataEngine.Mysql": "1.2.0",
+          "OptimaJet.Workflow.Api.Sql": "20.0.2",
+          "WorkflowEngine.NETCore-ProviderForMySQL": "20.0.2"
+        },
+        "runtime": {
+          "lib/net8.0/OptimaJet.Workflow.Api.Mysql.dll": {
+            "assemblyVersion": "20.0.2.0",
+            "fileVersion": "20.0.2.0"
+          }
+        }
+      },
+      "OptimaJet.Workflow.Api.Oracle/20.0.2": {
+        "dependencies": {
+          "OptimaJet.DataEngine.Oracle": "1.2.0",
+          "OptimaJet.Workflow.Api.Sql": "20.0.2",
+          "WorkflowEngine.NETCore-ProviderForOracle": "20.0.2"
+        },
+        "runtime": {
+          "lib/net8.0/OptimaJet.Workflow.Api.Oracle.dll": {
+            "assemblyVersion": "20.0.2.0",
+            "fileVersion": "20.0.2.0"
+          }
+        }
+      },
+      "OptimaJet.Workflow.Api.Postgres/20.0.2": {
+        "dependencies": {
+          "OptimaJet.DataEngine.Postgres": "1.2.0",
+          "OptimaJet.Workflow.Api.Sql": "20.0.2",
+          "WorkflowEngine.NETCore-ProviderForPostgreSQL": "20.0.2"
+        },
+        "runtime": {
+          "lib/net8.0/OptimaJet.Workflow.Api.Postgres.dll": {
+            "assemblyVersion": "20.0.2.0",
+            "fileVersion": "20.0.2.0"
+          }
+        }
+      },
+      "OptimaJet.Workflow.Api.Sql/20.0.2": {
+        "dependencies": {
+          "OptimaJet.DataEngine": "1.2.0",
+          "OptimaJet.DataEngine.Sql": "1.2.0",
+          "OptimaJet.Workflow.Api": "20.0.2"
+        },
+        "runtime": {
+          "lib/net8.0/OptimaJet.Workflow.Api.Sql.dll": {
+            "assemblyVersion": "20.0.2.0",
+            "fileVersion": "20.0.2.0"
           }
         }
       },
@@ -2902,52 +3143,54 @@
           }
         }
       },
-      "WorkflowEngine.NETCore-BpmnPlugin/17.3.0": {
+      "WorkflowEngine.NETCore-BpmnPlugin/20.0.2": {
         "dependencies": {
-          "WorkflowEngine.NETCore-Core": "17.3.0"
+          "WorkflowEngine.NETCore-Core": "20.0.2"
         },
         "runtime": {
           "lib/netstandard2.0/OptimaJet.Workflow.BpmnPlugin.dll": {
-            "assemblyVersion": "17.3.0.0",
-            "fileVersion": "17.3.0.0"
+            "assemblyVersion": "20.0.0.0",
+            "fileVersion": "20.0.0.0"
           }
         }
       },
-      "WorkflowEngine.NETCore-Core/17.3.0": {
+      "WorkflowEngine.NETCore-Core/20.0.2": {
         "dependencies": {
+          "Microsoft.Bcl.AsyncInterfaces": "9.0.5",
           "Microsoft.CodeAnalysis.CSharp": "4.1.0",
           "Microsoft.CodeAnalysis.CSharp.Scripting": "4.1.0",
           "Microsoft.Extensions.DependencyModel": "8.0.2",
           "Newtonsoft.Json": "13.0.3",
           "System.Collections.Specialized": "4.3.0",
           "System.Security.Cryptography.Csp": "4.3.0",
+          "System.Text.Json": "9.0.5",
           "System.Text.RegularExpressions": "4.3.1",
           "System.Xml.XmlDocument": "4.3.0",
           "ThomasLevesque.WeakEvent": "4.1.0"
         },
         "runtime": {
           "lib/netstandard2.0/OptimaJet.Workflow.Core.dll": {
-            "assemblyVersion": "17.3.0.0",
-            "fileVersion": "17.3.0.0"
+            "assemblyVersion": "20.0.0.0",
+            "fileVersion": "20.0.0.0"
           }
         }
       },
-      "WorkflowEngine.NETCore-FilesPlugin/17.3.0": {
+      "WorkflowEngine.NETCore-FilesPlugin/20.0.2": {
         "dependencies": {
           "FluentFTP": "32.4.3",
           "SSH.NET": "2020.0.2",
           "SharpZipLib": "1.4.2",
           "System.Net.Security": "4.3.2",
-          "WorkflowEngine.NETCore-Core": "17.3.0"
+          "WorkflowEngine.NETCore-Core": "20.0.2"
         },
         "runtime": {
           "lib/netstandard2.0/OptimaJet.Workflow.FilesPlugin.dll": {
-            "assemblyVersion": "17.3.0.0",
-            "fileVersion": "17.3.0.0"
+            "assemblyVersion": "20.0.0.0",
+            "fileVersion": "20.0.0.0"
           }
         }
       },
-      "WorkflowEngine.NETCore-Migrator/17.3.0": {
+      "WorkflowEngine.NETCore-Migrator/20.0.2": {
         "dependencies": {
           "Azure.Identity": "1.14.0",
           "FluentMigrator": "7.1.0",
@@ -2957,28 +3200,28 @@
           "Microsoft.IdentityModel.JsonWebTokens": "8.14.0",
           "System.IdentityModel.Tokens.Jwt": "8.10.0",
           "System.Runtime.Caching": "8.0.1",
-          "WorkflowEngine.NETCore-Core": "17.3.0"
+          "WorkflowEngine.NETCore-Core": "20.0.2"
         },
         "runtime": {
           "lib/netstandard2.0/OptimaJet.Workflow.Migrator.dll": {
-            "assemblyVersion": "17.3.0.0",
-            "fileVersion": "17.3.0.0"
+            "assemblyVersion": "20.0.0.0",
+            "fileVersion": "20.0.0.0"
           }
         }
       },
-      "WorkflowEngine.NETCore-ProviderForMongoDB/17.3.0": {
+      "WorkflowEngine.NETCore-ProviderForMongoDB/20.0.2": {
         "dependencies": {
           "MongoDB.Driver": "2.30.0",
-          "WorkflowEngine.NETCore-Core": "17.3.0"
+          "WorkflowEngine.NETCore-Core": "20.0.2"
         },
         "runtime": {
           "lib/netstandard2.0/OptimaJet.Workflow.MongoDB.dll": {
-            "assemblyVersion": "17.3.0.0",
-            "fileVersion": "17.3.0.0"
+            "assemblyVersion": "20.0.0.0",
+            "fileVersion": "20.0.0.0"
           }
         }
       },
-      "WorkflowEngine.NETCore-ProviderForMSSQL/17.3.0": {
+      "WorkflowEngine.NETCore-ProviderForMSSQL/20.0.2": {
         "dependencies": {
           "Azure.Identity": "1.14.0",
           "Microsoft.Data.SqlClient": "6.0.1",
@@ -2986,66 +3229,66 @@
           "Microsoft.IdentityModel.JsonWebTokens": "8.14.0",
           "System.IdentityModel.Tokens.Jwt": "8.10.0",
           "System.Runtime.Caching": "8.0.1",
-          "WorkflowEngine.NETCore-Core": "17.3.0",
-          "WorkflowEngine.NETCore-Migrator": "17.3.0"
+          "WorkflowEngine.NETCore-Core": "20.0.2",
+          "WorkflowEngine.NETCore-Migrator": "20.0.2"
         },
         "runtime": {
           "lib/netstandard2.0/OptimaJet.Workflow.MSSQL.dll": {
-            "assemblyVersion": "17.3.0.0",
-            "fileVersion": "17.3.0.0"
+            "assemblyVersion": "20.0.0.0",
+            "fileVersion": "20.0.0.0"
           }
         }
       },
-      "WorkflowEngine.NETCore-ProviderForMySQL/17.3.0": {
+      "WorkflowEngine.NETCore-ProviderForMySQL/20.0.2": {
         "dependencies": {
           "FluentMigrator.Runner.MySql": "7.1.0",
           "MySqlConnector": "2.4.0",
-          "WorkflowEngine.NETCore-Core": "17.3.0",
-          "WorkflowEngine.NETCore-Migrator": "17.3.0"
+          "WorkflowEngine.NETCore-Core": "20.0.2",
+          "WorkflowEngine.NETCore-Migrator": "20.0.2"
         },
         "runtime": {
           "lib/netstandard2.0/OptimaJet.Workflow.MySQL.dll": {
-            "assemblyVersion": "17.3.0.0",
-            "fileVersion": "17.3.0.0"
+            "assemblyVersion": "20.0.0.0",
+            "fileVersion": "20.0.0.0"
           }
         }
       },
-      "WorkflowEngine.NETCore-ProviderForOracle/17.3.0": {
+      "WorkflowEngine.NETCore-ProviderForOracle/20.0.2": {
         "dependencies": {
           "FluentMigrator.Runner.Oracle": "7.1.0",
           "Oracle.ManagedDataAccess.Core": "3.21.100",
-          "WorkflowEngine.NETCore-Core": "17.3.0",
-          "WorkflowEngine.NETCore-Migrator": "17.3.0"
+          "WorkflowEngine.NETCore-Core": "20.0.2",
+          "WorkflowEngine.NETCore-Migrator": "20.0.2"
         },
         "runtime": {
           "lib/netstandard2.1/OptimaJet.Workflow.Oracle.dll": {
-            "assemblyVersion": "17.3.0.0",
-            "fileVersion": "17.3.0.0"
+            "assemblyVersion": "20.0.0.0",
+            "fileVersion": "20.0.0.0"
           }
         }
       },
-      "WorkflowEngine.NETCore-ProviderForPostgreSQL/17.3.0": {
+      "WorkflowEngine.NETCore-ProviderForPostgreSQL/20.0.2": {
         "dependencies": {
           "FluentMigrator.Runner.Postgres": "7.1.0",
           "Npgsql": "8.0.3",
-          "WorkflowEngine.NETCore-Core": "17.3.0",
-          "WorkflowEngine.NETCore-Migrator": "17.3.0"
+          "WorkflowEngine.NETCore-Core": "20.0.2",
+          "WorkflowEngine.NETCore-Migrator": "20.0.2"
         },
         "runtime": {
           "lib/netstandard2.0/OptimaJet.Workflow.PostgreSQL.dll": {
-            "assemblyVersion": "17.3.0.0",
-            "fileVersion": "17.3.0.0"
+            "assemblyVersion": "20.0.0.0",
+            "fileVersion": "20.0.0.0"
           }
         }
       },
-      "WorkflowEngine.NETCore-RealTimeTrackingPlugin/17.3.0": {
+      "WorkflowEngine.NETCore-RealTimeTrackingPlugin/20.0.2": {
         "dependencies": {
-          "WorkflowEngine.NETCore-Core": "17.3.0"
+          "WorkflowEngine.NETCore-Core": "20.0.2"
         },
         "runtime": {
           "lib/net8.0/OptimaJet.Workflow.RealTimeTrackingPlugin.dll": {
-            "assemblyVersion": "17.3.0.0",
-            "fileVersion": "17.3.0.0"
+            "assemblyVersion": "20.0.0.0",
+            "fileVersion": "20.0.0.0"
           }
         }
       },
@@ -3068,7 +3311,7 @@
           "Serilog.Sinks.EventLog": "4.0.0",
           "Serilog.Sinks.File": "7.0.0",
           "Serilog.Sinks.PeriodicBatching": "5.0.0",
-          "WorkflowEngine.NETCore-Core": "17.3.0"
+          "WorkflowEngine.NETCore-Core": "20.0.2"
         },
         "runtime": {
           "OptimaJet.Logging.dll": {}
@@ -3078,7 +3321,7 @@
         "dependencies": {
           "FluentMigrator": "7.1.0",
           "FluentMigrator.Runner": "7.1.0",
-          "WorkflowEngine.NETCore-Migrator": "17.3.0"
+          "WorkflowEngine.NETCore-Migrator": "20.0.2"
         },
         "runtime": {
           "WorkflowServer.Migrator.MySQL.dll": {}
@@ -3088,7 +3331,7 @@
         "dependencies": {
           "FluentMigrator": "7.1.0",
           "FluentMigrator.Runner": "7.1.0",
-          "WorkflowEngine.NETCore-Migrator": "17.3.0"
+          "WorkflowEngine.NETCore-Migrator": "20.0.2"
         },
         "runtime": {
           "WorkflowServer.Migrator.Oracle.dll": {}
@@ -3098,7 +3341,7 @@
         "dependencies": {
           "FluentMigrator": "7.1.0",
           "FluentMigrator.Runner": "7.1.0",
-          "WorkflowEngine.NETCore-Migrator": "17.3.0"
+          "WorkflowEngine.NETCore-Migrator": "20.0.2"
         },
         "runtime": {
           "WorkflowServer.Migrator.PostgreSQL.dll": {}
@@ -3108,7 +3351,7 @@
         "dependencies": {
           "FluentMigrator": "7.1.0",
           "FluentMigrator.Runner": "7.1.0",
-          "WorkflowEngine.NETCore-Migrator": "17.3.0"
+          "WorkflowEngine.NETCore-Migrator": "20.0.2"
         },
         "runtime": {
           "WorkflowServer.Migrator.MSSQL.dll": {}
@@ -3130,19 +3373,25 @@
           "OpenIddict.AspNetCore": "7.1.0",
           "OpenIddict.EntityFrameworkCore": "7.1.0",
           "OptimaJet.Logging": "8.1.0",
+          "OptimaJet.Workflow.Api": "20.0.2",
+          "OptimaJet.Workflow.Api.Mongo": "20.0.2",
+          "OptimaJet.Workflow.Api.Mssql": "20.0.2",
+          "OptimaJet.Workflow.Api.Mysql": "20.0.2",
+          "OptimaJet.Workflow.Api.Oracle": "20.0.2",
+          "OptimaJet.Workflow.Api.Postgres": "20.0.2",
           "OptimaJet.WorkflowServer.Migrations.MySql": "8.1.0",
           "OptimaJet.WorkflowServer.Migrations.Oracle": "8.1.0",
           "OptimaJet.WorkflowServer.Migrations.PostgreSql": "8.1.0",
           "OptimaJet.WorkflowServer.Migrations.SqlServer": "8.1.0",
-          "WorkflowEngine.NETCore-BpmnPlugin": "17.3.0",
-          "WorkflowEngine.NETCore-Core": "17.3.0",
-          "WorkflowEngine.NETCore-FilesPlugin": "17.3.0",
-          "WorkflowEngine.NETCore-ProviderForMSSQL": "17.3.0",
-          "WorkflowEngine.NETCore-ProviderForMongoDB": "17.3.0",
-          "WorkflowEngine.NETCore-ProviderForMySQL": "17.3.0",
-          "WorkflowEngine.NETCore-ProviderForOracle": "17.3.0",
-          "WorkflowEngine.NETCore-ProviderForPostgreSQL": "17.3.0",
-          "WorkflowEngine.NETCore-RealTimeTrackingPlugin": "17.3.0"
+          "WorkflowEngine.NETCore-BpmnPlugin": "20.0.2",
+          "WorkflowEngine.NETCore-Core": "20.0.2",
+          "WorkflowEngine.NETCore-FilesPlugin": "20.0.2",
+          "WorkflowEngine.NETCore-ProviderForMSSQL": "20.0.2",
+          "WorkflowEngine.NETCore-ProviderForMongoDB": "20.0.2",
+          "WorkflowEngine.NETCore-ProviderForMySQL": "20.0.2",
+          "WorkflowEngine.NETCore-ProviderForOracle": "20.0.2",
+          "WorkflowEngine.NETCore-ProviderForPostgreSQL": "20.0.2",
+          "WorkflowEngine.NETCore-RealTimeTrackingPlugin": "20.0.2"
         },
         "runtime": {
           "OptimaJet.WorkflowServer.dll": {}
@@ -3230,6 +3479,20 @@
       "sha512": "sha512-xQ6mpNhifb8W/KG2BclhbJWAupvE3JF8lPEBF8t59Q5sc1yN0Ci+dvS0qXtc6m9auxwYpmc8rhOmK541dcGwmA==",
       "path": "azure.identity/1.14.0",
       "hashPath": "azure.identity.1.14.0.nupkg.sha512"
+    },
+    "Dapper.Oracle.StrongName/2.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gltFXwO8r2QWgSqVOsQIXTrO3l1gWP2acMXeOZSZEdR2VRPWe6Wnp8kWsuJfm5azvISebZQ70xUscbz7Usk64A==",
+      "path": "dapper.oracle.strongname/2.0.3",
+      "hashPath": "dapper.oracle.strongname.2.0.3.nupkg.sha512"
+    },
+    "Dapper.StrongName/2.1.15": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3ejOjghnN1qr7ydV84U0GITN9zYQqDn+aBZiOJvoRQR6PrRyC0a7TZ27GGdCOf2z9tIxkmWSf2PpUoUNn3oVOQ==",
+      "path": "dapper.strongname/2.1.15",
+      "hashPath": "dapper.strongname.2.1.15.nupkg.sha512"
     },
     "DnsClient/1.6.1": {
       "type": "package",
@@ -3385,6 +3648,13 @@
       "path": "fluentmigrator.runner.sqlserver/7.1.0",
       "hashPath": "fluentmigrator.runner.sqlserver.7.1.0.nupkg.sha512"
     },
+    "Humanizer.Core/2.8.26": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
+      "path": "humanizer.core/2.8.26",
+      "hashPath": "humanizer.core.2.8.26.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.Authentication.JwtBearer/8.0.12": {
       "type": "package",
       "serviceable": true,
@@ -3413,6 +3683,13 @@
       "path": "microsoft.aspnetcore.hosting.windowsservices/8.0.0",
       "hashPath": "microsoft.aspnetcore.hosting.windowsservices.8.0.0.nupkg.sha512"
     },
+    "Microsoft.AspNetCore.OpenApi/8.0.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-G0Qdo5ZtxmBFZ41CFRopZbSVeS/xwezmqZE0vLYcggoB7EEsPOUKSWnSrJPC2C+02iANAnnq6bSMIlKBgdqCmA==",
+      "path": "microsoft.aspnetcore.openapi/8.0.6",
+      "hashPath": "microsoft.aspnetcore.openapi.8.0.6.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.SignalR.Common/8.0.0": {
       "type": "package",
       "serviceable": true,
@@ -3427,12 +3704,12 @@
       "path": "microsoft.aspnetcore.signalr.protocols.newtonsoftjson/8.0.0",
       "hashPath": "microsoft.aspnetcore.signalr.protocols.newtonsoftjson.8.0.0.nupkg.sha512"
     },
-    "Microsoft.Bcl.AsyncInterfaces/8.0.0": {
+    "Microsoft.Bcl.AsyncInterfaces/9.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-3WA9q9yVqJp222P3x1wYIGDAkpjAku0TMUaaQV22g6L67AI0LdOIrVS7Ht2vJfLHGSPVuqN94vIr15qn+HEkHw==",
-      "path": "microsoft.bcl.asyncinterfaces/8.0.0",
-      "hashPath": "microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512"
+      "sha512": "sha512-eNQDjbtFj8kOLxbckCbn2JXTsnzK8+xkA4jg7NULO9jhIvlOSngC9BFzmiqVPpw1INQaP1pQ3YteY2XhfWNjtQ==",
+      "path": "microsoft.bcl.asyncinterfaces/9.0.5",
+      "hashPath": "microsoft.bcl.asyncinterfaces.9.0.5.nupkg.sha512"
     },
     "Microsoft.Bcl.Cryptography/8.0.0": {
       "type": "package",
@@ -3868,6 +4145,13 @@
       "path": "microsoft.netcore.targets/1.1.3",
       "hashPath": "microsoft.netcore.targets.1.1.3.nupkg.sha512"
     },
+    "Microsoft.OpenApi/1.4.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rURwggB+QZYcSVbDr7HSdhw/FELvMlriW10OeOzjPT7pstefMo7IThhtNtDudxbXhW+lj0NfX72Ka5EDsG8x6w==",
+      "path": "microsoft.openapi/1.4.3",
+      "hashPath": "microsoft.openapi.1.4.3.nupkg.sha512"
+    },
     "Microsoft.SqlServer.Server/1.0.0": {
       "type": "package",
       "serviceable": true,
@@ -4154,6 +4438,111 @@
       "sha512": "sha512-cB9nqeyJW61qSfHCOwzgSuOrOvWdRB6gR17gp7j3cbAhKRVPjx9GK/OrMBzsW0TbTq8Gzmx/58o+HCMvw2GbYg==",
       "path": "openiddict.validation.systemnethttp/7.1.0",
       "hashPath": "openiddict.validation.systemnethttp.7.1.0.nupkg.sha512"
+    },
+    "OptimaJet.DataEngine/1.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DLN6OJYFTHSl7mcfTw1mZZV9PipyO9paAVNpCsJSvZBiRnhGDaM9ZIK3oNf6hm1P4xBWYWD50ya397bteeARbA==",
+      "path": "optimajet.dataengine/1.2.0",
+      "hashPath": "optimajet.dataengine.1.2.0.nupkg.sha512"
+    },
+    "OptimaJet.DataEngine.Mssql/1.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Q2yuBgGQWftq+SPL+AWqfKI7jGxb8NBznci5t4WwVY0ogz6QF5DHNMW1wDmfiBg+shwrFQJ3Dy3LvVEnArkrRg==",
+      "path": "optimajet.dataengine.mssql/1.2.0",
+      "hashPath": "optimajet.dataengine.mssql.1.2.0.nupkg.sha512"
+    },
+    "OptimaJet.DataEngine.Mysql/1.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Uy1y1+6inw8TVnYXdmvREdQr+Zc9HSAuk2xO6yYsDX4QxHvoKG5CUdMCJfiDoUFiyauwGcCDHq0QTddicNwO6g==",
+      "path": "optimajet.dataengine.mysql/1.2.0",
+      "hashPath": "optimajet.dataengine.mysql.1.2.0.nupkg.sha512"
+    },
+    "OptimaJet.DataEngine.Oracle/1.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-THOICSx2dCsqSG+++2xTSv2gWzX10rRspHMWF2nXDKiwLDagl5LV8ZEPqWwV4kPnaSON23rPzzqWBMnAf9lpuQ==",
+      "path": "optimajet.dataengine.oracle/1.2.0",
+      "hashPath": "optimajet.dataengine.oracle.1.2.0.nupkg.sha512"
+    },
+    "OptimaJet.DataEngine.Postgres/1.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wa41f7aYO63JTqx+f9yoRIr2UJc8tAftQsB3iZOFJnJpLH6qpD+L+qT1zwxQaUAjWM//mBF1N5dH0DGXaEwz3w==",
+      "path": "optimajet.dataengine.postgres/1.2.0",
+      "hashPath": "optimajet.dataengine.postgres.1.2.0.nupkg.sha512"
+    },
+    "OptimaJet.DataEngine.Sql/1.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-oeeW0L9ME+zvj0afsVpULxm0FZX0RnZGSkSShzlemFNorbECWccK56+J/MgYzdMqBt67fmrNsP7valOzz32VxA==",
+      "path": "optimajet.dataengine.sql/1.2.0",
+      "hashPath": "optimajet.dataengine.sql.1.2.0.nupkg.sha512"
+    },
+    "OptimaJet.SqlKata/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IoxQKS5G2hGsWqGutBv9cYQFh4p1Zem+XexX5Q7pfDg+ZqS7BHNEXjdPJmAVopcsHBBaoJ/UHvJgMiTec/XHiQ==",
+      "path": "optimajet.sqlkata/1.0.0",
+      "hashPath": "optimajet.sqlkata.1.0.0.nupkg.sha512"
+    },
+    "OptimaJet.SqlKata.Execution/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xzrXT3SkI8YtKJASi42YfdlViypEzsfVBjVEFoLnCj/h33ZvI1+j65/XCu8QMJ2KpCxNzKfQyk29DC6Zuzuvjg==",
+      "path": "optimajet.sqlkata.execution/1.0.0",
+      "hashPath": "optimajet.sqlkata.execution.1.0.0.nupkg.sha512"
+    },
+    "OptimaJet.Workflow.Api/20.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-A9Hu5oV5FBLeaqGDkGqL+NKvlyA1JMOlX+xX/vsH1Vaaq8NG8o88rp4F8ReLT1AceHJea0L4emV14qlVMnuFTg==",
+      "path": "optimajet.workflow.api/20.0.2",
+      "hashPath": "optimajet.workflow.api.20.0.2.nupkg.sha512"
+    },
+    "OptimaJet.Workflow.Api.Mongo/20.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6g1A7xdfIG1LXu77GjHt6x8FD7/AbMze5sXWMYm4vMfyq3P4qcGpidprEKfeyN550mCI0lUWKKspLB5Unvk1jA==",
+      "path": "optimajet.workflow.api.mongo/20.0.2",
+      "hashPath": "optimajet.workflow.api.mongo.20.0.2.nupkg.sha512"
+    },
+    "OptimaJet.Workflow.Api.Mssql/20.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7qoAmeFvr2xBLuIjd2/8krvuNeHVL5fqec7MxQzPpxBJq+WXTKGPN4f0tgbjoOk0GjULLFhu+b0iXGcqCXQNzw==",
+      "path": "optimajet.workflow.api.mssql/20.0.2",
+      "hashPath": "optimajet.workflow.api.mssql.20.0.2.nupkg.sha512"
+    },
+    "OptimaJet.Workflow.Api.Mysql/20.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zVAMC+Ybw/hqHC6Ll5CG8BHx/yjYUsGJcADjajE9S5vri+5edx0p0Cu4fmiKvWY+WYHRrsM5+O010dzXnup1Vw==",
+      "path": "optimajet.workflow.api.mysql/20.0.2",
+      "hashPath": "optimajet.workflow.api.mysql.20.0.2.nupkg.sha512"
+    },
+    "OptimaJet.Workflow.Api.Oracle/20.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GkEYLdLSLCyQ3HmYbCHi49nvgJ5XAAEqyJtL89O8Cc3LjWxunJmZGoJstkpG7jezG1CnPq3rN7fodj9cH+h5gQ==",
+      "path": "optimajet.workflow.api.oracle/20.0.2",
+      "hashPath": "optimajet.workflow.api.oracle.20.0.2.nupkg.sha512"
+    },
+    "OptimaJet.Workflow.Api.Postgres/20.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/K3RoX3vKPyshho8mK8rmHdQYghrHY2r1sSED2KT6eNdqZj6d7tPC+ARJlRCk38PtzI+b05JHgUbAhl3kOWWMA==",
+      "path": "optimajet.workflow.api.postgres/20.0.2",
+      "hashPath": "optimajet.workflow.api.postgres.20.0.2.nupkg.sha512"
+    },
+    "OptimaJet.Workflow.Api.Sql/20.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RSb5XXvqocp91NRHjYEkrEI6Me/zSW23N6LY3vmLawYcfkGyfoeMJBZP4RRYPX6lewj4XP0C3DycuWmafK/kiQ==",
+      "path": "optimajet.workflow.api.sql/20.0.2",
+      "hashPath": "optimajet.workflow.api.sql.20.0.2.nupkg.sha512"
     },
     "Oracle.ManagedDataAccess.Core/3.21.100": {
       "type": "package",
@@ -5121,75 +5510,75 @@
       "path": "thomaslevesque.weakevent/4.1.0",
       "hashPath": "thomaslevesque.weakevent.4.1.0.nupkg.sha512"
     },
-    "WorkflowEngine.NETCore-BpmnPlugin/17.3.0": {
+    "WorkflowEngine.NETCore-BpmnPlugin/20.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-slzVO78qwE0VnOAN178mqxbeCDroz4tyQiXwaI+AJfO3OAmmK00mkKx8Q6T4yhIYJK0MBCjfIYERiBxBHEn52w==",
-      "path": "workflowengine.netcore-bpmnplugin/17.3.0",
-      "hashPath": "workflowengine.netcore-bpmnplugin.17.3.0.nupkg.sha512"
+      "sha512": "sha512-pOocLQIhDMEpf3sHGRbkLJvVbUsDhN87diFE7B3DhkbWy8JP8rXaQWss9BRAD8NAGpjTXiV6RAw1WjbBh5KFkQ==",
+      "path": "workflowengine.netcore-bpmnplugin/20.0.2",
+      "hashPath": "workflowengine.netcore-bpmnplugin.20.0.2.nupkg.sha512"
     },
-    "WorkflowEngine.NETCore-Core/17.3.0": {
+    "WorkflowEngine.NETCore-Core/20.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-M2OQwq8w0bBAWkZb0tK/3VtN9VMqQgkGklVVp0L7Mqj6ISjVOUf/hk8xFOpuftKnG10B4bRshZ5o+nKZs5SOrQ==",
-      "path": "workflowengine.netcore-core/17.3.0",
-      "hashPath": "workflowengine.netcore-core.17.3.0.nupkg.sha512"
+      "sha512": "sha512-bgJcEiTeCHUEAq5Fum5k+WuIgbRYYCtdzhZY6Ut4czsEzD8+uVsvK/bx440PiulbDJ4oBtOJrd727o3SnOIQbQ==",
+      "path": "workflowengine.netcore-core/20.0.2",
+      "hashPath": "workflowengine.netcore-core.20.0.2.nupkg.sha512"
     },
-    "WorkflowEngine.NETCore-FilesPlugin/17.3.0": {
+    "WorkflowEngine.NETCore-FilesPlugin/20.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Ux10MtU8/G6ARYjLqiILNRZTJhX/AsXh2zyFI2C4Juvcve+NOmLq6gvGt9UHLNx1xtU6kQw3ePRU4hDMv4FpBQ==",
-      "path": "workflowengine.netcore-filesplugin/17.3.0",
-      "hashPath": "workflowengine.netcore-filesplugin.17.3.0.nupkg.sha512"
+      "sha512": "sha512-4XUA9okVWzBtwoRosm7/kO1UPx4giET9Pv2UqRsgeH6iNTmosjztt/2o3OcnL0+itOhkY87Qp+Dq8XQHduN1CQ==",
+      "path": "workflowengine.netcore-filesplugin/20.0.2",
+      "hashPath": "workflowengine.netcore-filesplugin.20.0.2.nupkg.sha512"
     },
-    "WorkflowEngine.NETCore-Migrator/17.3.0": {
+    "WorkflowEngine.NETCore-Migrator/20.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-gZIZB+f4hCHvE54MT/iShQ0KEkfmhwptDdekpYzCmRmYInvJ3LeePDf3SRNjEkb6tNz8n2Z5fdmDsA7ZSZcO9g==",
-      "path": "workflowengine.netcore-migrator/17.3.0",
-      "hashPath": "workflowengine.netcore-migrator.17.3.0.nupkg.sha512"
+      "sha512": "sha512-bnjIAAAi6WhoIPY5gxBtUcoMU/x2YR1ZIMsQQJD4ZGhPyngaklQl9DfxZ77k/1kptkhDC21pMS9+T9/DSYGxrw==",
+      "path": "workflowengine.netcore-migrator/20.0.2",
+      "hashPath": "workflowengine.netcore-migrator.20.0.2.nupkg.sha512"
     },
-    "WorkflowEngine.NETCore-ProviderForMongoDB/17.3.0": {
+    "WorkflowEngine.NETCore-ProviderForMongoDB/20.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-GgSd15Zvm+tABx0klZLoGvdO3IPfhdmMsXPsLJ2yeIUtm86I5d7yiLK65x5gKQsnic+TywVTJxYg6v/K67s18g==",
-      "path": "workflowengine.netcore-providerformongodb/17.3.0",
-      "hashPath": "workflowengine.netcore-providerformongodb.17.3.0.nupkg.sha512"
+      "sha512": "sha512-+dKq14GJBB1XnhO0nb0aerPQWTFbfIZnyYHQb0FXkAsADbReIJ3FUJGq+fm2Us2sP+/6igLnR6b4Qs8S6siAdg==",
+      "path": "workflowengine.netcore-providerformongodb/20.0.2",
+      "hashPath": "workflowengine.netcore-providerformongodb.20.0.2.nupkg.sha512"
     },
-    "WorkflowEngine.NETCore-ProviderForMSSQL/17.3.0": {
+    "WorkflowEngine.NETCore-ProviderForMSSQL/20.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-NILOHIVgvIAK9eiUHGsi/fNscB/SBMikzuM8pZWKNR0t1HQN2G2tyhD5RrsPdrTbsQkU+BqKRy7B1HqTxS8b1g==",
-      "path": "workflowengine.netcore-providerformssql/17.3.0",
-      "hashPath": "workflowengine.netcore-providerformssql.17.3.0.nupkg.sha512"
+      "sha512": "sha512-WJkYl30s5wwlkC/88u1OZ3B6lNkmdGXUHM3TI2iFo48niK8vIMM2jFjbgK917hLpo/WfZYdeFaNV6rRpazb6bQ==",
+      "path": "workflowengine.netcore-providerformssql/20.0.2",
+      "hashPath": "workflowengine.netcore-providerformssql.20.0.2.nupkg.sha512"
     },
-    "WorkflowEngine.NETCore-ProviderForMySQL/17.3.0": {
+    "WorkflowEngine.NETCore-ProviderForMySQL/20.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-+vr14ko12gwtUu6AQ8drqLlwQLZP9NWAzbO6a05CB3sOcUpZKSzIwS+QNnqCxFdjsO42x+WJsaHPHH8ZrXRcyg==",
-      "path": "workflowengine.netcore-providerformysql/17.3.0",
-      "hashPath": "workflowengine.netcore-providerformysql.17.3.0.nupkg.sha512"
+      "sha512": "sha512-MVw4MWLIxZsyTEfV4lmWZoDpaFR5XGOEBtlcwxL2HyO1/R+yOEg9dHVcdeaU/rpJRfyIABCzmtTtiLZJCA1x6g==",
+      "path": "workflowengine.netcore-providerformysql/20.0.2",
+      "hashPath": "workflowengine.netcore-providerformysql.20.0.2.nupkg.sha512"
     },
-    "WorkflowEngine.NETCore-ProviderForOracle/17.3.0": {
+    "WorkflowEngine.NETCore-ProviderForOracle/20.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-KOQtgx7p9Xpz+kNd6jt2NvAazGztW3RMnGEG9FdhtWi6upx+3kK4CWTRZUv9rOz/BZCSDVx/tW5CLKAbmqcVJg==",
-      "path": "workflowengine.netcore-providerfororacle/17.3.0",
-      "hashPath": "workflowengine.netcore-providerfororacle.17.3.0.nupkg.sha512"
+      "sha512": "sha512-djk8l65eEpb3eQgMBP1ub5K2Uwu0OGwt+80Z52HFWOKFa/afF4FPRVzlUj8MBEbXljBXYcKBlC0gfGVXiZISPw==",
+      "path": "workflowengine.netcore-providerfororacle/20.0.2",
+      "hashPath": "workflowengine.netcore-providerfororacle.20.0.2.nupkg.sha512"
     },
-    "WorkflowEngine.NETCore-ProviderForPostgreSQL/17.3.0": {
+    "WorkflowEngine.NETCore-ProviderForPostgreSQL/20.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-SjWbuonbLQ7iuRRF0nt+WuTlyGSp41/5U273UXN1emVDxdKtFnmZnAeViG4tEyyVnZeRmfwhtMKpoKVWeG6dSQ==",
-      "path": "workflowengine.netcore-providerforpostgresql/17.3.0",
-      "hashPath": "workflowengine.netcore-providerforpostgresql.17.3.0.nupkg.sha512"
+      "sha512": "sha512-p7y+jOIfmZ+RdRu5jSBv17+i6o5cWNciJX6ksHXyh13J8YCCaCDuQXCMhD9gkZZQ7CfHGGZf7srf9SNCnEqxnA==",
+      "path": "workflowengine.netcore-providerforpostgresql/20.0.2",
+      "hashPath": "workflowengine.netcore-providerforpostgresql.20.0.2.nupkg.sha512"
     },
-    "WorkflowEngine.NETCore-RealTimeTrackingPlugin/17.3.0": {
+    "WorkflowEngine.NETCore-RealTimeTrackingPlugin/20.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-YCV1FyyklWFFrw1aSklS+/YoFPTFZbAym6eJICSWR8xK2SXXJa1GRX+lqhlHLxoxRFrvyjae+uhpyusgyH+1uQ==",
-      "path": "workflowengine.netcore-realtimetrackingplugin/17.3.0",
-      "hashPath": "workflowengine.netcore-realtimetrackingplugin.17.3.0.nupkg.sha512"
+      "sha512": "sha512-R5V70nF6HL21IYLCiHa0z9iby3pgcBDh++xeH47enS27mjWlq7+Ym7iqQvwGZTqTYZVXNBFclcLsTOTfApMpeA==",
+      "path": "workflowengine.netcore-realtimetrackingplugin/20.0.2",
+      "hashPath": "workflowengine.netcore-realtimetrackingplugin.20.0.2.nupkg.sha512"
     },
     "ZstdSharp.Port/0.7.3": {
       "type": "package",
