@@ -4,7 +4,7 @@
   </PropertyGroup>
   <!-- Workflow Engine packages -->
   <ItemGroup>
-    <PackageVersion Include="WorkflowEngine.NET-Server" Version="9.0.0" />
+    <PackageVersion Include="WorkflowEngine.NET-Server" Version="9.0.1" />
   </ItemGroup>
   <!-- Microsoft packages -->
   <ItemGroup>
